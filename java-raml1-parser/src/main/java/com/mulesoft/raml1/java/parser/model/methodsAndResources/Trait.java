@@ -1,0 +1,22 @@
+package com.mulesoft.raml1.java.parser.model.methodsAndResources;
+
+import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import com.mulesoft.raml1.java.parser.model.api.Library;
+
+
+
+public interface Trait extends MethodBase {
+
+    @XmlElement(name="name")
+    String name();
+
+
+    @XmlElement(name="usage")
+    String usage();
+
+
+    @XmlElement(name="uses")
+    List<Library> uses();
+
+}
