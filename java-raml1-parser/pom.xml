@@ -1,9 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>java-raml1-tools</groupId>
+	<parent>
+		<groupId>java-raml1-tools</groupId>
+		<artifactId>java-raml1-tools</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 	<artifactId>java-raml1-parser</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<build>
 		<resources>
@@ -19,12 +23,46 @@
 		</resources>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>jar-with-dependencies</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-shade-plugin</artifactId>
+						<version>2.4.2</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>shade</goal>
+								</goals>
+								<configuration>
+									<transformers>
+										<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+											<mainClass>org.raml.Validator</mainClass>
+										</transformer>
+										<transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+											<resource>log4j.properties</resource>
+											<file>src/test/resources/log4j.properties</file>
+										</transformer>
+									</transformers>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<dependencies>
 
 		<dependency>
 			<groupId>java-raml1-tools</groupId>
 			<artifactId>javascript-module-holders</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
