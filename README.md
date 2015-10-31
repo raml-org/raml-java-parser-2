@@ -21,12 +21,12 @@ public class Launcher {
 ```
 After the `Api` instance is created, you may reach any part of the RAML document.
 
-There are two operations related with data reading used by the parser:
+There are two operations related to data reading used by the parser:
 
 * read file content
 * list files of particular directory
  
-By default this operations are deligeated to the file system. You can force the parser to use your custom class by passing its instance to `JavaNodeFactory.setPathResolver()` as argument:
+By default these operations are delegated to the file system. You can force the parser to use your custom class by passing its instance to `JavaNodeFactory.setPathResolver()` as argument:
 ``` java
 JavaNodeFactory f = new JavaNodeFactory();
 f.setPathResolver(new IJavaPathResolver() {
@@ -43,7 +43,7 @@ Api api = f.createApi(/*Location of the APIs main .raml file*/);
 ```
 
 ## Dealing with user types in RAML 1.0
-Some parts of RAML 1.0 API are described by user types and, thus, can not be implemented as Java classes of the parser project. These are, Resource Type, Trait and Annotation references.
+Some parts of RAML 1.0 API are described by user types and, thus, can not be implemented as Java classes of the parser project. These are Resource Type, Trait and Annotation references.
 
 Consider an example of annotation usecase:
 ``` yaml
@@ -61,7 +61,7 @@ annotationTypes:
         offset:
           type: pointer
           target: *.DataElement
-/exmaple-collection:
+/example-collection:
   get:
     annotations:
       - paging:
@@ -99,8 +99,8 @@ public class paging extends CustomType{
 
 }
 ```
-Then it creates the class instance, populates it by means of JAXB unmarshaller and returns as result.
-Key of the reference (which is `paging` in our example) is stored in the `valueName` private field of the `CustomType` class. The field is provided with public getter.
+Then it creates the class instance, populates it by means of JAXB unmarshaller and returns it as the result.
+The key of the reference (which is `paging` in our example) is stored in the `valueName` private field of the `CustomType` class. The field is provided with public getter.
 
 
 ### Creating libraries for user types
@@ -113,5 +113,5 @@ The parser is capable of detecting user type implementations. There are several 
 javax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFactory
 ```
 
-* The project on it's classpath must provide a `customClassesPackages.txt` file containing a list of implementation classes packages separated by new line.
+* The project on its classpath must provide a `customClassesPackages.txt` file containing a list of implementation classes packages separated by new line.
 
