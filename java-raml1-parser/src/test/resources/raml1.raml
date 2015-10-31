@@ -1,0 +1,29 @@
+#%RAML 1.0
+title: Samle API
+version: v1.0
+baseUri: https://www.example.com/{version}
+annotationTypes:
+  - paging:
+      allowedTargets: method
+      parameters:
+        pageSize:
+          type: pointer
+          target: *.DataElement
+        offset:
+          type: pointer
+          target: *.DataElement
+/exmaple-collection:
+  get:
+    annotations:
+      - paging:
+          pageSize: application/x-www-form-urlencoded.limit
+          offset: application/x-www-form-urlencoded.skip
+    body:
+      application/x-www-form-urlencoded:
+        properties:
+          limit:
+            description: Pagination parameter. Maximal size of the results array.
+            type: integer
+          skip:
+            description: Pagination parameter. Offset used to form the results array.
+            type: integer
