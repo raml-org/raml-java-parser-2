@@ -10,6 +10,10 @@ public interface ArrayField extends DataElement {
     Boolean uniqueItems();
 
 
+    @XmlElement(name="items")
+    DataElement items();
+
+
     @XmlElement(name="minItems")
     Double minItems();
 

@@ -3,12 +3,10 @@ package com.mulesoft.raml1.java.parser.impl.api;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import com.mulesoft.raml1.java.parser.core.JavaNodeFactory;
-import com.mulesoft.raml1.java.parser.core.JavaElementNode;
-import com.mulesoft.raml1.java.parser.model.api.Library;
+import com.mulesoft.raml1.java.parser.impl.common.RAMLLanguageElementImpl;
+import com.mulesoft.raml1.java.parser.model.api.OLibrary;
 import com.mulesoft.raml1.java.parser.model.api.GlobalSchema;
 import com.mulesoft.raml1.java.parser.impl.api.GlobalSchemaImpl;
-import com.mulesoft.raml1.java.parser.model.declarations.AnnotationRef;
-import com.mulesoft.raml1.java.parser.impl.declarations.AnnotationRefImpl;
 import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
 import com.mulesoft.raml1.java.parser.impl.datamodel.DataElementImpl;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.Trait;
@@ -21,17 +19,18 @@ import com.mulesoft.raml1.java.parser.model.methodsAndResources.SecuritySchemaTy
 import com.mulesoft.raml1.java.parser.impl.methodsAndResources.SecuritySchemaTypeImpl;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.SecuritySchema;
 import com.mulesoft.raml1.java.parser.impl.methodsAndResources.SecuritySchemaImpl;
+import com.mulesoft.raml1.java.parser.model.api.Library;
 import com.mulesoft.raml1.java.parser.impl.api.LibraryImpl;
 
 
 
-public class LibraryImpl extends JavaElementNode implements Library {
+public class OLibraryImpl extends RAMLLanguageElementImpl implements OLibrary {
 
-    public LibraryImpl(Object jsNode, JavaNodeFactory factory){
+    public OLibraryImpl(Object jsNode, JavaNodeFactory factory){
         super(jsNode,factory);
     }
 
-    protected LibraryImpl(){
+    protected OLibraryImpl(){
         super();
     }
 
@@ -45,18 +44,6 @@ public class LibraryImpl extends JavaElementNode implements Library {
     @XmlElement(name="schemas")
     public List<GlobalSchema> schemas(){
         return super.getElements("schemas", GlobalSchemaImpl.class);
-    }
-
-
-    @XmlElement(name="usage")
-    public String usage(){
-        return super.getAttribute("usage", String.class);
-    }
-
-
-    @XmlElement(name="annotations")
-    public List<AnnotationRef> annotations(){
-        return super.getAttributes("annotations", AnnotationRefImpl.class);
     }
 
 

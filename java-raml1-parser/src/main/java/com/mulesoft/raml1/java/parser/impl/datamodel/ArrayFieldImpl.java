@@ -3,6 +3,8 @@ package com.mulesoft.raml1.java.parser.impl.datamodel;
 import javax.xml.bind.annotation.XmlElement;
 import com.mulesoft.raml1.java.parser.core.JavaNodeFactory;
 import com.mulesoft.raml1.java.parser.model.datamodel.ArrayField;
+import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
+import com.mulesoft.raml1.java.parser.impl.datamodel.DataElementImpl;
 
 
 
@@ -20,6 +22,12 @@ public class ArrayFieldImpl extends DataElementImpl implements ArrayField {
     @XmlElement(name="uniqueItems")
     public Boolean uniqueItems(){
         return super.getAttribute("uniqueItems", Boolean.class);
+    }
+
+
+    @XmlElement(name="items")
+    public DataElement items(){
+        return super.getElement("items", DataElementImpl.class);
     }
 
 

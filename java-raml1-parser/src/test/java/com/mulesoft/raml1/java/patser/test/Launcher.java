@@ -13,13 +13,13 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		JavaNodeFactory f = new JavaNodeFactory();
-		Api api = f.createApi("path to RAML spec");
+		Api api = f.createApi("C:/work/apis/Instagram/api.raml");
 		print(api);
 	}
 
 	private static void print(Api api) {
 		String str = ((ApiImpl)api).toJSON();
-		File f = new File("output_path.json");
+		File f = new File("C:/work/apis/Instagram/api.json");
 		f.getParentFile().mkdirs();
 		if(f.exists()){
 			f.delete();

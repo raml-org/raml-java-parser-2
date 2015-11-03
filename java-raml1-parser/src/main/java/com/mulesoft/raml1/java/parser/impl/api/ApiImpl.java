@@ -25,7 +25,7 @@ import com.mulesoft.raml1.java.parser.impl.methodsAndResources.SecuritySchemaTyp
 
 
 
-public class ApiImpl extends LibraryImpl implements Api {
+public class ApiImpl extends OLibraryImpl implements Api {
 
     public ApiImpl(Object jsNode, JavaNodeFactory factory){
         super(jsNode,factory);

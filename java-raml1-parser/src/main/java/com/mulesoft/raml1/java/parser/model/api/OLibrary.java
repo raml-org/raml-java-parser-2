@@ -2,8 +2,7 @@ package com.mulesoft.raml1.java.parser.model.api;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
-import com.mulesoft.raml1.java.parser.core.IJavaElementNode;
-import com.mulesoft.raml1.java.parser.model.declarations.AnnotationRef;
+import com.mulesoft.raml1.java.parser.model.common.RAMLLanguageElement;
 import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.Trait;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.ResourceType;
@@ -13,7 +12,7 @@ import com.mulesoft.raml1.java.parser.model.methodsAndResources.SecuritySchema;
 
 
 
-public interface Library extends IJavaElementNode {
+public interface OLibrary extends RAMLLanguageElement {
 
     @XmlElement(name="name")
     String name();
@@ -21,14 +20,6 @@ public interface Library extends IJavaElementNode {
 
     @XmlElement(name="schemas")
     List<GlobalSchema> schemas();
-
-
-    @XmlElement(name="usage")
-    String usage();
-
-
-    @XmlElement(name="annotations")
-    List<AnnotationRef> annotations();
 
 
     @XmlElement(name="types")

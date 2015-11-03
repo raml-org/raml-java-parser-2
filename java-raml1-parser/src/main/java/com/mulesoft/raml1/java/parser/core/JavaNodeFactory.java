@@ -191,6 +191,9 @@ public class JavaNodeFactory{
 	private <T,S extends T> T getObject(Object jsNode, String name, Class<S> clazz) {
 		T result = null;
 		try {
+			if(name.equals("example")){
+				System.out.println("");
+			}
 			Bindings bindings = this.getBindings();
 			bindings.put("node", jsNode);
 			Object jsResult = engine.eval("node." + name + "()",bindings);

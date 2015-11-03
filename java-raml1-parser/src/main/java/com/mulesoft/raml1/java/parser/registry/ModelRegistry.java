@@ -286,78 +286,6 @@ public class ModelRegistry {
 
         this.packageMap.put( "TraitImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
 
-        this.packageMap.put( "Method", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "MethodImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "SecuritySchemaPart", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "SecuritySchemaPartImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "SecuritySchemaSettings", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "SecuritySchemaSettingsImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "SecuritySchemaHook", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "SecuritySchemaHookImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "OAuth1SecuritySchemeSettings", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "OAuth1SecuritySchemeSettingsImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "OAuth2SecuritySchemeSettings", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "OAuth2SecuritySchemeSettingsImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "APIKeySettings", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "APIKeySettingsImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "SecuritySchema", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "SecuritySchemaImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "Oath2", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "Oath2Impl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "Oath1", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "Oath1Impl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "APIKey", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "APIKeyImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "Basic", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "BasicImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "Digest", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "DigestImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "Custom", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "CustomImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "ResourceBase", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "ResourceBaseImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "ResourceType", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "ResourceTypeImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "Resource", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
-
-        this.packageMap.put( "ResourceImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
-
-        this.packageMap.put( "AnnotationType", "com.mulesoft.raml1.java.parser.model.declarations" );
-
-        this.packageMap.put( "AnnotationTypeImpl", "com.mulesoft.raml1.java.parser.impl.declarations" );
-
         this.packageMap.put( "Library", "com.mulesoft.raml1.java.parser.model.api" );
 
         this.packageMap.put( "LibraryImpl", "com.mulesoft.raml1.java.parser.impl.api" );
@@ -373,6 +301,78 @@ public class ModelRegistry {
         this.packageMap.put( "GlobalSchema", "com.mulesoft.raml1.java.parser.model.api" );
 
         this.packageMap.put( "GlobalSchemaImpl", "com.mulesoft.raml1.java.parser.impl.api" );
+
+        this.packageMap.put( "ResourceBase", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "ResourceBaseImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "Method", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "MethodImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "Resource", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "ResourceImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "ResourceType", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "ResourceTypeImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "AnnotationType", "com.mulesoft.raml1.java.parser.model.declarations" );
+
+        this.packageMap.put( "AnnotationTypeImpl", "com.mulesoft.raml1.java.parser.impl.declarations" );
+
+        this.packageMap.put( "SecuritySchema", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "SecuritySchemaImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "SecuritySchemaSettings", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "SecuritySchemaSettingsImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "OAuth1SecuritySchemeSettings", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "OAuth1SecuritySchemeSettingsImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "OAuth2SecuritySchemeSettings", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "OAuth2SecuritySchemeSettingsImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "PassThroughSettings", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "PassThroughSettingsImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "Oath2", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "Oath2Impl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "Oath1", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "Oath1Impl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "PassThrough", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "PassThroughImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "Basic", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "BasicImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "Digest", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "DigestImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "Custom", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "CustomImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "SecuritySchemaPart", "com.mulesoft.raml1.java.parser.model.methodsAndResources" );
+
+        this.packageMap.put( "SecuritySchemaPartImpl", "com.mulesoft.raml1.java.parser.impl.methodsAndResources" );
+
+        this.packageMap.put( "OLibrary", "com.mulesoft.raml1.java.parser.model.api" );
+
+        this.packageMap.put( "OLibraryImpl", "com.mulesoft.raml1.java.parser.impl.api" );
 
         this.packageMap.put( "Api", "com.mulesoft.raml1.java.parser.model.api" );
 

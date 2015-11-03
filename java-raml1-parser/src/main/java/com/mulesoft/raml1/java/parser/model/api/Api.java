@@ -13,7 +13,7 @@ import com.mulesoft.raml1.java.parser.model.methodsAndResources.SecuritySchemaTy
 
 
 
-public interface Api extends Library {
+public interface Api extends OLibrary {
 
     @XmlElement(name="title")
     String title();

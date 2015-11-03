@@ -17,8 +17,20 @@ public class OverlayImpl extends ApiImpl implements Overlay {
     }
 
 
+    @XmlElement(name="usage")
+    public String usage(){
+        return super.getAttribute("usage", String.class);
+    }
+
+
     @XmlElement(name="masterRef")
     public String masterRef(){
         return super.getAttribute("masterRef", String.class);
+    }
+
+
+    @XmlElement(name="title")
+    public String title(){
+        return super.getAttribute("title", String.class);
     }
 }

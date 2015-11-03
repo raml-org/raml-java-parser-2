@@ -1,13 +1,11 @@
 package com.mulesoft.raml1.java.parser.model.methodsAndResources;
 
-import javax.xml.bind.annotation.XmlElement;
-import com.mulesoft.raml1.java.parser.model.common.RAMLLanguageElement;
+import com.mulesoft.raml1.java.parser.core.IJavaElementNode;
 
 
 
-public interface SecuritySchemaSettings extends RAMLLanguageElement {
+public interface SecuritySchemaSettings extends IJavaElementNode {
 
-    @XmlElement(name="authentificationConfigurator")
-    SecuritySchemaHook authentificationConfigurator();
+
 
 }
