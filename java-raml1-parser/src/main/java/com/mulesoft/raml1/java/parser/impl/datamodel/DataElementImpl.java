@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlElement;
 import com.mulesoft.raml1.java.parser.core.JavaNodeFactory;
 import com.mulesoft.raml1.java.parser.impl.common.RAMLLanguageElementImpl;
 import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
+import com.mulesoft.raml1.java.parser.model.datamodel.XMLInfo;
+import com.mulesoft.raml1.java.parser.impl.datamodel.XMLInfoImpl;
 import com.mulesoft.raml1.java.parser.impl.datamodel.DataElementImpl;
 import com.mulesoft.raml1.java.parser.model.datamodel.ModelLocation;
 import com.mulesoft.raml1.java.parser.model.datamodel.LocationKind;
@@ -31,6 +33,12 @@ public class DataElementImpl extends RAMLLanguageElementImpl implements DataElem
     @XmlElement(name="name")
     public String name(){
         return super.getAttribute("name", String.class);
+    }
+
+
+    @XmlElement(name="xml")
+    public XMLInfo xml(){
+        return super.getElement("xml", XMLInfoImpl.class);
     }
 
 

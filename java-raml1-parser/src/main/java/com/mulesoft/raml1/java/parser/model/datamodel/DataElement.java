@@ -14,6 +14,10 @@ public interface DataElement extends RAMLLanguageElement {
     String name();
 
 
+    @XmlElement(name="xml")
+    XMLInfo xml();
+
+
     @XmlElement(name="facets")
     List<DataElement> facets();
 

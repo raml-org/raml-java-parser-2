@@ -62,10 +62,4 @@ public class ObjectFieldImpl extends DataElementImpl implements ObjectField {
     public String discriminatorValue(){
         return super.getAttribute("discriminatorValue", String.class);
     }
-
-
-    @XmlElement(name="facets")
-    public List<DataElement> facets(){
-        return super.getElements("facets", DataElementImpl.class);
-    }
 }

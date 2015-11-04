@@ -206,6 +206,10 @@ public class ModelRegistry {
 
         this.packageMap.put( "DataElementImpl", "com.mulesoft.raml1.java.parser.impl.datamodel" );
 
+        this.packageMap.put( "XMLInfo", "com.mulesoft.raml1.java.parser.model.datamodel" );
+
+        this.packageMap.put( "XMLInfoImpl", "com.mulesoft.raml1.java.parser.impl.datamodel" );
+
         this.packageMap.put( "ModelLocation", "com.mulesoft.raml1.java.parser.model.datamodel" );
 
         this.packageMap.put( "LocationKind", "com.mulesoft.raml1.java.parser.model.datamodel" );

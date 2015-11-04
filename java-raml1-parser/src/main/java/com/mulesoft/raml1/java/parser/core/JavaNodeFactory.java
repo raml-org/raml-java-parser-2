@@ -337,5 +337,85 @@ public class JavaNodeFactory{
 	}
 
 
+	public List<ValidationIssue> getErrors(Object jsNode) {
+
+		ArrayList<ValidationIssue> result = new ArrayList<ValidationIssue>();
+		Bindings bindings = this.getBindings();
+		bindings.put("node", jsNode);
+		try {
+			Object errorsObj = engine.eval("node.errors()",bindings);
+			if(errorsObj instanceof ScriptObjectMirror){
+				ScriptObjectMirror errors = (ScriptObjectMirror) errorsObj;
+				for(Object obj : errors.values()){
+
+					ScriptObjectMirror error = (ScriptObjectMirror) obj;
+
+					IssueCode code = null;
+					Integer intCode = getIntegerValue(error, "code");
+					if(intCode != null){
+						IssueCode[] codes = IssueCode.values();
+						if(intCode>=0 && intCode < codes.length){
+							code = codes[intCode];
+						}
+					}
+
+					String message = getStringValue(error,"message");
+
+					String path = getStringValue(error,"path");
+
+					Integer start = getIntegerValue(error, "start");
+
+					Integer end = getIntegerValue(error, "end");
+
+					boolean isWarning = getBooleanValue(error, "isWarning");
+
+
+					ValidationIssue vi = new ValidationIssue(code, message, path, start, end, isWarning);
+					result.add(vi);
+				}
+
+			}
+
+		} catch (ScriptException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
+	private String getStringValue(ScriptObjectMirror error, String name) {
+		return error.get(name)!=null ? error.get(name).toString() : null;
+	}
+
+	private Integer getIntegerValue(ScriptObjectMirror error, String name) {
+
+		Integer result = null;
+		Object obj = error.get(name);
+		if(obj instanceof Integer){
+			result = (Integer) obj;
+		}
+		else if(obj instanceof Double){
+			result = (int)Math.round((Double)obj);
+		}
+		else if(obj instanceof String){
+			Double doubleVal = Double.parseDouble(obj.toString());
+			result = (int)Math.round(doubleVal);
+		}
+		return result;
+	}
+
+	private Boolean getBooleanValue(ScriptObjectMirror error, String name) {
+
+		Boolean result = null;
+		if(error.get(name)!=null){
+			try{
+				result = Boolean.parseBoolean(error.get(name).toString());
+			}
+			catch(Exception e){}
+		}
+		return result;
+	}
+
+
 
 }

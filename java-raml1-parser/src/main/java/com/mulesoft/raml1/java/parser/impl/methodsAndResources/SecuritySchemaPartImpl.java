@@ -12,6 +12,10 @@ import com.mulesoft.raml1.java.parser.model.methodsAndResources.TraitRef;
 import com.mulesoft.raml1.java.parser.impl.methodsAndResources.TraitRefImpl;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.SecuritySchemaRef;
 import com.mulesoft.raml1.java.parser.impl.methodsAndResources.SecuritySchemaRefImpl;
+import com.mulesoft.raml1.java.parser.model.systemTypes.MarkdownString;
+import com.mulesoft.raml1.java.parser.impl.systemTypes.MarkdownStringImpl;
+import com.mulesoft.raml1.java.parser.model.declarations.AnnotationRef;
+import com.mulesoft.raml1.java.parser.impl.declarations.AnnotationRefImpl;
 
 
 
@@ -59,5 +63,23 @@ public class SecuritySchemaPartImpl extends MethodBaseImpl implements SecuritySc
     @XmlElement(name="securedBy")
     public List<SecuritySchemaRef> securedBy(){
         return super.getAttributes("securedBy", SecuritySchemaRefImpl.class);
+    }
+
+
+    @XmlElement(name="displayName")
+    public String displayName(){
+        return super.getAttribute("displayName", String.class);
+    }
+
+
+    @XmlElement(name="description")
+    public MarkdownString description(){
+        return super.getAttribute("description", MarkdownStringImpl.class);
+    }
+
+
+    @XmlElement(name="annotations")
+    public List<AnnotationRef> annotations(){
+        return super.getAttributes("annotations", AnnotationRefImpl.class);
     }
 }

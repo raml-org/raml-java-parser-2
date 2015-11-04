@@ -34,8 +34,4 @@ public interface ObjectField extends DataElement {
     @XmlElement(name="discriminatorValue")
     String discriminatorValue();
 
-
-    @XmlElement(name="facets")
-    List<DataElement> facets();
-
 }

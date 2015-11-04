@@ -97,6 +97,18 @@
 	    console.log("Api parsed " + api.title());
 	    return new Opt(api);
 	}
+	function getErrors(node) {
+	    var result = [];
+	    node.errors().forEach(function (x) { return result.push({
+	        code: x.code,
+	        message: x.message,
+	        path: x.path,
+	        start: x.start,
+	        end: x.end,
+	        isWarning: x.isWarning
+	    }); });
+	    return result;
+	}
 	run();
 	//# sourceMappingURL=entryPoint.instrumented.js.map
 
@@ -1035,6 +1047,13 @@
 	    /**
 	     *
 	     **/
+	    //xml
+	    DataElementImpl.prototype.xml = function () {
+	        return _super.prototype.element.call(this, 'xml');
+	    };
+	    /**
+	     *
+	     **/
 	    //facets
 	    DataElementImpl.prototype.facets = function () {
 	        return _super.prototype.elements.call(this, 'facets');
@@ -1213,6 +1232,111 @@
 	    return DataElementImpl;
 	})(RAMLLanguageElementImpl);
 	exports.DataElementImpl = DataElementImpl;
+	var XMLInfoImpl = (function (_super) {
+	    __extends(XMLInfoImpl, _super);
+	    /**
+	     *
+	     **/
+	    //constructor
+	    function XMLInfoImpl(nodeOrKey) {
+	        _super.call(this, (typeof nodeOrKey == "string") ? createXMLInfo(nodeOrKey) : nodeOrKey);
+	        this.nodeOrKey = nodeOrKey;
+	    }
+	    /**
+	     *
+	     **/
+	    //wrapperClassName
+	    XMLInfoImpl.prototype.wrapperClassName = function () {
+	        return "XMLInfoImpl";
+	    };
+	    /**
+	     *
+	     **/
+	    //name
+	    XMLInfoImpl.prototype.name = function () {
+	        return _super.prototype.attribute.call(this, 'name', this.toString);
+	    };
+	    /**
+	     *
+	     **/
+	    //setName
+	    XMLInfoImpl.prototype.setName = function (param) {
+	        {
+	            this.highLevel().attrOrCreate("name").setValue("" + param);
+	            return this;
+	        }
+	    };
+	    /**
+	     *
+	     **/
+	    //namespace
+	    XMLInfoImpl.prototype.namespace = function () {
+	        return _super.prototype.attribute.call(this, 'namespace', this.toString);
+	    };
+	    /**
+	     *
+	     **/
+	    //setNamespace
+	    XMLInfoImpl.prototype.setNamespace = function (param) {
+	        {
+	            this.highLevel().attrOrCreate("namespace").setValue("" + param);
+	            return this;
+	        }
+	    };
+	    /**
+	     *
+	     **/
+	    //prefix
+	    XMLInfoImpl.prototype.prefix = function () {
+	        return _super.prototype.attribute.call(this, 'prefix', this.toString);
+	    };
+	    /**
+	     *
+	     **/
+	    //setPrefix
+	    XMLInfoImpl.prototype.setPrefix = function (param) {
+	        {
+	            this.highLevel().attrOrCreate("prefix").setValue("" + param);
+	            return this;
+	        }
+	    };
+	    /**
+	     *
+	     **/
+	    //attribute
+	    XMLInfoImpl.prototype.attribute = function () {
+	        return _super.prototype.attribute.call(this, 'attribute', this.toBoolean);
+	    };
+	    /**
+	     *
+	     **/
+	    //setAttribute
+	    XMLInfoImpl.prototype.setAttribute = function (param) {
+	        {
+	            this.highLevel().attrOrCreate("attribute").setValue("" + param);
+	            return this;
+	        }
+	    };
+	    /**
+	     *
+	     **/
+	    //wrapped
+	    XMLInfoImpl.prototype.wrapped = function () {
+	        return _super.prototype.attribute.call(this, 'wrapped', this.toBoolean);
+	    };
+	    /**
+	     *
+	     **/
+	    //setWrapped
+	    XMLInfoImpl.prototype.setWrapped = function (param) {
+	        {
+	            this.highLevel().attrOrCreate("wrapped").setValue("" + param);
+	            return this;
+	        }
+	    };
+	    return XMLInfoImpl;
+	})(BasicNodeImpl);
+	exports.XMLInfoImpl = XMLInfoImpl;
 	var ModelLocationImpl = (function () {
 	    /**
 	     *
@@ -1622,13 +1746,6 @@
 	            this.highLevel().attrOrCreate("discriminatorValue").setValue("" + param);
 	            return this;
 	        }
-	    };
-	    /**
-	     *
-	     **/
-	    //facets
-	    ObjectFieldImpl.prototype.facets = function () {
-	        return _super.prototype.elements.call(this, 'facets');
 	    };
 	    return ObjectFieldImpl;
 	})(DataElementImpl);
@@ -3404,6 +3521,37 @@
 	    SecuritySchemaPartImpl.prototype.securedBy = function () {
 	        return _super.prototype.attributes.call(this, 'securedBy', function (attr) { return new SecuritySchemaRefImpl(attr); });
 	    };
+	    /**
+	     *
+	     **/
+	    //displayName
+	    SecuritySchemaPartImpl.prototype.displayName = function () {
+	        return _super.prototype.attribute.call(this, 'displayName', this.toString);
+	    };
+	    /**
+	     *
+	     **/
+	    //setDisplayName
+	    SecuritySchemaPartImpl.prototype.setDisplayName = function (param) {
+	        {
+	            this.highLevel().attrOrCreate("displayName").setValue("" + param);
+	            return this;
+	        }
+	    };
+	    /**
+	     *
+	     **/
+	    //description
+	    SecuritySchemaPartImpl.prototype.description = function () {
+	        return _super.prototype.attribute.call(this, 'description', function (attr) { return new MarkdownStringImpl(attr); });
+	    };
+	    /**
+	     *
+	     **/
+	    //annotations
+	    SecuritySchemaPartImpl.prototype.annotations = function () {
+	        return _super.prototype.attributes.call(this, 'annotations', function (attr) { return new AnnotationRefImpl(attr); });
+	    };
 	    return SecuritySchemaPartImpl;
 	})(MethodBaseImpl);
 	exports.SecuritySchemaPartImpl = SecuritySchemaPartImpl;
@@ -3870,6 +4018,12 @@
 	    var node = nc.createStubNode(null, key);
 	    return node;
 	}
+	function createXMLInfo(key) {
+	    var universe = hl.universeProvider("RAML10");
+	    var nc = universe.getType("XMLInfo");
+	    var node = nc.createStubNode(null, key);
+	    return node;
+	}
 	function createExampleSpec(key) {
 	    var universe = hl.universeProvider("RAML10");
 	    var nc = universe.getType("ExampleSpec");
@@ -4133,7 +4287,7 @@
 	var RamlWrapper = __webpack_require__(3);
 	var RamlWrapper08 = __webpack_require__(14);
 	var wrapperHelper = __webpack_require__(15);
-	var pluralize = __webpack_require__(43);
+	var pluralize = __webpack_require__(45);
 	var sig = __webpack_require__(16);
 	var universeProvider = __webpack_require__(10);
 	function expandTraitsAndResourceTypes(api) {
@@ -4455,14 +4609,14 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var yaml = __webpack_require__(19);
-	var lowlevel = __webpack_require__(25);
+	var yaml = __webpack_require__(21);
+	var lowlevel = __webpack_require__(20);
 	var path = __webpack_require__(11);
 	var fs = __webpack_require__(12);
 	var parser = __webpack_require__(34);
 	var dumper = __webpack_require__(35);
 	var Error = __webpack_require__(36);
-	var textutil = __webpack_require__(31);
+	var textutil = __webpack_require__(27);
 	var rr = __webpack_require__(37);
 	var MarkupIndentingBuffer = (function () {
 	    function MarkupIndentingBuffer(indent) {
@@ -6915,21 +7069,21 @@
 	    d.prototype = new __();
 	};
 	var jsyaml = __webpack_require__(6);
-	var defs = __webpack_require__(21);
+	var defs = __webpack_require__(19);
 	var hl = __webpack_require__(17);
-	var ll = __webpack_require__(25);
+	var ll = __webpack_require__(20);
 	var _ = __webpack_require__(47);
-	var yaml = __webpack_require__(19);
+	var yaml = __webpack_require__(21);
 	var proxy = __webpack_require__(13);
-	var typeExpression = __webpack_require__(26);
-	var def = __webpack_require__(21);
-	var builder = __webpack_require__(27);
-	var linter = __webpack_require__(28);
-	var typeBuilder = __webpack_require__(29);
-	var search = __webpack_require__(30);
-	var textutil = __webpack_require__(31);
-	var ModelFactory = __webpack_require__(32);
-	var ovlval = __webpack_require__(33);
+	var typeExpression = __webpack_require__(22);
+	var def = __webpack_require__(19);
+	var builder = __webpack_require__(23);
+	var linter = __webpack_require__(24);
+	var typeBuilder = __webpack_require__(25);
+	var search = __webpack_require__(26);
+	var textutil = __webpack_require__(27);
+	var ModelFactory = __webpack_require__(28);
+	var ovlval = __webpack_require__(29);
 	function qName(x, context) {
 	    var dr = search.declRoot(context);
 	    var nm = x.name();
@@ -7954,7 +8108,7 @@
 	                if (x.unit() != r) {
 	                    return false;
 	                }
-	                if (x.value() && x._node.value) {
+	                if (x.value() && x._node && x._node.value) {
 	                    if (x._node.value.doubleQuoted) {
 	                        var ind = (x.value() + "").indexOf(":");
 	                        var nl = (x.value() + "").indexOf("\n");
@@ -8865,13 +9019,13 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var def = __webpack_require__(21);
-	var td = __webpack_require__(22);
-	var tsutil = __webpack_require__(23);
+	var def = __webpack_require__(19);
+	var td = __webpack_require__(30);
+	var tsutil = __webpack_require__(31);
 	var path = __webpack_require__(11);
 	var mkdirp = __webpack_require__(40);
 	var fs = __webpack_require__(12);
-	var wrappedParserGen = __webpack_require__(24);
+	var wrappedParserGen = __webpack_require__(32);
 	var ParserGenerator = (function () {
 	    function ParserGenerator(cfg, universe) {
 	        this.cfg = cfg;
@@ -9307,8 +9461,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var yaml = __webpack_require__(19);
-	var util = __webpack_require__(20);
+	var yaml = __webpack_require__(21);
+	var util = __webpack_require__(33);
 	var llImpl = __webpack_require__(6);
 	var CompilationUnit = (function () {
 	    function CompilationUnit(_absolutePath, _path, _content, _project, _isTopoLevel) {
@@ -9587,9 +9741,9 @@
 	    "Swagger2": "./spec-swagger-2.0/swagger.ts"
 	};
 	var jsonDefinitions = {
-	    "RAML10": __webpack_require__(51),
-	    "RAML08": __webpack_require__(52),
-	    "Swagger2": __webpack_require__(53)
+	    "RAML10": __webpack_require__(58),
+	    "RAML08": __webpack_require__(59),
+	    "Swagger2": __webpack_require__(60)
 	};
 	var getUniverse = (function () {
 	    var x = function (key) {
@@ -9602,7 +9756,7 @@
 	            universe.setUniverseVersion(key);
 	            universes[key] = universe;
 	        }
-	        var mediaTypeParser = __webpack_require__(41);
+	        var mediaTypeParser = __webpack_require__(42);
 	        global.mediaTypeParser = mediaTypeParser;
 	        return universe;
 	    };
@@ -9895,7 +10049,7 @@
 	    }
 	;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
 /* 12 */
@@ -9913,11 +10067,11 @@
 	    __.prototype = b.prototype;
 	    d.prototype = new __();
 	};
-	var yaml = __webpack_require__(19);
+	var yaml = __webpack_require__(21);
 	var json = __webpack_require__(9);
 	var stringify = __webpack_require__(73);
 	var impl = __webpack_require__(6);
-	var util = __webpack_require__(20);
+	var util = __webpack_require__(33);
 	var LowLevelProxyNode = (function () {
 	    function LowLevelProxyNode(_parent, _transformer) {
 	        this._parent = _parent;
@@ -9991,7 +10145,7 @@
 	    };
 	    //TODO
 	    LowLevelProxyNode.prototype.dumpToObject = function () {
-	        return null;
+	        return json.serialize(this);
 	    };
 	    LowLevelProxyNode.prototype.keyStart = function () {
 	        return this._original.keyStart();
@@ -12228,9 +12382,9 @@
 	var hl = __webpack_require__(17);
 	var hlimpl = __webpack_require__(7);
 	var Opt = __webpack_require__(5);
-	var util = __webpack_require__(20);
-	var typeexpression = __webpack_require__(29);
-	var search = __webpack_require__(30);
+	var util = __webpack_require__(33);
+	var typeexpression = __webpack_require__(25);
+	var search = __webpack_require__(26);
 	var ll = __webpack_require__(6);
 	var path = __webpack_require__(11);
 	function resolveType(p) {
@@ -12569,6 +12723,9 @@
 	    HelperUriParam.prototype.highLevel = function () {
 	        return null;
 	    };
+	    HelperUriParam.prototype.errors = function () {
+	        return [];
+	    };
 	    return HelperUriParam;
 	})();
 	exports.HelperUriParam = HelperUriParam;
@@ -12617,7 +12774,7 @@
 	/// <reference path="../../typings/tsd.d.ts" />
 	var hl = __webpack_require__(17);
 	var hlImpl = __webpack_require__(7);
-	var typeExpr = __webpack_require__(26);
+	var typeExpr = __webpack_require__(22);
 	var ramlSignatureParser = __webpack_require__(50);
 	var wrapper = __webpack_require__(3);
 	function validate(s, node, cb) {
@@ -12724,7 +12881,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
-	var ds = __webpack_require__(21);
+	var ds = __webpack_require__(19);
 	(function (NodeKind) {
 	    NodeKind[NodeKind["BASIC"] = 0] = "BASIC";
 	    NodeKind[NodeKind["NODE"] = 1] = "NODE";
@@ -13066,6 +13223,11 @@
 	        }
 	        return Number.MAX_VALUE;
 	    };
+	    BasicSuperNodeImpl.prototype.errors = function () {
+	        var result = [].concat(this._node.errors());
+	        this._node.attrs().forEach(function (x) { return result = result.concat(x.errors()); });
+	        return result;
+	    };
 	    return BasicSuperNodeImpl;
 	})();
 	exports.BasicSuperNodeImpl = BasicSuperNodeImpl;
@@ -13089,285 +13251,6 @@
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/// <reference path="../../../typings/tsd.d.ts" />
-	(function (Kind) {
-	    Kind[Kind["SCALAR"] = 0] = "SCALAR";
-	    Kind[Kind["MAPPING"] = 1] = "MAPPING";
-	    Kind[Kind["MAP"] = 2] = "MAP";
-	    Kind[Kind["SEQ"] = 3] = "SEQ";
-	    Kind[Kind["ANCHOR_REF"] = 4] = "ANCHOR_REF";
-	    Kind[Kind["INCLUDE_REF"] = 5] = "INCLUDE_REF";
-	})(exports.Kind || (exports.Kind = {}));
-	var Kind = exports.Kind;
-	function newMapping(key, value) {
-	    var end = (value ? value.endPosition : key.endPosition + 1); //FIXME.workaround, end should be defied by position of ':'
-	    //console.log('key: ' + key.value + ' ' + key.startPosition + '..' + key.endPosition + ' ' + value + ' end: ' + end);
-	    var node = {
-	        key: key,
-	        value: value,
-	        startPosition: key.startPosition,
-	        endPosition: end,
-	        kind: 1 /* MAPPING */,
-	        parent: null,
-	        errors: []
-	    };
-	    return node;
-	}
-	exports.newMapping = newMapping;
-	function newAnchorRef(key, start, end, value) {
-	    return {
-	        errors: [],
-	        referencesAnchor: key,
-	        value: value,
-	        startPosition: start,
-	        endPosition: end,
-	        kind: 4 /* ANCHOR_REF */,
-	        parent: null
-	    };
-	}
-	exports.newAnchorRef = newAnchorRef;
-	function newScalar(v) {
-	    if (v === void 0) { v = ""; }
-	    return {
-	        errors: [],
-	        startPosition: -1,
-	        endPosition: -1,
-	        value: v,
-	        kind: 0 /* SCALAR */,
-	        parent: null,
-	        doubleQuoted: false
-	    };
-	}
-	exports.newScalar = newScalar;
-	function newItems() {
-	    return {
-	        errors: [],
-	        startPosition: -1,
-	        endPosition: -1,
-	        items: [],
-	        kind: 3 /* SEQ */,
-	        parent: null
-	    };
-	}
-	exports.newItems = newItems;
-	function newSeq() {
-	    return newItems();
-	}
-	exports.newSeq = newSeq;
-	function newMap(mappings) {
-	    return {
-	        errors: [],
-	        startPosition: -1,
-	        endPosition: -1,
-	        mappings: mappings ? mappings : [],
-	        kind: 2 /* MAP */,
-	        parent: null
-	    };
-	}
-	exports.newMap = newMap;
-	//# sourceMappingURL=yamlAST.js.map
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var _ = __webpack_require__(47);
-	var Opt = __webpack_require__(5);
-	exports.defined = function (x) { return (x !== null) && (x !== undefined); };
-	/**
-	 * Arrays of Objects are common in RAML08.
-	 * @param x
-	 * @returns {{}}
-	 */
-	function flattenArrayOfObjects(x) {
-	    var res = {};
-	    x.forEach(function (v) { return Object.keys(v).forEach(function (k) { return res[k] = v[k]; }); });
-	    return res;
-	}
-	exports.flattenArrayOfObjects = flattenArrayOfObjects;
-	function find(xs, f) {
-	    return new Opt(_.find(xs || [], f));
-	}
-	exports.find = find;
-	exports.isInstance = function (v, C) { return (v instanceof C) ? [v] : []; };
-	exports.ifInstanceOf = function (v, C, f) { return (v instanceof C) ? f(v) : null; };
-	function toTuples(map) {
-	    return Object.keys(map).map(function (k) { return [k, map[k]]; });
-	}
-	exports.toTuples = toTuples;
-	function fromTuples(tuples) {
-	    var obj = {};
-	    tuples.forEach(function (x) { return obj[x[0]] = x[1]; });
-	    return obj;
-	}
-	exports.fromTuples = fromTuples;
-	exports.collectInstancesOf = function (xs, C) { return tap([], function (res) { return xs.forEach(function (v) { return exports.ifInstanceOf(v, C, function (x) { return res.push(x); }); }); }); };
-	exports.collectInstancesOfInMap = function (map, C) {
-	    return Object.keys(map).map(function (k) { return [k, map[k]]; }).filter(function (x) { return x[1] instanceof C; }).map(function (x) { return x; });
-	};
-	exports.asArray = function (v) { return exports.defined(v) ? ((v instanceof Array) ? v : [v]) : []; };
-	exports.shallowCopy = function (obj) { return tap({}, function (copy) { return Object.keys(obj).forEach(function (k) { return copy[k] = obj[k]; }); }); };
-	exports.flatMap = function (xs, f) { return exports.flatten(xs.map(f)); };
-	exports.flatten = function (xss) { return Array.prototype.concat.apply([], xss); };
-	exports.takeWhile = function (xs, f) { return tap([], function (res) {
-	    for (var i = 0; i < xs.length; i++) {
-	        if (!f(xs[i]))
-	            break;
-	        res.push(xs[i]);
-	    }
-	}); };
-	function tap(v, f) {
-	    f(v);
-	    return v;
-	}
-	exports.tap = tap;
-	function kv(obj, iter) {
-	    if (typeof obj === 'object')
-	        Object.keys(obj).forEach(function (k) { return iter(k, obj[k]); });
-	}
-	exports.kv = kv;
-	function indexed(objects, key, delKey) {
-	    if (delKey === void 0) { delKey = false; }
-	    var obj = {};
-	    objects.forEach(function (original) {
-	        var copy = exports.shallowCopy(original);
-	        if (delKey)
-	            delete copy[key];
-	        obj[original[key]] = copy;
-	    });
-	    return obj;
-	}
-	exports.indexed = indexed;
-	function stringEndsWith(str, search) {
-	    var dif = str.length - search.length;
-	    return dif >= 0 && str.lastIndexOf(search) === dif;
-	}
-	exports.stringEndsWith = stringEndsWith;
-	function stringStartsWith(str, search) {
-	    return str.length - search.length >= 0 && str.substring(0, search.length) === search;
-	}
-	exports.stringStartsWith = stringStartsWith;
-	function lazypropkeyfilter(k) {
-	    return k[k.length - 1] == "_"; // ends with underscore
-	}
-	exports.lazypropkeyfilter = lazypropkeyfilter;
-	function lazyprop(obj, key, func) {
-	    var result, ready = false;
-	    obj[key] = function () {
-	        if (!ready) {
-	            ready = true;
-	            result = func.apply(obj);
-	        }
-	        return result;
-	    };
-	}
-	function lazyprops(obj, keyfilter) {
-	    if (keyfilter === void 0) { keyfilter = lazypropkeyfilter; }
-	    for (var k in obj) {
-	        if (keyfilter(k)) {
-	            exports.ifInstanceOf(obj[k], Function, function (vf) { return (vf.length === 0) ? lazyprop(obj, k, vf) : null; });
-	        }
-	    }
-	}
-	exports.lazyprops = lazyprops;
-	function iff(v, f) {
-	    if (v !== undefined)
-	        f(v);
-	}
-	exports.iff = iff;
-	function isRAMLUrl(str) {
-	    if (typeof str !== 'string' || str == '')
-	        return false;
-	    return stringEndsWith(str, ".raml");
-	}
-	exports.isRAMLUrl = isRAMLUrl;
-	function getAllRequiredExternalModulesFromCode(code) {
-	    var match;
-	    var mods = [];
-	    // both quoting styles
-	    var r1 = new RegExp("require\\('([^']+)'\\)", "gi");
-	    while (match = r1.exec(code)) {
-	        mods.push(match[1]);
-	    }
-	    var r2 = new RegExp('require\\("([^"]+)"\\)', "gi");
-	    while (match = r2.exec(code)) {
-	        mods.push(match[1]);
-	    }
-	    mods = _.unique(mods).filter(function (x) { return x != ""; });
-	    mods.sort();
-	    return mods;
-	}
-	exports.getAllRequiredExternalModulesFromCode = getAllRequiredExternalModulesFromCode;
-	exports.serial = (function () {
-	    var i = 0;
-	    return function () { return i++; };
-	})();
-	function isEssential(arg) {
-	    return typeof arg !== 'undefined' && arg != null;
-	}
-	exports.isEssential = isEssential;
-	function firstToUpper(q) {
-	    if (q.length == 0) {
-	        return q;
-	    }
-	    return q.charAt(0).toUpperCase() + q.substr(1);
-	}
-	exports.firstToUpper = firstToUpper;
-	function updateObject(source, target, addNewFields) {
-	    if (addNewFields === void 0) { addNewFields = false; }
-	    var keySet = Object.keys(target);
-	    if (addNewFields) {
-	        var map = {};
-	        keySet.forEach(function (x) { return map[x] = true; });
-	        Object.keys(source).forEach(function (x) { return map[x] = true; });
-	        keySet = Object.keys(map);
-	    }
-	    keySet.forEach(function (x) {
-	        var value = source[x];
-	        if (value instanceof Object) {
-	            if (!target[x]) {
-	                target[x] = {};
-	            }
-	            updateObject(value, target[x], true);
-	        }
-	        else if (value != undefined) {
-	            target[x] = source[x];
-	        }
-	    });
-	}
-	exports.updateObject = updateObject;
-	;
-	/**
-	 * In 'str' replace all occurences of 'map' keys to their values.
-	 */
-	function replaceMap(str, map) {
-	    Object.keys(map).forEach(function (x) { return str = replace(str, x, map[x]); });
-	    return str;
-	}
-	exports.replaceMap = replaceMap;
-	/**
-	 * Replace all occurences of 'x' in 'str' to 'r' without thinking if 'x' can be passed without
-	 * escaping as argument to RegExp constructor
-	 */
-	function replace(str, x, r) {
-	    var result = '';
-	    var prev = 0;
-	    for (var i = str.indexOf(x); i < str.length && i >= 0; i = str.indexOf(x, prev)) {
-	        result += str.substring(prev, i);
-	        result += r;
-	        prev = i + x.length;
-	    }
-	    result += str.substring(prev, str.length);
-	    return result;
-	}
-	exports.replace = replace;
-	//# sourceMappingURL=index.js.map
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __extends = this.__extends || function (d, b) {
 	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
 	    function __() { this.constructor = d; }
@@ -13377,12 +13260,12 @@
 	var _ = __webpack_require__(47);
 	var hlimpl = __webpack_require__(7);
 	var jsyaml = __webpack_require__(6);
-	var su = __webpack_require__(54);
-	var selector = __webpack_require__(55);
-	var typeBuilder = __webpack_require__(29);
-	var ramlexp = __webpack_require__(56);
-	var defs = __webpack_require__(21);
-	var search = __webpack_require__(30);
+	var su = __webpack_require__(51);
+	var selector = __webpack_require__(52);
+	var typeBuilder = __webpack_require__(25);
+	var ramlexp = __webpack_require__(53);
+	var defs = __webpack_require__(19);
+	var search = __webpack_require__(26);
 	var Annotation = (function () {
 	    function Annotation(_name) {
 	        this._name = _name;
@@ -15393,1231 +15276,7 @@
 	//# sourceMappingURL=definitionSystem.js.map
 
 /***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var __extends = this.__extends || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    __.prototype = b.prototype;
-	    d.prototype = new __();
-	};
-	var tsutil = __webpack_require__(23);
-	var _ = __webpack_require__(47);
-	var assert = __webpack_require__(74);
-	var Opt = __webpack_require__(5);
-	exports.MODEL_CLASS_MODEL_ELEMENT = '$resource-model-element';
-	exports.MODEL_CLASS_TYPE_DECLARATION = '$type-declaration';
-	exports.MODEL_CLASS_INTERFACE = '$interface-declaration';
-	exports.MODEL_CLASS_CLASS_DECLARATION = '$class-declaration';
-	exports.MODEL_CLASS_ANNOTATION_DECLARATION = '$annotation-declaration';
-	exports.MODEL_CLASS_ENUM_DECLARATION = '$enum-declaration';
-	exports.MODEL_CLASS_TYPE_ASSERTION = '$type-assertion';
-	exports.MODEL_CLASS_API_MODULE = '$api-module';
-	exports.MODEL_CLASS_UNIVERSE = '$universe';
-	exports.MODEL_CLASS_MEMBER = '$member';
-	exports.MODEL_CLASS_UNION_TYPE_REFERENCE = '$union-type-reference';
-	exports.MODEL_CLASS_SIMPLE_TYPE_REFERENCE = '$simple-type-reference';
-	exports.MODEL_CLASS_FUNCTION_REFERENCE = '$function-reference';
-	exports.MODEL_CLASS_ARRAY_REFERENCE = '$array-reference';
-	exports.MODEL_CLASS_DECLARED_INTERFACE_REFERENCE = '$declared-interface-reference';
-	exports.MODEL_CLASS_ANY_TYPE_REFERENCE = '$any-type-reference';
-	exports.MODEL_CLASS_STRUCTURAL_TYPE_REFERENCE = '$structural-type-reference';
-	exports.MODEL_CLASS_PARAM = '$param';
-	exports.MODEL_CLASS_STRING_VALUE = '$string-value';
-	exports.MODEL_CLASS_ARRAY_VALUE = '$array-value';
-	exports.MODEL_CLASS_API_ELEMENT_DECLARATION = '$api-element-declaration';
-	exports.MODEL_CLASS_CONSTRUCTOR = '$constructor';
-	//TODO HIDE Fields from unmanagable modification
-	//TODO Refine type decl type ref hieararchy a bit more
-	//TODO add classes, generics, metadata
-	var TSModelElement = (function () {
-	    function TSModelElement(parent, config) {
-	        if (parent === void 0) { parent = exports.Universe; }
-	        this.meta = {};
-	        this._annotations = [];
-	        this._parent = parent;
-	        this._config = config ? config : parent._config;
-	        this._children = [];
-	        assert(parent, "Should never be null");
-	        this._parent.addChild(this);
-	    }
-	    TSModelElement.prototype.annotations = function () {
-	        return this._annotations;
-	    };
-	    TSModelElement.prototype.patchParent = function (parent) {
-	        this._parent = parent; //FIXME
-	    };
-	    TSModelElement.prototype.isEmpty = function () {
-	        return this._children.length == 0;
-	    };
-	    TSModelElement.prototype.parent = function () {
-	        return this._parent;
-	    };
-	    TSModelElement.prototype.children = function () {
-	        return this._children;
-	    };
-	    TSModelElement.prototype.root = function () {
-	        if (this._parent == exports.Universe) {
-	            return this;
-	        }
-	        return this._parent.root();
-	    };
-	    TSModelElement.prototype.removeChild = function (child) {
-	        if (child._parent == this) {
-	            this._children = this._children.filter(function (x) { return x != child; });
-	        }
-	        child._parent = exports.Universe;
-	    };
-	    TSModelElement.prototype.addChild = function (child) {
-	        if (child._parent) {
-	            child._parent.removeChild(child);
-	        }
-	        child._parent = this;
-	        this._children.push(child);
-	    };
-	    TSModelElement.prototype.serializeToString = function () {
-	        throw new Error("You should override serialize to string always");
-	    };
-	    TSModelElement.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_MODEL_ELEMENT;
-	    };
-	    return TSModelElement;
-	})();
-	exports.TSModelElement = TSModelElement;
-	//TODO It should become an interface
-	var TSTypeDeclaration = (function (_super) {
-	    __extends(TSTypeDeclaration, _super);
-	    function TSTypeDeclaration(parent) {
-	        var _this = this;
-	        if (parent === void 0) { parent = null; }
-	        _super.call(this, parent);
-	        this.canBeOmmited = function () { return _this.locked ? false : _this.children().every(function (x) { return x.optional; }); };
-	        this.locked = false;
-	        this.extras = [""];
-	    }
-	    TSTypeDeclaration.prototype.addCode = function (code) {
-	        this.extras.push(code);
-	    };
-	    TSTypeDeclaration.prototype.toReference = function () {
-	        throw new Error("Implement in subclasses");
-	    };
-	    TSTypeDeclaration.prototype.hash = function () {
-	        return this.serializeToString();
-	    };
-	    TSTypeDeclaration.prototype.isFunctor = function () {
-	        return this.children().some(function (x) { return x.isAnonymousFunction(); });
-	    };
-	    TSTypeDeclaration.prototype.getFunctor = function () {
-	        return _.find(this.children(), function (x) { return x.isAnonymousFunction(); });
-	    };
-	    TSTypeDeclaration.prototype.visit = function (v) {
-	        if (v.startTypeDeclaration(this)) {
-	            this.children().forEach(function (x, i, arr) {
-	                x.visit(v);
-	                if (i != arr.length - 1)
-	                    v.betweenElements();
-	            });
-	            v.endTypeDeclaration(this);
-	        }
-	    };
-	    TSTypeDeclaration.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_TYPE_DECLARATION;
-	    };
-	    return TSTypeDeclaration;
-	})(TSModelElement);
-	exports.TSTypeDeclaration = TSTypeDeclaration;
-	var TSInterface = (function (_super) {
-	    __extends(TSInterface, _super);
-	    function TSInterface(p, name) {
-	        _super.call(this, p);
-	        this.extends = [];
-	        this.implements = [];
-	        this.name = name;
-	    }
-	    TSInterface.prototype.hash = function () {
-	        return this.children().filter(function (x) { return !x.isPrivate; }).map(function (x) { return "\n" + x.serializeToString() + "\n"; }).join('');
-	    };
-	    TSInterface.prototype.toReference = function () {
-	        return new TSDeclaredInterfaceReference(exports.Universe, this.name, this);
-	    };
-	    TSInterface.prototype.decl = function () {
-	        return "interface";
-	    };
-	    TSInterface.prototype.serializeToString = function () {
-	        var body = this.hash();
-	        return "export " + this.decl() + " " + this.name.concat(this.extendsString() + this.implementsString()) + "{" + this.extras.join("\n") + body + "}\n";
-	    };
-	    TSInterface.prototype.extendsString = function () {
-	        if (this.extends.length > 0) {
-	            return " extends " + this.extends.map(function (x) { return x.serializeToString(); }).join(",");
-	        }
-	        return "";
-	    };
-	    TSInterface.prototype.implementsString = function () {
-	        if (this.implements.length > 0) {
-	            return " implements " + this.implements.map(function (x) { return x.serializeToString(); }).join(",");
-	        }
-	        return "";
-	    };
-	    TSInterface.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_INTERFACE;
-	    };
-	    return TSInterface;
-	})(TSTypeDeclaration);
-	exports.TSInterface = TSInterface;
-	//TODO INCORRECT INHERITANCE CHAIN
-	var TSClassDecl = (function (_super) {
-	    __extends(TSClassDecl, _super);
-	    function TSClassDecl() {
-	        _super.apply(this, arguments);
-	    }
-	    TSClassDecl.prototype.decl = function () {
-	        return "class";
-	    };
-	    TSClassDecl.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_CLASS_DECLARATION;
-	    };
-	    return TSClassDecl;
-	})(TSInterface);
-	exports.TSClassDecl = TSClassDecl;
-	var TSAnnotationDecl = (function (_super) {
-	    __extends(TSAnnotationDecl, _super);
-	    function TSAnnotationDecl() {
-	        _super.apply(this, arguments);
-	    }
-	    TSAnnotationDecl.prototype.decl = function () {
-	        return "annotation";
-	    };
-	    TSAnnotationDecl.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ANNOTATION_DECLARATION;
-	    };
-	    TSAnnotationDecl.prototype.toReference = function () {
-	        return new TSDeclaredAnnotationReference(exports.Universe, this.name, this);
-	    };
-	    return TSAnnotationDecl;
-	})(TSInterface);
-	exports.TSAnnotationDecl = TSAnnotationDecl;
-	var TSEnumDecl = (function (_super) {
-	    __extends(TSEnumDecl, _super);
-	    function TSEnumDecl() {
-	        _super.apply(this, arguments);
-	    }
-	    TSEnumDecl.prototype.decl = function () {
-	        return "enum";
-	    };
-	    TSEnumDecl.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ENUM_DECLARATION;
-	    };
-	    return TSEnumDecl;
-	})(TSInterface);
-	exports.TSEnumDecl = TSEnumDecl;
-	var TSTypeAssertion = (function (_super) {
-	    __extends(TSTypeAssertion, _super);
-	    function TSTypeAssertion(p, _name, _ref) {
-	        _super.call(this, p);
-	        this._name = _name;
-	        this._ref = _ref;
-	    }
-	    TSTypeAssertion.prototype.toReference = function () {
-	        return new TSSimpleTypeReference(exports.Universe, this._name);
-	    };
-	    TSTypeAssertion.prototype.serializeToString = function () {
-	        return "export type " + this._name + "=" + this._ref.serializeToString() + "\n";
-	    };
-	    TSTypeAssertion.prototype.ref = function () {
-	        return this._ref;
-	    };
-	    TSTypeAssertion.prototype.name = function () {
-	        return this._name;
-	    };
-	    TSTypeAssertion.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_TYPE_ASSERTION;
-	    };
-	    return TSTypeAssertion;
-	})(TSTypeDeclaration);
-	exports.TSTypeAssertion = TSTypeAssertion;
-	var TSUniverse = (function (_super) {
-	    __extends(TSUniverse, _super);
-	    function TSUniverse() {
-	        _super.call(this, this);
-	    }
-	    TSUniverse.prototype.addChild = function (child) {
-	    };
-	    TSUniverse.prototype.setConfig = function (cfg) {
-	        this._config = cfg;
-	    };
-	    TSUniverse.prototype.getConfig = function () {
-	        return this._config;
-	    };
-	    TSUniverse.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_UNIVERSE;
-	    };
-	    return TSUniverse;
-	})(TSModelElement);
-	exports.TSUniverse = TSUniverse;
-	exports.Universe = new TSUniverse();
-	var TSAPIModule = (function (_super) {
-	    __extends(TSAPIModule, _super);
-	    function TSAPIModule() {
-	        _super.apply(this, arguments);
-	    }
-	    TSAPIModule.prototype.getInterface = function (nm) {
-	        return new Opt(_.find(this.children(), function (x) { return x.name == nm; }));
-	    };
-	    TSAPIModule.prototype.serializeToString = function () {
-	        var typeMap = {};
-	        this.children().forEach(function (x) { return typeMap[x.name] = x; });
-	        var covered = {};
-	        var sorted = [];
-	        var append = function (t) {
-	            if (covered[t.name]) {
-	                return;
-	            }
-	            covered[t.name] = true;
-	            var refs = t.extends;
-	            refs.forEach(function (ref) {
-	                if (ref instanceof TSSimpleTypeReference) {
-	                    var name = ref.name;
-	                    var st = typeMap[name];
-	                    if (st) {
-	                        append(st);
-	                    }
-	                }
-	            });
-	            sorted.push(t);
-	        };
-	        this.children().forEach(function (x) { return append(x); });
-	        return sorted.map(function (x) { return x.serializeToString(); }).join("\n");
-	    };
-	    TSAPIModule.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_API_MODULE;
-	    };
-	    return TSAPIModule;
-	})(TSModelElement);
-	exports.TSAPIModule = TSAPIModule;
-	var TSMember = (function (_super) {
-	    __extends(TSMember, _super);
-	    function TSMember() {
-	        _super.apply(this, arguments);
-	    }
-	    TSMember.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_MEMBER;
-	    };
-	    return TSMember;
-	})(TSModelElement);
-	exports.TSMember = TSMember;
-	var TSUnionTypeReference = (function (_super) {
-	    __extends(TSUnionTypeReference, _super);
-	    function TSUnionTypeReference() {
-	        _super.apply(this, arguments);
-	        this.array = function () { return false; };
-	    }
-	    TSUnionTypeReference.prototype.getFunctor = function () {
-	        return null;
-	    };
-	    //TODO FIXIT FIX IT WITH MIX IN
-	    TSUnionTypeReference.prototype.union = function (q) {
-	        var map = {};
-	        this.children().filter(function (x) { return x instanceof TSSimpleTypeReference; }).forEach(function (x) { return map[x.name] = true; });
-	        var gotNew = false;
-	        var flat = flattenUnionType(q);
-	        flat.forEach(function (x) {
-	            if (x instanceof TSSimpleTypeReference) {
-	                gotNew = gotNew || !map[q.name];
-	            }
-	            else {
-	                gotNew = true;
-	            }
-	        });
-	        if (!gotNew) {
-	            return this;
-	        }
-	        var r = new TSUnionTypeReference();
-	        this.children().forEach(function (x) { return r.addChild(x); });
-	        flat.forEach(function (x) { return r.addChild(x); });
-	        return r;
-	    };
-	    TSUnionTypeReference.prototype.isFunctor = function () {
-	        return false;
-	    };
-	    TSUnionTypeReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSUnionTypeReference.prototype.serializeToString = function () {
-	        return this.children().map(function (x) { return x.serializeToString(); }).join(" | ");
-	    };
-	    TSUnionTypeReference.prototype.removeChild = function (child) {
-	    };
-	    TSUnionTypeReference.prototype.addChild = function (child) {
-	        this.children().push(child);
-	    };
-	    TSUnionTypeReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_UNION_TYPE_REFERENCE;
-	    };
-	    return TSUnionTypeReference;
-	})(TSModelElement);
-	exports.TSUnionTypeReference = TSUnionTypeReference;
-	var TSSimpleTypeReference = (function (_super) {
-	    __extends(TSSimpleTypeReference, _super);
-	    function TSSimpleTypeReference(p, tn) {
-	        var _this = this;
-	        _super.call(this, p);
-	        this.array = function () { return false; };
-	        this.genericStr = function () { return _this.typeParameters && _this.typeParameters.length > 0 ? '<' + _this.typeParameters.map(function (p) { return p.serializeToString(); }).join(',') + '>' : ''; };
-	        this.name = tn;
-	    }
-	    TSSimpleTypeReference.prototype.isEmpty = function () {
-	        return false;
-	    };
-	    TSSimpleTypeReference.prototype.getFunctor = function () {
-	        return null;
-	    };
-	    TSSimpleTypeReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSSimpleTypeReference.prototype.isFunctor = function () {
-	        return false;
-	    };
-	    TSSimpleTypeReference.prototype.union = function (q) {
-	        var _this = this;
-	        var flat = flattenUnionType(q);
-	        var gotThis = false;
-	        flat.filter(function (x) { return x instanceof TSSimpleTypeReference; }).map(function (x) { return x; }).forEach(function (x) { return gotThis = gotThis || (x.name == _this.name); });
-	        if (gotThis) {
-	            return q;
-	        }
-	        var r = new TSUnionTypeReference();
-	        r.addChild(this);
-	        flat.forEach(function (x) { return r.addChild(x); });
-	        return r;
-	    };
-	    TSSimpleTypeReference.prototype.serializeToString = function () {
-	        return this.name + this.genericStr();
-	    };
-	    TSSimpleTypeReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_SIMPLE_TYPE_REFERENCE;
-	    };
-	    return TSSimpleTypeReference;
-	})(TSModelElement);
-	exports.TSSimpleTypeReference = TSSimpleTypeReference;
-	var TSFunctionReference = (function (_super) {
-	    __extends(TSFunctionReference, _super);
-	    function TSFunctionReference(p) {
-	        var _this = this;
-	        _super.call(this, p);
-	        this.rangeType = new AnyType();
-	        this.parameters = [];
-	        this.array = function () { return false; };
-	        this.paramStr = function (appendDefault) {
-	            if (appendDefault === void 0) { appendDefault = false; }
-	            return '(' + _this.parameters.filter(function (x) { return !x.isEmpty(); }).map(function (p) { return p.serializeToString(appendDefault); }).join(', ') + ')';
-	        };
-	    }
-	    TSFunctionReference.prototype.isEmpty = function () {
-	        return false;
-	    };
-	    TSFunctionReference.prototype.getFunctor = function () {
-	        return null;
-	    };
-	    TSFunctionReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSFunctionReference.prototype.isFunctor = function () {
-	        return true;
-	    };
-	    TSFunctionReference.prototype.union = function (q) {
-	        var r = new TSUnionTypeReference();
-	        r.addChild(this);
-	        r.addChild(q);
-	        return r;
-	    };
-	    TSFunctionReference.prototype.serializeToString = function () {
-	        return this.paramStr() + '=>' + this.rangeType.serializeToString();
-	    };
-	    TSFunctionReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_FUNCTION_REFERENCE;
-	    };
-	    return TSFunctionReference;
-	})(TSModelElement);
-	exports.TSFunctionReference = TSFunctionReference;
-	var TSArrayReference = (function (_super) {
-	    __extends(TSArrayReference, _super);
-	    function TSArrayReference(componentType) {
-	        if (componentType === void 0) { componentType = new AnyType(); }
-	        _super.call(this, exports.Universe);
-	        this.array = function () { return true; };
-	        this.componentType = componentType;
-	    }
-	    TSArrayReference.prototype.isEmpty = function () {
-	        return this.componentType ? true : false;
-	    };
-	    TSArrayReference.prototype.getFunctor = function () {
-	        return this.componentType.getFunctor();
-	    };
-	    TSArrayReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSArrayReference.prototype.isFunctor = function () {
-	        return this.componentType.isFunctor();
-	    };
-	    TSArrayReference.prototype.union = function (q) {
-	        var r = new TSUnionTypeReference();
-	        r.addChild(this);
-	        r.addChild(q);
-	        return r;
-	    };
-	    TSArrayReference.prototype.serializeToString = function () {
-	        return this.componentType.serializeToString() + '[]';
-	    };
-	    TSArrayReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ARRAY_REFERENCE;
-	    };
-	    return TSArrayReference;
-	})(TSModelElement);
-	exports.TSArrayReference = TSArrayReference;
-	var TSDeclaredInterfaceReference = (function (_super) {
-	    __extends(TSDeclaredInterfaceReference, _super);
-	    function TSDeclaredInterfaceReference(p, tn, _data) {
-	        _super.call(this, p, tn);
-	        this._data = _data;
-	    }
-	    TSDeclaredInterfaceReference.prototype.isEmpty = function () {
-	        return false;
-	    };
-	    TSDeclaredInterfaceReference.prototype.getFunctor = function () {
-	        return null;
-	    };
-	    TSDeclaredInterfaceReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSDeclaredInterfaceReference.prototype.getOriginal = function () {
-	        return this._data;
-	    };
-	    TSDeclaredInterfaceReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_DECLARED_INTERFACE_REFERENCE;
-	    };
-	    return TSDeclaredInterfaceReference;
-	})(TSSimpleTypeReference);
-	exports.TSDeclaredInterfaceReference = TSDeclaredInterfaceReference;
-	var TSAnnotationReference = (function (_super) {
-	    __extends(TSAnnotationReference, _super);
-	    function TSAnnotationReference(p, tn, values) {
-	        if (values === void 0) { values = {}; }
-	        _super.call(this, p, tn);
-	        this.values = values;
-	    }
-	    TSAnnotationReference.prototype.value = function (key) {
-	        if (key === void 0) { key = 'value'; }
-	        return this.values[key];
-	    };
-	    return TSAnnotationReference;
-	})(TSSimpleTypeReference);
-	exports.TSAnnotationReference = TSAnnotationReference;
-	var TSDeclaredAnnotationReference = (function (_super) {
-	    __extends(TSDeclaredAnnotationReference, _super);
-	    function TSDeclaredAnnotationReference() {
-	        _super.apply(this, arguments);
-	        this.values = {};
-	    }
-	    TSDeclaredAnnotationReference.prototype.value = function (key) {
-	        if (key === void 0) { key = 'value'; }
-	        return this.values[key];
-	    };
-	    return TSDeclaredAnnotationReference;
-	})(TSDeclaredInterfaceReference);
-	exports.TSDeclaredAnnotationReference = TSDeclaredAnnotationReference;
-	var AnyType = (function (_super) {
-	    __extends(AnyType, _super);
-	    function AnyType(nm) {
-	        if (nm === void 0) { nm = "any"; }
-	        _super.call(this, exports.Universe, nm);
-	    }
-	    AnyType.prototype.union = function (q) {
-	        return q;
-	    };
-	    AnyType.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ANY_TYPE_REFERENCE;
-	    };
-	    return AnyType;
-	})(TSSimpleTypeReference);
-	exports.AnyType = AnyType;
-	var TSStructuralTypeReference = (function (_super) {
-	    __extends(TSStructuralTypeReference, _super);
-	    function TSStructuralTypeReference(parent) {
-	        var _this = this;
-	        if (parent === void 0) { parent = exports.Universe; }
-	        _super.call(this, parent);
-	        this.array = function () { return false; };
-	        this.canBeOmmited = function () { return _this.locked ? false : _this.children().every(function (x) { return x.optional; }); };
-	    }
-	    TSStructuralTypeReference.prototype.visitReturnType = function (v) {
-	        //v.visitStructuralReturn(this);
-	        this.visit(v);
-	    };
-	    TSStructuralTypeReference.prototype.toReference = function () {
-	        return this;
-	    };
-	    TSStructuralTypeReference.prototype.union = function (q) {
-	        var r = new TSUnionTypeReference();
-	        r.addChild(this);
-	        r.addChild(q);
-	        return r;
-	    };
-	    TSStructuralTypeReference.prototype.serializeToString = function () {
-	        var body = this.children().map(function (x) { return ("\n" + x.serializeToString() + "\n"); }).join('');
-	        return "{" + body + "}";
-	    };
-	    TSStructuralTypeReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_STRUCTURAL_TYPE_REFERENCE;
-	    };
-	    return TSStructuralTypeReference;
-	})(TSTypeDeclaration);
-	exports.TSStructuralTypeReference = TSStructuralTypeReference;
-	(function (ParamLocation) {
-	    ParamLocation[ParamLocation["URI"] = 0] = "URI";
-	    ParamLocation[ParamLocation["BODY"] = 1] = "BODY";
-	    ParamLocation[ParamLocation["OPTIONS"] = 2] = "OPTIONS";
-	    ParamLocation[ParamLocation["OTHER"] = 3] = "OTHER";
-	})(exports.ParamLocation || (exports.ParamLocation = {}));
-	var ParamLocation = exports.ParamLocation;
-	var Param = (function (_super) {
-	    __extends(Param, _super);
-	    function Param(p, nm, location, tp, defaultValue) {
-	        if (tp === void 0) { tp = new TSSimpleTypeReference(exports.Universe, "string"); }
-	        _super.call(this, p);
-	        this.name = nm;
-	        this.ptype = tp;
-	        this.location = location;
-	        this.defaultValue = defaultValue;
-	    }
-	    Param.prototype.isEmpty = function () {
-	        return this.ptype.isEmpty();
-	    };
-	    Param.prototype.serializeToString = function (appendDefault) {
-	        if (appendDefault === void 0) { appendDefault = false; }
-	        //return this.name + (this.optional ? "?" : "") + ":" + this.ptype.serializeToString() + (this.ptype.canBeOmmited() ? "?" : "");
-	        return this.name + (this.optional || (this.defaultValue && !appendDefault) ? "?" : "") + (":" + this.ptype.serializeToString() + (this.ptype.canBeOmmited() ? "?" : "")) + (appendDefault && this.defaultValue ? '=' + JSON.stringify(this.defaultValue) : '');
-	    };
-	    Param.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_PARAM;
-	    };
-	    return Param;
-	})(TSModelElement);
-	exports.Param = Param;
-	var StringValue = (function (_super) {
-	    __extends(StringValue, _super);
-	    function StringValue(_value) {
-	        _super.call(this);
-	        this._value = _value;
-	    }
-	    StringValue.prototype.value = function () {
-	        return this._value;
-	    };
-	    StringValue.prototype.serializeToString = function () {
-	        return "\"" + this._value + "\"";
-	    };
-	    StringValue.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_STRING_VALUE;
-	    };
-	    return StringValue;
-	})(TSMember);
-	exports.StringValue = StringValue;
-	var ArrayValue = (function (_super) {
-	    __extends(ArrayValue, _super);
-	    function ArrayValue(_values) {
-	        _super.call(this);
-	        this._values = _values;
-	    }
-	    ArrayValue.prototype.value = function () {
-	        return this.serializeToString();
-	    };
-	    ArrayValue.prototype.serializeToString = function () {
-	        return "[ " + this._values.map(function (x) { return x.value(); }).join(', ') + " ]";
-	    };
-	    ArrayValue.prototype.values = function () {
-	        return this._values;
-	    };
-	    ArrayValue.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ARRAY_VALUE;
-	    };
-	    return ArrayValue;
-	})(TSMember);
-	exports.ArrayValue = ArrayValue;
-	var TSAPIElementDeclaration = (function (_super) {
-	    __extends(TSAPIElementDeclaration, _super);
-	    function TSAPIElementDeclaration(p, name) {
-	        var _this = this;
-	        _super.call(this, p);
-	        this.rangeType = new AnyType();
-	        this.value = null;
-	        this.paramStr = function (appendDefault) {
-	            if (appendDefault === void 0) { appendDefault = false; }
-	            return '( ' + _this.parameters.filter(function (x) { return !x.isEmpty(); }).map(function (p) { return _this.serializeParam(p, appendDefault); }).join(',') + ' )';
-	        };
-	        this.serializeParam = function (p, appendDefault) { return p.serializeToString(appendDefault); };
-	        this.isFunction = function () { return _this.parameters.length != 0 || _this.isFunc; };
-	        this.isAnonymousFunction = function () { return _this.isFunction() && _this.name === ''; };
-	        this.returnStr = function () { return _this.rangeType ? ':' + _this.rangeType.serializeToString() : ''; };
-	        this.name = name;
-	        this.parameters = [];
-	        this.rangeType = null;
-	        this.optional = false;
-	    }
-	    TSAPIElementDeclaration.prototype.visit = function (v) {
-	        if (v.startVisitElement(this)) {
-	            if (this.rangeType) {
-	                if (this.rangeType instanceof TSStructuralTypeReference && !this.isInterfaceMethodWithBody()) {
-	                    this.rangeType.visitReturnType(v);
-	                }
-	            }
-	            v.endVisitElement(this);
-	        }
-	    };
-	    TSAPIElementDeclaration.prototype.commentCode = function () {
-	        return "\n        /**\n         *\n         **/\n         //" + this.name + "\n         ";
-	    };
-	    TSAPIElementDeclaration.prototype.serializeToString = function () {
-	        var x = (this.isPrivate ? 'private ' : '') + this.escapeDot(this.name) + (this.optional ? "?" : "") + (this.isFunction() ? this.paramStr() : "") + this.returnStr();
-	        if (this.value) {
-	            x += '=' + this.value.value();
-	        }
-	        return this.commentCode() + x + (this.isFunction() && this.isInterfaceMethodWithBody() ? '' : this.body());
-	    };
-	    TSAPIElementDeclaration.prototype.body = function () {
-	        if (this._body == null)
-	            return "";
-	        return "{" + this._body + "}";
-	    };
-	    TSAPIElementDeclaration.prototype.escapeDot = function (name) {
-	        return tsutil.escapeTypescriptPropertyName(name);
-	    };
-	    TSAPIElementDeclaration.prototype.isInterfaceMethodWithBody = function () {
-	        return false;
-	    };
-	    TSAPIElementDeclaration.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_API_ELEMENT_DECLARATION;
-	    };
-	    return TSAPIElementDeclaration;
-	})(TSMember);
-	exports.TSAPIElementDeclaration = TSAPIElementDeclaration;
-	var TSConstructor = (function (_super) {
-	    __extends(TSConstructor, _super);
-	    function TSConstructor(p) {
-	        _super.call(this, p, 'constructor');
-	        this.serializeParam = function (p, appendDefault) { return 'protected ' + p.serializeToString(appendDefault); };
-	    }
-	    TSConstructor.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_CONSTRUCTOR;
-	    };
-	    return TSConstructor;
-	})(TSAPIElementDeclaration);
-	exports.TSConstructor = TSConstructor;
-	function flattenUnionType(ref) {
-	    var _this = this;
-	    if (!(ref instanceof TSUnionTypeReference)) {
-	        return [ref];
-	    }
-	    var map = {};
-	    var arr = [];
-	    ref.children().forEach(function (x) { return _this.flattenUnionType(x).forEach(function (y) {
-	        if (y instanceof TSSimpleTypeReference) {
-	            var st = y;
-	            var name = st.name;
-	            map[name] = st;
-	        }
-	        else {
-	            arr.push(y);
-	        }
-	    }); });
-	    return arr.concat(_.sortBy(Object.keys(map).map(function (x) { return map[x]; }), 'name'));
-	}
-	//# sourceMappingURL=TSDeclModel.js.map
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var ts = __webpack_require__(42);
-	// https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
-	function escapeTypescriptPropertyName(str) {
-	    return isValidTypescriptIdentifier(str) ? str : JSON.stringify(str);
-	}
-	exports.escapeTypescriptPropertyName = escapeTypescriptPropertyName;
-	// TODO: these are made up lists. check the grammar
-	var tsKeywords = 'type class interface break case catch continue debugger default delete do else finally for function if in instanceof new return switch this throw try typeof var void while with'.split(' ');
-	var digitCodesL = "0".charCodeAt(0);
-	var digitCodesR = "9".charCodeAt(0);
-	var lowerCaseCodesL = "a".charCodeAt(0);
-	var lowerCaseCodesR = "z".charCodeAt(0);
-	var upperCaseCodesL = "A".charCodeAt(0);
-	var upperCaseCodesR = "Z".charCodeAt(0);
-	var digitChars = {}; //:boolean[] = []
-	var validChars = {}; //:boolean[] = []
-	for (var i = digitCodesL, end = digitCodesR; i <= end; i++) {
-	    digitChars[String.fromCharCode(i)] = true;
-	    validChars[String.fromCharCode(i)] = true;
-	}
-	for (var i = lowerCaseCodesL, end = lowerCaseCodesR; i <= end; i++) {
-	    validChars[String.fromCharCode(i)] = true;
-	}
-	for (var i = upperCaseCodesL, end = upperCaseCodesR; i <= end; i++) {
-	    validChars[String.fromCharCode(i)] = true;
-	}
-	"_ $".split(" ").forEach(function (x) { return validChars[x] = true; });
-	function isValidTypescriptIdentifier(str) {
-	    str = str.trim();
-	    if (str.length == 0) {
-	        return false;
-	    }
-	    if (tsKeywords.indexOf(str) >= 0) {
-	        return false;
-	    }
-	    if (digitChars[str.charAt(0)]) {
-	        return false;
-	    }
-	    for (var i = 0; i < str.length; i++) {
-	        if (!validChars[str.charAt(i)]) {
-	            return false;
-	        }
-	    }
-	    return true;
-	}
-	exports.isValidTypescriptIdentifier = isValidTypescriptIdentifier;
-	function escapeToIdentifier(str) {
-	    str = str.trim();
-	    var result = '';
-	    if (str.length > 0 && digitChars[str.charAt(0)]) {
-	        result += '_';
-	    }
-	    for (var i = 0; i < str.length; i++) {
-	        var ch = str.charAt(i);
-	        if (validChars[ch]) {
-	            result += ch;
-	        }
-	        else {
-	            result += '_';
-	        }
-	    }
-	    return result;
-	}
-	exports.escapeToIdentifier = escapeToIdentifier;
-	// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently
-	//       exposed in the public typescript.d.ts. The typings should be exposed in the next release.
-	function format(text) {
-	    var options = getDefaultOptions();
-	    // Parse the source text
-	    var sourceFile = ts.createSourceFile("file.ts", text, 2 /* Latest */, "0");
-	    fixupParentReferences(sourceFile);
-	    // Get the formatting edits on the input sources
-	    var edits = ts.formatting.formatDocument(sourceFile, getRuleProvider(options), options);
-	    // Apply the edits on the input code
-	    return applyEdits(text, edits);
-	    function getRuleProvider(options) {
-	        // Share this between multiple formatters using the same options.
-	        // This represents the bulk of the space the formatter uses.
-	        var ruleProvider = new ts.formatting.RulesProvider();
-	        ruleProvider.ensureUpToDate(options);
-	        return ruleProvider;
-	    }
-	    function applyEdits(text, edits) {
-	        // Apply edits in reverse on the existing text
-	        var result = text;
-	        for (var i = edits.length - 1; i >= 0; i--) {
-	            var change = edits[i];
-	            var head = result.slice(0, change.span.start());
-	            var tail = result.slice(change.span.start() + change.span.length());
-	            result = head + change.newText + tail;
-	        }
-	        return result;
-	    }
-	    function getDefaultOptions() {
-	        return {
-	            IndentSize: 4,
-	            TabSize: 4,
-	            NewLineCharacter: '\n',
-	            ConvertTabsToSpaces: true,
-	            InsertSpaceAfterCommaDelimiter: true,
-	            InsertSpaceAfterSemicolonInForStatements: true,
-	            InsertSpaceBeforeAndAfterBinaryOperators: true,
-	            InsertSpaceAfterKeywordsInControlFlowStatements: true,
-	            InsertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
-	            InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
-	            PlaceOpenBraceOnNewLineForFunctions: false,
-	            PlaceOpenBraceOnNewLineForControlBlocks: false
-	        };
-	    }
-	    function fixupParentReferences(sourceFile) {
-	        var parent = sourceFile;
-	        function walk(n) {
-	            n.parent = parent;
-	            var saveParent = parent;
-	            parent = n;
-	            ts.forEachChild(n, walk);
-	            parent = saveParent;
-	        }
-	        ts.forEachChild(sourceFile, walk);
-	    }
-	}
-	exports.format = format;
-	var typeMap = {
-	    'string': 'string',
-	    'integer': 'number',
-	    'number': 'number',
-	    'boolean': 'boolean',
-	    'file': 'string',
-	    'date': 'string',
-	    'NumberType': 'number'
-	};
-	function ramlType2TSType(ramlType) {
-	    var tsType = typeMap[ramlType];
-	    if (!tsType) {
-	        tsType = 'any';
-	    }
-	    return tsType;
-	}
-	exports.ramlType2TSType = ramlType2TSType;
-	function escapeToJavaIdentifier(str) {
-	    str = escapeToIdentifier(str);
-	    return exports.javaReservedWords[str] ? str + '_' : str;
-	}
-	exports.escapeToJavaIdentifier = escapeToJavaIdentifier;
-	exports.tsToJavaTypeMap = {
-	    'number': 'Double',
-	    'string': 'String',
-	    'boolean': 'Boolean',
-	    'any': 'Object'
-	};
-	exports.javaReservedWords = {
-	    "abstract": true,
-	    "continue": true,
-	    "for": true,
-	    "new": true,
-	    "switch": true,
-	    "assert": true,
-	    "default": true,
-	    "goto": true,
-	    "package": true,
-	    "synchronized": true,
-	    "boolean": true,
-	    "do": true,
-	    "if": true,
-	    "private": true,
-	    "this": true,
-	    "break": true,
-	    "double": true,
-	    "implements": true,
-	    "protected": true,
-	    "throw": true,
-	    "byte": true,
-	    "else": true,
-	    "import": true,
-	    "public": true,
-	    "throws": true,
-	    "case": true,
-	    "enum": true,
-	    "instanceof": true,
-	    "return": true,
-	    "transient": true,
-	    "catch": true,
-	    "extends": true,
-	    "int": true,
-	    "short": true,
-	    "try": true,
-	    "char": true,
-	    "final": true,
-	    "interface": true,
-	    "static": true,
-	    "void": true,
-	    "class": true,
-	    "finally": true,
-	    "long": true,
-	    "strictfp": true,
-	    "volatile": true,
-	    "const": true,
-	    "float": true,
-	    "native": true,
-	    "super": true,
-	    "while": true
-	};
-	//# sourceMappingURL=tsutil.js.map
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var def = __webpack_require__(21);
-	var td = __webpack_require__(22);
-	var util = __webpack_require__(20);
-	var parserCoreModuleVar = 'core';
-	var ParserGenerator = (function () {
-	    function ParserGenerator() {
-	        this.mod = new td.TSAPIModule();
-	        this.processed = {};
-	        this.typeMap = {
-	            'StringType': 'string',
-	            'NumberType': 'number',
-	            'BooleanType': 'boolean'
-	        };
-	    }
-	    ParserGenerator.prototype.processType = function (u, generateConstructor) {
-	        var _this = this;
-	        var typeName = u.name();
-	        if (this.processed[typeName]) {
-	            return;
-	        }
-	        this.processed[typeName] = u;
-	        u.superTypes().forEach(function (x) { return _this.processType(x, generateConstructor); });
-	        var idcl = new td.TSInterface(this.mod, typeName);
-	        var dcl = new td.TSClassDecl(this.mod, typeName + "Impl");
-	        if (generateConstructor) {
-	            var _constructor = new td.TSConstructor(dcl);
-	            _constructor.parameters = [
-	                new td.Param(_constructor, 'attr', 3 /* OTHER */, new td.TSSimpleTypeReference(td.Universe, 'hl.IAttribute'))
-	            ];
-	            if (u.isValueType()) {
-	                if (typeName == 'ValueType' || u.superTypes().length == 0) {
-	                    _constructor._body = '';
-	                }
-	                else {
-	                    _constructor._body = 'super(attr);';
-	                }
-	            }
-	            else {
-	                _constructor._body = 'super()';
-	            }
-	        }
-	        else {
-	            if (u instanceof def.NodeClass) {
-	                var _constructor = new td.TSConstructor(dcl);
-	                _constructor.parameters = [
-	                    new td.Param(_constructor, 'nodeOrKey', 3 /* OTHER */, new td.TSSimpleTypeReference(td.Universe, 'hl.IHighLevelNode|string'))
-	                ];
-	                _constructor._body = "super((typeof  nodeOrKey==\"string\")?create" + u.name() + "(<string>nodeOrKey):<hl.IHighLevelNode>nodeOrKey)";
-	            }
-	        }
-	        this.addImplementationMethod(dcl, 'wrapperClassName', 'string', "return \"" + typeName + "Impl\";");
-	        if (typeName == 'ValueType') {
-	            this.addInterfaceMethod(idcl, 'value', 'string');
-	            this.addImplementationMethod(dcl, 'value', 'string', 'return this.attr.value();');
-	            this.addInterfaceMethod(idcl, 'highLevel', 'hl.IAttribute');
-	            this.addImplementationMethod(dcl, 'highLevel', 'hl.IAttribute', 'return this.attr;');
-	        }
-	        else if (typeName == 'Reference') {
-	            this.addImplementationMethod(dcl, 'value', 'string', 'return <any>core.toStructuredValue(this.attr);');
-	        }
-	        dcl.implements.push(new td.TSSimpleTypeReference(td.Universe, idcl.name));
-	        u.superTypes().forEach(function (x) {
-	            idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, x.name()));
-	            dcl.extends.push(new td.TSSimpleTypeReference(td.Universe, x.name() + "Impl"));
-	        });
-	        u.properties().forEach(function (x) {
-	            _this.createMethodDecl(idcl, x);
-	            var z = _this.createMethodDecl(dcl, x);
-	            z._body = _this.generateBody(x);
-	            if (x.isPrimitive()) {
-	                _this.createSetterMethodDecl(dcl, x);
-	            }
-	        });
-	        if (dcl.extends.length == 0) {
-	            if (u.isValueType()) {
-	                idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "core.AbstractWrapperNode"));
-	            }
-	            else {
-	                idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "BasicNode"));
-	                dcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "BasicNodeImpl"));
-	            }
-	        }
-	        u.subTypes().forEach(function (x) { return _this.processType(x); });
-	    };
-	    ParserGenerator.prototype.addInterfaceMethod = function (idcl, methodName, returnTypeName) {
-	        var method = new td.TSAPIElementDeclaration(idcl, methodName);
-	        method.isFunc = true;
-	        method.rangeType = new td.TSSimpleTypeReference(method, returnTypeName);
-	        return method;
-	    };
-	    ParserGenerator.prototype.addImplementationMethod = function (dcl, methodName, returnTypeName, body) {
-	        var method = this.addInterfaceMethod(dcl, methodName, returnTypeName);
-	        method._body = body;
-	        return method;
-	    };
-	    ParserGenerator.prototype.generateBody = function (x) {
-	        var rangeType = x.range().name();
-	        if (x.isValueProperty()) {
-	            var args = [("'" + x.name() + "'")];
-	            if (x.isPrimitive()) {
-	                rangeType = this.typeMap[rangeType];
-	                args.push("this.to" + util.firstToUpper(rangeType));
-	            }
-	            else {
-	                args.push("(attr:hl.IAttribute)=>new " + rangeType + "Impl(attr)");
-	            }
-	            if (x.isMultiValue()) {
-	                return "\n             return <" + rangeType + "[]>super.attributes(" + args.join(', ') + ");\n         ";
-	            }
-	            else {
-	                return "\n             return <" + rangeType + ">super.attribute(" + args.join(', ') + ");\n         ";
-	            }
-	        }
-	        else {
-	            if (x.isMultiValue()) {
-	                return "\n             return <" + rangeType + "[]>super.elements('" + x.name() + "');\n         ";
-	            }
-	            else {
-	                return "\n             return <" + rangeType + ">super.element('" + x.name() + "');\n         ";
-	            }
-	        }
-	        //if (x.isValueProperty()){
-	        //
-	        //    var varInit:any;
-	        //    if(x.isPrimitive()){
-	        //        varInit = function(varStr:string,typeName:string){
-	        //            return varStr + '.value()';
-	        //        }
-	        //    }
-	        //    else{
-	        //        varInit = function(varStr:string,typeName:string){
-	        //            return 'new ' + typeName + 'Impl(' + varStr + ')';
-	        //        }
-	        //    }
-	        //    if(x.isMultiValue()) {
-	        //        return `var attrs = this._node.attributes('${x.name()}');
-	        //        if (attrs) {
-	        //            return attrs.map(x=>${varInit('x', x.range().name())});
-	        //        }
-	        //        return [];`;
-	        //    }
-	        //    else{
-	        //        return `var attr = this._node.attr('${x.name()}');
-	        //        if (attr) {
-	        //            var v = ${varInit('attr', x.range().name())};
-	        //            return v;
-	        //        }
-	        //        else {
-	        //            return null;
-	        //        }`;
-	        //    }
-	        //}
-	        //else{
-	        //    if (x.isMultiValue()){
-	        //        return `
-	        //        var elements = this._node.elementsOfKind('${x.name()}');
-	        //        if(elements) {
-	        //            return elements.map(x=><${x.range().name()}>x.wrapperNode());
-	        //        }
-	        //        else {
-	        //            return null;
-	        //        }
-	        //    `;
-	        //    }
-	        //    else{
-	        //        return `
-	        //        var v = this._node.element('${x.name()}');
-	        //        if(!v){
-	        //            return null;
-	        //        }
-	        //        return <${x.range().name()}>v.wrapperNode();
-	        //    `;
-	        //    }
-	        //}
-	    };
-	    ParserGenerator.prototype.createSetterMethodDecl = function (dcl, x) {
-	        var method = new td.TSAPIElementDeclaration(dcl, "set" + x.name()[0].toUpperCase() + x.name().substr(1));
-	        method.isFunc = true;
-	        var tname = "string";
-	        if (x.isPrimitive()) {
-	            tname = this.typeMap[x.range().name()];
-	        }
-	        else {
-	            tname = x.range().name();
-	            this.processType(x.range(), x.isValueProperty());
-	        }
-	        var ref = new td.TSSimpleTypeReference(td.Universe, tname);
-	        method.parameters = [
-	            new td.Param(method, 'param', 3 /* OTHER */, ref)
-	        ];
-	        method._body = "\n        {\n        this.highLevel().attrOrCreate(\"" + x.name() + "\").setValue(\"\"+param);\n        return this;\n        }\n        ";
-	        return method;
-	    };
-	    ParserGenerator.prototype.createMethodDecl = function (dcl, x) {
-	        var method = new td.TSAPIElementDeclaration(dcl, x.name());
-	        method.isFunc = true;
-	        var tname = "string";
-	        if (x.isPrimitive()) {
-	            tname = this.typeMap[x.range().name()];
-	        }
-	        else {
-	            tname = x.range().name();
-	            this.processType(x.range(), x.isValueProperty());
-	        }
-	        var ref = new td.TSSimpleTypeReference(td.Universe, tname);
-	        if (x.isMultiValue()) {
-	            var aRef = new td.TSArrayReference();
-	            aRef.componentType = ref;
-	            method.rangeType = aRef;
-	        }
-	        else {
-	            method.rangeType = ref;
-	        }
-	        return method;
-	    };
-	    ParserGenerator.prototype.serializeToString = function () {
-	        return "import hl=require(\"../highLevelAST\");\nimport hlImpl=require(\"../highLevelImpl\");\nimport jsyaml=require(\"../jsyaml/jsyaml2lowLevel\");\nimport def=require(\"../definitionSystem\");\nimport core=require(\"../parserCore\");\n\n\nexport interface BasicNode extends core.BasicSuperNode{\n\n    parent():BasicNode\n\n    highLevel():hl.IHighLevelNode\n}\n\nexport class BasicNodeImpl extends core.BasicSuperNodeImpl implements BasicNode{\n\n    constructor(node:hl.IHighLevelNode){\n        super(node);\n    }\n\n    wrapperClassName():string{\n        return 'BasicNodeImpl';\n    }\n\n    parent():BasicNode{\n        return <BasicNode>super.parent();\n    }\n}\n\n        " + this.mod.serializeToString() + this.createFunctions();
-	    };
-	    ParserGenerator.prototype.createFunctions = function () {
-	        var res = "";
-	        for (var p in this.processed) {
-	            var q = this.processed[p];
-	            if (q instanceof def.NodeClass) {
-	                res += "\nfunction create" + p + "(key:string){\n    var universe=hl.universeProvider(\"RAML10\");\n    var nc=<def.NodeClass>universe.getType(\"" + p + "\");\n    var node=nc.createStubNode(null,key);\n    return node;\n}\n";
-	            }
-	            ;
-	        }
-	        return res;
-	    };
-	    ParserGenerator.prototype.nodeFactory = function (highLevelASTLocation, parserLocation) {
-	        return "import RamlWrapper = require(\"" + parserLocation + "\");\nimport hl = require(\"" + highLevelASTLocation + "\")\n\nexport function buildWrapperNode(node:hl.IHighLevelNode){\n\n    var nodeClassName = node.definition().name();\n\n    var wrapperConstructor = classMap[nodeClassName];\n\n    if(!wrapperConstructor){\n        var m=node.definition().allSuperTypes();\n        var wr=null;\n        for (var i=0;i<m.length;i++){\n            var nm=m[i].name();\n            wrapperConstructor = classMap[nm];\n            if (nm==\"DataElement\"){\n                wr=nm;\n                //This is only case of nested hierarchy\n                continue;\n            }\n            if (nm==\"RAMLLanguageElement\"){\n                //depth first\n                continue;\n            }\n            if (wrapperConstructor){\n                break;\n            }\n        }\n        if (!wrapperConstructor){\n            wr=nm;\n        }\n    }\n    if (!wrapperConstructor){\n        wrapperConstructor = classMap[\"RAMLLanguageElement\"]\n\n    }\n    return wrapperConstructor(node);\n}\n\nvar classMap = {\n\n" + Object.keys(this.processed).sort().map(function (x) { return ("    \"" + x + "\": (x)=>{return new RamlWrapper." + x + "Impl(x)}"); }).join(',\n\n') + "\n\n};\n";
-	    };
-	    return ParserGenerator;
-	})();
-	function def2Parser(u) {
-	    var mod = new ParserGenerator();
-	    mod.processType(u);
-	    return mod;
-	}
-	exports.def2Parser = def2Parser;
-	var ImplementationGenerator = (function () {
-	    function ImplementationGenerator() {
-	    }
-	    ImplementationGenerator.prototype.generateASTAccessor = function (p) {
-	        this.generatedCode.push("var val=this.ast.getValue(" + p.name() + "}");
-	        this.generatedCode.push("return new " + p.range().name() + "Impl(val)");
-	    };
-	    return ImplementationGenerator;
-	})();
-	function checkIfReference(u) {
-	    if (u.name() == 'Reference') {
-	        return true;
-	    }
-	    var superTypes = u.superTypes();
-	    for (var i = 0; i < superTypes.length; i++) {
-	        var st = superTypes[i];
-	        if (checkIfReference(st)) {
-	            return true;
-	        }
-	    }
-	    return false;
-	}
-	exports.checkIfReference = checkIfReference;
-	/**
-	 * Created by kor on 11/05/15.
-	 */
-	//# sourceMappingURL=wrappedParserGen.js.map
-
-/***/ },
-/* 25 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
@@ -16698,17 +15357,99 @@
 	//# sourceMappingURL=lowLevelAST.js.map
 
 /***/ },
-/* 26 */
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../typings/tsd.d.ts" />
+	(function (Kind) {
+	    Kind[Kind["SCALAR"] = 0] = "SCALAR";
+	    Kind[Kind["MAPPING"] = 1] = "MAPPING";
+	    Kind[Kind["MAP"] = 2] = "MAP";
+	    Kind[Kind["SEQ"] = 3] = "SEQ";
+	    Kind[Kind["ANCHOR_REF"] = 4] = "ANCHOR_REF";
+	    Kind[Kind["INCLUDE_REF"] = 5] = "INCLUDE_REF";
+	})(exports.Kind || (exports.Kind = {}));
+	var Kind = exports.Kind;
+	function newMapping(key, value) {
+	    var end = (value ? value.endPosition : key.endPosition + 1); //FIXME.workaround, end should be defied by position of ':'
+	    //console.log('key: ' + key.value + ' ' + key.startPosition + '..' + key.endPosition + ' ' + value + ' end: ' + end);
+	    var node = {
+	        key: key,
+	        value: value,
+	        startPosition: key.startPosition,
+	        endPosition: end,
+	        kind: 1 /* MAPPING */,
+	        parent: null,
+	        errors: []
+	    };
+	    return node;
+	}
+	exports.newMapping = newMapping;
+	function newAnchorRef(key, start, end, value) {
+	    return {
+	        errors: [],
+	        referencesAnchor: key,
+	        value: value,
+	        startPosition: start,
+	        endPosition: end,
+	        kind: 4 /* ANCHOR_REF */,
+	        parent: null
+	    };
+	}
+	exports.newAnchorRef = newAnchorRef;
+	function newScalar(v) {
+	    if (v === void 0) { v = ""; }
+	    return {
+	        errors: [],
+	        startPosition: -1,
+	        endPosition: -1,
+	        value: v,
+	        kind: 0 /* SCALAR */,
+	        parent: null,
+	        doubleQuoted: false
+	    };
+	}
+	exports.newScalar = newScalar;
+	function newItems() {
+	    return {
+	        errors: [],
+	        startPosition: -1,
+	        endPosition: -1,
+	        items: [],
+	        kind: 3 /* SEQ */,
+	        parent: null
+	    };
+	}
+	exports.newItems = newItems;
+	function newSeq() {
+	    return newItems();
+	}
+	exports.newSeq = newSeq;
+	function newMap(mappings) {
+	    return {
+	        errors: [],
+	        startPosition: -1,
+	        endPosition: -1,
+	        mappings: mappings ? mappings : [],
+	        kind: 2 /* MAP */,
+	        parent: null
+	    };
+	}
+	exports.newMap = newMap;
+	//# sourceMappingURL=yamlAST.js.map
+
+/***/ },
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
-	var defs = __webpack_require__(21);
+	var defs = __webpack_require__(19);
 	var hl = __webpack_require__(17);
 	var _ = __webpack_require__(47);
-	var typeExpression = __webpack_require__(57);
-	var search = __webpack_require__(30);
-	var linter = __webpack_require__(28);
-	var schema = __webpack_require__(54);
+	var typeExpression = __webpack_require__(54);
+	var search = __webpack_require__(26);
+	var linter = __webpack_require__(24);
+	var schema = __webpack_require__(51);
 	function validate(str, node, cb) {
 	    var x = str.trim();
 	    if (x.length > 0) {
@@ -17045,17 +15786,17 @@
 	//# sourceMappingURL=typeExpressions.js.map
 
 /***/ },
-/* 27 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var defs = __webpack_require__(21);
+	var defs = __webpack_require__(19);
 	var _ = __webpack_require__(47);
-	var yaml = __webpack_require__(19);
-	var typeExpression = __webpack_require__(26);
-	var def = __webpack_require__(21);
+	var yaml = __webpack_require__(21);
+	var typeExpression = __webpack_require__(22);
+	var def = __webpack_require__(19);
 	var hlimpl = __webpack_require__(7);
-	var search = __webpack_require__(30);
+	var search = __webpack_require__(26);
 	var KeyMatcher = (function () {
 	    function KeyMatcher(_props) {
 	        this._props = _props;
@@ -17532,23 +16273,23 @@
 	//# sourceMappingURL=builder.js.map
 
 /***/ },
-/* 28 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
 	var jsyaml = __webpack_require__(6);
-	var defs = __webpack_require__(21);
+	var defs = __webpack_require__(19);
 	var hl = __webpack_require__(17);
 	var _ = __webpack_require__(47);
-	var typeExpression = __webpack_require__(26);
-	var def = __webpack_require__(21);
+	var typeExpression = __webpack_require__(22);
+	var def = __webpack_require__(19);
 	var ramlSignature = __webpack_require__(16);
 	var hlimpl = __webpack_require__(7);
-	var su = __webpack_require__(54);
+	var su = __webpack_require__(51);
 	var path = __webpack_require__(11);
 	var fs = __webpack_require__(12);
-	var mediaTypeParser = __webpack_require__(41);
-	var xmlutil = __webpack_require__(58);
+	var mediaTypeParser = __webpack_require__(42);
+	var xmlutil = __webpack_require__(55);
 	var LinterSettings = (function () {
 	    function LinterSettings() {
 	        this.validateNotStrictExamples = true;
@@ -18662,17 +17403,17 @@
 	//# sourceMappingURL=linter.js.map
 
 /***/ },
-/* 29 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var defs = __webpack_require__(21);
+	var defs = __webpack_require__(19);
 	var ts2Def = __webpack_require__(39);
 	var _ = __webpack_require__(47);
-	var selector = __webpack_require__(55);
-	var typeExpression = __webpack_require__(26);
+	var selector = __webpack_require__(52);
+	var typeExpression = __webpack_require__(22);
 	var hlimpl = __webpack_require__(7);
-	var linter = __webpack_require__(28);
+	var linter = __webpack_require__(24);
 	function templateFields(node, d) {
 	    var u = node.root().definition().universe();
 	    node.children().forEach(function (x) { return templateFields(x, d); });
@@ -19185,17 +17926,17 @@
 	//# sourceMappingURL=typeBuilder.js.map
 
 /***/ },
-/* 30 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var defs = __webpack_require__(21);
+	var defs = __webpack_require__(19);
 	var hl = __webpack_require__(17);
 	var _ = __webpack_require__(47);
-	var typeExpression = __webpack_require__(26);
+	var typeExpression = __webpack_require__(22);
 	var ramlSignature = __webpack_require__(16);
 	var hlimpl = __webpack_require__(7);
-	var typeBuilder = __webpack_require__(29);
+	var typeBuilder = __webpack_require__(25);
 	//FIXME CORRECTLY STRUCTURE IT
 	function resolveRamlPointer(point, path) {
 	    var components = path.split(".");
@@ -19968,7 +18709,7 @@
 	//# sourceMappingURL=search.js.map
 
 /***/ },
-/* 31 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
@@ -20268,11 +19009,11 @@
 	//# sourceMappingURL=textutil.js.map
 
 /***/ },
-/* 32 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var factory10 = __webpack_require__(59);
-	var factory08 = __webpack_require__(60);
+	var factory10 = __webpack_require__(56);
+	var factory08 = __webpack_require__(57);
 	function buildWrapperNode(node) {
 	    var ramlVersion = node.definition().universe().version();
 	    if (ramlVersion == 'RAML10') {
@@ -20287,13 +19028,13 @@
 	//# sourceMappingURL=modelFactory.js.map
 
 /***/ },
-/* 33 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
 	var hl = __webpack_require__(17);
 	var _ = __webpack_require__(47);
-	var linter = __webpack_require__(28);
+	var linter = __webpack_require__(24);
 	var wrapperHelper = __webpack_require__(15);
 	function escapeUri(u) {
 	    var ss = "";
@@ -20426,25 +19167,1446 @@
 	//# sourceMappingURL=overloadingValidator.js.map
 
 /***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var __extends = this.__extends || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    __.prototype = b.prototype;
+	    d.prototype = new __();
+	};
+	var tsutil = __webpack_require__(31);
+	var _ = __webpack_require__(47);
+	var assert = __webpack_require__(74);
+	var Opt = __webpack_require__(5);
+	exports.MODEL_CLASS_MODEL_ELEMENT = '$resource-model-element';
+	exports.MODEL_CLASS_TYPE_DECLARATION = '$type-declaration';
+	exports.MODEL_CLASS_INTERFACE = '$interface-declaration';
+	exports.MODEL_CLASS_CLASS_DECLARATION = '$class-declaration';
+	exports.MODEL_CLASS_ANNOTATION_DECLARATION = '$annotation-declaration';
+	exports.MODEL_CLASS_ENUM_DECLARATION = '$enum-declaration';
+	exports.MODEL_CLASS_TYPE_ASSERTION = '$type-assertion';
+	exports.MODEL_CLASS_API_MODULE = '$api-module';
+	exports.MODEL_CLASS_UNIVERSE = '$universe';
+	exports.MODEL_CLASS_MEMBER = '$member';
+	exports.MODEL_CLASS_UNION_TYPE_REFERENCE = '$union-type-reference';
+	exports.MODEL_CLASS_SIMPLE_TYPE_REFERENCE = '$simple-type-reference';
+	exports.MODEL_CLASS_FUNCTION_REFERENCE = '$function-reference';
+	exports.MODEL_CLASS_ARRAY_REFERENCE = '$array-reference';
+	exports.MODEL_CLASS_DECLARED_INTERFACE_REFERENCE = '$declared-interface-reference';
+	exports.MODEL_CLASS_ANY_TYPE_REFERENCE = '$any-type-reference';
+	exports.MODEL_CLASS_STRUCTURAL_TYPE_REFERENCE = '$structural-type-reference';
+	exports.MODEL_CLASS_PARAM = '$param';
+	exports.MODEL_CLASS_STRING_VALUE = '$string-value';
+	exports.MODEL_CLASS_ARRAY_VALUE = '$array-value';
+	exports.MODEL_CLASS_API_ELEMENT_DECLARATION = '$api-element-declaration';
+	exports.MODEL_CLASS_CONSTRUCTOR = '$constructor';
+	//TODO HIDE Fields from unmanagable modification
+	//TODO Refine type decl type ref hieararchy a bit more
+	//TODO add classes, generics, metadata
+	var TSModelElement = (function () {
+	    function TSModelElement(parent, config) {
+	        if (parent === void 0) { parent = exports.Universe; }
+	        this.meta = {};
+	        this._annotations = [];
+	        this._parent = parent;
+	        this._config = config ? config : parent._config;
+	        this._children = [];
+	        assert(parent, "Should never be null");
+	        this._parent.addChild(this);
+	    }
+	    TSModelElement.prototype.annotations = function () {
+	        return this._annotations;
+	    };
+	    TSModelElement.prototype.patchParent = function (parent) {
+	        this._parent = parent; //FIXME
+	    };
+	    TSModelElement.prototype.isEmpty = function () {
+	        return this._children.length == 0;
+	    };
+	    TSModelElement.prototype.parent = function () {
+	        return this._parent;
+	    };
+	    TSModelElement.prototype.children = function () {
+	        return this._children;
+	    };
+	    TSModelElement.prototype.root = function () {
+	        if (this._parent == exports.Universe) {
+	            return this;
+	        }
+	        return this._parent.root();
+	    };
+	    TSModelElement.prototype.removeChild = function (child) {
+	        if (child._parent == this) {
+	            this._children = this._children.filter(function (x) { return x != child; });
+	        }
+	        child._parent = exports.Universe;
+	    };
+	    TSModelElement.prototype.addChild = function (child) {
+	        if (child._parent) {
+	            child._parent.removeChild(child);
+	        }
+	        child._parent = this;
+	        this._children.push(child);
+	    };
+	    TSModelElement.prototype.serializeToString = function () {
+	        throw new Error("You should override serialize to string always");
+	    };
+	    TSModelElement.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_MODEL_ELEMENT;
+	    };
+	    return TSModelElement;
+	})();
+	exports.TSModelElement = TSModelElement;
+	//TODO It should become an interface
+	var TSTypeDeclaration = (function (_super) {
+	    __extends(TSTypeDeclaration, _super);
+	    function TSTypeDeclaration(parent) {
+	        var _this = this;
+	        if (parent === void 0) { parent = null; }
+	        _super.call(this, parent);
+	        this.canBeOmmited = function () { return _this.locked ? false : _this.children().every(function (x) { return x.optional; }); };
+	        this.locked = false;
+	        this.extras = [""];
+	    }
+	    TSTypeDeclaration.prototype.addCode = function (code) {
+	        this.extras.push(code);
+	    };
+	    TSTypeDeclaration.prototype.toReference = function () {
+	        throw new Error("Implement in subclasses");
+	    };
+	    TSTypeDeclaration.prototype.hash = function () {
+	        return this.serializeToString();
+	    };
+	    TSTypeDeclaration.prototype.isFunctor = function () {
+	        return this.children().some(function (x) { return x.isAnonymousFunction(); });
+	    };
+	    TSTypeDeclaration.prototype.getFunctor = function () {
+	        return _.find(this.children(), function (x) { return x.isAnonymousFunction(); });
+	    };
+	    TSTypeDeclaration.prototype.visit = function (v) {
+	        if (v.startTypeDeclaration(this)) {
+	            this.children().forEach(function (x, i, arr) {
+	                x.visit(v);
+	                if (i != arr.length - 1)
+	                    v.betweenElements();
+	            });
+	            v.endTypeDeclaration(this);
+	        }
+	    };
+	    TSTypeDeclaration.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_TYPE_DECLARATION;
+	    };
+	    return TSTypeDeclaration;
+	})(TSModelElement);
+	exports.TSTypeDeclaration = TSTypeDeclaration;
+	var TSInterface = (function (_super) {
+	    __extends(TSInterface, _super);
+	    function TSInterface(p, name) {
+	        _super.call(this, p);
+	        this.extends = [];
+	        this.implements = [];
+	        this.name = name;
+	    }
+	    TSInterface.prototype.hash = function () {
+	        return this.children().filter(function (x) { return !x.isPrivate; }).map(function (x) { return "\n" + x.serializeToString() + "\n"; }).join('');
+	    };
+	    TSInterface.prototype.toReference = function () {
+	        return new TSDeclaredInterfaceReference(exports.Universe, this.name, this);
+	    };
+	    TSInterface.prototype.decl = function () {
+	        return "interface";
+	    };
+	    TSInterface.prototype.serializeToString = function () {
+	        var body = this.hash();
+	        return "export " + this.decl() + " " + this.name.concat(this.extendsString() + this.implementsString()) + "{" + this.extras.join("\n") + body + "}\n";
+	    };
+	    TSInterface.prototype.extendsString = function () {
+	        if (this.extends.length > 0) {
+	            return " extends " + this.extends.map(function (x) { return x.serializeToString(); }).join(",");
+	        }
+	        return "";
+	    };
+	    TSInterface.prototype.implementsString = function () {
+	        if (this.implements.length > 0) {
+	            return " implements " + this.implements.map(function (x) { return x.serializeToString(); }).join(",");
+	        }
+	        return "";
+	    };
+	    TSInterface.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_INTERFACE;
+	    };
+	    return TSInterface;
+	})(TSTypeDeclaration);
+	exports.TSInterface = TSInterface;
+	//TODO INCORRECT INHERITANCE CHAIN
+	var TSClassDecl = (function (_super) {
+	    __extends(TSClassDecl, _super);
+	    function TSClassDecl() {
+	        _super.apply(this, arguments);
+	    }
+	    TSClassDecl.prototype.decl = function () {
+	        return "class";
+	    };
+	    TSClassDecl.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_CLASS_DECLARATION;
+	    };
+	    return TSClassDecl;
+	})(TSInterface);
+	exports.TSClassDecl = TSClassDecl;
+	var TSAnnotationDecl = (function (_super) {
+	    __extends(TSAnnotationDecl, _super);
+	    function TSAnnotationDecl() {
+	        _super.apply(this, arguments);
+	    }
+	    TSAnnotationDecl.prototype.decl = function () {
+	        return "annotation";
+	    };
+	    TSAnnotationDecl.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ANNOTATION_DECLARATION;
+	    };
+	    TSAnnotationDecl.prototype.toReference = function () {
+	        return new TSDeclaredAnnotationReference(exports.Universe, this.name, this);
+	    };
+	    return TSAnnotationDecl;
+	})(TSInterface);
+	exports.TSAnnotationDecl = TSAnnotationDecl;
+	var TSEnumDecl = (function (_super) {
+	    __extends(TSEnumDecl, _super);
+	    function TSEnumDecl() {
+	        _super.apply(this, arguments);
+	    }
+	    TSEnumDecl.prototype.decl = function () {
+	        return "enum";
+	    };
+	    TSEnumDecl.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ENUM_DECLARATION;
+	    };
+	    return TSEnumDecl;
+	})(TSInterface);
+	exports.TSEnumDecl = TSEnumDecl;
+	var TSTypeAssertion = (function (_super) {
+	    __extends(TSTypeAssertion, _super);
+	    function TSTypeAssertion(p, _name, _ref) {
+	        _super.call(this, p);
+	        this._name = _name;
+	        this._ref = _ref;
+	    }
+	    TSTypeAssertion.prototype.toReference = function () {
+	        return new TSSimpleTypeReference(exports.Universe, this._name);
+	    };
+	    TSTypeAssertion.prototype.serializeToString = function () {
+	        return "export type " + this._name + "=" + this._ref.serializeToString() + "\n";
+	    };
+	    TSTypeAssertion.prototype.ref = function () {
+	        return this._ref;
+	    };
+	    TSTypeAssertion.prototype.name = function () {
+	        return this._name;
+	    };
+	    TSTypeAssertion.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_TYPE_ASSERTION;
+	    };
+	    return TSTypeAssertion;
+	})(TSTypeDeclaration);
+	exports.TSTypeAssertion = TSTypeAssertion;
+	var TSUniverse = (function (_super) {
+	    __extends(TSUniverse, _super);
+	    function TSUniverse() {
+	        _super.call(this, this);
+	    }
+	    TSUniverse.prototype.addChild = function (child) {
+	    };
+	    TSUniverse.prototype.setConfig = function (cfg) {
+	        this._config = cfg;
+	    };
+	    TSUniverse.prototype.getConfig = function () {
+	        return this._config;
+	    };
+	    TSUniverse.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_UNIVERSE;
+	    };
+	    return TSUniverse;
+	})(TSModelElement);
+	exports.TSUniverse = TSUniverse;
+	exports.Universe = new TSUniverse();
+	var TSAPIModule = (function (_super) {
+	    __extends(TSAPIModule, _super);
+	    function TSAPIModule() {
+	        _super.apply(this, arguments);
+	    }
+	    TSAPIModule.prototype.getInterface = function (nm) {
+	        return new Opt(_.find(this.children(), function (x) { return x.name == nm; }));
+	    };
+	    TSAPIModule.prototype.serializeToString = function () {
+	        var typeMap = {};
+	        this.children().forEach(function (x) { return typeMap[x.name] = x; });
+	        var covered = {};
+	        var sorted = [];
+	        var append = function (t) {
+	            if (covered[t.name]) {
+	                return;
+	            }
+	            covered[t.name] = true;
+	            var refs = t.extends;
+	            refs.forEach(function (ref) {
+	                if (ref instanceof TSSimpleTypeReference) {
+	                    var name = ref.name;
+	                    var st = typeMap[name];
+	                    if (st) {
+	                        append(st);
+	                    }
+	                }
+	            });
+	            sorted.push(t);
+	        };
+	        this.children().forEach(function (x) { return append(x); });
+	        return sorted.map(function (x) { return x.serializeToString(); }).join("\n");
+	    };
+	    TSAPIModule.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_API_MODULE;
+	    };
+	    return TSAPIModule;
+	})(TSModelElement);
+	exports.TSAPIModule = TSAPIModule;
+	var TSMember = (function (_super) {
+	    __extends(TSMember, _super);
+	    function TSMember() {
+	        _super.apply(this, arguments);
+	    }
+	    TSMember.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_MEMBER;
+	    };
+	    return TSMember;
+	})(TSModelElement);
+	exports.TSMember = TSMember;
+	var TSUnionTypeReference = (function (_super) {
+	    __extends(TSUnionTypeReference, _super);
+	    function TSUnionTypeReference() {
+	        _super.apply(this, arguments);
+	        this.array = function () { return false; };
+	    }
+	    TSUnionTypeReference.prototype.getFunctor = function () {
+	        return null;
+	    };
+	    //TODO FIXIT FIX IT WITH MIX IN
+	    TSUnionTypeReference.prototype.union = function (q) {
+	        var map = {};
+	        this.children().filter(function (x) { return x instanceof TSSimpleTypeReference; }).forEach(function (x) { return map[x.name] = true; });
+	        var gotNew = false;
+	        var flat = flattenUnionType(q);
+	        flat.forEach(function (x) {
+	            if (x instanceof TSSimpleTypeReference) {
+	                gotNew = gotNew || !map[q.name];
+	            }
+	            else {
+	                gotNew = true;
+	            }
+	        });
+	        if (!gotNew) {
+	            return this;
+	        }
+	        var r = new TSUnionTypeReference();
+	        this.children().forEach(function (x) { return r.addChild(x); });
+	        flat.forEach(function (x) { return r.addChild(x); });
+	        return r;
+	    };
+	    TSUnionTypeReference.prototype.isFunctor = function () {
+	        return false;
+	    };
+	    TSUnionTypeReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSUnionTypeReference.prototype.serializeToString = function () {
+	        return this.children().map(function (x) { return x.serializeToString(); }).join(" | ");
+	    };
+	    TSUnionTypeReference.prototype.removeChild = function (child) {
+	    };
+	    TSUnionTypeReference.prototype.addChild = function (child) {
+	        this.children().push(child);
+	    };
+	    TSUnionTypeReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_UNION_TYPE_REFERENCE;
+	    };
+	    return TSUnionTypeReference;
+	})(TSModelElement);
+	exports.TSUnionTypeReference = TSUnionTypeReference;
+	var TSSimpleTypeReference = (function (_super) {
+	    __extends(TSSimpleTypeReference, _super);
+	    function TSSimpleTypeReference(p, tn) {
+	        var _this = this;
+	        _super.call(this, p);
+	        this.array = function () { return false; };
+	        this.genericStr = function () { return _this.typeParameters && _this.typeParameters.length > 0 ? '<' + _this.typeParameters.map(function (p) { return p.serializeToString(); }).join(',') + '>' : ''; };
+	        this.name = tn;
+	    }
+	    TSSimpleTypeReference.prototype.isEmpty = function () {
+	        return false;
+	    };
+	    TSSimpleTypeReference.prototype.getFunctor = function () {
+	        return null;
+	    };
+	    TSSimpleTypeReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSSimpleTypeReference.prototype.isFunctor = function () {
+	        return false;
+	    };
+	    TSSimpleTypeReference.prototype.union = function (q) {
+	        var _this = this;
+	        var flat = flattenUnionType(q);
+	        var gotThis = false;
+	        flat.filter(function (x) { return x instanceof TSSimpleTypeReference; }).map(function (x) { return x; }).forEach(function (x) { return gotThis = gotThis || (x.name == _this.name); });
+	        if (gotThis) {
+	            return q;
+	        }
+	        var r = new TSUnionTypeReference();
+	        r.addChild(this);
+	        flat.forEach(function (x) { return r.addChild(x); });
+	        return r;
+	    };
+	    TSSimpleTypeReference.prototype.serializeToString = function () {
+	        return this.name + this.genericStr();
+	    };
+	    TSSimpleTypeReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_SIMPLE_TYPE_REFERENCE;
+	    };
+	    return TSSimpleTypeReference;
+	})(TSModelElement);
+	exports.TSSimpleTypeReference = TSSimpleTypeReference;
+	var TSFunctionReference = (function (_super) {
+	    __extends(TSFunctionReference, _super);
+	    function TSFunctionReference(p) {
+	        var _this = this;
+	        _super.call(this, p);
+	        this.rangeType = new AnyType();
+	        this.parameters = [];
+	        this.array = function () { return false; };
+	        this.paramStr = function (appendDefault) {
+	            if (appendDefault === void 0) { appendDefault = false; }
+	            return '(' + _this.parameters.filter(function (x) { return !x.isEmpty(); }).map(function (p) { return p.serializeToString(appendDefault); }).join(', ') + ')';
+	        };
+	    }
+	    TSFunctionReference.prototype.isEmpty = function () {
+	        return false;
+	    };
+	    TSFunctionReference.prototype.getFunctor = function () {
+	        return null;
+	    };
+	    TSFunctionReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSFunctionReference.prototype.isFunctor = function () {
+	        return true;
+	    };
+	    TSFunctionReference.prototype.union = function (q) {
+	        var r = new TSUnionTypeReference();
+	        r.addChild(this);
+	        r.addChild(q);
+	        return r;
+	    };
+	    TSFunctionReference.prototype.serializeToString = function () {
+	        return this.paramStr() + '=>' + this.rangeType.serializeToString();
+	    };
+	    TSFunctionReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_FUNCTION_REFERENCE;
+	    };
+	    return TSFunctionReference;
+	})(TSModelElement);
+	exports.TSFunctionReference = TSFunctionReference;
+	var TSArrayReference = (function (_super) {
+	    __extends(TSArrayReference, _super);
+	    function TSArrayReference(componentType) {
+	        if (componentType === void 0) { componentType = new AnyType(); }
+	        _super.call(this, exports.Universe);
+	        this.array = function () { return true; };
+	        this.componentType = componentType;
+	    }
+	    TSArrayReference.prototype.isEmpty = function () {
+	        return this.componentType ? true : false;
+	    };
+	    TSArrayReference.prototype.getFunctor = function () {
+	        return this.componentType.getFunctor();
+	    };
+	    TSArrayReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSArrayReference.prototype.isFunctor = function () {
+	        return this.componentType.isFunctor();
+	    };
+	    TSArrayReference.prototype.union = function (q) {
+	        var r = new TSUnionTypeReference();
+	        r.addChild(this);
+	        r.addChild(q);
+	        return r;
+	    };
+	    TSArrayReference.prototype.serializeToString = function () {
+	        return this.componentType.serializeToString() + '[]';
+	    };
+	    TSArrayReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ARRAY_REFERENCE;
+	    };
+	    return TSArrayReference;
+	})(TSModelElement);
+	exports.TSArrayReference = TSArrayReference;
+	var TSDeclaredInterfaceReference = (function (_super) {
+	    __extends(TSDeclaredInterfaceReference, _super);
+	    function TSDeclaredInterfaceReference(p, tn, _data) {
+	        _super.call(this, p, tn);
+	        this._data = _data;
+	    }
+	    TSDeclaredInterfaceReference.prototype.isEmpty = function () {
+	        return false;
+	    };
+	    TSDeclaredInterfaceReference.prototype.getFunctor = function () {
+	        return null;
+	    };
+	    TSDeclaredInterfaceReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSDeclaredInterfaceReference.prototype.getOriginal = function () {
+	        return this._data;
+	    };
+	    TSDeclaredInterfaceReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_DECLARED_INTERFACE_REFERENCE;
+	    };
+	    return TSDeclaredInterfaceReference;
+	})(TSSimpleTypeReference);
+	exports.TSDeclaredInterfaceReference = TSDeclaredInterfaceReference;
+	var TSAnnotationReference = (function (_super) {
+	    __extends(TSAnnotationReference, _super);
+	    function TSAnnotationReference(p, tn, values) {
+	        if (values === void 0) { values = {}; }
+	        _super.call(this, p, tn);
+	        this.values = values;
+	    }
+	    TSAnnotationReference.prototype.value = function (key) {
+	        if (key === void 0) { key = 'value'; }
+	        return this.values[key];
+	    };
+	    return TSAnnotationReference;
+	})(TSSimpleTypeReference);
+	exports.TSAnnotationReference = TSAnnotationReference;
+	var TSDeclaredAnnotationReference = (function (_super) {
+	    __extends(TSDeclaredAnnotationReference, _super);
+	    function TSDeclaredAnnotationReference() {
+	        _super.apply(this, arguments);
+	        this.values = {};
+	    }
+	    TSDeclaredAnnotationReference.prototype.value = function (key) {
+	        if (key === void 0) { key = 'value'; }
+	        return this.values[key];
+	    };
+	    return TSDeclaredAnnotationReference;
+	})(TSDeclaredInterfaceReference);
+	exports.TSDeclaredAnnotationReference = TSDeclaredAnnotationReference;
+	var AnyType = (function (_super) {
+	    __extends(AnyType, _super);
+	    function AnyType(nm) {
+	        if (nm === void 0) { nm = "any"; }
+	        _super.call(this, exports.Universe, nm);
+	    }
+	    AnyType.prototype.union = function (q) {
+	        return q;
+	    };
+	    AnyType.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ANY_TYPE_REFERENCE;
+	    };
+	    return AnyType;
+	})(TSSimpleTypeReference);
+	exports.AnyType = AnyType;
+	var TSStructuralTypeReference = (function (_super) {
+	    __extends(TSStructuralTypeReference, _super);
+	    function TSStructuralTypeReference(parent) {
+	        var _this = this;
+	        if (parent === void 0) { parent = exports.Universe; }
+	        _super.call(this, parent);
+	        this.array = function () { return false; };
+	        this.canBeOmmited = function () { return _this.locked ? false : _this.children().every(function (x) { return x.optional; }); };
+	    }
+	    TSStructuralTypeReference.prototype.visitReturnType = function (v) {
+	        //v.visitStructuralReturn(this);
+	        this.visit(v);
+	    };
+	    TSStructuralTypeReference.prototype.toReference = function () {
+	        return this;
+	    };
+	    TSStructuralTypeReference.prototype.union = function (q) {
+	        var r = new TSUnionTypeReference();
+	        r.addChild(this);
+	        r.addChild(q);
+	        return r;
+	    };
+	    TSStructuralTypeReference.prototype.serializeToString = function () {
+	        var body = this.children().map(function (x) { return ("\n" + x.serializeToString() + "\n"); }).join('');
+	        return "{" + body + "}";
+	    };
+	    TSStructuralTypeReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_STRUCTURAL_TYPE_REFERENCE;
+	    };
+	    return TSStructuralTypeReference;
+	})(TSTypeDeclaration);
+	exports.TSStructuralTypeReference = TSStructuralTypeReference;
+	(function (ParamLocation) {
+	    ParamLocation[ParamLocation["URI"] = 0] = "URI";
+	    ParamLocation[ParamLocation["BODY"] = 1] = "BODY";
+	    ParamLocation[ParamLocation["OPTIONS"] = 2] = "OPTIONS";
+	    ParamLocation[ParamLocation["OTHER"] = 3] = "OTHER";
+	})(exports.ParamLocation || (exports.ParamLocation = {}));
+	var ParamLocation = exports.ParamLocation;
+	var Param = (function (_super) {
+	    __extends(Param, _super);
+	    function Param(p, nm, location, tp, defaultValue) {
+	        if (tp === void 0) { tp = new TSSimpleTypeReference(exports.Universe, "string"); }
+	        _super.call(this, p);
+	        this.name = nm;
+	        this.ptype = tp;
+	        this.location = location;
+	        this.defaultValue = defaultValue;
+	    }
+	    Param.prototype.isEmpty = function () {
+	        return this.ptype.isEmpty();
+	    };
+	    Param.prototype.serializeToString = function (appendDefault) {
+	        if (appendDefault === void 0) { appendDefault = false; }
+	        //return this.name + (this.optional ? "?" : "") + ":" + this.ptype.serializeToString() + (this.ptype.canBeOmmited() ? "?" : "");
+	        return this.name + (this.optional || (this.defaultValue && !appendDefault) ? "?" : "") + (":" + this.ptype.serializeToString() + (this.ptype.canBeOmmited() ? "?" : "")) + (appendDefault && this.defaultValue ? '=' + JSON.stringify(this.defaultValue) : '');
+	    };
+	    Param.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_PARAM;
+	    };
+	    return Param;
+	})(TSModelElement);
+	exports.Param = Param;
+	var StringValue = (function (_super) {
+	    __extends(StringValue, _super);
+	    function StringValue(_value) {
+	        _super.call(this);
+	        this._value = _value;
+	    }
+	    StringValue.prototype.value = function () {
+	        return this._value;
+	    };
+	    StringValue.prototype.serializeToString = function () {
+	        return "\"" + this._value + "\"";
+	    };
+	    StringValue.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_STRING_VALUE;
+	    };
+	    return StringValue;
+	})(TSMember);
+	exports.StringValue = StringValue;
+	var ArrayValue = (function (_super) {
+	    __extends(ArrayValue, _super);
+	    function ArrayValue(_values) {
+	        _super.call(this);
+	        this._values = _values;
+	    }
+	    ArrayValue.prototype.value = function () {
+	        return this.serializeToString();
+	    };
+	    ArrayValue.prototype.serializeToString = function () {
+	        return "[ " + this._values.map(function (x) { return x.value(); }).join(', ') + " ]";
+	    };
+	    ArrayValue.prototype.values = function () {
+	        return this._values;
+	    };
+	    ArrayValue.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ARRAY_VALUE;
+	    };
+	    return ArrayValue;
+	})(TSMember);
+	exports.ArrayValue = ArrayValue;
+	var TSAPIElementDeclaration = (function (_super) {
+	    __extends(TSAPIElementDeclaration, _super);
+	    function TSAPIElementDeclaration(p, name) {
+	        var _this = this;
+	        _super.call(this, p);
+	        this.rangeType = new AnyType();
+	        this.value = null;
+	        this.paramStr = function (appendDefault) {
+	            if (appendDefault === void 0) { appendDefault = false; }
+	            return '( ' + _this.parameters.filter(function (x) { return !x.isEmpty(); }).map(function (p) { return _this.serializeParam(p, appendDefault); }).join(',') + ' )';
+	        };
+	        this.serializeParam = function (p, appendDefault) { return p.serializeToString(appendDefault); };
+	        this.isFunction = function () { return _this.parameters.length != 0 || _this.isFunc; };
+	        this.isAnonymousFunction = function () { return _this.isFunction() && _this.name === ''; };
+	        this.returnStr = function () { return _this.rangeType ? ':' + _this.rangeType.serializeToString() : ''; };
+	        this.name = name;
+	        this.parameters = [];
+	        this.rangeType = null;
+	        this.optional = false;
+	    }
+	    TSAPIElementDeclaration.prototype.visit = function (v) {
+	        if (v.startVisitElement(this)) {
+	            if (this.rangeType) {
+	                if (this.rangeType instanceof TSStructuralTypeReference && !this.isInterfaceMethodWithBody()) {
+	                    this.rangeType.visitReturnType(v);
+	                }
+	            }
+	            v.endVisitElement(this);
+	        }
+	    };
+	    TSAPIElementDeclaration.prototype.commentCode = function () {
+	        return "\n        /**\n         *\n         **/\n         //" + this.name + "\n         ";
+	    };
+	    TSAPIElementDeclaration.prototype.serializeToString = function () {
+	        var x = (this.isPrivate ? 'private ' : '') + this.escapeDot(this.name) + (this.optional ? "?" : "") + (this.isFunction() ? this.paramStr() : "") + this.returnStr();
+	        if (this.value) {
+	            x += '=' + this.value.value();
+	        }
+	        return this.commentCode() + x + (this.isFunction() && this.isInterfaceMethodWithBody() ? '' : this.body());
+	    };
+	    TSAPIElementDeclaration.prototype.body = function () {
+	        if (this._body == null)
+	            return "";
+	        return "{" + this._body + "}";
+	    };
+	    TSAPIElementDeclaration.prototype.escapeDot = function (name) {
+	        return tsutil.escapeTypescriptPropertyName(name);
+	    };
+	    TSAPIElementDeclaration.prototype.isInterfaceMethodWithBody = function () {
+	        return false;
+	    };
+	    TSAPIElementDeclaration.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_API_ELEMENT_DECLARATION;
+	    };
+	    return TSAPIElementDeclaration;
+	})(TSMember);
+	exports.TSAPIElementDeclaration = TSAPIElementDeclaration;
+	var TSConstructor = (function (_super) {
+	    __extends(TSConstructor, _super);
+	    function TSConstructor(p) {
+	        _super.call(this, p, 'constructor');
+	        this.serializeParam = function (p, appendDefault) { return 'protected ' + p.serializeToString(appendDefault); };
+	    }
+	    TSConstructor.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_CONSTRUCTOR;
+	    };
+	    return TSConstructor;
+	})(TSAPIElementDeclaration);
+	exports.TSConstructor = TSConstructor;
+	function flattenUnionType(ref) {
+	    var _this = this;
+	    if (!(ref instanceof TSUnionTypeReference)) {
+	        return [ref];
+	    }
+	    var map = {};
+	    var arr = [];
+	    ref.children().forEach(function (x) { return _this.flattenUnionType(x).forEach(function (y) {
+	        if (y instanceof TSSimpleTypeReference) {
+	            var st = y;
+	            var name = st.name;
+	            map[name] = st;
+	        }
+	        else {
+	            arr.push(y);
+	        }
+	    }); });
+	    return arr.concat(_.sortBy(Object.keys(map).map(function (x) { return map[x]; }), 'name'));
+	}
+	//# sourceMappingURL=TSDeclModel.js.map
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var ts = __webpack_require__(41);
+	// https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
+	function escapeTypescriptPropertyName(str) {
+	    return isValidTypescriptIdentifier(str) ? str : JSON.stringify(str);
+	}
+	exports.escapeTypescriptPropertyName = escapeTypescriptPropertyName;
+	// TODO: these are made up lists. check the grammar
+	var tsKeywords = 'type class interface break case catch continue debugger default delete do else finally for function if in instanceof new return switch this throw try typeof var void while with'.split(' ');
+	var digitCodesL = "0".charCodeAt(0);
+	var digitCodesR = "9".charCodeAt(0);
+	var lowerCaseCodesL = "a".charCodeAt(0);
+	var lowerCaseCodesR = "z".charCodeAt(0);
+	var upperCaseCodesL = "A".charCodeAt(0);
+	var upperCaseCodesR = "Z".charCodeAt(0);
+	var digitChars = {}; //:boolean[] = []
+	var validChars = {}; //:boolean[] = []
+	for (var i = digitCodesL, end = digitCodesR; i <= end; i++) {
+	    digitChars[String.fromCharCode(i)] = true;
+	    validChars[String.fromCharCode(i)] = true;
+	}
+	for (var i = lowerCaseCodesL, end = lowerCaseCodesR; i <= end; i++) {
+	    validChars[String.fromCharCode(i)] = true;
+	}
+	for (var i = upperCaseCodesL, end = upperCaseCodesR; i <= end; i++) {
+	    validChars[String.fromCharCode(i)] = true;
+	}
+	"_ $".split(" ").forEach(function (x) { return validChars[x] = true; });
+	function isValidTypescriptIdentifier(str) {
+	    str = str.trim();
+	    if (str.length == 0) {
+	        return false;
+	    }
+	    if (tsKeywords.indexOf(str) >= 0) {
+	        return false;
+	    }
+	    if (digitChars[str.charAt(0)]) {
+	        return false;
+	    }
+	    for (var i = 0; i < str.length; i++) {
+	        if (!validChars[str.charAt(i)]) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+	exports.isValidTypescriptIdentifier = isValidTypescriptIdentifier;
+	function escapeToIdentifier(str) {
+	    str = str.trim();
+	    var result = '';
+	    if (str.length > 0 && digitChars[str.charAt(0)]) {
+	        result += '_';
+	    }
+	    for (var i = 0; i < str.length; i++) {
+	        var ch = str.charAt(i);
+	        if (validChars[ch]) {
+	            result += ch;
+	        }
+	        else {
+	            result += '_';
+	        }
+	    }
+	    return result;
+	}
+	exports.escapeToIdentifier = escapeToIdentifier;
+	// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently
+	//       exposed in the public typescript.d.ts. The typings should be exposed in the next release.
+	function format(text) {
+	    var options = getDefaultOptions();
+	    // Parse the source text
+	    var sourceFile = ts.createSourceFile("file.ts", text, 2 /* Latest */, "0");
+	    fixupParentReferences(sourceFile);
+	    // Get the formatting edits on the input sources
+	    var edits = ts.formatting.formatDocument(sourceFile, getRuleProvider(options), options);
+	    // Apply the edits on the input code
+	    return applyEdits(text, edits);
+	    function getRuleProvider(options) {
+	        // Share this between multiple formatters using the same options.
+	        // This represents the bulk of the space the formatter uses.
+	        var ruleProvider = new ts.formatting.RulesProvider();
+	        ruleProvider.ensureUpToDate(options);
+	        return ruleProvider;
+	    }
+	    function applyEdits(text, edits) {
+	        // Apply edits in reverse on the existing text
+	        var result = text;
+	        for (var i = edits.length - 1; i >= 0; i--) {
+	            var change = edits[i];
+	            var head = result.slice(0, change.span.start());
+	            var tail = result.slice(change.span.start() + change.span.length());
+	            result = head + change.newText + tail;
+	        }
+	        return result;
+	    }
+	    function getDefaultOptions() {
+	        return {
+	            IndentSize: 4,
+	            TabSize: 4,
+	            NewLineCharacter: '\n',
+	            ConvertTabsToSpaces: true,
+	            InsertSpaceAfterCommaDelimiter: true,
+	            InsertSpaceAfterSemicolonInForStatements: true,
+	            InsertSpaceBeforeAndAfterBinaryOperators: true,
+	            InsertSpaceAfterKeywordsInControlFlowStatements: true,
+	            InsertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
+	            InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
+	            PlaceOpenBraceOnNewLineForFunctions: false,
+	            PlaceOpenBraceOnNewLineForControlBlocks: false
+	        };
+	    }
+	    function fixupParentReferences(sourceFile) {
+	        var parent = sourceFile;
+	        function walk(n) {
+	            n.parent = parent;
+	            var saveParent = parent;
+	            parent = n;
+	            ts.forEachChild(n, walk);
+	            parent = saveParent;
+	        }
+	        ts.forEachChild(sourceFile, walk);
+	    }
+	}
+	exports.format = format;
+	var typeMap = {
+	    'string': 'string',
+	    'integer': 'number',
+	    'number': 'number',
+	    'boolean': 'boolean',
+	    'file': 'string',
+	    'date': 'string',
+	    'NumberType': 'number'
+	};
+	function ramlType2TSType(ramlType) {
+	    var tsType = typeMap[ramlType];
+	    if (!tsType) {
+	        tsType = 'any';
+	    }
+	    return tsType;
+	}
+	exports.ramlType2TSType = ramlType2TSType;
+	function escapeToJavaIdentifier(str) {
+	    str = escapeToIdentifier(str);
+	    return exports.javaReservedWords[str] ? str + '_' : str;
+	}
+	exports.escapeToJavaIdentifier = escapeToJavaIdentifier;
+	exports.tsToJavaTypeMap = {
+	    'number': 'Double',
+	    'string': 'String',
+	    'boolean': 'Boolean',
+	    'any': 'Object'
+	};
+	exports.javaReservedWords = {
+	    "abstract": true,
+	    "continue": true,
+	    "for": true,
+	    "new": true,
+	    "switch": true,
+	    "assert": true,
+	    "default": true,
+	    "goto": true,
+	    "package": true,
+	    "synchronized": true,
+	    "boolean": true,
+	    "do": true,
+	    "if": true,
+	    "private": true,
+	    "this": true,
+	    "break": true,
+	    "double": true,
+	    "implements": true,
+	    "protected": true,
+	    "throw": true,
+	    "byte": true,
+	    "else": true,
+	    "import": true,
+	    "public": true,
+	    "throws": true,
+	    "case": true,
+	    "enum": true,
+	    "instanceof": true,
+	    "return": true,
+	    "transient": true,
+	    "catch": true,
+	    "extends": true,
+	    "int": true,
+	    "short": true,
+	    "try": true,
+	    "char": true,
+	    "final": true,
+	    "interface": true,
+	    "static": true,
+	    "void": true,
+	    "class": true,
+	    "finally": true,
+	    "long": true,
+	    "strictfp": true,
+	    "volatile": true,
+	    "const": true,
+	    "float": true,
+	    "native": true,
+	    "super": true,
+	    "while": true
+	};
+	//# sourceMappingURL=tsutil.js.map
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var def = __webpack_require__(19);
+	var td = __webpack_require__(30);
+	var util = __webpack_require__(33);
+	var parserCoreModuleVar = 'core';
+	var ParserGenerator = (function () {
+	    function ParserGenerator() {
+	        this.mod = new td.TSAPIModule();
+	        this.processed = {};
+	        this.typeMap = {
+	            'StringType': 'string',
+	            'NumberType': 'number',
+	            'BooleanType': 'boolean'
+	        };
+	    }
+	    ParserGenerator.prototype.processType = function (u, generateConstructor) {
+	        var _this = this;
+	        var typeName = u.name();
+	        if (this.processed[typeName]) {
+	            return;
+	        }
+	        this.processed[typeName] = u;
+	        u.superTypes().forEach(function (x) { return _this.processType(x, generateConstructor); });
+	        var idcl = new td.TSInterface(this.mod, typeName);
+	        var dcl = new td.TSClassDecl(this.mod, typeName + "Impl");
+	        if (generateConstructor) {
+	            var _constructor = new td.TSConstructor(dcl);
+	            _constructor.parameters = [
+	                new td.Param(_constructor, 'attr', 3 /* OTHER */, new td.TSSimpleTypeReference(td.Universe, 'hl.IAttribute'))
+	            ];
+	            if (u.isValueType()) {
+	                if (typeName == 'ValueType' || u.superTypes().length == 0) {
+	                    _constructor._body = '';
+	                }
+	                else {
+	                    _constructor._body = 'super(attr);';
+	                }
+	            }
+	            else {
+	                _constructor._body = 'super()';
+	            }
+	        }
+	        else {
+	            if (u instanceof def.NodeClass) {
+	                var _constructor = new td.TSConstructor(dcl);
+	                _constructor.parameters = [
+	                    new td.Param(_constructor, 'nodeOrKey', 3 /* OTHER */, new td.TSSimpleTypeReference(td.Universe, 'hl.IHighLevelNode|string'))
+	                ];
+	                _constructor._body = "super((typeof  nodeOrKey==\"string\")?create" + u.name() + "(<string>nodeOrKey):<hl.IHighLevelNode>nodeOrKey)";
+	            }
+	        }
+	        this.addImplementationMethod(dcl, 'wrapperClassName', 'string', "return \"" + typeName + "Impl\";");
+	        if (typeName == 'ValueType') {
+	            this.addInterfaceMethod(idcl, 'value', 'string');
+	            this.addImplementationMethod(dcl, 'value', 'string', 'return this.attr.value();');
+	            this.addInterfaceMethod(idcl, 'highLevel', 'hl.IAttribute');
+	            this.addImplementationMethod(dcl, 'highLevel', 'hl.IAttribute', 'return this.attr;');
+	        }
+	        else if (typeName == 'Reference') {
+	            this.addImplementationMethod(dcl, 'value', 'string', 'return <any>core.toStructuredValue(this.attr);');
+	        }
+	        dcl.implements.push(new td.TSSimpleTypeReference(td.Universe, idcl.name));
+	        u.superTypes().forEach(function (x) {
+	            idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, x.name()));
+	            dcl.extends.push(new td.TSSimpleTypeReference(td.Universe, x.name() + "Impl"));
+	        });
+	        u.properties().forEach(function (x) {
+	            _this.createMethodDecl(idcl, x);
+	            var z = _this.createMethodDecl(dcl, x);
+	            z._body = _this.generateBody(x);
+	            if (x.isPrimitive()) {
+	                _this.createSetterMethodDecl(dcl, x);
+	            }
+	        });
+	        if (dcl.extends.length == 0) {
+	            if (u.isValueType()) {
+	                idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "core.AbstractWrapperNode"));
+	            }
+	            else {
+	                idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "BasicNode"));
+	                dcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "BasicNodeImpl"));
+	            }
+	        }
+	        u.subTypes().forEach(function (x) { return _this.processType(x); });
+	    };
+	    ParserGenerator.prototype.addInterfaceMethod = function (idcl, methodName, returnTypeName) {
+	        var method = new td.TSAPIElementDeclaration(idcl, methodName);
+	        method.isFunc = true;
+	        method.rangeType = new td.TSSimpleTypeReference(method, returnTypeName);
+	        return method;
+	    };
+	    ParserGenerator.prototype.addImplementationMethod = function (dcl, methodName, returnTypeName, body) {
+	        var method = this.addInterfaceMethod(dcl, methodName, returnTypeName);
+	        method._body = body;
+	        return method;
+	    };
+	    ParserGenerator.prototype.generateBody = function (x) {
+	        var rangeType = x.range().name();
+	        if (x.isValueProperty()) {
+	            var args = [("'" + x.name() + "'")];
+	            if (x.isPrimitive()) {
+	                rangeType = this.typeMap[rangeType];
+	                args.push("this.to" + util.firstToUpper(rangeType));
+	            }
+	            else {
+	                args.push("(attr:hl.IAttribute)=>new " + rangeType + "Impl(attr)");
+	            }
+	            if (x.isMultiValue()) {
+	                return "\n             return <" + rangeType + "[]>super.attributes(" + args.join(', ') + ");\n         ";
+	            }
+	            else {
+	                return "\n             return <" + rangeType + ">super.attribute(" + args.join(', ') + ");\n         ";
+	            }
+	        }
+	        else {
+	            if (x.isMultiValue()) {
+	                return "\n             return <" + rangeType + "[]>super.elements('" + x.name() + "');\n         ";
+	            }
+	            else {
+	                return "\n             return <" + rangeType + ">super.element('" + x.name() + "');\n         ";
+	            }
+	        }
+	        //if (x.isValueProperty()){
+	        //
+	        //    var varInit:any;
+	        //    if(x.isPrimitive()){
+	        //        varInit = function(varStr:string,typeName:string){
+	        //            return varStr + '.value()';
+	        //        }
+	        //    }
+	        //    else{
+	        //        varInit = function(varStr:string,typeName:string){
+	        //            return 'new ' + typeName + 'Impl(' + varStr + ')';
+	        //        }
+	        //    }
+	        //    if(x.isMultiValue()) {
+	        //        return `var attrs = this._node.attributes('${x.name()}');
+	        //        if (attrs) {
+	        //            return attrs.map(x=>${varInit('x', x.range().name())});
+	        //        }
+	        //        return [];`;
+	        //    }
+	        //    else{
+	        //        return `var attr = this._node.attr('${x.name()}');
+	        //        if (attr) {
+	        //            var v = ${varInit('attr', x.range().name())};
+	        //            return v;
+	        //        }
+	        //        else {
+	        //            return null;
+	        //        }`;
+	        //    }
+	        //}
+	        //else{
+	        //    if (x.isMultiValue()){
+	        //        return `
+	        //        var elements = this._node.elementsOfKind('${x.name()}');
+	        //        if(elements) {
+	        //            return elements.map(x=><${x.range().name()}>x.wrapperNode());
+	        //        }
+	        //        else {
+	        //            return null;
+	        //        }
+	        //    `;
+	        //    }
+	        //    else{
+	        //        return `
+	        //        var v = this._node.element('${x.name()}');
+	        //        if(!v){
+	        //            return null;
+	        //        }
+	        //        return <${x.range().name()}>v.wrapperNode();
+	        //    `;
+	        //    }
+	        //}
+	    };
+	    ParserGenerator.prototype.createSetterMethodDecl = function (dcl, x) {
+	        var method = new td.TSAPIElementDeclaration(dcl, "set" + x.name()[0].toUpperCase() + x.name().substr(1));
+	        method.isFunc = true;
+	        var tname = "string";
+	        if (x.isPrimitive()) {
+	            tname = this.typeMap[x.range().name()];
+	        }
+	        else {
+	            tname = x.range().name();
+	            this.processType(x.range(), x.isValueProperty());
+	        }
+	        var ref = new td.TSSimpleTypeReference(td.Universe, tname);
+	        method.parameters = [
+	            new td.Param(method, 'param', 3 /* OTHER */, ref)
+	        ];
+	        method._body = "\n        {\n        this.highLevel().attrOrCreate(\"" + x.name() + "\").setValue(\"\"+param);\n        return this;\n        }\n        ";
+	        return method;
+	    };
+	    ParserGenerator.prototype.createMethodDecl = function (dcl, x) {
+	        var method = new td.TSAPIElementDeclaration(dcl, x.name());
+	        method.isFunc = true;
+	        var tname = "string";
+	        if (x.isPrimitive()) {
+	            tname = this.typeMap[x.range().name()];
+	        }
+	        else {
+	            tname = x.range().name();
+	            this.processType(x.range(), x.isValueProperty());
+	        }
+	        var ref = new td.TSSimpleTypeReference(td.Universe, tname);
+	        if (x.isMultiValue()) {
+	            var aRef = new td.TSArrayReference();
+	            aRef.componentType = ref;
+	            method.rangeType = aRef;
+	        }
+	        else {
+	            method.rangeType = ref;
+	        }
+	        return method;
+	    };
+	    ParserGenerator.prototype.serializeToString = function () {
+	        return "import hl=require(\"../highLevelAST\");\nimport hlImpl=require(\"../highLevelImpl\");\nimport jsyaml=require(\"../jsyaml/jsyaml2lowLevel\");\nimport def=require(\"../definitionSystem\");\nimport core=require(\"../parserCore\");\n\n\nexport interface BasicNode extends core.BasicSuperNode{\n\n    parent():BasicNode\n\n    highLevel():hl.IHighLevelNode\n}\n\nexport class BasicNodeImpl extends core.BasicSuperNodeImpl implements BasicNode{\n\n    constructor(node:hl.IHighLevelNode){\n        super(node);\n    }\n\n    wrapperClassName():string{\n        return 'BasicNodeImpl';\n    }\n\n    parent():BasicNode{\n        return <BasicNode>super.parent();\n    }\n}\n\n        " + this.mod.serializeToString() + this.createFunctions();
+	    };
+	    ParserGenerator.prototype.createFunctions = function () {
+	        var res = "";
+	        for (var p in this.processed) {
+	            var q = this.processed[p];
+	            if (q instanceof def.NodeClass) {
+	                res += "\nfunction create" + p + "(key:string){\n    var universe=hl.universeProvider(\"RAML10\");\n    var nc=<def.NodeClass>universe.getType(\"" + p + "\");\n    var node=nc.createStubNode(null,key);\n    return node;\n}\n";
+	            }
+	            ;
+	        }
+	        return res;
+	    };
+	    ParserGenerator.prototype.nodeFactory = function (highLevelASTLocation, parserLocation) {
+	        return "import RamlWrapper = require(\"" + parserLocation + "\");\nimport hl = require(\"" + highLevelASTLocation + "\")\n\nexport function buildWrapperNode(node:hl.IHighLevelNode){\n\n    var nodeClassName = node.definition().name();\n\n    var wrapperConstructor = classMap[nodeClassName];\n\n    if(!wrapperConstructor){\n        var m=node.definition().allSuperTypes();\n        var wr=null;\n        for (var i=0;i<m.length;i++){\n            var nm=m[i].name();\n            wrapperConstructor = classMap[nm];\n            if (nm==\"DataElement\"){\n                wr=nm;\n                //This is only case of nested hierarchy\n                continue;\n            }\n            if (nm==\"RAMLLanguageElement\"){\n                //depth first\n                continue;\n            }\n            if (wrapperConstructor){\n                break;\n            }\n        }\n        if (!wrapperConstructor){\n            wr=nm;\n        }\n    }\n    if (!wrapperConstructor){\n        wrapperConstructor = classMap[\"RAMLLanguageElement\"]\n\n    }\n    return wrapperConstructor(node);\n}\n\nvar classMap = {\n\n" + Object.keys(this.processed).sort().map(function (x) { return ("    \"" + x + "\": (x)=>{return new RamlWrapper." + x + "Impl(x)}"); }).join(',\n\n') + "\n\n};\n";
+	    };
+	    return ParserGenerator;
+	})();
+	function def2Parser(u) {
+	    var mod = new ParserGenerator();
+	    mod.processType(u);
+	    return mod;
+	}
+	exports.def2Parser = def2Parser;
+	var ImplementationGenerator = (function () {
+	    function ImplementationGenerator() {
+	    }
+	    ImplementationGenerator.prototype.generateASTAccessor = function (p) {
+	        this.generatedCode.push("var val=this.ast.getValue(" + p.name() + "}");
+	        this.generatedCode.push("return new " + p.range().name() + "Impl(val)");
+	    };
+	    return ImplementationGenerator;
+	})();
+	function checkIfReference(u) {
+	    if (u.name() == 'Reference') {
+	        return true;
+	    }
+	    var superTypes = u.superTypes();
+	    for (var i = 0; i < superTypes.length; i++) {
+	        var st = superTypes[i];
+	        if (checkIfReference(st)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	exports.checkIfReference = checkIfReference;
+	/**
+	 * Created by kor on 11/05/15.
+	 */
+	//# sourceMappingURL=wrappedParserGen.js.map
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var _ = __webpack_require__(47);
+	var Opt = __webpack_require__(5);
+	exports.defined = function (x) { return (x !== null) && (x !== undefined); };
+	/**
+	 * Arrays of Objects are common in RAML08.
+	 * @param x
+	 * @returns {{}}
+	 */
+	function flattenArrayOfObjects(x) {
+	    var res = {};
+	    x.forEach(function (v) { return Object.keys(v).forEach(function (k) { return res[k] = v[k]; }); });
+	    return res;
+	}
+	exports.flattenArrayOfObjects = flattenArrayOfObjects;
+	function find(xs, f) {
+	    return new Opt(_.find(xs || [], f));
+	}
+	exports.find = find;
+	exports.isInstance = function (v, C) { return (v instanceof C) ? [v] : []; };
+	exports.ifInstanceOf = function (v, C, f) { return (v instanceof C) ? f(v) : null; };
+	function toTuples(map) {
+	    return Object.keys(map).map(function (k) { return [k, map[k]]; });
+	}
+	exports.toTuples = toTuples;
+	function fromTuples(tuples) {
+	    var obj = {};
+	    tuples.forEach(function (x) { return obj[x[0]] = x[1]; });
+	    return obj;
+	}
+	exports.fromTuples = fromTuples;
+	exports.collectInstancesOf = function (xs, C) { return tap([], function (res) { return xs.forEach(function (v) { return exports.ifInstanceOf(v, C, function (x) { return res.push(x); }); }); }); };
+	exports.collectInstancesOfInMap = function (map, C) {
+	    return Object.keys(map).map(function (k) { return [k, map[k]]; }).filter(function (x) { return x[1] instanceof C; }).map(function (x) { return x; });
+	};
+	exports.asArray = function (v) { return exports.defined(v) ? ((v instanceof Array) ? v : [v]) : []; };
+	exports.shallowCopy = function (obj) { return tap({}, function (copy) { return Object.keys(obj).forEach(function (k) { return copy[k] = obj[k]; }); }); };
+	exports.flatMap = function (xs, f) { return exports.flatten(xs.map(f)); };
+	exports.flatten = function (xss) { return Array.prototype.concat.apply([], xss); };
+	exports.takeWhile = function (xs, f) { return tap([], function (res) {
+	    for (var i = 0; i < xs.length; i++) {
+	        if (!f(xs[i]))
+	            break;
+	        res.push(xs[i]);
+	    }
+	}); };
+	function tap(v, f) {
+	    f(v);
+	    return v;
+	}
+	exports.tap = tap;
+	function kv(obj, iter) {
+	    if (typeof obj === 'object')
+	        Object.keys(obj).forEach(function (k) { return iter(k, obj[k]); });
+	}
+	exports.kv = kv;
+	function indexed(objects, key, delKey) {
+	    if (delKey === void 0) { delKey = false; }
+	    var obj = {};
+	    objects.forEach(function (original) {
+	        var copy = exports.shallowCopy(original);
+	        if (delKey)
+	            delete copy[key];
+	        obj[original[key]] = copy;
+	    });
+	    return obj;
+	}
+	exports.indexed = indexed;
+	function stringEndsWith(str, search) {
+	    var dif = str.length - search.length;
+	    return dif >= 0 && str.lastIndexOf(search) === dif;
+	}
+	exports.stringEndsWith = stringEndsWith;
+	function stringStartsWith(str, search) {
+	    return str.length - search.length >= 0 && str.substring(0, search.length) === search;
+	}
+	exports.stringStartsWith = stringStartsWith;
+	function lazypropkeyfilter(k) {
+	    return k[k.length - 1] == "_"; // ends with underscore
+	}
+	exports.lazypropkeyfilter = lazypropkeyfilter;
+	function lazyprop(obj, key, func) {
+	    var result, ready = false;
+	    obj[key] = function () {
+	        if (!ready) {
+	            ready = true;
+	            result = func.apply(obj);
+	        }
+	        return result;
+	    };
+	}
+	function lazyprops(obj, keyfilter) {
+	    if (keyfilter === void 0) { keyfilter = lazypropkeyfilter; }
+	    for (var k in obj) {
+	        if (keyfilter(k)) {
+	            exports.ifInstanceOf(obj[k], Function, function (vf) { return (vf.length === 0) ? lazyprop(obj, k, vf) : null; });
+	        }
+	    }
+	}
+	exports.lazyprops = lazyprops;
+	function iff(v, f) {
+	    if (v !== undefined)
+	        f(v);
+	}
+	exports.iff = iff;
+	function isRAMLUrl(str) {
+	    if (typeof str !== 'string' || str == '')
+	        return false;
+	    return stringEndsWith(str, ".raml");
+	}
+	exports.isRAMLUrl = isRAMLUrl;
+	function getAllRequiredExternalModulesFromCode(code) {
+	    var match;
+	    var mods = [];
+	    // both quoting styles
+	    var r1 = new RegExp("require\\('([^']+)'\\)", "gi");
+	    while (match = r1.exec(code)) {
+	        mods.push(match[1]);
+	    }
+	    var r2 = new RegExp('require\\("([^"]+)"\\)', "gi");
+	    while (match = r2.exec(code)) {
+	        mods.push(match[1]);
+	    }
+	    mods = _.unique(mods).filter(function (x) { return x != ""; });
+	    mods.sort();
+	    return mods;
+	}
+	exports.getAllRequiredExternalModulesFromCode = getAllRequiredExternalModulesFromCode;
+	exports.serial = (function () {
+	    var i = 0;
+	    return function () { return i++; };
+	})();
+	function isEssential(arg) {
+	    return typeof arg !== 'undefined' && arg != null;
+	}
+	exports.isEssential = isEssential;
+	function firstToUpper(q) {
+	    if (q.length == 0) {
+	        return q;
+	    }
+	    return q.charAt(0).toUpperCase() + q.substr(1);
+	}
+	exports.firstToUpper = firstToUpper;
+	function updateObject(source, target, addNewFields) {
+	    if (addNewFields === void 0) { addNewFields = false; }
+	    var keySet = Object.keys(target);
+	    if (addNewFields) {
+	        var map = {};
+	        keySet.forEach(function (x) { return map[x] = true; });
+	        Object.keys(source).forEach(function (x) { return map[x] = true; });
+	        keySet = Object.keys(map);
+	    }
+	    keySet.forEach(function (x) {
+	        var value = source[x];
+	        if (value instanceof Object) {
+	            if (!target[x]) {
+	                target[x] = {};
+	            }
+	            updateObject(value, target[x], true);
+	        }
+	        else if (value != undefined) {
+	            target[x] = source[x];
+	        }
+	    });
+	}
+	exports.updateObject = updateObject;
+	;
+	/**
+	 * In 'str' replace all occurences of 'map' keys to their values.
+	 */
+	function replaceMap(str, map) {
+	    Object.keys(map).forEach(function (x) { return str = replace(str, x, map[x]); });
+	    return str;
+	}
+	exports.replaceMap = replaceMap;
+	/**
+	 * Replace all occurences of 'x' in 'str' to 'r' without thinking if 'x' can be passed without
+	 * escaping as argument to RegExp constructor
+	 */
+	function replace(str, x, r) {
+	    var result = '';
+	    var prev = 0;
+	    for (var i = str.indexOf(x); i < str.length && i >= 0; i = str.indexOf(x, prev)) {
+	        result += str.substring(prev, i);
+	        result += r;
+	        prev = i + x.length;
+	    }
+	    result += str.substring(prev, str.length);
+	    return result;
+	}
+	exports.replace = replace;
+	//# sourceMappingURL=index.js.map
+
+/***/ },
 /* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
 	'use strict';
-	var loader = __webpack_require__(62);
+	var loader = __webpack_require__(61);
 	var dumper = __webpack_require__(35);
 	function deprecated(name) {
 	    return function () {
 	        throw new Error('Function ' + name + ' is deprecated and cannot be used.');
 	    };
 	}
-	exports.Type = __webpack_require__(63);
-	exports.Schema = __webpack_require__(64);
-	exports.FAILSAFE_SCHEMA = __webpack_require__(65);
-	exports.JSON_SCHEMA = __webpack_require__(66);
-	exports.CORE_SCHEMA = __webpack_require__(67);
-	exports.DEFAULT_SAFE_SCHEMA = __webpack_require__(68);
-	exports.DEFAULT_FULL_SCHEMA = __webpack_require__(69);
+	exports.Type = __webpack_require__(62);
+	exports.Schema = __webpack_require__(63);
+	exports.FAILSAFE_SCHEMA = __webpack_require__(64);
+	exports.JSON_SCHEMA = __webpack_require__(65);
+	exports.CORE_SCHEMA = __webpack_require__(66);
+	exports.DEFAULT_SAFE_SCHEMA = __webpack_require__(67);
+	exports.DEFAULT_FULL_SCHEMA = __webpack_require__(68);
 	exports.load = loader.load;
 	exports.loadAll = loader.loadAll;
 	exports.safeLoad = loader.safeLoad;
@@ -20453,9 +20615,9 @@
 	exports.safeDump = dumper.safeDump;
 	exports.YAMLException = __webpack_require__(36);
 	// Deprecared schema names from JS-YAML 2.0.x
-	exports.MINIMAL_SCHEMA = __webpack_require__(65);
-	exports.SAFE_SCHEMA = __webpack_require__(68);
-	exports.DEFAULT_SCHEMA = __webpack_require__(69);
+	exports.MINIMAL_SCHEMA = __webpack_require__(64);
+	exports.SAFE_SCHEMA = __webpack_require__(67);
+	exports.DEFAULT_SCHEMA = __webpack_require__(68);
 	// Deprecated functions from JS-YAML 1.x.x
 	exports.scan = deprecated('scan');
 	exports.parse = deprecated('parse');
@@ -20470,10 +20632,10 @@
 	/// <reference path="../../../../typings/tsd.d.ts" />
 	'use strict';
 	/*eslint-disable no-use-before-define*/
-	var common = __webpack_require__(70);
+	var common = __webpack_require__(69);
 	var YAMLException = __webpack_require__(36);
-	var DEFAULT_FULL_SCHEMA = __webpack_require__(69);
-	var DEFAULT_SAFE_SCHEMA = __webpack_require__(68);
+	var DEFAULT_FULL_SCHEMA = __webpack_require__(68);
+	var DEFAULT_SAFE_SCHEMA = __webpack_require__(67);
 	var _toString = Object.prototype.toString;
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	var CHAR_TAB = 0x09; /* Tab */
@@ -21158,11 +21320,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/// <reference path="../../../typings/tsd.d.ts" />
-	var spawnSync = __webpack_require__(44).spawnSync || __webpack_require__(45);
-	var HttpResponse = __webpack_require__(75);
-	__webpack_require__(76);
-	__webpack_require__(81);
-	var lru = __webpack_require__(82);
+	var spawnSync = __webpack_require__(43).spawnSync || __webpack_require__(44);
+	var HttpResponse = __webpack_require__(76);
+	__webpack_require__(75);
+	__webpack_require__(79);
+	var lru = __webpack_require__(80);
 	var globalCache = lru(50);
 	//Function('', fs.readFileSync(require.resolve('./lib/worker.js'), 'utf8'));
 	function doRequest(method, url, options) {
@@ -21222,7 +21384,7 @@
 	 * Created by kor on 08/05/15.
 	 */
 	/// <reference path="../../typings/tsd.d.ts" />
-	var ts = __webpack_require__(42);
+	var ts = __webpack_require__(41);
 	var tsm = __webpack_require__(72);
 	var pth = __webpack_require__(11);
 	var fs = __webpack_require__(12);
@@ -21570,9 +21732,9 @@
 	};
 	/// <reference path="../../typings/tsd.d.ts" />
 	var tsStruct = __webpack_require__(38);
-	var def = __webpack_require__(21);
+	var def = __webpack_require__(19);
 	var _ = __webpack_require__(47);
-	var khttp = __webpack_require__(83);
+	var khttp = __webpack_require__(85);
 	var FieldWrapper = (function () {
 	    function FieldWrapper(_field, _clazz) {
 	        this._field = _field;
@@ -22623,10 +22785,16 @@
 	    return made;
 	};
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
 /* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = typescript;
+
+/***/ },
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -22902,13 +23070,19 @@
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = typescript;
+	module.exports = child_process;
 
 /***/ },
-/* 43 */
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = _spawn_sync;
+
+/***/ },
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* global define */
@@ -23347,18 +23521,6 @@
 
 
 /***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = child_process;
-
-/***/ },
-/* 45 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = _spawn_sync;
-
-/***/ },
 /* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -23416,7 +23578,7 @@
 
 	module.exports = invariant;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
 /* 47 */
@@ -25029,8 +25191,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
-	var ramlSanitize = __webpack_require__(79);
-	var ramlValidate = __webpack_require__(80);
+	var ramlSanitize = __webpack_require__(81);
+	var ramlValidate = __webpack_require__(82);
 	var REGEXP_MATCH = {
 	    number: '[-+]?\\d+(?:\\.\\d+)?',
 	    integer: '[-+]?\\d+',
@@ -26260,6 +26422,1659 @@
 
 /***/ },
 /* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var xmlutil = __webpack_require__(55);
+	var lru = __webpack_require__(80);
+	var ZSchema = __webpack_require__(78);
+	var ValidationResult = (function () {
+	    function ValidationResult() {
+	    }
+	    return ValidationResult;
+	})();
+	exports.ValidationResult = ValidationResult;
+	var globalCache = lru(400);
+	var useLint = true;
+	var JSONSchemaObject = (function () {
+	    function JSONSchemaObject(schema) {
+	        this.schema = schema;
+	        if (!schema || schema.trim().length == 0 || schema.trim().charAt(0) != '{') {
+	            throw new Error("Invalid JSON schema content");
+	        }
+	        var jsonSchemaObject;
+	        try {
+	            var jsonSchemaObject = JSON.parse(schema);
+	        }
+	        catch (err) {
+	            throw new Error("It is not JSON schema");
+	        }
+	        if (!jsonSchemaObject) {
+	            return;
+	        }
+	        try {
+	            var api = __webpack_require__(104);
+	            jsonSchemaObject = api.v4(jsonSchemaObject);
+	        }
+	        catch (e) {
+	            throw new Error('Can not parse schema' + schema);
+	        }
+	        delete jsonSchemaObject['$schema'];
+	        delete jsonSchemaObject['required'];
+	        this.jsonSchema = jsonSchemaObject;
+	    }
+	    JSONSchemaObject.prototype.getType = function () {
+	        return "source.json";
+	    };
+	    JSONSchemaObject.prototype.validateObject = function (object) {
+	        //TODO Validation of objects
+	        //xmlutil(content);
+	        this.validate(JSON.stringify(object));
+	    };
+	    JSONSchemaObject.prototype.validate = function (content) {
+	        var key = content + this.schema;
+	        var c = globalCache.get(key);
+	        if (c) {
+	            if (c instanceof Error) {
+	                throw c;
+	            }
+	            return;
+	        }
+	        var validator = new ZSchema();
+	        var valid = validator.validate(JSON.parse(content), this.jsonSchema);
+	        var errors = validator.getLastErrors();
+	        if (errors && errors.length > 0) {
+	            var res = new Error("Content is not valid according to schema:" + errors.map(function (x) { return x.message + " " + x.params; }).join(", "));
+	            res.errors = errors;
+	            globalCache.set(key, res);
+	            throw res;
+	        }
+	        globalCache.set(key, 1);
+	    };
+	    return JSONSchemaObject;
+	})();
+	exports.JSONSchemaObject = JSONSchemaObject;
+	var XMLSchemaObject = (function () {
+	    function XMLSchemaObject(schema) {
+	        this.schema = schema;
+	        if (schema.charAt(0) != '<') {
+	            throw new Error("Invalid JSON schema");
+	        }
+	        xmlutil(schema);
+	    }
+	    XMLSchemaObject.prototype.getType = function () {
+	        return "text.xml";
+	    };
+	    XMLSchemaObject.prototype.validate = function (content) {
+	        xmlutil(content);
+	    };
+	    XMLSchemaObject.prototype.validateObject = function (object) {
+	        //TODO Validation of objects
+	        //xmlutil(content);
+	    };
+	    return XMLSchemaObject;
+	})();
+	exports.XMLSchemaObject = XMLSchemaObject;
+	function getJSONSchema(content) {
+	    var rs = useLint ? globalCache.get(content) : false;
+	    if (rs) {
+	        return rs;
+	    }
+	    var res = new JSONSchemaObject(content);
+	    globalCache.set(content, res);
+	    return res;
+	}
+	exports.getJSONSchema = getJSONSchema;
+	function getXMLSchema(content) {
+	    var rs = useLint ? globalCache.get(content) : false;
+	    if (rs) {
+	        return rs;
+	    }
+	    var res = new XMLSchemaObject(content);
+	    if (useLint) {
+	        globalCache.set(content, res);
+	    }
+	}
+	exports.getXMLSchema = getXMLSchema;
+	function createSchema(content) {
+	    var rs = useLint ? globalCache.get(content) : false;
+	    if (rs) {
+	        return rs;
+	    }
+	    try {
+	        var res = new JSONSchemaObject(content);
+	        if (useLint) {
+	            globalCache.set(content, res);
+	        }
+	        return res;
+	    }
+	    catch (e) {
+	        try {
+	            var res = new XMLSchemaObject(content);
+	            if (useLint) {
+	                globalCache.set(content, res);
+	            }
+	            return res;
+	        }
+	        catch (e) {
+	            if (useLint) {
+	                globalCache.set(content, new Error("Can not parse schema"));
+	            }
+	            return null;
+	        }
+	    }
+	}
+	exports.createSchema = createSchema;
+	//# sourceMappingURL=schemaUtil.js.map
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var __extends = this.__extends || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    __.prototype = b.prototype;
+	    d.prototype = new __();
+	};
+	var _ = __webpack_require__(47);
+	var sel = __webpack_require__(84);
+	var Selector = (function () {
+	    function Selector() {
+	    }
+	    Selector.prototype.candidates = function (context) {
+	        return context;
+	    };
+	    Selector.prototype.apply = function (h) {
+	        return this.candidates([h]);
+	    };
+	    return Selector;
+	})();
+	exports.Selector = Selector;
+	var OrMatch = (function (_super) {
+	    __extends(OrMatch, _super);
+	    function OrMatch(left, right) {
+	        _super.call(this);
+	        this.left = left;
+	        this.right = right;
+	    }
+	    OrMatch.prototype.candidates = function (context) {
+	        var l = this.left.candidates(context);
+	        l = l.concat(this.right.candidates(context));
+	        return _.unique(l);
+	    };
+	    return OrMatch;
+	})(Selector);
+	exports.OrMatch = OrMatch;
+	var DotMatch = (function (_super) {
+	    __extends(DotMatch, _super);
+	    function DotMatch(left, right) {
+	        _super.call(this);
+	        this.left = left;
+	        this.right = right;
+	    }
+	    DotMatch.prototype.candidates = function (context) {
+	        var l = this.left.candidates(context);
+	        if (this.left instanceof AnyParentMatch) {
+	            l = this.right.candidates(new AnyChildMatch().candidates(l));
+	            return _.unique(l);
+	        }
+	        if (this.left instanceof ParentMatch) {
+	            l = this.right.candidates(new AnyChildMatch().candidates(l));
+	            return _.unique(l);
+	        }
+	        l = this.right.candidates(l);
+	        return _.unique(l);
+	    };
+	    return DotMatch;
+	})(Selector);
+	exports.DotMatch = DotMatch;
+	function resolveSelector(s, n) {
+	    if (s.type == "or") {
+	        var b = s;
+	        var l = resolveSelector(b.left, n);
+	        var r = resolveSelector(b.right, n);
+	        return new OrMatch(l, r);
+	    }
+	    if (s.type == "dot") {
+	        var b = s;
+	        var l = resolveSelector(b.left, n);
+	        var r = resolveSelector(b.right, n);
+	        return new DotMatch(l, r);
+	    }
+	    if (s.type == 'classLiteral') {
+	        var literal = s;
+	        var tp = n.definition().universe().getType(literal.name);
+	        if (tp == null || tp.isValueType()) {
+	            throw new Error("Referencing unknown type:" + literal.name);
+	        }
+	        return new IdMatch(literal.name);
+	    }
+	    if (s.type == 'parent') {
+	        return new ParentMatch();
+	    }
+	    if (s.type == 'ancestor') {
+	        return new AnyParentMatch();
+	    }
+	    if (s.type == 'descendant') {
+	        return new AnyChildMatch();
+	    }
+	    if (s.type == 'child') {
+	        return new ChildMatch();
+	    }
+	}
+	exports.resolveSelector = resolveSelector;
+	var IdMatch = (function (_super) {
+	    __extends(IdMatch, _super);
+	    function IdMatch(name) {
+	        _super.call(this);
+	        this.name = name;
+	    }
+	    IdMatch.prototype.candidates = function (context) {
+	        var _this = this;
+	        return context.filter(function (x) {
+	            if (!x) {
+	                return false;
+	            }
+	            if (x.definition().name() == _this.name) {
+	                return true;
+	            }
+	            var superTypes = x.definition().allSuperTypes();
+	            if (_.find(superTypes, function (x) { return x.name() == _this.name; })) {
+	                return true;
+	            }
+	            return false;
+	        });
+	    };
+	    return IdMatch;
+	})(Selector);
+	exports.IdMatch = IdMatch;
+	var AnyParentMatch = (function (_super) {
+	    __extends(AnyParentMatch, _super);
+	    function AnyParentMatch() {
+	        _super.apply(this, arguments);
+	    }
+	    AnyParentMatch.prototype.candidates = function (context) {
+	        var res = [];
+	        context.forEach(function (x) {
+	            if (x) {
+	                var z = x.parent();
+	                while (z) {
+	                    res.push(z);
+	                    z = z.parent();
+	                }
+	            }
+	        });
+	        return _.unique(res);
+	    };
+	    return AnyParentMatch;
+	})(Selector);
+	exports.AnyParentMatch = AnyParentMatch;
+	function addChildren(x, r) {
+	    r.push(x);
+	    x.elements().forEach(function (y) { return addChildren(y, r); });
+	}
+	var AnyChildMatch = (function (_super) {
+	    __extends(AnyChildMatch, _super);
+	    function AnyChildMatch() {
+	        _super.apply(this, arguments);
+	    }
+	    AnyChildMatch.prototype.candidates = function (context) {
+	        var res = [];
+	        context.forEach(function (x) {
+	            if (x) {
+	                addChildren(x, res);
+	            }
+	        });
+	        return _.unique(res);
+	    };
+	    return AnyChildMatch;
+	})(Selector);
+	exports.AnyChildMatch = AnyChildMatch;
+	var ParentMatch = (function (_super) {
+	    __extends(ParentMatch, _super);
+	    function ParentMatch() {
+	        _super.apply(this, arguments);
+	    }
+	    ParentMatch.prototype.candidates = function (context) {
+	        return context.map(function (x) { return x.parent(); });
+	    };
+	    return ParentMatch;
+	})(Selector);
+	exports.ParentMatch = ParentMatch;
+	var ChildMatch = (function (_super) {
+	    __extends(ChildMatch, _super);
+	    function ChildMatch() {
+	        _super.apply(this, arguments);
+	    }
+	    ChildMatch.prototype.candidates = function (context) {
+	        var res = [];
+	        context.forEach(function (x) {
+	            if (x) {
+	                res = res.concat(x.elements());
+	            }
+	        });
+	        return res;
+	    };
+	    return ChildMatch;
+	})(Selector);
+	exports.ChildMatch = ChildMatch;
+	function parse(h, path) {
+	    return resolveSelector(sel.parse(path), h);
+	}
+	exports.parse = parse;
+	//# sourceMappingURL=selectorMatch.js.map
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var ramlExpression = __webpack_require__(83);
+	var search = __webpack_require__(26);
+	function validate(str, node) {
+	    var result = ramlExpression.parse(str);
+	    validateNode(result, node);
+	}
+	exports.validate = validate;
+	function validateNode(r, node) {
+	    if (r.type == "unary") {
+	        var u = r;
+	        validateNode(u.exp, node);
+	    }
+	    else if (r.type == 'paren') {
+	        var ex = r;
+	        validateNode(ex.exp, node);
+	    }
+	    else if (r.type == 'string' || r.type == 'number') {
+	    }
+	    else if (r.type == 'ident') {
+	        var ident = r;
+	        var p = search.resolveRamlPointer(node, ident.value);
+	        if (!p) {
+	            throw new Error("Unable to resolve " + ident.value);
+	        }
+	    }
+	    else {
+	        var be = r;
+	        validateNode(be.l, node);
+	        validateNode(be.r, node);
+	    }
+	}
+	//# sourceMappingURL=ramlExpressions.js.map
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var parser = (function () {
+	    "use strict";
+	    /*
+	     * Generated by PEG.js 0.9.0.
+	     *
+	     * http://pegjs.org/
+	     */
+	    function peg$subclass(child, parent) {
+	        function ctor() {
+	            this.constructor = child;
+	        }
+	        ctor.prototype = parent.prototype;
+	        child.prototype = new ctor();
+	    }
+	    function peg$SyntaxError(message, expected, found, location) {
+	        this.message = message;
+	        this.expected = expected;
+	        this.found = found;
+	        this.location = location;
+	        this.name = "SyntaxError";
+	        if (typeof Error.captureStackTrace === "function") {
+	            Error.captureStackTrace(this, peg$SyntaxError);
+	        }
+	    }
+	    peg$subclass(peg$SyntaxError, Error);
+	    function peg$parse(input) {
+	        var options = arguments.length > 1 ? arguments[1] : {}, parser = this, peg$FAILED = {}, peg$startRuleFunctions = { Term: peg$parseTerm }, peg$startRuleFunction = peg$parseTerm, peg$c0 = "|", peg$c1 = { type: "literal", value: "|", description: "\"|\"" }, peg$c2 = function (first, rest) {
+	            return rest ? { "type": "union", "first": first, "rest": rest[3] } : first;
+	        }, peg$c3 = "(", peg$c4 = { type: "literal", value: "(", description: "\"(\"" }, peg$c5 = ")", peg$c6 = { type: "literal", value: ")", description: "\")\"" }, peg$c7 = "[]", peg$c8 = { type: "literal", value: "[]", description: "\"[]\"" }, peg$c9 = function (expr, arr) {
+	            return { "type": "parens", "expr": expr, "arr": arr.length };
+	        }, peg$c10 = "<", peg$c11 = { type: "literal", value: "<", description: "\"<\"" }, peg$c12 = ">", peg$c13 = { type: "literal", value: ">", description: "\">\"" }, peg$c14 = function (first, other) {
+	            return [first].concat(other);
+	        }, peg$c15 = ",", peg$c16 = { type: "literal", value: ",", description: "\",\"" }, peg$c17 = function (r) {
+	            return r;
+	        }, peg$c18 = { type: "other", description: "name" }, peg$c19 = function (r, tp, c) {
+	            return { "type": "name", "params": tp, "value": r.join(""), "arr": (c.length) };
+	        }, peg$c20 = { type: "other", description: "whitespace" }, peg$c21 = /^[ \t\n\r]/, peg$c22 = { type: "class", value: "[ \\t\\n\\r]", description: "[ \\t\\n\\r]" }, peg$c23 = /^[A-Z]/, peg$c24 = { type: "class", value: "[A-Z]", description: "[A-Z]" }, peg$c25 = "_", peg$c26 = { type: "literal", value: "_", description: "\"_\"" }, peg$c27 = "-", peg$c28 = { type: "literal", value: "-", description: "\"-\"" }, peg$c29 = ".", peg$c30 = { type: "literal", value: ".", description: "\".\"" }, peg$c31 = /^[a-z]/, peg$c32 = { type: "class", value: "[a-z]", description: "[a-z]" }, peg$c33 = /^[0-9]/, peg$c34 = { type: "class", value: "[0-9]", description: "[0-9]" }, peg$currPos = 0, peg$savedPos = 0, peg$posDetailsCache = [{ line: 1, column: 1, seenCR: false }], peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
+	        if ("startRule" in options) {
+	            if (!(options.startRule in peg$startRuleFunctions)) {
+	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
+	            }
+	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
+	        }
+	        function text() {
+	            return input.substring(peg$savedPos, peg$currPos);
+	        }
+	        function location() {
+	            return peg$computeLocation(peg$savedPos, peg$currPos);
+	        }
+	        function expected(description) {
+	            throw peg$buildException(null, [{ type: "other", description: description }], input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
+	        }
+	        function error(message) {
+	            throw peg$buildException(message, null, input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
+	        }
+	        function peg$computePosDetails(pos) {
+	            var details = peg$posDetailsCache[pos], p, ch;
+	            if (details) {
+	                return details;
+	            }
+	            else {
+	                p = pos - 1;
+	                while (!peg$posDetailsCache[p]) {
+	                    p--;
+	                }
+	                details = peg$posDetailsCache[p];
+	                details = {
+	                    line: details.line,
+	                    column: details.column,
+	                    seenCR: details.seenCR
+	                };
+	                while (p < pos) {
+	                    ch = input.charAt(p);
+	                    if (ch === "\n") {
+	                        if (!details.seenCR) {
+	                            details.line++;
+	                        }
+	                        details.column = 1;
+	                        details.seenCR = false;
+	                    }
+	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
+	                        details.line++;
+	                        details.column = 1;
+	                        details.seenCR = true;
+	                    }
+	                    else {
+	                        details.column++;
+	                        details.seenCR = false;
+	                    }
+	                    p++;
+	                }
+	                peg$posDetailsCache[pos] = details;
+	                return details;
+	            }
+	        }
+	        function peg$computeLocation(startPos, endPos) {
+	            var startPosDetails = peg$computePosDetails(startPos), endPosDetails = peg$computePosDetails(endPos);
+	            return {
+	                start: {
+	                    offset: startPos,
+	                    line: startPosDetails.line,
+	                    column: startPosDetails.column
+	                },
+	                end: {
+	                    offset: endPos,
+	                    line: endPosDetails.line,
+	                    column: endPosDetails.column
+	                }
+	            };
+	        }
+	        function peg$fail(expected) {
+	            if (peg$currPos < peg$maxFailPos) {
+	                return;
+	            }
+	            if (peg$currPos > peg$maxFailPos) {
+	                peg$maxFailPos = peg$currPos;
+	                peg$maxFailExpected = [];
+	            }
+	            peg$maxFailExpected.push(expected);
+	        }
+	        function peg$buildException(message, expected, found, location) {
+	            function cleanupExpected(expected) {
+	                var i = 1;
+	                expected.sort(function (a, b) {
+	                    if (a.description < b.description) {
+	                        return -1;
+	                    }
+	                    else if (a.description > b.description) {
+	                        return 1;
+	                    }
+	                    else {
+	                        return 0;
+	                    }
+	                });
+	                while (i < expected.length) {
+	                    if (expected[i - 1] === expected[i]) {
+	                        expected.splice(i, 1);
+	                    }
+	                    else {
+	                        i++;
+	                    }
+	                }
+	            }
+	            function buildMessage(expected, found) {
+	                function stringEscape(s) {
+	                    function hex(ch) {
+	                        return ch.charCodeAt(0).toString(16).toUpperCase();
+	                    }
+	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
+	                        return '\\x0' + hex(ch);
+	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
+	                        return '\\x' + hex(ch);
+	                    }).replace(/[\u0100-\u0FFF]/g, function (ch) {
+	                        return '\\u0' + hex(ch);
+	                    }).replace(/[\u1000-\uFFFF]/g, function (ch) {
+	                        return '\\u' + hex(ch);
+	                    });
+	                }
+	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
+	                for (i = 0; i < expected.length; i++) {
+	                    expectedDescs[i] = expected[i].description;
+	                }
+	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
+	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
+	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
+	            }
+	            if (expected !== null) {
+	                cleanupExpected(expected);
+	            }
+	            return new peg$SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, location);
+	        }
+	        function peg$parseTerm() {
+	            var s0, s1, s2, s3, s4, s5, s6, s7;
+	            s0 = peg$currPos;
+	            s1 = peg$parse_();
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseFactor();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$currPos;
+	                    s4 = peg$parse_();
+	                    if (s4 !== peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 124) {
+	                            s5 = peg$c0;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s5 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c1);
+	                            }
+	                        }
+	                        if (s5 !== peg$FAILED) {
+	                            s6 = peg$parse_();
+	                            if (s6 !== peg$FAILED) {
+	                                s7 = peg$parseTerm();
+	                                if (s7 !== peg$FAILED) {
+	                                    s4 = [s4, s5, s6, s7];
+	                                    s3 = s4;
+	                                }
+	                                else {
+	                                    peg$currPos = s3;
+	                                    s3 = peg$FAILED;
+	                                }
+	                            }
+	                            else {
+	                                peg$currPos = s3;
+	                                s3 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s3;
+	                            s3 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s3;
+	                        s3 = peg$FAILED;
+	                    }
+	                    if (s3 === peg$FAILED) {
+	                        s3 = null;
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        peg$savedPos = s0;
+	                        s1 = peg$c2(s2, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseFactor() {
+	            var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 40) {
+	                s1 = peg$c3;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c4);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parse_();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parseTerm();
+	                    if (s3 !== peg$FAILED) {
+	                        s4 = peg$parse_();
+	                        if (s4 !== peg$FAILED) {
+	                            if (input.charCodeAt(peg$currPos) === 41) {
+	                                s5 = peg$c5;
+	                                peg$currPos++;
+	                            }
+	                            else {
+	                                s5 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c6);
+	                                }
+	                            }
+	                            if (s5 !== peg$FAILED) {
+	                                s6 = [];
+	                                s7 = peg$currPos;
+	                                s8 = peg$parse_();
+	                                if (s8 !== peg$FAILED) {
+	                                    if (input.substr(peg$currPos, 2) === peg$c7) {
+	                                        s9 = peg$c7;
+	                                        peg$currPos += 2;
+	                                    }
+	                                    else {
+	                                        s9 = peg$FAILED;
+	                                        if (peg$silentFails === 0) {
+	                                            peg$fail(peg$c8);
+	                                        }
+	                                    }
+	                                    if (s9 !== peg$FAILED) {
+	                                        s8 = [s8, s9];
+	                                        s7 = s8;
+	                                    }
+	                                    else {
+	                                        peg$currPos = s7;
+	                                        s7 = peg$FAILED;
+	                                    }
+	                                }
+	                                else {
+	                                    peg$currPos = s7;
+	                                    s7 = peg$FAILED;
+	                                }
+	                                while (s7 !== peg$FAILED) {
+	                                    s6.push(s7);
+	                                    s7 = peg$currPos;
+	                                    s8 = peg$parse_();
+	                                    if (s8 !== peg$FAILED) {
+	                                        if (input.substr(peg$currPos, 2) === peg$c7) {
+	                                            s9 = peg$c7;
+	                                            peg$currPos += 2;
+	                                        }
+	                                        else {
+	                                            s9 = peg$FAILED;
+	                                            if (peg$silentFails === 0) {
+	                                                peg$fail(peg$c8);
+	                                            }
+	                                        }
+	                                        if (s9 !== peg$FAILED) {
+	                                            s8 = [s8, s9];
+	                                            s7 = s8;
+	                                        }
+	                                        else {
+	                                            peg$currPos = s7;
+	                                            s7 = peg$FAILED;
+	                                        }
+	                                    }
+	                                    else {
+	                                        peg$currPos = s7;
+	                                        s7 = peg$FAILED;
+	                                    }
+	                                }
+	                                if (s6 !== peg$FAILED) {
+	                                    peg$savedPos = s0;
+	                                    s1 = peg$c9(s3, s6);
+	                                    s0 = s1;
+	                                }
+	                                else {
+	                                    peg$currPos = s0;
+	                                    s0 = peg$FAILED;
+	                                }
+	                            }
+	                            else {
+	                                peg$currPos = s0;
+	                                s0 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parseLiteral();
+	            }
+	            return s0;
+	        }
+	        function peg$parseTypeParams() {
+	            var s0, s1, s2, s3, s4;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 60) {
+	                s1 = peg$c10;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c11);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTerm();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = [];
+	                    s4 = peg$parseExtraParam();
+	                    while (s4 !== peg$FAILED) {
+	                        s3.push(s4);
+	                        s4 = peg$parseExtraParam();
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 62) {
+	                            s4 = peg$c12;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s4 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c13);
+	                            }
+	                        }
+	                        if (s4 !== peg$FAILED) {
+	                            peg$savedPos = s0;
+	                            s1 = peg$c14(s2, s3);
+	                            s0 = s1;
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseExtraParam() {
+	            var s0, s1, s2;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 44) {
+	                s1 = peg$c15;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c16);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTerm();
+	                if (s2 !== peg$FAILED) {
+	                    peg$savedPos = s0;
+	                    s1 = peg$c17(s2);
+	                    s0 = s1;
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseLiteral() {
+	            var s0, s1, s2, s3, s4, s5, s6;
+	            peg$silentFails++;
+	            s0 = peg$currPos;
+	            s1 = [];
+	            s2 = peg$parsechar();
+	            if (s2 !== peg$FAILED) {
+	                while (s2 !== peg$FAILED) {
+	                    s1.push(s2);
+	                    s2 = peg$parsechar();
+	                }
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTypeParams();
+	                if (s2 === peg$FAILED) {
+	                    s2 = null;
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = [];
+	                    s4 = peg$currPos;
+	                    s5 = peg$parse_();
+	                    if (s5 !== peg$FAILED) {
+	                        if (input.substr(peg$currPos, 2) === peg$c7) {
+	                            s6 = peg$c7;
+	                            peg$currPos += 2;
+	                        }
+	                        else {
+	                            s6 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c8);
+	                            }
+	                        }
+	                        if (s6 !== peg$FAILED) {
+	                            s5 = [s5, s6];
+	                            s4 = s5;
+	                        }
+	                        else {
+	                            peg$currPos = s4;
+	                            s4 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s4;
+	                        s4 = peg$FAILED;
+	                    }
+	                    while (s4 !== peg$FAILED) {
+	                        s3.push(s4);
+	                        s4 = peg$currPos;
+	                        s5 = peg$parse_();
+	                        if (s5 !== peg$FAILED) {
+	                            if (input.substr(peg$currPos, 2) === peg$c7) {
+	                                s6 = peg$c7;
+	                                peg$currPos += 2;
+	                            }
+	                            else {
+	                                s6 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c8);
+	                                }
+	                            }
+	                            if (s6 !== peg$FAILED) {
+	                                s5 = [s5, s6];
+	                                s4 = s5;
+	                            }
+	                            else {
+	                                peg$currPos = s4;
+	                                s4 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s4;
+	                            s4 = peg$FAILED;
+	                        }
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        peg$savedPos = s0;
+	                        s1 = peg$c19(s1, s2, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            peg$silentFails--;
+	            if (s0 === peg$FAILED) {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c18);
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parse_() {
+	            var s0, s1;
+	            peg$silentFails++;
+	            s0 = [];
+	            if (peg$c21.test(input.charAt(peg$currPos))) {
+	                s1 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c22);
+	                }
+	            }
+	            while (s1 !== peg$FAILED) {
+	                s0.push(s1);
+	                if (peg$c21.test(input.charAt(peg$currPos))) {
+	                    s1 = input.charAt(peg$currPos);
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s1 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c22);
+	                    }
+	                }
+	            }
+	            peg$silentFails--;
+	            if (s0 === peg$FAILED) {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c20);
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parsechar() {
+	            var s0;
+	            if (peg$c23.test(input.charAt(peg$currPos))) {
+	                s0 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s0 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c24);
+	                }
+	            }
+	            if (s0 === peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 95) {
+	                    s0 = peg$c25;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s0 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c26);
+	                    }
+	                }
+	                if (s0 === peg$FAILED) {
+	                    if (input.charCodeAt(peg$currPos) === 45) {
+	                        s0 = peg$c27;
+	                        peg$currPos++;
+	                    }
+	                    else {
+	                        s0 = peg$FAILED;
+	                        if (peg$silentFails === 0) {
+	                            peg$fail(peg$c28);
+	                        }
+	                    }
+	                    if (s0 === peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 46) {
+	                            s0 = peg$c29;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s0 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c30);
+	                            }
+	                        }
+	                        if (s0 === peg$FAILED) {
+	                            if (peg$c31.test(input.charAt(peg$currPos))) {
+	                                s0 = input.charAt(peg$currPos);
+	                                peg$currPos++;
+	                            }
+	                            else {
+	                                s0 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c32);
+	                                }
+	                            }
+	                            if (s0 === peg$FAILED) {
+	                                if (peg$c33.test(input.charAt(peg$currPos))) {
+	                                    s0 = input.charAt(peg$currPos);
+	                                    peg$currPos++;
+	                                }
+	                                else {
+	                                    s0 = peg$FAILED;
+	                                    if (peg$silentFails === 0) {
+	                                        peg$fail(peg$c34);
+	                                    }
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	            return s0;
+	        }
+	        peg$result = peg$startRuleFunction();
+	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
+	            return peg$result;
+	        }
+	        else {
+	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+	                peg$fail({ type: "end", description: "end of input" });
+	            }
+	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null, peg$maxFailPos < input.length ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1) : peg$computeLocation(peg$maxFailPos, peg$maxFailPos));
+	        }
+	    }
+	    return {
+	        SyntaxError: peg$SyntaxError,
+	        parse: peg$parse
+	    };
+	})();
+	module.exports = parser;
+	//# sourceMappingURL=typeExpressionParser.js.map
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var DomParser = __webpack_require__(105);
+	function xmlToJson(xml) {
+	    // Create the return object
+	    var obj = {};
+	    if (xml.nodeType == 1) {
+	        // do attributes
+	        if (xml.attributes.length > 0) {
+	            for (var j = 0; j < xml.attributes.length; j++) {
+	                var attribute = xml.attributes.item(j);
+	                obj["@" + attribute.nodeName] = attribute.nodeValue;
+	            }
+	        }
+	    }
+	    else if (xml.nodeType == 3) {
+	        obj = xml.nodeValue;
+	    }
+	    // do children
+	    if (xml.hasChildNodes()) {
+	        for (var i = 0; i < xml.childNodes.length; i++) {
+	            var item = xml.childNodes.item(i);
+	            var nodeName = item.nodeName;
+	            if (nodeName == undefined) {
+	                continue;
+	            }
+	            if (typeof (obj[nodeName]) == "undefined") {
+	                obj[nodeName] = xmlToJson(item);
+	            }
+	            else {
+	                if (typeof (obj[nodeName].push) == "undefined") {
+	                    var old = obj[nodeName];
+	                    obj[nodeName] = [];
+	                    obj[nodeName].push(old);
+	                }
+	                obj[nodeName].push(xmlToJson(item));
+	            }
+	        }
+	    }
+	    return obj;
+	}
+	;
+	function cleanupText(j) {
+	    for (var p in j) {
+	        if (typeof (j[p]) == "object") {
+	            for (var k in j[p]) {
+	                if (k == '#text') {
+	                    var txt = j[p]['#text'];
+	                    if (typeof (txt) != 'string') {
+	                        txt = txt.join("");
+	                    }
+	                    txt = txt.trim();
+	                    if (txt.length == 0) {
+	                        delete j[p]['#text'];
+	                    }
+	                }
+	            }
+	            cleanupText(j[p]);
+	        }
+	    }
+	    return j;
+	}
+	function cleanupJson(j) {
+	    for (var p in j) {
+	        if (typeof (j[p]) == "object") {
+	            var keys = Object.keys(j[p]);
+	            if (keys.length == 1) {
+	                if (keys[0] == '#text') {
+	                    j[p] = j[p]['#text'];
+	                }
+	            }
+	            cleanupJson(j[p]);
+	        }
+	    }
+	    return j;
+	}
+	function parseXML(value) {
+	    var v = new DomParser.DOMParser();
+	    var parsed = v.parseFromString(value);
+	    return cleanupJson(cleanupText(xmlToJson(parsed)));
+	}
+	module.exports = parseXML;
+	//# sourceMappingURL=xmlutil.js.map
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var RamlWrapper = __webpack_require__(3);
+	function buildWrapperNode(node) {
+	    var nodeClassName = node.definition().name();
+	    var wrapperConstructor = classMap[nodeClassName];
+	    if (!wrapperConstructor) {
+	        var m = node.definition().allSuperTypes();
+	        var wr = null;
+	        for (var i = 0; i < m.length; i++) {
+	            var nm = m[i].name();
+	            wrapperConstructor = classMap[nm];
+	            if (nm == "DataElement") {
+	                wr = nm;
+	                continue;
+	            }
+	            if (nm == "RAMLLanguageElement") {
+	                continue;
+	            }
+	            if (wrapperConstructor) {
+	                break;
+	            }
+	        }
+	        if (!wrapperConstructor) {
+	            wr = nm;
+	        }
+	    }
+	    if (!wrapperConstructor) {
+	        wrapperConstructor = classMap["RAMLLanguageElement"];
+	    }
+	    return wrapperConstructor(node);
+	}
+	exports.buildWrapperNode = buildWrapperNode;
+	var classMap = {
+	    "AnnotationRef": function (x) {
+	        return new RamlWrapper.AnnotationRefImpl(x);
+	    },
+	    "AnnotationTarget": function (x) {
+	        return new RamlWrapper.AnnotationTargetImpl(x);
+	    },
+	    "AnnotationType": function (x) {
+	        return new RamlWrapper.AnnotationTypeImpl(x);
+	    },
+	    "Api": function (x) {
+	        return new RamlWrapper.ApiImpl(x);
+	    },
+	    "ApiDescription": function (x) {
+	        return new RamlWrapper.ApiDescriptionImpl(x);
+	    },
+	    "ArrayField": function (x) {
+	        return new RamlWrapper.ArrayFieldImpl(x);
+	    },
+	    "Basic": function (x) {
+	        return new RamlWrapper.BasicImpl(x);
+	    },
+	    "BooleanElement": function (x) {
+	        return new RamlWrapper.BooleanElementImpl(x);
+	    },
+	    "BooleanType": function (x) {
+	        return new RamlWrapper.BooleanTypeImpl(x);
+	    },
+	    "CallbackAPIDescription": function (x) {
+	        return new RamlWrapper.CallbackAPIDescriptionImpl(x);
+	    },
+	    "ContentType": function (x) {
+	        return new RamlWrapper.ContentTypeImpl(x);
+	    },
+	    "Custom": function (x) {
+	        return new RamlWrapper.CustomImpl(x);
+	    },
+	    "DataElement": function (x) {
+	        return new RamlWrapper.DataElementImpl(x);
+	    },
+	    "DataElementRef": function (x) {
+	        return new RamlWrapper.DataElementRefImpl(x);
+	    },
+	    "DateElement": function (x) {
+	        return new RamlWrapper.DateElementImpl(x);
+	    },
+	    "DateFormatSpec": function (x) {
+	        return new RamlWrapper.DateFormatSpecImpl(x);
+	    },
+	    "Digest": function (x) {
+	        return new RamlWrapper.DigestImpl(x);
+	    },
+	    "DocumentationItem": function (x) {
+	        return new RamlWrapper.DocumentationItemImpl(x);
+	    },
+	    "ExampleSpec": function (x) {
+	        return new RamlWrapper.ExampleSpecImpl(x);
+	    },
+	    "ExampleString": function (x) {
+	        return new RamlWrapper.ExampleStringImpl(x);
+	    },
+	    "Extension": function (x) {
+	        return new RamlWrapper.ExtensionImpl(x);
+	    },
+	    "FileParameter": function (x) {
+	        return new RamlWrapper.FileParameterImpl(x);
+	    },
+	    "FixedUri": function (x) {
+	        return new RamlWrapper.FixedUriImpl(x);
+	    },
+	    "FullUriTemplate": function (x) {
+	        return new RamlWrapper.FullUriTemplateImpl(x);
+	    },
+	    "FunctionalInterface": function (x) {
+	        return new RamlWrapper.FunctionalInterfaceImpl(x);
+	    },
+	    "GlobalSchema": function (x) {
+	        return new RamlWrapper.GlobalSchemaImpl(x);
+	    },
+	    "HasNormalParameters": function (x) {
+	        return new RamlWrapper.HasNormalParametersImpl(x);
+	    },
+	    "ImportDeclaration": function (x) {
+	        return new RamlWrapper.ImportDeclarationImpl(x);
+	    },
+	    "IntegerElement": function (x) {
+	        return new RamlWrapper.IntegerElementImpl(x);
+	    },
+	    "JSonSchemaString": function (x) {
+	        return new RamlWrapper.JSonSchemaStringImpl(x);
+	    },
+	    "Library": function (x) {
+	        return new RamlWrapper.LibraryImpl(x);
+	    },
+	    "LocationKind": function (x) {
+	        return new RamlWrapper.LocationKindImpl(x);
+	    },
+	    "MarkdownString": function (x) {
+	        return new RamlWrapper.MarkdownStringImpl(x);
+	    },
+	    "Method": function (x) {
+	        return new RamlWrapper.MethodImpl(x);
+	    },
+	    "MethodBase": function (x) {
+	        return new RamlWrapper.MethodBaseImpl(x);
+	    },
+	    "MimeType": function (x) {
+	        return new RamlWrapper.MimeTypeImpl(x);
+	    },
+	    "ModelLocation": function (x) {
+	        return new RamlWrapper.ModelLocationImpl(x);
+	    },
+	    "NumberElement": function (x) {
+	        return new RamlWrapper.NumberElementImpl(x);
+	    },
+	    "NumberType": function (x) {
+	        return new RamlWrapper.NumberTypeImpl(x);
+	    },
+	    "OAuth1SecuritySchemeSettings": function (x) {
+	        return new RamlWrapper.OAuth1SecuritySchemeSettingsImpl(x);
+	    },
+	    "OAuth2SecuritySchemeSettings": function (x) {
+	        return new RamlWrapper.OAuth2SecuritySchemeSettingsImpl(x);
+	    },
+	    "OLibrary": function (x) {
+	        return new RamlWrapper.OLibraryImpl(x);
+	    },
+	    "Oath1": function (x) {
+	        return new RamlWrapper.Oath1Impl(x);
+	    },
+	    "Oath2": function (x) {
+	        return new RamlWrapper.Oath2Impl(x);
+	    },
+	    "ObjectField": function (x) {
+	        return new RamlWrapper.ObjectFieldImpl(x);
+	    },
+	    "Overlay": function (x) {
+	        return new RamlWrapper.OverlayImpl(x);
+	    },
+	    "PassThrough": function (x) {
+	        return new RamlWrapper.PassThroughImpl(x);
+	    },
+	    "PassThroughSettings": function (x) {
+	        return new RamlWrapper.PassThroughSettingsImpl(x);
+	    },
+	    "RAMLExpression": function (x) {
+	        return new RamlWrapper.RAMLExpressionImpl(x);
+	    },
+	    "RAMLLanguageElement": function (x) {
+	        return new RamlWrapper.RAMLLanguageElementImpl(x);
+	    },
+	    "RAMLPointer": function (x) {
+	        return new RamlWrapper.RAMLPointerImpl(x);
+	    },
+	    "RAMLPointerElement": function (x) {
+	        return new RamlWrapper.RAMLPointerElementImpl(x);
+	    },
+	    "RAMLProject": function (x) {
+	        return new RamlWrapper.RAMLProjectImpl(x);
+	    },
+	    "RAMLSelector": function (x) {
+	        return new RamlWrapper.RAMLSelectorImpl(x);
+	    },
+	    "RAMLSimpleElement": function (x) {
+	        return new RamlWrapper.RAMLSimpleElementImpl(x);
+	    },
+	    "Reference": function (x) {
+	        return new RamlWrapper.ReferenceImpl(x);
+	    },
+	    "RelativeUri": function (x) {
+	        return new RamlWrapper.RelativeUriImpl(x);
+	    },
+	    "Resource": function (x) {
+	        return new RamlWrapper.ResourceImpl(x);
+	    },
+	    "ResourceBase": function (x) {
+	        return new RamlWrapper.ResourceBaseImpl(x);
+	    },
+	    "ResourceType": function (x) {
+	        return new RamlWrapper.ResourceTypeImpl(x);
+	    },
+	    "ResourceTypeRef": function (x) {
+	        return new RamlWrapper.ResourceTypeRefImpl(x);
+	    },
+	    "Response": function (x) {
+	        return new RamlWrapper.ResponseImpl(x);
+	    },
+	    "SchemaElement": function (x) {
+	        return new RamlWrapper.SchemaElementImpl(x);
+	    },
+	    "SchemaString": function (x) {
+	        return new RamlWrapper.SchemaStringImpl(x);
+	    },
+	    "ScriptHookElement": function (x) {
+	        return new RamlWrapper.ScriptHookElementImpl(x);
+	    },
+	    "ScriptSpec": function (x) {
+	        return new RamlWrapper.ScriptSpecImpl(x);
+	    },
+	    "ScriptingHook": function (x) {
+	        return new RamlWrapper.ScriptingHookImpl(x);
+	    },
+	    "SecuritySchema": function (x) {
+	        return new RamlWrapper.SecuritySchemaImpl(x);
+	    },
+	    "SecuritySchemaHookScript": function (x) {
+	        return new RamlWrapper.SecuritySchemaHookScriptImpl(x);
+	    },
+	    "SecuritySchemaPart": function (x) {
+	        return new RamlWrapper.SecuritySchemaPartImpl(x);
+	    },
+	    "SecuritySchemaRef": function (x) {
+	        return new RamlWrapper.SecuritySchemaRefImpl(x);
+	    },
+	    "SecuritySchemaSettings": function (x) {
+	        return new RamlWrapper.SecuritySchemaSettingsImpl(x);
+	    },
+	    "SecuritySchemaType": function (x) {
+	        return new RamlWrapper.SecuritySchemaTypeImpl(x);
+	    },
+	    "StatusCode": function (x) {
+	        return new RamlWrapper.StatusCodeImpl(x);
+	    },
+	    "StrElement": function (x) {
+	        return new RamlWrapper.StrElementImpl(x);
+	    },
+	    "StringType": function (x) {
+	        return new RamlWrapper.StringTypeImpl(x);
+	    },
+	    "Trait": function (x) {
+	        return new RamlWrapper.TraitImpl(x);
+	    },
+	    "TraitRef": function (x) {
+	        return new RamlWrapper.TraitRefImpl(x);
+	    },
+	    "UnionField": function (x) {
+	        return new RamlWrapper.UnionFieldImpl(x);
+	    },
+	    "UriTemplate": function (x) {
+	        return new RamlWrapper.UriTemplateImpl(x);
+	    },
+	    "ValidityExpression": function (x) {
+	        return new RamlWrapper.ValidityExpressionImpl(x);
+	    },
+	    "ValueElement": function (x) {
+	        return new RamlWrapper.ValueElementImpl(x);
+	    },
+	    "ValueType": function (x) {
+	        return new RamlWrapper.ValueTypeImpl(x);
+	    },
+	    "XMLInfo": function (x) {
+	        return new RamlWrapper.XMLInfoImpl(x);
+	    },
+	    "XMLSchemaString": function (x) {
+	        return new RamlWrapper.XMLSchemaStringImpl(x);
+	    },
+	    "pointer": function (x) {
+	        return new RamlWrapper.pointerImpl(x);
+	    },
+	    "ramlexpression": function (x) {
+	        return new RamlWrapper.ramlexpressionImpl(x);
+	    }
+	};
+	//# sourceMappingURL=raml003factory.js.map
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var RamlWrapper = __webpack_require__(14);
+	function buildWrapperNode(node) {
+	    var nodeClassName = node.definition().name();
+	    var wrapperConstructor = classMap[nodeClassName];
+	    if (!wrapperConstructor) {
+	        var m = node.definition().allSuperTypes();
+	        var wr = null;
+	        for (var i = 0; i < m.length; i++) {
+	            var nm = m[i].name();
+	            wrapperConstructor = classMap[nm];
+	            if (nm == "DataElement") {
+	                wr = nm;
+	                continue;
+	            }
+	            if (nm == "RAMLLanguageElement") {
+	                continue;
+	            }
+	            if (wrapperConstructor) {
+	                break;
+	            }
+	        }
+	        if (!wrapperConstructor) {
+	            wr = nm;
+	        }
+	    }
+	    if (!wrapperConstructor) {
+	        wrapperConstructor = classMap["RAMLLanguageElement"];
+	    }
+	    return wrapperConstructor(node);
+	}
+	exports.buildWrapperNode = buildWrapperNode;
+	var classMap = {
+	    "Api": function (x) {
+	        return new RamlWrapper.ApiImpl(x);
+	    },
+	    "BodyLike": function (x) {
+	        return new RamlWrapper.BodyLikeImpl(x);
+	    },
+	    "BooleanElement": function (x) {
+	        return new RamlWrapper.BooleanElementImpl(x);
+	    },
+	    "BooleanType": function (x) {
+	        return new RamlWrapper.BooleanTypeImpl(x);
+	    },
+	    "DateElement": function (x) {
+	        return new RamlWrapper.DateElementImpl(x);
+	    },
+	    "DocumentationItem": function (x) {
+	        return new RamlWrapper.DocumentationItemImpl(x);
+	    },
+	    "ExampleString": function (x) {
+	        return new RamlWrapper.ExampleStringImpl(x);
+	    },
+	    "FileElement": function (x) {
+	        return new RamlWrapper.FileElementImpl(x);
+	    },
+	    "FixedUri": function (x) {
+	        return new RamlWrapper.FixedUriImpl(x);
+	    },
+	    "FullUriTemplate": function (x) {
+	        return new RamlWrapper.FullUriTemplateImpl(x);
+	    },
+	    "GlobalSchema": function (x) {
+	        return new RamlWrapper.GlobalSchemaImpl(x);
+	    },
+	    "HasNormalParameters": function (x) {
+	        return new RamlWrapper.HasNormalParametersImpl(x);
+	    },
+	    "IntegerElement": function (x) {
+	        return new RamlWrapper.IntegerElementImpl(x);
+	    },
+	    "JSONBody": function (x) {
+	        return new RamlWrapper.JSONBodyImpl(x);
+	    },
+	    "JSONExample": function (x) {
+	        return new RamlWrapper.JSONExampleImpl(x);
+	    },
+	    "JSonSchemaString": function (x) {
+	        return new RamlWrapper.JSonSchemaStringImpl(x);
+	    },
+	    "MarkdownString": function (x) {
+	        return new RamlWrapper.MarkdownStringImpl(x);
+	    },
+	    "Method": function (x) {
+	        return new RamlWrapper.MethodImpl(x);
+	    },
+	    "MethodBase": function (x) {
+	        return new RamlWrapper.MethodBaseImpl(x);
+	    },
+	    "MimeType": function (x) {
+	        return new RamlWrapper.MimeTypeImpl(x);
+	    },
+	    "NumberElement": function (x) {
+	        return new RamlWrapper.NumberElementImpl(x);
+	    },
+	    "NumberType": function (x) {
+	        return new RamlWrapper.NumberTypeImpl(x);
+	    },
+	    "OAuth1SecuritySchemeSettings": function (x) {
+	        return new RamlWrapper.OAuth1SecuritySchemeSettingsImpl(x);
+	    },
+	    "OAuth2SecuritySchemeSettings": function (x) {
+	        return new RamlWrapper.OAuth2SecuritySchemeSettingsImpl(x);
+	    },
+	    "Parameter": function (x) {
+	        return new RamlWrapper.ParameterImpl(x);
+	    },
+	    "ParameterLocation": function (x) {
+	        return new RamlWrapper.ParameterLocationImpl(x);
+	    },
+	    "RAMLLanguageElement": function (x) {
+	        return new RamlWrapper.RAMLLanguageElementImpl(x);
+	    },
+	    "RAMLSimpleElement": function (x) {
+	        return new RamlWrapper.RAMLSimpleElementImpl(x);
+	    },
+	    "Reference": function (x) {
+	        return new RamlWrapper.ReferenceImpl(x);
+	    },
+	    "RelativeUri": function (x) {
+	        return new RamlWrapper.RelativeUriImpl(x);
+	    },
+	    "Resource": function (x) {
+	        return new RamlWrapper.ResourceImpl(x);
+	    },
+	    "ResourceType": function (x) {
+	        return new RamlWrapper.ResourceTypeImpl(x);
+	    },
+	    "ResourceTypeRef": function (x) {
+	        return new RamlWrapper.ResourceTypeRefImpl(x);
+	    },
+	    "Response": function (x) {
+	        return new RamlWrapper.ResponseImpl(x);
+	    },
+	    "SchemaString": function (x) {
+	        return new RamlWrapper.SchemaStringImpl(x);
+	    },
+	    "SecuritySchema": function (x) {
+	        return new RamlWrapper.SecuritySchemaImpl(x);
+	    },
+	    "SecuritySchemaPart": function (x) {
+	        return new RamlWrapper.SecuritySchemaPartImpl(x);
+	    },
+	    "SecuritySchemaRef": function (x) {
+	        return new RamlWrapper.SecuritySchemaRefImpl(x);
+	    },
+	    "SecuritySchemaSettings": function (x) {
+	        return new RamlWrapper.SecuritySchemaSettingsImpl(x);
+	    },
+	    "StatusCode": function (x) {
+	        return new RamlWrapper.StatusCodeImpl(x);
+	    },
+	    "StrElement": function (x) {
+	        return new RamlWrapper.StrElementImpl(x);
+	    },
+	    "StringType": function (x) {
+	        return new RamlWrapper.StringTypeImpl(x);
+	    },
+	    "Trait": function (x) {
+	        return new RamlWrapper.TraitImpl(x);
+	    },
+	    "TraitRef": function (x) {
+	        return new RamlWrapper.TraitRefImpl(x);
+	    },
+	    "UriTemplate": function (x) {
+	        return new RamlWrapper.UriTemplateImpl(x);
+	    },
+	    "ValueType": function (x) {
+	        return new RamlWrapper.ValueTypeImpl(x);
+	    },
+	    "XMLBody": function (x) {
+	        return new RamlWrapper.XMLBodyImpl(x);
+	    },
+	    "XMLExample": function (x) {
+	        return new RamlWrapper.XMLExampleImpl(x);
+	    },
+	    "XMLSchemaString": function (x) {
+	        return new RamlWrapper.XMLSchemaStringImpl(x);
+	    }
+	};
+	//# sourceMappingURL=raml08factory.js.map
+
+/***/ },
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = [
@@ -29104,6 +30919,36 @@
 								"name": "MetaModel.hide",
 								"arguments": []
 							}
+						],
+						"displayName": [
+							{
+								"name": "MetaModel.description",
+								"arguments": [
+									"An alternate, human-friendly name for the security scheme part"
+								]
+							}
+						],
+						"description": [
+							{
+								"name": "MetaModel.description",
+								"arguments": [
+									"A longer, human-friendly description of the security scheme part"
+								]
+							},
+							{
+								"name": "MetaModel.valueDescription",
+								"arguments": [
+									"Markdown string"
+								]
+							}
+						],
+						"annotations": [
+							{
+								"name": "MetaModel.description",
+								"arguments": [
+									"Annotations to be applied to this security scheme part. Annotations are any property whose key begins with \"(\" and ends with \")\" and whose name (the part between the beginning and ending parentheses) is a declared annotation name. See [[raml-10-spec-annotations|the section on annotations]]."
+								]
+							}
 						]
 					}
 				},
@@ -29809,6 +31654,10 @@
 									"arguments": [
 										""
 									]
+								},
+								{
+									"name": "MetaModel.hide",
+									"arguments": []
 								}
 							],
 							"valueConstraint": null,
@@ -29903,7 +31752,7 @@
 								{
 									"name": "MetaModel.description",
 									"arguments": [
-										"The describedBy property MAY be used to document  response codes, HTTP headers or provide custom documentation.\nAs a best practice, even for standard security schemes, API designers SHOULD describe the security schemes' required properties (such as headers, URI parameters, and so on).\nThe only required item in the security scheme is the description, which completes the security scheme definition for an API."
+										"A description of the request components related to Security that are determined by the scheme: the headers, query parameters or responses. As a best practice, even for standard security schemes, API designers SHOULD describe these properties of security schemes.\nIncluding the security scheme description completes an API documentation."
 									]
 								}
 							],
@@ -30827,7 +32676,7 @@
 								{
 									"name": "MetaModel.valueRestriction",
 									"arguments": [
-										"_.find(relativeUri.templateArguments(),$value.name)",
+										"_.find(<br>&nbsp;&nbsp;relativeUri.templateArguments(),<br>&nbsp;&nbsp;$value.name)",
 										"Uri parameter names should match to template names in relative uri"
 									]
 								},
@@ -32131,7 +33980,7 @@
 								{
 									"name": "MetaModel.valueDescription",
 									"arguments": [
-										"One or more names from the list of Target Names in the [[raml-10-spec-target-locations-table|Target Locations table]]  below. "
+										"An array of names (or a single name) from the list of Target Names in the [[raml-10-spec-target-locations-table|Target Locations table]]  below. "
 									]
 								}
 							],
@@ -32650,6 +34499,20 @@
 							"optional": false
 						},
 						{
+							"name": "xml",
+							"type": {
+								"typeName": "XMLInfo",
+								"nameSpace": "",
+								"basicName": "XMLInfo",
+								"typeKind": 0,
+								"typeArguments": [],
+								"modulePath": "c:\\GIT-repos\\raml-labs\\src\\raml1\\spec-1.0\\datamodel.ts"
+							},
+							"annotations": [],
+							"valueConstraint": null,
+							"optional": false
+						},
+						{
 							"name": "facets",
 							"type": {
 								"base": {
@@ -33080,7 +34943,7 @@
 								{
 									"name": "MetaModel.valueDescription",
 									"arguments": [
-										"`Property[]`"
+										"An object whose properties map facets names to their types."
 									]
 								}
 							],
@@ -33112,8 +34975,98 @@
 									"arguments": [
 										"Enumeration of possible values for this primitive type. Cannot be used with the file type."
 									]
+								},
+								{
+									"name": "MetaModel.valueDescription",
+									"arguments": [
+										"Array containing string representations of possible values, or a single string if there is only one possible value."
+									]
 								}
 							],
+							"valueConstraint": null,
+							"optional": false
+						}
+					],
+					"isInterface": false,
+					"annotations": [],
+					"extends": [],
+					"moduleName": null,
+					"annotationOverridings": {}
+				},
+				{
+					"name": "XMLInfo",
+					"methods": [],
+					"typeParameters": [],
+					"typeParameterConstraint": [],
+					"implements": [],
+					"fields": [
+						{
+							"name": "name",
+							"type": {
+								"typeName": "string",
+								"nameSpace": "",
+								"basicName": "string",
+								"typeKind": 0,
+								"typeArguments": [],
+								"modulePath": null
+							},
+							"annotations": [],
+							"valueConstraint": null,
+							"optional": false
+						},
+						{
+							"name": "namespace",
+							"type": {
+								"typeName": "string",
+								"nameSpace": "",
+								"basicName": "string",
+								"typeKind": 0,
+								"typeArguments": [],
+								"modulePath": null
+							},
+							"annotations": [],
+							"valueConstraint": null,
+							"optional": false
+						},
+						{
+							"name": "prefix",
+							"type": {
+								"typeName": "string",
+								"nameSpace": "",
+								"basicName": "string",
+								"typeKind": 0,
+								"typeArguments": [],
+								"modulePath": null
+							},
+							"annotations": [],
+							"valueConstraint": null,
+							"optional": false
+						},
+						{
+							"name": "attribute",
+							"type": {
+								"typeName": "boolean",
+								"nameSpace": "",
+								"basicName": "boolean",
+								"typeKind": 0,
+								"typeArguments": [],
+								"modulePath": null
+							},
+							"annotations": [],
+							"valueConstraint": null,
+							"optional": false
+						},
+						{
+							"name": "wrapped",
+							"type": {
+								"typeName": "boolean",
+								"nameSpace": "",
+								"basicName": "boolean",
+								"typeKind": 0,
+								"typeArguments": [],
+								"modulePath": null
+							},
+							"annotations": [],
 							"valueConstraint": null,
 							"optional": false
 						}
@@ -33178,7 +35131,20 @@
 								"typeArguments": [],
 								"modulePath": "c:\\GIT-repos\\raml-labs\\src\\raml1\\spec-1.0\\datamodel.ts"
 							},
-							"annotations": [],
+							"annotations": [
+								{
+									"name": "MetaModel.description",
+									"arguments": [
+										"Array component type."
+									]
+								},
+								{
+									"name": "MetaModel.valueDescription",
+									"arguments": [
+										"Inline type declaration or type name."
+									]
+								}
+							],
 							"valueConstraint": null,
 							"optional": false
 						},
@@ -33512,7 +35478,7 @@
 								{
 									"name": "MetaModel.valueDescription",
 									"arguments": [
-										""
+										"Inline type declaration or typename"
 									]
 								}
 							],
@@ -33548,7 +35514,7 @@
 								{
 									"name": "MetaModel.valueDescription",
 									"arguments": [
-										""
+										"An object whose properties map regular expressions (which are regarded as defining ranges for property names) to types of properties expressed as Inline type declaration or typename."
 									]
 								}
 							],
@@ -33645,16 +35611,7 @@
 						}
 					],
 					"moduleName": null,
-					"annotationOverridings": {
-						"facets": [
-							{
-								"name": "MetaModel.hide",
-								"arguments": [
-									false
-								]
-							}
-						]
-					}
+					"annotationOverridings": {}
 				},
 				{
 					"name": "StrElement",
@@ -35462,7 +37419,7 @@
 	]
 
 /***/ },
-/* 52 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = [
@@ -39874,1738 +41831,24 @@
 	]
 
 /***/ },
-/* 53 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = null
 
 /***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var xmlutil = __webpack_require__(58);
-	var lru = __webpack_require__(82);
-	var ZSchema = __webpack_require__(78);
-	var ValidationResult = (function () {
-	    function ValidationResult() {
-	    }
-	    return ValidationResult;
-	})();
-	exports.ValidationResult = ValidationResult;
-	var globalCache = lru(400);
-	var useLint = true;
-	var JSONSchemaObject = (function () {
-	    function JSONSchemaObject(schema) {
-	        this.schema = schema;
-	        if (!schema || schema.trim().length == 0 || schema.trim().charAt(0) != '{') {
-	            throw new Error("Invalid JSON schema content");
-	        }
-	        var jsonSchemaObject;
-	        try {
-	            var jsonSchemaObject = JSON.parse(schema);
-	        }
-	        catch (err) {
-	            throw new Error("It is not JSON schema");
-	        }
-	        if (!jsonSchemaObject) {
-	            return;
-	        }
-	        try {
-	            var api = __webpack_require__(104);
-	            jsonSchemaObject = api.v4(jsonSchemaObject);
-	        }
-	        catch (e) {
-	            throw new Error('Can not parse schema' + schema);
-	        }
-	        delete jsonSchemaObject['$schema'];
-	        delete jsonSchemaObject['required'];
-	        this.jsonSchema = jsonSchemaObject;
-	    }
-	    JSONSchemaObject.prototype.getType = function () {
-	        return "source.json";
-	    };
-	    JSONSchemaObject.prototype.validateObject = function (object) {
-	        //TODO Validation of objects
-	        //xmlutil(content);
-	        this.validate(JSON.stringify(object));
-	    };
-	    JSONSchemaObject.prototype.validate = function (content) {
-	        var key = content + this.schema;
-	        var c = globalCache.get(key);
-	        if (c) {
-	            if (c instanceof Error) {
-	                throw c;
-	            }
-	            return;
-	        }
-	        var validator = new ZSchema();
-	        var valid = validator.validate(JSON.parse(content), this.jsonSchema);
-	        var errors = validator.getLastErrors();
-	        if (errors && errors.length > 0) {
-	            var res = new Error("Content is not valid according to schema:" + errors.map(function (x) { return x.message + " " + x.params; }).join(", "));
-	            res.errors = errors;
-	            globalCache.set(key, res);
-	            throw res;
-	        }
-	        globalCache.set(key, 1);
-	    };
-	    return JSONSchemaObject;
-	})();
-	exports.JSONSchemaObject = JSONSchemaObject;
-	var XMLSchemaObject = (function () {
-	    function XMLSchemaObject(schema) {
-	        this.schema = schema;
-	        if (schema.charAt(0) != '<') {
-	            throw new Error("Invalid JSON schema");
-	        }
-	        xmlutil(schema);
-	    }
-	    XMLSchemaObject.prototype.getType = function () {
-	        return "text.xml";
-	    };
-	    XMLSchemaObject.prototype.validate = function (content) {
-	        xmlutil(content);
-	    };
-	    XMLSchemaObject.prototype.validateObject = function (object) {
-	        //TODO Validation of objects
-	        //xmlutil(content);
-	    };
-	    return XMLSchemaObject;
-	})();
-	exports.XMLSchemaObject = XMLSchemaObject;
-	function getJSONSchema(content) {
-	    var rs = useLint ? globalCache.get(content) : false;
-	    if (rs) {
-	        return rs;
-	    }
-	    var res = new JSONSchemaObject(content);
-	    globalCache.set(content, res);
-	    return res;
-	}
-	exports.getJSONSchema = getJSONSchema;
-	function getXMLSchema(content) {
-	    var rs = useLint ? globalCache.get(content) : false;
-	    if (rs) {
-	        return rs;
-	    }
-	    var res = new XMLSchemaObject(content);
-	    if (useLint) {
-	        globalCache.set(content, res);
-	    }
-	}
-	exports.getXMLSchema = getXMLSchema;
-	function createSchema(content) {
-	    var rs = useLint ? globalCache.get(content) : false;
-	    if (rs) {
-	        return rs;
-	    }
-	    try {
-	        var res = new JSONSchemaObject(content);
-	        if (useLint) {
-	            globalCache.set(content, res);
-	        }
-	        return res;
-	    }
-	    catch (e) {
-	        try {
-	            var res = new XMLSchemaObject(content);
-	            if (useLint) {
-	                globalCache.set(content, res);
-	            }
-	            return res;
-	        }
-	        catch (e) {
-	            if (useLint) {
-	                globalCache.set(content, new Error("Can not parse schema"));
-	            }
-	            return null;
-	        }
-	    }
-	}
-	exports.createSchema = createSchema;
-	//# sourceMappingURL=schemaUtil.js.map
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var __extends = this.__extends || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    __.prototype = b.prototype;
-	    d.prototype = new __();
-	};
-	var _ = __webpack_require__(47);
-	var sel = __webpack_require__(84);
-	var Selector = (function () {
-	    function Selector() {
-	    }
-	    Selector.prototype.candidates = function (context) {
-	        return context;
-	    };
-	    Selector.prototype.apply = function (h) {
-	        return this.candidates([h]);
-	    };
-	    return Selector;
-	})();
-	exports.Selector = Selector;
-	var OrMatch = (function (_super) {
-	    __extends(OrMatch, _super);
-	    function OrMatch(left, right) {
-	        _super.call(this);
-	        this.left = left;
-	        this.right = right;
-	    }
-	    OrMatch.prototype.candidates = function (context) {
-	        var l = this.left.candidates(context);
-	        l = l.concat(this.right.candidates(context));
-	        return _.unique(l);
-	    };
-	    return OrMatch;
-	})(Selector);
-	exports.OrMatch = OrMatch;
-	var DotMatch = (function (_super) {
-	    __extends(DotMatch, _super);
-	    function DotMatch(left, right) {
-	        _super.call(this);
-	        this.left = left;
-	        this.right = right;
-	    }
-	    DotMatch.prototype.candidates = function (context) {
-	        var l = this.left.candidates(context);
-	        if (this.left instanceof AnyParentMatch) {
-	            l = this.right.candidates(new AnyChildMatch().candidates(l));
-	            return _.unique(l);
-	        }
-	        if (this.left instanceof ParentMatch) {
-	            l = this.right.candidates(new AnyChildMatch().candidates(l));
-	            return _.unique(l);
-	        }
-	        l = this.right.candidates(l);
-	        return _.unique(l);
-	    };
-	    return DotMatch;
-	})(Selector);
-	exports.DotMatch = DotMatch;
-	function resolveSelector(s, n) {
-	    if (s.type == "or") {
-	        var b = s;
-	        var l = resolveSelector(b.left, n);
-	        var r = resolveSelector(b.right, n);
-	        return new OrMatch(l, r);
-	    }
-	    if (s.type == "dot") {
-	        var b = s;
-	        var l = resolveSelector(b.left, n);
-	        var r = resolveSelector(b.right, n);
-	        return new DotMatch(l, r);
-	    }
-	    if (s.type == 'classLiteral') {
-	        var literal = s;
-	        var tp = n.definition().universe().getType(literal.name);
-	        if (tp == null || tp.isValueType()) {
-	            throw new Error("Referencing unknown type:" + literal.name);
-	        }
-	        return new IdMatch(literal.name);
-	    }
-	    if (s.type == 'parent') {
-	        return new ParentMatch();
-	    }
-	    if (s.type == 'ancestor') {
-	        return new AnyParentMatch();
-	    }
-	    if (s.type == 'descendant') {
-	        return new AnyChildMatch();
-	    }
-	    if (s.type == 'child') {
-	        return new ChildMatch();
-	    }
-	}
-	exports.resolveSelector = resolveSelector;
-	var IdMatch = (function (_super) {
-	    __extends(IdMatch, _super);
-	    function IdMatch(name) {
-	        _super.call(this);
-	        this.name = name;
-	    }
-	    IdMatch.prototype.candidates = function (context) {
-	        var _this = this;
-	        return context.filter(function (x) {
-	            if (!x) {
-	                return false;
-	            }
-	            if (x.definition().name() == _this.name) {
-	                return true;
-	            }
-	            var superTypes = x.definition().allSuperTypes();
-	            if (_.find(superTypes, function (x) { return x.name() == _this.name; })) {
-	                return true;
-	            }
-	            return false;
-	        });
-	    };
-	    return IdMatch;
-	})(Selector);
-	exports.IdMatch = IdMatch;
-	var AnyParentMatch = (function (_super) {
-	    __extends(AnyParentMatch, _super);
-	    function AnyParentMatch() {
-	        _super.apply(this, arguments);
-	    }
-	    AnyParentMatch.prototype.candidates = function (context) {
-	        var res = [];
-	        context.forEach(function (x) {
-	            if (x) {
-	                var z = x.parent();
-	                while (z) {
-	                    res.push(z);
-	                    z = z.parent();
-	                }
-	            }
-	        });
-	        return _.unique(res);
-	    };
-	    return AnyParentMatch;
-	})(Selector);
-	exports.AnyParentMatch = AnyParentMatch;
-	function addChildren(x, r) {
-	    r.push(x);
-	    x.elements().forEach(function (y) { return addChildren(y, r); });
-	}
-	var AnyChildMatch = (function (_super) {
-	    __extends(AnyChildMatch, _super);
-	    function AnyChildMatch() {
-	        _super.apply(this, arguments);
-	    }
-	    AnyChildMatch.prototype.candidates = function (context) {
-	        var res = [];
-	        context.forEach(function (x) {
-	            if (x) {
-	                addChildren(x, res);
-	            }
-	        });
-	        return _.unique(res);
-	    };
-	    return AnyChildMatch;
-	})(Selector);
-	exports.AnyChildMatch = AnyChildMatch;
-	var ParentMatch = (function (_super) {
-	    __extends(ParentMatch, _super);
-	    function ParentMatch() {
-	        _super.apply(this, arguments);
-	    }
-	    ParentMatch.prototype.candidates = function (context) {
-	        return context.map(function (x) { return x.parent(); });
-	    };
-	    return ParentMatch;
-	})(Selector);
-	exports.ParentMatch = ParentMatch;
-	var ChildMatch = (function (_super) {
-	    __extends(ChildMatch, _super);
-	    function ChildMatch() {
-	        _super.apply(this, arguments);
-	    }
-	    ChildMatch.prototype.candidates = function (context) {
-	        var res = [];
-	        context.forEach(function (x) {
-	            if (x) {
-	                res = res.concat(x.elements());
-	            }
-	        });
-	        return res;
-	    };
-	    return ChildMatch;
-	})(Selector);
-	exports.ChildMatch = ChildMatch;
-	function parse(h, path) {
-	    return resolveSelector(sel.parse(path), h);
-	}
-	exports.parse = parse;
-	//# sourceMappingURL=selectorMatch.js.map
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var ramlExpression = __webpack_require__(85);
-	var search = __webpack_require__(30);
-	function validate(str, node) {
-	    var result = ramlExpression.parse(str);
-	    validateNode(result, node);
-	}
-	exports.validate = validate;
-	function validateNode(r, node) {
-	    if (r.type == "unary") {
-	        var u = r;
-	        validateNode(u.exp, node);
-	    }
-	    else if (r.type == 'paren') {
-	        var ex = r;
-	        validateNode(ex.exp, node);
-	    }
-	    else if (r.type == 'string' || r.type == 'number') {
-	    }
-	    else if (r.type == 'ident') {
-	        var ident = r;
-	        var p = search.resolveRamlPointer(node, ident.value);
-	        if (!p) {
-	            throw new Error("Unable to resolve " + ident.value);
-	        }
-	    }
-	    else {
-	        var be = r;
-	        validateNode(be.l, node);
-	        validateNode(be.r, node);
-	    }
-	}
-	//# sourceMappingURL=ramlExpressions.js.map
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var parser = (function () {
-	    "use strict";
-	    /*
-	     * Generated by PEG.js 0.9.0.
-	     *
-	     * http://pegjs.org/
-	     */
-	    function peg$subclass(child, parent) {
-	        function ctor() {
-	            this.constructor = child;
-	        }
-	        ctor.prototype = parent.prototype;
-	        child.prototype = new ctor();
-	    }
-	    function peg$SyntaxError(message, expected, found, location) {
-	        this.message = message;
-	        this.expected = expected;
-	        this.found = found;
-	        this.location = location;
-	        this.name = "SyntaxError";
-	        if (typeof Error.captureStackTrace === "function") {
-	            Error.captureStackTrace(this, peg$SyntaxError);
-	        }
-	    }
-	    peg$subclass(peg$SyntaxError, Error);
-	    function peg$parse(input) {
-	        var options = arguments.length > 1 ? arguments[1] : {}, parser = this, peg$FAILED = {}, peg$startRuleFunctions = { Term: peg$parseTerm }, peg$startRuleFunction = peg$parseTerm, peg$c0 = "|", peg$c1 = { type: "literal", value: "|", description: "\"|\"" }, peg$c2 = function (first, rest) {
-	            return rest ? { "type": "union", "first": first, "rest": rest[3] } : first;
-	        }, peg$c3 = "(", peg$c4 = { type: "literal", value: "(", description: "\"(\"" }, peg$c5 = ")", peg$c6 = { type: "literal", value: ")", description: "\")\"" }, peg$c7 = "[]", peg$c8 = { type: "literal", value: "[]", description: "\"[]\"" }, peg$c9 = function (expr, arr) {
-	            return { "type": "parens", "expr": expr, "arr": arr.length };
-	        }, peg$c10 = "<", peg$c11 = { type: "literal", value: "<", description: "\"<\"" }, peg$c12 = ">", peg$c13 = { type: "literal", value: ">", description: "\">\"" }, peg$c14 = function (first, other) {
-	            return [first].concat(other);
-	        }, peg$c15 = ",", peg$c16 = { type: "literal", value: ",", description: "\",\"" }, peg$c17 = function (r) {
-	            return r;
-	        }, peg$c18 = { type: "other", description: "name" }, peg$c19 = function (r, tp, c) {
-	            return { "type": "name", "params": tp, "value": r.join(""), "arr": (c.length) };
-	        }, peg$c20 = { type: "other", description: "whitespace" }, peg$c21 = /^[ \t\n\r]/, peg$c22 = { type: "class", value: "[ \\t\\n\\r]", description: "[ \\t\\n\\r]" }, peg$c23 = /^[A-Z]/, peg$c24 = { type: "class", value: "[A-Z]", description: "[A-Z]" }, peg$c25 = "_", peg$c26 = { type: "literal", value: "_", description: "\"_\"" }, peg$c27 = "-", peg$c28 = { type: "literal", value: "-", description: "\"-\"" }, peg$c29 = ".", peg$c30 = { type: "literal", value: ".", description: "\".\"" }, peg$c31 = /^[a-z]/, peg$c32 = { type: "class", value: "[a-z]", description: "[a-z]" }, peg$c33 = /^[0-9]/, peg$c34 = { type: "class", value: "[0-9]", description: "[0-9]" }, peg$currPos = 0, peg$savedPos = 0, peg$posDetailsCache = [{ line: 1, column: 1, seenCR: false }], peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
-	        if ("startRule" in options) {
-	            if (!(options.startRule in peg$startRuleFunctions)) {
-	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
-	            }
-	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
-	        }
-	        function text() {
-	            return input.substring(peg$savedPos, peg$currPos);
-	        }
-	        function location() {
-	            return peg$computeLocation(peg$savedPos, peg$currPos);
-	        }
-	        function expected(description) {
-	            throw peg$buildException(null, [{ type: "other", description: description }], input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
-	        }
-	        function error(message) {
-	            throw peg$buildException(message, null, input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
-	        }
-	        function peg$computePosDetails(pos) {
-	            var details = peg$posDetailsCache[pos], p, ch;
-	            if (details) {
-	                return details;
-	            }
-	            else {
-	                p = pos - 1;
-	                while (!peg$posDetailsCache[p]) {
-	                    p--;
-	                }
-	                details = peg$posDetailsCache[p];
-	                details = {
-	                    line: details.line,
-	                    column: details.column,
-	                    seenCR: details.seenCR
-	                };
-	                while (p < pos) {
-	                    ch = input.charAt(p);
-	                    if (ch === "\n") {
-	                        if (!details.seenCR) {
-	                            details.line++;
-	                        }
-	                        details.column = 1;
-	                        details.seenCR = false;
-	                    }
-	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
-	                        details.line++;
-	                        details.column = 1;
-	                        details.seenCR = true;
-	                    }
-	                    else {
-	                        details.column++;
-	                        details.seenCR = false;
-	                    }
-	                    p++;
-	                }
-	                peg$posDetailsCache[pos] = details;
-	                return details;
-	            }
-	        }
-	        function peg$computeLocation(startPos, endPos) {
-	            var startPosDetails = peg$computePosDetails(startPos), endPosDetails = peg$computePosDetails(endPos);
-	            return {
-	                start: {
-	                    offset: startPos,
-	                    line: startPosDetails.line,
-	                    column: startPosDetails.column
-	                },
-	                end: {
-	                    offset: endPos,
-	                    line: endPosDetails.line,
-	                    column: endPosDetails.column
-	                }
-	            };
-	        }
-	        function peg$fail(expected) {
-	            if (peg$currPos < peg$maxFailPos) {
-	                return;
-	            }
-	            if (peg$currPos > peg$maxFailPos) {
-	                peg$maxFailPos = peg$currPos;
-	                peg$maxFailExpected = [];
-	            }
-	            peg$maxFailExpected.push(expected);
-	        }
-	        function peg$buildException(message, expected, found, location) {
-	            function cleanupExpected(expected) {
-	                var i = 1;
-	                expected.sort(function (a, b) {
-	                    if (a.description < b.description) {
-	                        return -1;
-	                    }
-	                    else if (a.description > b.description) {
-	                        return 1;
-	                    }
-	                    else {
-	                        return 0;
-	                    }
-	                });
-	                while (i < expected.length) {
-	                    if (expected[i - 1] === expected[i]) {
-	                        expected.splice(i, 1);
-	                    }
-	                    else {
-	                        i++;
-	                    }
-	                }
-	            }
-	            function buildMessage(expected, found) {
-	                function stringEscape(s) {
-	                    function hex(ch) {
-	                        return ch.charCodeAt(0).toString(16).toUpperCase();
-	                    }
-	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
-	                        return '\\x0' + hex(ch);
-	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
-	                        return '\\x' + hex(ch);
-	                    }).replace(/[\u0100-\u0FFF]/g, function (ch) {
-	                        return '\\u0' + hex(ch);
-	                    }).replace(/[\u1000-\uFFFF]/g, function (ch) {
-	                        return '\\u' + hex(ch);
-	                    });
-	                }
-	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
-	                for (i = 0; i < expected.length; i++) {
-	                    expectedDescs[i] = expected[i].description;
-	                }
-	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
-	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
-	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
-	            }
-	            if (expected !== null) {
-	                cleanupExpected(expected);
-	            }
-	            return new peg$SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, location);
-	        }
-	        function peg$parseTerm() {
-	            var s0, s1, s2, s3, s4, s5, s6, s7;
-	            s0 = peg$currPos;
-	            s1 = peg$parse_();
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseFactor();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$currPos;
-	                    s4 = peg$parse_();
-	                    if (s4 !== peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 124) {
-	                            s5 = peg$c0;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s5 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c1);
-	                            }
-	                        }
-	                        if (s5 !== peg$FAILED) {
-	                            s6 = peg$parse_();
-	                            if (s6 !== peg$FAILED) {
-	                                s7 = peg$parseTerm();
-	                                if (s7 !== peg$FAILED) {
-	                                    s4 = [s4, s5, s6, s7];
-	                                    s3 = s4;
-	                                }
-	                                else {
-	                                    peg$currPos = s3;
-	                                    s3 = peg$FAILED;
-	                                }
-	                            }
-	                            else {
-	                                peg$currPos = s3;
-	                                s3 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s3;
-	                            s3 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s3;
-	                        s3 = peg$FAILED;
-	                    }
-	                    if (s3 === peg$FAILED) {
-	                        s3 = null;
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        peg$savedPos = s0;
-	                        s1 = peg$c2(s2, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseFactor() {
-	            var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 40) {
-	                s1 = peg$c3;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c4);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parse_();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parseTerm();
-	                    if (s3 !== peg$FAILED) {
-	                        s4 = peg$parse_();
-	                        if (s4 !== peg$FAILED) {
-	                            if (input.charCodeAt(peg$currPos) === 41) {
-	                                s5 = peg$c5;
-	                                peg$currPos++;
-	                            }
-	                            else {
-	                                s5 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c6);
-	                                }
-	                            }
-	                            if (s5 !== peg$FAILED) {
-	                                s6 = [];
-	                                s7 = peg$currPos;
-	                                s8 = peg$parse_();
-	                                if (s8 !== peg$FAILED) {
-	                                    if (input.substr(peg$currPos, 2) === peg$c7) {
-	                                        s9 = peg$c7;
-	                                        peg$currPos += 2;
-	                                    }
-	                                    else {
-	                                        s9 = peg$FAILED;
-	                                        if (peg$silentFails === 0) {
-	                                            peg$fail(peg$c8);
-	                                        }
-	                                    }
-	                                    if (s9 !== peg$FAILED) {
-	                                        s8 = [s8, s9];
-	                                        s7 = s8;
-	                                    }
-	                                    else {
-	                                        peg$currPos = s7;
-	                                        s7 = peg$FAILED;
-	                                    }
-	                                }
-	                                else {
-	                                    peg$currPos = s7;
-	                                    s7 = peg$FAILED;
-	                                }
-	                                while (s7 !== peg$FAILED) {
-	                                    s6.push(s7);
-	                                    s7 = peg$currPos;
-	                                    s8 = peg$parse_();
-	                                    if (s8 !== peg$FAILED) {
-	                                        if (input.substr(peg$currPos, 2) === peg$c7) {
-	                                            s9 = peg$c7;
-	                                            peg$currPos += 2;
-	                                        }
-	                                        else {
-	                                            s9 = peg$FAILED;
-	                                            if (peg$silentFails === 0) {
-	                                                peg$fail(peg$c8);
-	                                            }
-	                                        }
-	                                        if (s9 !== peg$FAILED) {
-	                                            s8 = [s8, s9];
-	                                            s7 = s8;
-	                                        }
-	                                        else {
-	                                            peg$currPos = s7;
-	                                            s7 = peg$FAILED;
-	                                        }
-	                                    }
-	                                    else {
-	                                        peg$currPos = s7;
-	                                        s7 = peg$FAILED;
-	                                    }
-	                                }
-	                                if (s6 !== peg$FAILED) {
-	                                    peg$savedPos = s0;
-	                                    s1 = peg$c9(s3, s6);
-	                                    s0 = s1;
-	                                }
-	                                else {
-	                                    peg$currPos = s0;
-	                                    s0 = peg$FAILED;
-	                                }
-	                            }
-	                            else {
-	                                peg$currPos = s0;
-	                                s0 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parseLiteral();
-	            }
-	            return s0;
-	        }
-	        function peg$parseTypeParams() {
-	            var s0, s1, s2, s3, s4;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 60) {
-	                s1 = peg$c10;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c11);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTerm();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = [];
-	                    s4 = peg$parseExtraParam();
-	                    while (s4 !== peg$FAILED) {
-	                        s3.push(s4);
-	                        s4 = peg$parseExtraParam();
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 62) {
-	                            s4 = peg$c12;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s4 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c13);
-	                            }
-	                        }
-	                        if (s4 !== peg$FAILED) {
-	                            peg$savedPos = s0;
-	                            s1 = peg$c14(s2, s3);
-	                            s0 = s1;
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseExtraParam() {
-	            var s0, s1, s2;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 44) {
-	                s1 = peg$c15;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c16);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTerm();
-	                if (s2 !== peg$FAILED) {
-	                    peg$savedPos = s0;
-	                    s1 = peg$c17(s2);
-	                    s0 = s1;
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseLiteral() {
-	            var s0, s1, s2, s3, s4, s5, s6;
-	            peg$silentFails++;
-	            s0 = peg$currPos;
-	            s1 = [];
-	            s2 = peg$parsechar();
-	            if (s2 !== peg$FAILED) {
-	                while (s2 !== peg$FAILED) {
-	                    s1.push(s2);
-	                    s2 = peg$parsechar();
-	                }
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTypeParams();
-	                if (s2 === peg$FAILED) {
-	                    s2 = null;
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = [];
-	                    s4 = peg$currPos;
-	                    s5 = peg$parse_();
-	                    if (s5 !== peg$FAILED) {
-	                        if (input.substr(peg$currPos, 2) === peg$c7) {
-	                            s6 = peg$c7;
-	                            peg$currPos += 2;
-	                        }
-	                        else {
-	                            s6 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c8);
-	                            }
-	                        }
-	                        if (s6 !== peg$FAILED) {
-	                            s5 = [s5, s6];
-	                            s4 = s5;
-	                        }
-	                        else {
-	                            peg$currPos = s4;
-	                            s4 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s4;
-	                        s4 = peg$FAILED;
-	                    }
-	                    while (s4 !== peg$FAILED) {
-	                        s3.push(s4);
-	                        s4 = peg$currPos;
-	                        s5 = peg$parse_();
-	                        if (s5 !== peg$FAILED) {
-	                            if (input.substr(peg$currPos, 2) === peg$c7) {
-	                                s6 = peg$c7;
-	                                peg$currPos += 2;
-	                            }
-	                            else {
-	                                s6 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c8);
-	                                }
-	                            }
-	                            if (s6 !== peg$FAILED) {
-	                                s5 = [s5, s6];
-	                                s4 = s5;
-	                            }
-	                            else {
-	                                peg$currPos = s4;
-	                                s4 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s4;
-	                            s4 = peg$FAILED;
-	                        }
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        peg$savedPos = s0;
-	                        s1 = peg$c19(s1, s2, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            peg$silentFails--;
-	            if (s0 === peg$FAILED) {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c18);
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parse_() {
-	            var s0, s1;
-	            peg$silentFails++;
-	            s0 = [];
-	            if (peg$c21.test(input.charAt(peg$currPos))) {
-	                s1 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c22);
-	                }
-	            }
-	            while (s1 !== peg$FAILED) {
-	                s0.push(s1);
-	                if (peg$c21.test(input.charAt(peg$currPos))) {
-	                    s1 = input.charAt(peg$currPos);
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s1 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c22);
-	                    }
-	                }
-	            }
-	            peg$silentFails--;
-	            if (s0 === peg$FAILED) {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c20);
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parsechar() {
-	            var s0;
-	            if (peg$c23.test(input.charAt(peg$currPos))) {
-	                s0 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s0 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c24);
-	                }
-	            }
-	            if (s0 === peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 95) {
-	                    s0 = peg$c25;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s0 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c26);
-	                    }
-	                }
-	                if (s0 === peg$FAILED) {
-	                    if (input.charCodeAt(peg$currPos) === 45) {
-	                        s0 = peg$c27;
-	                        peg$currPos++;
-	                    }
-	                    else {
-	                        s0 = peg$FAILED;
-	                        if (peg$silentFails === 0) {
-	                            peg$fail(peg$c28);
-	                        }
-	                    }
-	                    if (s0 === peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 46) {
-	                            s0 = peg$c29;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s0 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c30);
-	                            }
-	                        }
-	                        if (s0 === peg$FAILED) {
-	                            if (peg$c31.test(input.charAt(peg$currPos))) {
-	                                s0 = input.charAt(peg$currPos);
-	                                peg$currPos++;
-	                            }
-	                            else {
-	                                s0 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c32);
-	                                }
-	                            }
-	                            if (s0 === peg$FAILED) {
-	                                if (peg$c33.test(input.charAt(peg$currPos))) {
-	                                    s0 = input.charAt(peg$currPos);
-	                                    peg$currPos++;
-	                                }
-	                                else {
-	                                    s0 = peg$FAILED;
-	                                    if (peg$silentFails === 0) {
-	                                        peg$fail(peg$c34);
-	                                    }
-	                                }
-	                            }
-	                        }
-	                    }
-	                }
-	            }
-	            return s0;
-	        }
-	        peg$result = peg$startRuleFunction();
-	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
-	            return peg$result;
-	        }
-	        else {
-	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
-	                peg$fail({ type: "end", description: "end of input" });
-	            }
-	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null, peg$maxFailPos < input.length ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1) : peg$computeLocation(peg$maxFailPos, peg$maxFailPos));
-	        }
-	    }
-	    return {
-	        SyntaxError: peg$SyntaxError,
-	        parse: peg$parse
-	    };
-	})();
-	module.exports = parser;
-	//# sourceMappingURL=typeExpressionParser.js.map
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var DomParser = __webpack_require__(105);
-	function xmlToJson(xml) {
-	    // Create the return object
-	    var obj = {};
-	    if (xml.nodeType == 1) {
-	        // do attributes
-	        if (xml.attributes.length > 0) {
-	            for (var j = 0; j < xml.attributes.length; j++) {
-	                var attribute = xml.attributes.item(j);
-	                obj["@" + attribute.nodeName] = attribute.nodeValue;
-	            }
-	        }
-	    }
-	    else if (xml.nodeType == 3) {
-	        obj = xml.nodeValue;
-	    }
-	    // do children
-	    if (xml.hasChildNodes()) {
-	        for (var i = 0; i < xml.childNodes.length; i++) {
-	            var item = xml.childNodes.item(i);
-	            var nodeName = item.nodeName;
-	            if (nodeName == undefined) {
-	                continue;
-	            }
-	            if (typeof (obj[nodeName]) == "undefined") {
-	                obj[nodeName] = xmlToJson(item);
-	            }
-	            else {
-	                if (typeof (obj[nodeName].push) == "undefined") {
-	                    var old = obj[nodeName];
-	                    obj[nodeName] = [];
-	                    obj[nodeName].push(old);
-	                }
-	                obj[nodeName].push(xmlToJson(item));
-	            }
-	        }
-	    }
-	    return obj;
-	}
-	;
-	function cleanupText(j) {
-	    for (var p in j) {
-	        if (typeof (j[p]) == "object") {
-	            for (var k in j[p]) {
-	                if (k == '#text') {
-	                    var txt = j[p]['#text'];
-	                    if (typeof (txt) != 'string') {
-	                        txt = txt.join("");
-	                    }
-	                    txt = txt.trim();
-	                    if (txt.length == 0) {
-	                        delete j[p]['#text'];
-	                    }
-	                }
-	            }
-	            cleanupText(j[p]);
-	        }
-	    }
-	    return j;
-	}
-	function cleanupJson(j) {
-	    for (var p in j) {
-	        if (typeof (j[p]) == "object") {
-	            var keys = Object.keys(j[p]);
-	            if (keys.length == 1) {
-	                if (keys[0] == '#text') {
-	                    j[p] = j[p]['#text'];
-	                }
-	            }
-	            cleanupJson(j[p]);
-	        }
-	    }
-	    return j;
-	}
-	function parseXML(value) {
-	    var v = new DomParser.DOMParser();
-	    var parsed = v.parseFromString(value);
-	    return cleanupJson(cleanupText(xmlToJson(parsed)));
-	}
-	module.exports = parseXML;
-	//# sourceMappingURL=xmlutil.js.map
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RamlWrapper = __webpack_require__(3);
-	function buildWrapperNode(node) {
-	    var nodeClassName = node.definition().name();
-	    var wrapperConstructor = classMap[nodeClassName];
-	    if (!wrapperConstructor) {
-	        var m = node.definition().allSuperTypes();
-	        var wr = null;
-	        for (var i = 0; i < m.length; i++) {
-	            var nm = m[i].name();
-	            wrapperConstructor = classMap[nm];
-	            if (nm == "DataElement") {
-	                wr = nm;
-	                continue;
-	            }
-	            if (nm == "RAMLLanguageElement") {
-	                continue;
-	            }
-	            if (wrapperConstructor) {
-	                break;
-	            }
-	        }
-	        if (!wrapperConstructor) {
-	            wr = nm;
-	        }
-	    }
-	    if (!wrapperConstructor) {
-	        wrapperConstructor = classMap["RAMLLanguageElement"];
-	    }
-	    return wrapperConstructor(node);
-	}
-	exports.buildWrapperNode = buildWrapperNode;
-	var classMap = {
-	    "AnnotationRef": function (x) {
-	        return new RamlWrapper.AnnotationRefImpl(x);
-	    },
-	    "AnnotationTarget": function (x) {
-	        return new RamlWrapper.AnnotationTargetImpl(x);
-	    },
-	    "AnnotationType": function (x) {
-	        return new RamlWrapper.AnnotationTypeImpl(x);
-	    },
-	    "Api": function (x) {
-	        return new RamlWrapper.ApiImpl(x);
-	    },
-	    "ApiDescription": function (x) {
-	        return new RamlWrapper.ApiDescriptionImpl(x);
-	    },
-	    "ArrayField": function (x) {
-	        return new RamlWrapper.ArrayFieldImpl(x);
-	    },
-	    "Basic": function (x) {
-	        return new RamlWrapper.BasicImpl(x);
-	    },
-	    "BooleanElement": function (x) {
-	        return new RamlWrapper.BooleanElementImpl(x);
-	    },
-	    "BooleanType": function (x) {
-	        return new RamlWrapper.BooleanTypeImpl(x);
-	    },
-	    "CallbackAPIDescription": function (x) {
-	        return new RamlWrapper.CallbackAPIDescriptionImpl(x);
-	    },
-	    "ContentType": function (x) {
-	        return new RamlWrapper.ContentTypeImpl(x);
-	    },
-	    "Custom": function (x) {
-	        return new RamlWrapper.CustomImpl(x);
-	    },
-	    "DataElement": function (x) {
-	        return new RamlWrapper.DataElementImpl(x);
-	    },
-	    "DataElementRef": function (x) {
-	        return new RamlWrapper.DataElementRefImpl(x);
-	    },
-	    "DateElement": function (x) {
-	        return new RamlWrapper.DateElementImpl(x);
-	    },
-	    "DateFormatSpec": function (x) {
-	        return new RamlWrapper.DateFormatSpecImpl(x);
-	    },
-	    "Digest": function (x) {
-	        return new RamlWrapper.DigestImpl(x);
-	    },
-	    "DocumentationItem": function (x) {
-	        return new RamlWrapper.DocumentationItemImpl(x);
-	    },
-	    "ExampleSpec": function (x) {
-	        return new RamlWrapper.ExampleSpecImpl(x);
-	    },
-	    "ExampleString": function (x) {
-	        return new RamlWrapper.ExampleStringImpl(x);
-	    },
-	    "Extension": function (x) {
-	        return new RamlWrapper.ExtensionImpl(x);
-	    },
-	    "FileParameter": function (x) {
-	        return new RamlWrapper.FileParameterImpl(x);
-	    },
-	    "FixedUri": function (x) {
-	        return new RamlWrapper.FixedUriImpl(x);
-	    },
-	    "FullUriTemplate": function (x) {
-	        return new RamlWrapper.FullUriTemplateImpl(x);
-	    },
-	    "FunctionalInterface": function (x) {
-	        return new RamlWrapper.FunctionalInterfaceImpl(x);
-	    },
-	    "GlobalSchema": function (x) {
-	        return new RamlWrapper.GlobalSchemaImpl(x);
-	    },
-	    "HasNormalParameters": function (x) {
-	        return new RamlWrapper.HasNormalParametersImpl(x);
-	    },
-	    "ImportDeclaration": function (x) {
-	        return new RamlWrapper.ImportDeclarationImpl(x);
-	    },
-	    "IntegerElement": function (x) {
-	        return new RamlWrapper.IntegerElementImpl(x);
-	    },
-	    "JSonSchemaString": function (x) {
-	        return new RamlWrapper.JSonSchemaStringImpl(x);
-	    },
-	    "Library": function (x) {
-	        return new RamlWrapper.LibraryImpl(x);
-	    },
-	    "LocationKind": function (x) {
-	        return new RamlWrapper.LocationKindImpl(x);
-	    },
-	    "MarkdownString": function (x) {
-	        return new RamlWrapper.MarkdownStringImpl(x);
-	    },
-	    "Method": function (x) {
-	        return new RamlWrapper.MethodImpl(x);
-	    },
-	    "MethodBase": function (x) {
-	        return new RamlWrapper.MethodBaseImpl(x);
-	    },
-	    "MimeType": function (x) {
-	        return new RamlWrapper.MimeTypeImpl(x);
-	    },
-	    "ModelLocation": function (x) {
-	        return new RamlWrapper.ModelLocationImpl(x);
-	    },
-	    "NumberElement": function (x) {
-	        return new RamlWrapper.NumberElementImpl(x);
-	    },
-	    "NumberType": function (x) {
-	        return new RamlWrapper.NumberTypeImpl(x);
-	    },
-	    "OAuth1SecuritySchemeSettings": function (x) {
-	        return new RamlWrapper.OAuth1SecuritySchemeSettingsImpl(x);
-	    },
-	    "OAuth2SecuritySchemeSettings": function (x) {
-	        return new RamlWrapper.OAuth2SecuritySchemeSettingsImpl(x);
-	    },
-	    "OLibrary": function (x) {
-	        return new RamlWrapper.OLibraryImpl(x);
-	    },
-	    "Oath1": function (x) {
-	        return new RamlWrapper.Oath1Impl(x);
-	    },
-	    "Oath2": function (x) {
-	        return new RamlWrapper.Oath2Impl(x);
-	    },
-	    "ObjectField": function (x) {
-	        return new RamlWrapper.ObjectFieldImpl(x);
-	    },
-	    "Overlay": function (x) {
-	        return new RamlWrapper.OverlayImpl(x);
-	    },
-	    "PassThrough": function (x) {
-	        return new RamlWrapper.PassThroughImpl(x);
-	    },
-	    "PassThroughSettings": function (x) {
-	        return new RamlWrapper.PassThroughSettingsImpl(x);
-	    },
-	    "RAMLExpression": function (x) {
-	        return new RamlWrapper.RAMLExpressionImpl(x);
-	    },
-	    "RAMLLanguageElement": function (x) {
-	        return new RamlWrapper.RAMLLanguageElementImpl(x);
-	    },
-	    "RAMLPointer": function (x) {
-	        return new RamlWrapper.RAMLPointerImpl(x);
-	    },
-	    "RAMLPointerElement": function (x) {
-	        return new RamlWrapper.RAMLPointerElementImpl(x);
-	    },
-	    "RAMLProject": function (x) {
-	        return new RamlWrapper.RAMLProjectImpl(x);
-	    },
-	    "RAMLSelector": function (x) {
-	        return new RamlWrapper.RAMLSelectorImpl(x);
-	    },
-	    "RAMLSimpleElement": function (x) {
-	        return new RamlWrapper.RAMLSimpleElementImpl(x);
-	    },
-	    "Reference": function (x) {
-	        return new RamlWrapper.ReferenceImpl(x);
-	    },
-	    "RelativeUri": function (x) {
-	        return new RamlWrapper.RelativeUriImpl(x);
-	    },
-	    "Resource": function (x) {
-	        return new RamlWrapper.ResourceImpl(x);
-	    },
-	    "ResourceBase": function (x) {
-	        return new RamlWrapper.ResourceBaseImpl(x);
-	    },
-	    "ResourceType": function (x) {
-	        return new RamlWrapper.ResourceTypeImpl(x);
-	    },
-	    "ResourceTypeRef": function (x) {
-	        return new RamlWrapper.ResourceTypeRefImpl(x);
-	    },
-	    "Response": function (x) {
-	        return new RamlWrapper.ResponseImpl(x);
-	    },
-	    "SchemaElement": function (x) {
-	        return new RamlWrapper.SchemaElementImpl(x);
-	    },
-	    "SchemaString": function (x) {
-	        return new RamlWrapper.SchemaStringImpl(x);
-	    },
-	    "ScriptHookElement": function (x) {
-	        return new RamlWrapper.ScriptHookElementImpl(x);
-	    },
-	    "ScriptSpec": function (x) {
-	        return new RamlWrapper.ScriptSpecImpl(x);
-	    },
-	    "ScriptingHook": function (x) {
-	        return new RamlWrapper.ScriptingHookImpl(x);
-	    },
-	    "SecuritySchema": function (x) {
-	        return new RamlWrapper.SecuritySchemaImpl(x);
-	    },
-	    "SecuritySchemaHookScript": function (x) {
-	        return new RamlWrapper.SecuritySchemaHookScriptImpl(x);
-	    },
-	    "SecuritySchemaPart": function (x) {
-	        return new RamlWrapper.SecuritySchemaPartImpl(x);
-	    },
-	    "SecuritySchemaRef": function (x) {
-	        return new RamlWrapper.SecuritySchemaRefImpl(x);
-	    },
-	    "SecuritySchemaSettings": function (x) {
-	        return new RamlWrapper.SecuritySchemaSettingsImpl(x);
-	    },
-	    "SecuritySchemaType": function (x) {
-	        return new RamlWrapper.SecuritySchemaTypeImpl(x);
-	    },
-	    "StatusCode": function (x) {
-	        return new RamlWrapper.StatusCodeImpl(x);
-	    },
-	    "StrElement": function (x) {
-	        return new RamlWrapper.StrElementImpl(x);
-	    },
-	    "StringType": function (x) {
-	        return new RamlWrapper.StringTypeImpl(x);
-	    },
-	    "Trait": function (x) {
-	        return new RamlWrapper.TraitImpl(x);
-	    },
-	    "TraitRef": function (x) {
-	        return new RamlWrapper.TraitRefImpl(x);
-	    },
-	    "UnionField": function (x) {
-	        return new RamlWrapper.UnionFieldImpl(x);
-	    },
-	    "UriTemplate": function (x) {
-	        return new RamlWrapper.UriTemplateImpl(x);
-	    },
-	    "ValidityExpression": function (x) {
-	        return new RamlWrapper.ValidityExpressionImpl(x);
-	    },
-	    "ValueElement": function (x) {
-	        return new RamlWrapper.ValueElementImpl(x);
-	    },
-	    "ValueType": function (x) {
-	        return new RamlWrapper.ValueTypeImpl(x);
-	    },
-	    "XMLSchemaString": function (x) {
-	        return new RamlWrapper.XMLSchemaStringImpl(x);
-	    },
-	    "pointer": function (x) {
-	        return new RamlWrapper.pointerImpl(x);
-	    },
-	    "ramlexpression": function (x) {
-	        return new RamlWrapper.ramlexpressionImpl(x);
-	    }
-	};
-	//# sourceMappingURL=raml003factory.js.map
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RamlWrapper = __webpack_require__(14);
-	function buildWrapperNode(node) {
-	    var nodeClassName = node.definition().name();
-	    var wrapperConstructor = classMap[nodeClassName];
-	    if (!wrapperConstructor) {
-	        var m = node.definition().allSuperTypes();
-	        var wr = null;
-	        for (var i = 0; i < m.length; i++) {
-	            var nm = m[i].name();
-	            wrapperConstructor = classMap[nm];
-	            if (nm == "DataElement") {
-	                wr = nm;
-	                continue;
-	            }
-	            if (nm == "RAMLLanguageElement") {
-	                continue;
-	            }
-	            if (wrapperConstructor) {
-	                break;
-	            }
-	        }
-	        if (!wrapperConstructor) {
-	            wr = nm;
-	        }
-	    }
-	    if (!wrapperConstructor) {
-	        wrapperConstructor = classMap["RAMLLanguageElement"];
-	    }
-	    return wrapperConstructor(node);
-	}
-	exports.buildWrapperNode = buildWrapperNode;
-	var classMap = {
-	    "Api": function (x) {
-	        return new RamlWrapper.ApiImpl(x);
-	    },
-	    "BodyLike": function (x) {
-	        return new RamlWrapper.BodyLikeImpl(x);
-	    },
-	    "BooleanElement": function (x) {
-	        return new RamlWrapper.BooleanElementImpl(x);
-	    },
-	    "BooleanType": function (x) {
-	        return new RamlWrapper.BooleanTypeImpl(x);
-	    },
-	    "DateElement": function (x) {
-	        return new RamlWrapper.DateElementImpl(x);
-	    },
-	    "DocumentationItem": function (x) {
-	        return new RamlWrapper.DocumentationItemImpl(x);
-	    },
-	    "ExampleString": function (x) {
-	        return new RamlWrapper.ExampleStringImpl(x);
-	    },
-	    "FileElement": function (x) {
-	        return new RamlWrapper.FileElementImpl(x);
-	    },
-	    "FixedUri": function (x) {
-	        return new RamlWrapper.FixedUriImpl(x);
-	    },
-	    "FullUriTemplate": function (x) {
-	        return new RamlWrapper.FullUriTemplateImpl(x);
-	    },
-	    "GlobalSchema": function (x) {
-	        return new RamlWrapper.GlobalSchemaImpl(x);
-	    },
-	    "HasNormalParameters": function (x) {
-	        return new RamlWrapper.HasNormalParametersImpl(x);
-	    },
-	    "IntegerElement": function (x) {
-	        return new RamlWrapper.IntegerElementImpl(x);
-	    },
-	    "JSONBody": function (x) {
-	        return new RamlWrapper.JSONBodyImpl(x);
-	    },
-	    "JSONExample": function (x) {
-	        return new RamlWrapper.JSONExampleImpl(x);
-	    },
-	    "JSonSchemaString": function (x) {
-	        return new RamlWrapper.JSonSchemaStringImpl(x);
-	    },
-	    "MarkdownString": function (x) {
-	        return new RamlWrapper.MarkdownStringImpl(x);
-	    },
-	    "Method": function (x) {
-	        return new RamlWrapper.MethodImpl(x);
-	    },
-	    "MethodBase": function (x) {
-	        return new RamlWrapper.MethodBaseImpl(x);
-	    },
-	    "MimeType": function (x) {
-	        return new RamlWrapper.MimeTypeImpl(x);
-	    },
-	    "NumberElement": function (x) {
-	        return new RamlWrapper.NumberElementImpl(x);
-	    },
-	    "NumberType": function (x) {
-	        return new RamlWrapper.NumberTypeImpl(x);
-	    },
-	    "OAuth1SecuritySchemeSettings": function (x) {
-	        return new RamlWrapper.OAuth1SecuritySchemeSettingsImpl(x);
-	    },
-	    "OAuth2SecuritySchemeSettings": function (x) {
-	        return new RamlWrapper.OAuth2SecuritySchemeSettingsImpl(x);
-	    },
-	    "Parameter": function (x) {
-	        return new RamlWrapper.ParameterImpl(x);
-	    },
-	    "ParameterLocation": function (x) {
-	        return new RamlWrapper.ParameterLocationImpl(x);
-	    },
-	    "RAMLLanguageElement": function (x) {
-	        return new RamlWrapper.RAMLLanguageElementImpl(x);
-	    },
-	    "RAMLSimpleElement": function (x) {
-	        return new RamlWrapper.RAMLSimpleElementImpl(x);
-	    },
-	    "Reference": function (x) {
-	        return new RamlWrapper.ReferenceImpl(x);
-	    },
-	    "RelativeUri": function (x) {
-	        return new RamlWrapper.RelativeUriImpl(x);
-	    },
-	    "Resource": function (x) {
-	        return new RamlWrapper.ResourceImpl(x);
-	    },
-	    "ResourceType": function (x) {
-	        return new RamlWrapper.ResourceTypeImpl(x);
-	    },
-	    "ResourceTypeRef": function (x) {
-	        return new RamlWrapper.ResourceTypeRefImpl(x);
-	    },
-	    "Response": function (x) {
-	        return new RamlWrapper.ResponseImpl(x);
-	    },
-	    "SchemaString": function (x) {
-	        return new RamlWrapper.SchemaStringImpl(x);
-	    },
-	    "SecuritySchema": function (x) {
-	        return new RamlWrapper.SecuritySchemaImpl(x);
-	    },
-	    "SecuritySchemaPart": function (x) {
-	        return new RamlWrapper.SecuritySchemaPartImpl(x);
-	    },
-	    "SecuritySchemaRef": function (x) {
-	        return new RamlWrapper.SecuritySchemaRefImpl(x);
-	    },
-	    "SecuritySchemaSettings": function (x) {
-	        return new RamlWrapper.SecuritySchemaSettingsImpl(x);
-	    },
-	    "StatusCode": function (x) {
-	        return new RamlWrapper.StatusCodeImpl(x);
-	    },
-	    "StrElement": function (x) {
-	        return new RamlWrapper.StrElementImpl(x);
-	    },
-	    "StringType": function (x) {
-	        return new RamlWrapper.StringTypeImpl(x);
-	    },
-	    "Trait": function (x) {
-	        return new RamlWrapper.TraitImpl(x);
-	    },
-	    "TraitRef": function (x) {
-	        return new RamlWrapper.TraitRefImpl(x);
-	    },
-	    "UriTemplate": function (x) {
-	        return new RamlWrapper.UriTemplateImpl(x);
-	    },
-	    "ValueType": function (x) {
-	        return new RamlWrapper.ValueTypeImpl(x);
-	    },
-	    "XMLBody": function (x) {
-	        return new RamlWrapper.XMLBodyImpl(x);
-	    },
-	    "XMLExample": function (x) {
-	        return new RamlWrapper.XMLExampleImpl(x);
-	    },
-	    "XMLSchemaString": function (x) {
-	        return new RamlWrapper.XMLSchemaStringImpl(x);
-	    }
-	};
-	//# sourceMappingURL=raml08factory.js.map
-
-/***/ },
 /* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// shim for using process in browser
-
-	var process = module.exports = {};
-	var queue = [];
-	var draining = false;
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    draining = true;
-	    var currentQueue;
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        var i = -1;
-	        while (++i < len) {
-	            currentQueue[i]();
-	        }
-	        len = queue.length;
-	    }
-	    draining = false;
-	}
-	process.nextTick = function (fun) {
-	    queue.push(fun);
-	    if (!draining) {
-	        setTimeout(drainQueue, 0);
-	    }
-	};
-
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	// TODO(shtylman)
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/// <reference path="../../../../typings/tsd.d.ts" />
-	var ast = __webpack_require__(19);
+	var ast = __webpack_require__(21);
 	'use strict';
 	/*eslint-disable max-len,no-use-before-define*/
-	var common = __webpack_require__(70);
+	var common = __webpack_require__(69);
 	var YAMLException = __webpack_require__(36);
-	var Mark = __webpack_require__(93);
-	var DEFAULT_SAFE_SCHEMA = __webpack_require__(68);
-	var DEFAULT_FULL_SCHEMA = __webpack_require__(69);
+	var Mark = __webpack_require__(86);
+	var DEFAULT_SAFE_SCHEMA = __webpack_require__(67);
+	var DEFAULT_FULL_SCHEMA = __webpack_require__(68);
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	var CONTEXT_FLOW_IN = 1;
 	var CONTEXT_FLOW_OUT = 2;
@@ -42914,7 +43157,7 @@
 	//# sourceMappingURL=loader.js.map
 
 /***/ },
-/* 63 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42974,15 +43217,15 @@
 	//# sourceMappingURL=type.js.map
 
 /***/ },
-/* 64 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../typings/tsd.d.ts" />
 	'use strict';
 	/*eslint-disable max-len*/
-	var common = __webpack_require__(70);
+	var common = __webpack_require__(69);
 	var YAMLException = __webpack_require__(36);
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	function compileList(schema, name, result) {
 	    var exclude = [];
 	    schema.include.forEach(function (includedSchema) {
@@ -43062,25 +43305,25 @@
 	//# sourceMappingURL=schema.js.map
 
 /***/ },
-/* 65 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	// Standard YAML's Failsafe schema.
 	// http://www.yaml.org/spec/1.2/spec.html#id2802346
 	'use strict';
-	var Schema = __webpack_require__(64);
+	var Schema = __webpack_require__(63);
 	module.exports = new Schema({
 	    explicit: [
-	        __webpack_require__(86),
 	        __webpack_require__(87),
-	        __webpack_require__(88)
+	        __webpack_require__(88),
+	        __webpack_require__(89)
 	    ]
 	});
 	//# sourceMappingURL=failsafe.js.map
 
 /***/ },
-/* 66 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -43091,22 +43334,22 @@
 	// So, this schema is not such strict as defined in the YAML specification.
 	// It allows numbers in binary notaion, use `Null` and `NULL` as `null`, etc.
 	'use strict';
-	var Schema = __webpack_require__(64);
+	var Schema = __webpack_require__(63);
 	module.exports = new Schema({
 	    include: [
-	        __webpack_require__(65)
+	        __webpack_require__(64)
 	    ],
 	    implicit: [
-	        __webpack_require__(89),
 	        __webpack_require__(90),
 	        __webpack_require__(91),
-	        __webpack_require__(92)
+	        __webpack_require__(92),
+	        __webpack_require__(93)
 	    ]
 	});
 	//# sourceMappingURL=json.js.map
 
 /***/ },
-/* 67 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -43116,16 +43359,16 @@
 	// NOTE: JS-YAML does not support schema-specific tag resolution restrictions.
 	// So, Core schema has no distinctions from JSON schema is JS-YAML.
 	'use strict';
-	var Schema = __webpack_require__(64);
+	var Schema = __webpack_require__(63);
 	module.exports = new Schema({
 	    include: [
-	        __webpack_require__(66)
+	        __webpack_require__(65)
 	    ]
 	});
 	//# sourceMappingURL=core.js.map
 
 /***/ },
-/* 68 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -43135,10 +43378,10 @@
 	// This schema is based on standard YAML's Core schema and includes most of
 	// extra types described at YAML tag repository. (http://yaml.org/type/)
 	'use strict';
-	var Schema = __webpack_require__(64);
+	var Schema = __webpack_require__(63);
 	var schema = new Schema({
 	    include: [
-	        __webpack_require__(67)
+	        __webpack_require__(66)
 	    ],
 	    implicit: [
 	        __webpack_require__(94),
@@ -43155,7 +43398,7 @@
 	//# sourceMappingURL=default_safe.js.map
 
 /***/ },
-/* 69 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -43167,10 +43410,10 @@
 	//
 	// Also this schema is used as default base schema at `Schema.create` function.
 	'use strict';
-	var Schema = __webpack_require__(64);
+	var Schema = __webpack_require__(63);
 	var schema = new Schema({
 	    include: [
-	        __webpack_require__(68)
+	        __webpack_require__(67)
 	    ],
 	    explicit: [
 	        __webpack_require__(100),
@@ -43183,7 +43426,7 @@
 	//# sourceMappingURL=default_full.js.map
 
 /***/ },
-/* 70 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../typings/tsd.d.ts" />
@@ -43233,13 +43476,77 @@
 	//# sourceMappingURL=common.js.map
 
 /***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    draining = true;
+	    var currentQueue;
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        var i = -1;
+	        while (++i < len) {
+	            currentQueue[i]();
+	        }
+	        len = queue.length;
+	    }
+	    draining = false;
+	}
+	process.nextTick = function (fun) {
+	    queue.push(fun);
+	    if (!draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	// TODO(shtylman)
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
 /* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/// <reference path="../../../typings/tsd.d.ts" />
 	'use strict';
-	var concat = __webpack_require__(76);
-	var request = __webpack_require__(81);
+	var concat = __webpack_require__(75);
+	var request = __webpack_require__(79);
 	function respond(data) {
 	    process.stdout.write(JSON.stringify(data), function () {
 	        process.exit(0);
@@ -43254,7 +43561,7 @@
 	    });
 	}));
 	//# sourceMappingURL=worker.js.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
 /* 72 */
@@ -43267,7 +43574,7 @@
 	    d.prototype = new __();
 	};
 	/// <reference path="../../typings/tsd.d.ts" />
-	var ts = __webpack_require__(42);
+	var ts = __webpack_require__(41);
 	/***
 	 * This module is designed to match simple patterns on Typescript AST Tree
 	 * it functionality mirrors jsASTMatchers which allows you to match on jsAST
@@ -44085,60 +44392,11 @@
 /* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	module.exports = Response;
-
-	/**
-	 * A response from a web request
-	 *
-	 * @param {Number} statusCode
-	 * @param {Object} headers
-	 * @param {Buffer} body
-	 * @param {String} url
-	 */
-	function Response(statusCode, headers, body, url) {
-	  if (typeof statusCode !== 'number') {
-	    throw new TypeError('statusCode must be a number but was ' + (typeof statusCode));
-	  }
-	  if (headers === null) {
-	    throw new TypeError('headers cannot be null');
-	  }
-	  if (typeof headers !== 'object') {
-	    throw new TypeError('headers must be an object but was ' + (typeof headers));
-	  }
-	  this.statusCode = statusCode;
-	  this.headers = {};
-	  for (var key in headers) {
-	    this.headers[key.toLowerCase()] = headers[key];
-	  }
-	  this.body = body;
-	  this.url = url;
-	}
-
-	Response.prototype.getBody = function (encoding) {
-	  if (this.statusCode >= 300) {
-	    var err = new Error('Server responded with status code '
-	                    + this.statusCode + ':\n' + this.body.toString());
-	    err.statusCode = this.statusCode;
-	    err.headers = this.headers;
-	    err.body = this.body;
-	    err.url = this.url;
-	    throw err;
-	  }
-	  return encoding ? this.body.toString(encoding) : this.body;
-	};
-
-
-/***/ },
-/* 76 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var Writable = __webpack_require__(116).Writable
-	var inherits = __webpack_require__(117)
+	var inherits = __webpack_require__(118)
 
 	if (typeof Uint8Array === 'undefined') {
-	  var U8 = __webpack_require__(115).Uint8Array
+	  var U8 = __webpack_require__(109).Uint8Array
 	} else {
 	  var U8 = Uint8Array
 	}
@@ -44274,6 +44532,55 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(77).Buffer))
 
 /***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = Response;
+
+	/**
+	 * A response from a web request
+	 *
+	 * @param {Number} statusCode
+	 * @param {Object} headers
+	 * @param {Buffer} body
+	 * @param {String} url
+	 */
+	function Response(statusCode, headers, body, url) {
+	  if (typeof statusCode !== 'number') {
+	    throw new TypeError('statusCode must be a number but was ' + (typeof statusCode));
+	  }
+	  if (headers === null) {
+	    throw new TypeError('headers cannot be null');
+	  }
+	  if (typeof headers !== 'object') {
+	    throw new TypeError('headers must be an object but was ' + (typeof headers));
+	  }
+	  this.statusCode = statusCode;
+	  this.headers = {};
+	  for (var key in headers) {
+	    this.headers[key.toLowerCase()] = headers[key];
+	  }
+	  this.body = body;
+	  this.url = url;
+	}
+
+	Response.prototype.getBody = function (encoding) {
+	  if (this.statusCode >= 300) {
+	    var err = new Error('Server responded with status code '
+	                    + this.statusCode + ':\n' + this.body.toString());
+	    err.statusCode = this.statusCode;
+	    err.headers = this.headers;
+	    err.body = this.body;
+	    err.url = this.url;
+	    throw err;
+	  }
+	  return encoding ? this.body.toString(encoding) : this.body;
+	};
+
+
+/***/ },
 /* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -44285,8 +44592,8 @@
 	 */
 
 	var base64 = __webpack_require__(119)
-	var ieee754 = __webpack_require__(109)
-	var isArray = __webpack_require__(110)
+	var ieee754 = __webpack_require__(110)
+	var isArray = __webpack_require__(111)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -45704,6 +46011,291 @@
 /* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var Promise = __webpack_require__(117);
+	var Response = __webpack_require__(76);
+	var handleQs = __webpack_require__(106);
+
+	module.exports = doRequest;
+	function doRequest(method, url, options, callback) {
+	  var result = new Promise(function (resolve, reject) {
+	    var xhr = new window.XMLHttpRequest();
+
+	    // check types of arguments
+
+	    if (typeof method !== 'string') {
+	      throw new TypeError('The method must be a string.');
+	    }
+	    if (typeof url !== 'string') {
+	      throw new TypeError('The URL/path must be a string.');
+	    }
+	    if (typeof options === 'function') {
+	      callback = options;
+	      options = {};
+	    }
+	    if (options === null || options === undefined) {
+	      options = {};
+	    }
+	    if (typeof options !== 'object') {
+	      throw new TypeError('Options must be an object (or null).');
+	    }
+	    if (typeof callback !== 'function') {
+	      callback = undefined;
+	    }
+
+	    method = method.toUpperCase();
+	    options.headers = options.headers || {};
+
+
+	    function attempt(n) {
+	      doRequest(method, url, {
+	        qs: options.qs,
+	        headers: options.headers,
+	        timeout: options.timeout
+	      }).nodeify(function (err, res) {
+	        var retry = err || res.statusCode >= 400;
+	        if (typeof options.retry === 'function') {
+	          retry = options.retry(err, res, n + 1);
+	        }
+	        if (n >= (options.maxRetries | 5)) {
+	          retry = false;
+	        }
+	        if (retry) {
+	          var delay = options.retryDelay;
+	          if (typeof options.retryDelay === 'function') {
+	            delay = options.retryDelay(err, res, n + 1);
+	          }
+	          delay = delay || 200;
+	          setTimeout(function () {
+	            attempt(n + 1);
+	          }, delay);
+	        } else {
+	          if (err) reject(err);
+	          else resolve(res);
+	        }
+	      });
+	    }
+	    if (options.retry && method === 'GET') {
+	      return attempt(0);
+	    }
+
+	    // handle cross domain
+
+	    var match;
+	    var crossDomain = !!((match = /^([\w-]+:)?\/\/([^\/]+)/.exec(options.uri)) && (match[2] != window.location.host));
+	    if (!crossDomain) options.headers['X-Requested-With'] = 'XMLHttpRequest';
+
+	    // handle query string
+	    if (options.qs) {
+	      url = handleQs(url, options.qs);
+	    }
+
+	    // handle json body
+	    if (options.json) {
+	      options.body = JSON.stringify(options.json);
+	      options.headers['Content-Type'] = 'application/json';
+	    }
+
+	    if (options.timeout) {
+	      xhr.timeout = options.timeout;
+	      var start = Date.now();
+	      xhr.ontimeout = function () {
+	        var duration = Date.now() - start;
+	        var err = new Error('Request timed out after ' + duration + 'ms');
+	        err.timeout = true;
+	        err.duration = duration;
+	        reject(err);
+	      };
+	    }
+	    xhr.onreadystatechange = function () {
+	      if (xhr.readyState === 4) {
+	        var headers = {};
+	        xhr.getAllResponseHeaders().split('\r\n').forEach(function (header) {
+	          var h = header.split(':');
+	          if (h.length > 1) {
+	            headers[h[0].toLowerCase()] = h.slice(1).join(':').trim();
+	          }
+	        });
+	        var res = new Response(xhr.status, headers, xhr.responseText);
+	        res.url = url;
+	        resolve(res);
+	      }
+	    };
+
+	    // method, url, async
+	    xhr.open(method, url, true);
+
+	    for (var name in options.headers) {
+	      xhr.setRequestHeader(name, options.headers[name]);
+	    }
+
+	    // avoid sending empty string (#319)
+	    xhr.send(options.body ? options.body : null);
+	  });
+	  result.getBody = function () {
+	    return result.then(function (res) { return res.getBody(); });
+	  };
+	  return result.nodeify(callback);
+	}
+
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// **Github:** https://github.com/zensh/lrucache
+	//
+	// **License:** MIT
+
+	/* global module, define */
+	;(function (root, factory) {
+	  'use strict';
+
+	  if (typeof module === 'object' && typeof module.exports === 'object') {
+	    module.exports = factory();
+	  } else if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else {
+	    root.LRUCache = factory();
+	  }
+	}(typeof window === 'object' ? window : this, function () {
+	  'use strict';
+
+	  function CacheState(capacity) {
+	    this.capacity = capacity > 0 ? +capacity : Number.MAX_VALUE;
+	    this.data = Object.create ? Object.create(null) : {};
+	    this.hash = Object.create ? Object.create(null) : {};
+	    this.linkedList = {
+	      length: 0,
+	      head: null,
+	      end: null
+	    };
+	  }
+
+	  function LRUCache(capacity) {
+	    if (!(this instanceof LRUCache)) return new LRUCache(capacity);
+	    this._LRUCacheState = new CacheState(capacity);
+	  }
+
+	  var proto = LRUCache.prototype;
+
+	  proto.get = function (key) {
+	    var state = this._LRUCacheState;
+	    var lruEntry = state.hash[key];
+	    if (!lruEntry) return;
+	    refresh(state.linkedList, lruEntry);
+	    return state.data[key];
+	  };
+
+	  proto.set = function (key, value) {
+	    var state = this._LRUCacheState;
+	    var lruEntry = state.hash[key];
+	    if (value === undefined) return this;
+	    if (!lruEntry) {
+	      state.hash[key] = {key: key};
+	      state.linkedList.length += 1;
+	      lruEntry = state.hash[key];
+	    }
+	    refresh(state.linkedList, lruEntry);
+	    state.data[key] = value;
+	    if (state.linkedList.length > state.capacity) this.remove(state.linkedList.end.key);
+	    return this;
+	  };
+
+	  proto.update = function (key, parseFn) {
+	    var state = this._LRUCacheState;
+	    if (this.has(key)) {
+	      var data = this.get(key);
+	      this.set(key, parseFn(data));
+	    }
+	    return this;
+	  };
+
+	  proto.remove = function (key) {
+	    var state = this._LRUCacheState;
+	    var lruEntry = state.hash[key];
+	    if (!lruEntry) return this;
+	    if (lruEntry === state.linkedList.head) state.linkedList.head = lruEntry.p;
+	    if (lruEntry === state.linkedList.end) state.linkedList.end = lruEntry.n;
+	    link(lruEntry.n, lruEntry.p);
+	    delete state.hash[key];
+	    delete state.data[key];
+	    state.linkedList.length -= 1;
+	    return this;
+	  };
+
+	  proto.removeAll = function () {
+	    this._LRUCacheState = new CacheState(this._LRUCacheState.capacity);
+	    return this;
+	  };
+
+	  proto.info = function () {
+	    var state = this._LRUCacheState;
+	    return {
+	      capacity: state.capacity,
+	      length: state.linkedList.length
+	    };
+	  };
+
+	  proto.keys = function () {
+	    var state = this._LRUCacheState;
+	    var keys = [], lruEntry = state.linkedList.head;
+	    while (lruEntry) {
+	      keys.push(lruEntry.key);
+	      lruEntry = lruEntry.p;
+	    }
+	    return keys;
+	  };
+
+	  proto.has = function (key) {
+	    return !!this._LRUCacheState.hash[key];
+	  };
+
+	  proto.staleKey = function () {
+	    return this._LRUCacheState.linkedList.end && this._LRUCacheState.linkedList.end.key;
+	  };
+
+	  proto.popStale = function () {
+	    var staleKey = this.staleKey();
+	    if (!staleKey) return null;
+	    var stale = [staleKey, this._LRUCacheState.data[staleKey]];
+	    this.remove(staleKey);
+	    return stale;
+	  };
+
+	  // 更新链表，把get或put方法操作的key提到链表head，即表示最新
+	  function refresh(linkedList, entry) {
+	    if (entry === linkedList.head) return;
+	    if (!linkedList.end) {
+	      linkedList.end = entry;
+	    } else if (linkedList.end === entry) {
+	      linkedList.end = entry.n;
+	    }
+
+	    link(entry.n, entry.p);
+	    link(entry, linkedList.head);
+	    linkedList.head = entry;
+	    linkedList.head.n = null;
+	  }
+
+	  // 对两个链表对象建立链接，形成一条链
+	  function link(nextEntry, prevEntry) {
+	    if (nextEntry === prevEntry) return;
+	    if (nextEntry) nextEntry.p = prevEntry;
+	    if (prevEntry) prevEntry.n = nextEntry;
+	  }
+
+	  LRUCache.NAME = 'LRUCache';
+	  LRUCache.VERSION = 'v0.2.0';
+	  return LRUCache;
+	}));
+
+
+/***/ },
+/* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/// <reference path="../../typings/tsd.d.ts" />
 	function isEmpty(value) {
 	    return value == null;
@@ -45830,7 +46422,7 @@
 	//# sourceMappingURL=raml-sanitize.js.map
 
 /***/ },
-/* 80 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/// <reference path="../../typings/tsd.d.ts" />
@@ -46026,742 +46618,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(77).Buffer))
 
 /***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Promise = __webpack_require__(118);
-	var Response = __webpack_require__(75);
-	var handleQs = __webpack_require__(106);
-
-	module.exports = doRequest;
-	function doRequest(method, url, options, callback) {
-	  var result = new Promise(function (resolve, reject) {
-	    var xhr = new window.XMLHttpRequest();
-
-	    // check types of arguments
-
-	    if (typeof method !== 'string') {
-	      throw new TypeError('The method must be a string.');
-	    }
-	    if (typeof url !== 'string') {
-	      throw new TypeError('The URL/path must be a string.');
-	    }
-	    if (typeof options === 'function') {
-	      callback = options;
-	      options = {};
-	    }
-	    if (options === null || options === undefined) {
-	      options = {};
-	    }
-	    if (typeof options !== 'object') {
-	      throw new TypeError('Options must be an object (or null).');
-	    }
-	    if (typeof callback !== 'function') {
-	      callback = undefined;
-	    }
-
-	    method = method.toUpperCase();
-	    options.headers = options.headers || {};
-
-
-	    function attempt(n) {
-	      doRequest(method, url, {
-	        qs: options.qs,
-	        headers: options.headers,
-	        timeout: options.timeout
-	      }).nodeify(function (err, res) {
-	        var retry = err || res.statusCode >= 400;
-	        if (typeof options.retry === 'function') {
-	          retry = options.retry(err, res, n + 1);
-	        }
-	        if (n >= (options.maxRetries | 5)) {
-	          retry = false;
-	        }
-	        if (retry) {
-	          var delay = options.retryDelay;
-	          if (typeof options.retryDelay === 'function') {
-	            delay = options.retryDelay(err, res, n + 1);
-	          }
-	          delay = delay || 200;
-	          setTimeout(function () {
-	            attempt(n + 1);
-	          }, delay);
-	        } else {
-	          if (err) reject(err);
-	          else resolve(res);
-	        }
-	      });
-	    }
-	    if (options.retry && method === 'GET') {
-	      return attempt(0);
-	    }
-
-	    // handle cross domain
-
-	    var match;
-	    var crossDomain = !!((match = /^([\w-]+:)?\/\/([^\/]+)/.exec(options.uri)) && (match[2] != window.location.host));
-	    if (!crossDomain) options.headers['X-Requested-With'] = 'XMLHttpRequest';
-
-	    // handle query string
-	    if (options.qs) {
-	      url = handleQs(url, options.qs);
-	    }
-
-	    // handle json body
-	    if (options.json) {
-	      options.body = JSON.stringify(options.json);
-	      options.headers['Content-Type'] = 'application/json';
-	    }
-
-	    if (options.timeout) {
-	      xhr.timeout = options.timeout;
-	      var start = Date.now();
-	      xhr.ontimeout = function () {
-	        var duration = Date.now() - start;
-	        var err = new Error('Request timed out after ' + duration + 'ms');
-	        err.timeout = true;
-	        err.duration = duration;
-	        reject(err);
-	      };
-	    }
-	    xhr.onreadystatechange = function () {
-	      if (xhr.readyState === 4) {
-	        var headers = {};
-	        xhr.getAllResponseHeaders().split('\r\n').forEach(function (header) {
-	          var h = header.split(':');
-	          if (h.length > 1) {
-	            headers[h[0].toLowerCase()] = h.slice(1).join(':').trim();
-	          }
-	        });
-	        var res = new Response(xhr.status, headers, xhr.responseText);
-	        res.url = url;
-	        resolve(res);
-	      }
-	    };
-
-	    // method, url, async
-	    xhr.open(method, url, true);
-
-	    for (var name in options.headers) {
-	      xhr.setRequestHeader(name, options.headers[name]);
-	    }
-
-	    // avoid sending empty string (#319)
-	    xhr.send(options.body ? options.body : null);
-	  });
-	  result.getBody = function () {
-	    return result.then(function (res) { return res.getBody(); });
-	  };
-	  return result.nodeify(callback);
-	}
-
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// **Github:** https://github.com/zensh/lrucache
-	//
-	// **License:** MIT
-
-	/* global module, define */
-	;(function (root, factory) {
-	  'use strict';
-
-	  if (typeof module === 'object' && typeof module.exports === 'object') {
-	    module.exports = factory();
-	  } else if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else {
-	    root.LRUCache = factory();
-	  }
-	}(typeof window === 'object' ? window : this, function () {
-	  'use strict';
-
-	  function CacheState(capacity) {
-	    this.capacity = capacity > 0 ? +capacity : Number.MAX_VALUE;
-	    this.data = Object.create ? Object.create(null) : {};
-	    this.hash = Object.create ? Object.create(null) : {};
-	    this.linkedList = {
-	      length: 0,
-	      head: null,
-	      end: null
-	    };
-	  }
-
-	  function LRUCache(capacity) {
-	    if (!(this instanceof LRUCache)) return new LRUCache(capacity);
-	    this._LRUCacheState = new CacheState(capacity);
-	  }
-
-	  var proto = LRUCache.prototype;
-
-	  proto.get = function (key) {
-	    var state = this._LRUCacheState;
-	    var lruEntry = state.hash[key];
-	    if (!lruEntry) return;
-	    refresh(state.linkedList, lruEntry);
-	    return state.data[key];
-	  };
-
-	  proto.set = function (key, value) {
-	    var state = this._LRUCacheState;
-	    var lruEntry = state.hash[key];
-	    if (value === undefined) return this;
-	    if (!lruEntry) {
-	      state.hash[key] = {key: key};
-	      state.linkedList.length += 1;
-	      lruEntry = state.hash[key];
-	    }
-	    refresh(state.linkedList, lruEntry);
-	    state.data[key] = value;
-	    if (state.linkedList.length > state.capacity) this.remove(state.linkedList.end.key);
-	    return this;
-	  };
-
-	  proto.update = function (key, parseFn) {
-	    var state = this._LRUCacheState;
-	    if (this.has(key)) {
-	      var data = this.get(key);
-	      this.set(key, parseFn(data));
-	    }
-	    return this;
-	  };
-
-	  proto.remove = function (key) {
-	    var state = this._LRUCacheState;
-	    var lruEntry = state.hash[key];
-	    if (!lruEntry) return this;
-	    if (lruEntry === state.linkedList.head) state.linkedList.head = lruEntry.p;
-	    if (lruEntry === state.linkedList.end) state.linkedList.end = lruEntry.n;
-	    link(lruEntry.n, lruEntry.p);
-	    delete state.hash[key];
-	    delete state.data[key];
-	    state.linkedList.length -= 1;
-	    return this;
-	  };
-
-	  proto.removeAll = function () {
-	    this._LRUCacheState = new CacheState(this._LRUCacheState.capacity);
-	    return this;
-	  };
-
-	  proto.info = function () {
-	    var state = this._LRUCacheState;
-	    return {
-	      capacity: state.capacity,
-	      length: state.linkedList.length
-	    };
-	  };
-
-	  proto.keys = function () {
-	    var state = this._LRUCacheState;
-	    var keys = [], lruEntry = state.linkedList.head;
-	    while (lruEntry) {
-	      keys.push(lruEntry.key);
-	      lruEntry = lruEntry.p;
-	    }
-	    return keys;
-	  };
-
-	  proto.has = function (key) {
-	    return !!this._LRUCacheState.hash[key];
-	  };
-
-	  proto.staleKey = function () {
-	    return this._LRUCacheState.linkedList.end && this._LRUCacheState.linkedList.end.key;
-	  };
-
-	  proto.popStale = function () {
-	    var staleKey = this.staleKey();
-	    if (!staleKey) return null;
-	    var stale = [staleKey, this._LRUCacheState.data[staleKey]];
-	    this.remove(staleKey);
-	    return stale;
-	  };
-
-	  // 更新链表，把get或put方法操作的key提到链表head，即表示最新
-	  function refresh(linkedList, entry) {
-	    if (entry === linkedList.head) return;
-	    if (!linkedList.end) {
-	      linkedList.end = entry;
-	    } else if (linkedList.end === entry) {
-	      linkedList.end = entry.n;
-	    }
-
-	    link(entry.n, entry.p);
-	    link(entry, linkedList.head);
-	    linkedList.head = entry;
-	    linkedList.head.n = null;
-	  }
-
-	  // 对两个链表对象建立链接，形成一条链
-	  function link(nextEntry, prevEntry) {
-	    if (nextEntry === prevEntry) return;
-	    if (nextEntry) nextEntry.p = prevEntry;
-	    if (prevEntry) prevEntry.n = nextEntry;
-	  }
-
-	  LRUCache.NAME = 'LRUCache';
-	  LRUCache.VERSION = 'v0.2.0';
-	  return LRUCache;
-	}));
-
-
-/***/ },
 /* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*jshint node:true*/
-
-	if (false) {
-	    var define = require('amdefine')(module);
-	}
-
-	!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
-	    "use strict";
-
-	    var statusCodes = __webpack_require__(111),
-	        statusCodesToPhrases = {},
-	        statusPhrasesToCodes = {},
-	        methods = __webpack_require__(112),
-	        headers = __webpack_require__(113),
-	        relations = __webpack_require__(114);
-
-	    statusCodes.forEach(function(item) {
-	        var code = parseInt(item.code, 10),
-	            phrase;
-
-	        // Ignore codes for classes
-	        if (code.toString() !== item.code) {
-	            return;
-	        }
-
-	        phrase = item.phrase.toUpperCase().replace(/[^A-Z]/g, '_');
-
-	        statusCodesToPhrases[code] = item.phrase;
-	        statusPhrasesToCodes[phrase] = item.code;
-	    });
-
-	    return {
-	        statusCodes: statusCodes,
-	        statusCodesToPhrases: statusCodesToPhrases,
-	        statusPhrasesToCodes: statusPhrasesToCodes,
-	        methods: methods,
-	        headers: headers,
-	        relations: relations
-	    };
-	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var mod = (function () {
-	    /*
-	     * Generated by PEG.js 0.8.0.
-	     *
-	     * http://pegjs.majda.cz/
-	     */
-	    function peg$subclass(child, parent) {
-	        function ctor() {
-	            this.constructor = child;
-	        }
-	        ctor.prototype = parent.prototype;
-	        child.prototype = new ctor();
-	    }
-	    function SyntaxError(message, expected, found, offset, line, column) {
-	        this.message = message;
-	        this.expected = expected;
-	        this.found = found;
-	        this.offset = offset;
-	        this.line = line;
-	        this.column = column;
-	        this.name = "SyntaxError";
-	    }
-	    peg$subclass(SyntaxError, Error);
-	    function parse(input) {
-	        var options = arguments.length > 1 ? arguments[1] : {}, peg$FAILED = {}, peg$startRuleFunctions = { start: peg$parsestart }, peg$startRuleFunction = peg$parsestart, peg$c0 = peg$FAILED, peg$c1 = "|", peg$c2 = { type: "literal", value: "|", description: "\"|\"" }, peg$c3 = function (left, r) {
-	            return { 'type': 'or', 'left': left, 'right': r ? r : null };
-	        }, peg$c4 = ".", peg$c5 = { type: "literal", value: ".", description: "\".\"" }, peg$c6 = function (left, r) {
-	            return { 'type': 'dot', 'left': left, 'right': r };
-	        }, peg$c7 = "$", peg$c8 = { type: "literal", value: "$", description: "\"$\"" }, peg$c9 = function () {
-	            return { 'type': 'parent' };
-	        }, peg$c10 = "$$", peg$c11 = { type: "literal", value: "$$", description: "\"$$\"" }, peg$c12 = function () {
-	            return { 'type': 'ancestor' };
-	        }, peg$c13 = "**", peg$c14 = { type: "literal", value: "**", description: "\"**\"" }, peg$c15 = function () {
-	            return { 'type': 'descendant' };
-	        }, peg$c16 = "*", peg$c17 = { type: "literal", value: "*", description: "\"*\"" }, peg$c18 = function () {
-	            return { 'type': 'child' };
-	        }, peg$c19 = [], peg$c20 = /^[A-z]/, peg$c21 = { type: "class", value: "[A-z]", description: "[A-z]" }, peg$c22 = function (chars) {
-	            return { 'type': 'classLiteral', "name": chars.join("") };
-	        }, peg$currPos = 0, peg$reportedPos = 0, peg$cachedPos = 0, peg$cachedPosDetails = { line: 1, column: 1, seenCR: false }, peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
-	        if ("startRule" in options) {
-	            if (!(options.startRule in peg$startRuleFunctions)) {
-	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
-	            }
-	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
-	        }
-	        function text() {
-	            return input.substring(peg$reportedPos, peg$currPos);
-	        }
-	        function offset() {
-	            return peg$reportedPos;
-	        }
-	        function line() {
-	            return peg$computePosDetails(peg$reportedPos).line;
-	        }
-	        function column() {
-	            return peg$computePosDetails(peg$reportedPos).column;
-	        }
-	        function expected(description) {
-	            throw peg$buildException(null, [{ type: "other", description: description }], peg$reportedPos);
-	        }
-	        function error(message) {
-	            throw peg$buildException(message, null, peg$reportedPos);
-	        }
-	        function peg$computePosDetails(pos) {
-	            function advance(details, startPos, endPos) {
-	                var p, ch;
-	                for (p = startPos; p < endPos; p++) {
-	                    ch = input.charAt(p);
-	                    if (ch === "\n") {
-	                        if (!details.seenCR) {
-	                            details.line++;
-	                        }
-	                        details.column = 1;
-	                        details.seenCR = false;
-	                    }
-	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
-	                        details.line++;
-	                        details.column = 1;
-	                        details.seenCR = true;
-	                    }
-	                    else {
-	                        details.column++;
-	                        details.seenCR = false;
-	                    }
-	                }
-	            }
-	            if (peg$cachedPos !== pos) {
-	                if (peg$cachedPos > pos) {
-	                    peg$cachedPos = 0;
-	                    peg$cachedPosDetails = { line: 1, column: 1, seenCR: false };
-	                }
-	                advance(peg$cachedPosDetails, peg$cachedPos, pos);
-	                peg$cachedPos = pos;
-	            }
-	            return peg$cachedPosDetails;
-	        }
-	        function peg$fail(expected) {
-	            if (peg$currPos < peg$maxFailPos) {
-	                return;
-	            }
-	            if (peg$currPos > peg$maxFailPos) {
-	                peg$maxFailPos = peg$currPos;
-	                peg$maxFailExpected = [];
-	            }
-	            peg$maxFailExpected.push(expected);
-	        }
-	        function peg$buildException(message, expected, pos) {
-	            function cleanupExpected(expected) {
-	                var i = 1;
-	                expected.sort(function (a, b) {
-	                    if (a.description < b.description) {
-	                        return -1;
-	                    }
-	                    else if (a.description > b.description) {
-	                        return 1;
-	                    }
-	                    else {
-	                        return 0;
-	                    }
-	                });
-	                while (i < expected.length) {
-	                    if (expected[i - 1] === expected[i]) {
-	                        expected.splice(i, 1);
-	                    }
-	                    else {
-	                        i++;
-	                    }
-	                }
-	            }
-	            function buildMessage(expected, found) {
-	                function stringEscape(s) {
-	                    function hex(ch) {
-	                        return ch.charCodeAt(0).toString(16).toUpperCase();
-	                    }
-	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
-	                        return '\\x0' + hex(ch);
-	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
-	                        return '\\x' + hex(ch);
-	                    }).replace(/[\u0180-\u0FFF]/g, function (ch) {
-	                        return '\\u0' + hex(ch);
-	                    }).replace(/[\u1080-\uFFFF]/g, function (ch) {
-	                        return '\\u' + hex(ch);
-	                    });
-	                }
-	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
-	                for (i = 0; i < expected.length; i++) {
-	                    expectedDescs[i] = expected[i].description;
-	                }
-	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
-	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
-	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
-	            }
-	            var posDetails = peg$computePosDetails(pos), found = pos < input.length ? input.charAt(pos) : null;
-	            if (expected !== null) {
-	                cleanupExpected(expected);
-	            }
-	            return new SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, pos, posDetails.line, posDetails.column);
-	        }
-	        function peg$parsestart() {
-	            var s0;
-	            s0 = peg$parseor();
-	            return s0;
-	        }
-	        function peg$parseor() {
-	            var s0, s1, s2, s3;
-	            s0 = peg$currPos;
-	            s1 = peg$parsesequence();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 124) {
-	                    s2 = peg$c1;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c2);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parseor();
-	                    if (s3 !== peg$FAILED) {
-	                        peg$reportedPos = s0;
-	                        s1 = peg$c3(s1, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$c0;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$c0;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$c0;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parsesequence();
-	            }
-	            return s0;
-	        }
-	        function peg$parsesequence() {
-	            var s0, s1, s2, s3;
-	            s0 = peg$currPos;
-	            s1 = peg$parseprimary();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 46) {
-	                    s2 = peg$c4;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c5);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parsesequence();
-	                    if (s3 !== peg$FAILED) {
-	                        peg$reportedPos = s0;
-	                        s1 = peg$c6(s1, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$c0;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$c0;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$c0;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parseprimary();
-	            }
-	            return s0;
-	        }
-	        function peg$parseprimary() {
-	            var s0;
-	            s0 = peg$parsechildRef();
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parsedoubleStar();
-	                if (s0 === peg$FAILED) {
-	                    s0 = peg$parsestar();
-	                    if (s0 === peg$FAILED) {
-	                        s0 = peg$parsedoubleDollar();
-	                        if (s0 === peg$FAILED) {
-	                            s0 = peg$parsedollar();
-	                        }
-	                    }
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parsedollar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 36) {
-	                s1 = peg$c7;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c8);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c9();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsedoubleDollar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.substr(peg$currPos, 2) === peg$c10) {
-	                s1 = peg$c10;
-	                peg$currPos += 2;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c11);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c12();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsedoubleStar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.substr(peg$currPos, 2) === peg$c13) {
-	                s1 = peg$c13;
-	                peg$currPos += 2;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c14);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c15();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsestar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 42) {
-	                s1 = peg$c16;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c17);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c18();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsechildRef() {
-	            var s0, s1, s2;
-	            s0 = peg$currPos;
-	            s1 = [];
-	            if (peg$c20.test(input.charAt(peg$currPos))) {
-	                s2 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s2 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c21);
-	                }
-	            }
-	            if (s2 !== peg$FAILED) {
-	                while (s2 !== peg$FAILED) {
-	                    s1.push(s2);
-	                    if (peg$c20.test(input.charAt(peg$currPos))) {
-	                        s2 = input.charAt(peg$currPos);
-	                        peg$currPos++;
-	                    }
-	                    else {
-	                        s2 = peg$FAILED;
-	                        if (peg$silentFails === 0) {
-	                            peg$fail(peg$c21);
-	                        }
-	                    }
-	                }
-	            }
-	            else {
-	                s1 = peg$c0;
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c22(s1);
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        peg$result = peg$startRuleFunction();
-	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
-	            return peg$result;
-	        }
-	        else {
-	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
-	                peg$fail({ type: "end", description: "end of input" });
-	            }
-	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos);
-	        }
-	    }
-	    return {
-	        SyntaxError: SyntaxError,
-	        parse: parse
-	    };
-	})();
-	module.exports = mod;
-	//# sourceMappingURL=ramlselector.js.map
-
-/***/ },
-/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parser = (function () {
@@ -48113,12 +47970,529 @@
 	//# sourceMappingURL=ramlExpressionParser.js.map
 
 /***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var mod = (function () {
+	    /*
+	     * Generated by PEG.js 0.8.0.
+	     *
+	     * http://pegjs.majda.cz/
+	     */
+	    function peg$subclass(child, parent) {
+	        function ctor() {
+	            this.constructor = child;
+	        }
+	        ctor.prototype = parent.prototype;
+	        child.prototype = new ctor();
+	    }
+	    function SyntaxError(message, expected, found, offset, line, column) {
+	        this.message = message;
+	        this.expected = expected;
+	        this.found = found;
+	        this.offset = offset;
+	        this.line = line;
+	        this.column = column;
+	        this.name = "SyntaxError";
+	    }
+	    peg$subclass(SyntaxError, Error);
+	    function parse(input) {
+	        var options = arguments.length > 1 ? arguments[1] : {}, peg$FAILED = {}, peg$startRuleFunctions = { start: peg$parsestart }, peg$startRuleFunction = peg$parsestart, peg$c0 = peg$FAILED, peg$c1 = "|", peg$c2 = { type: "literal", value: "|", description: "\"|\"" }, peg$c3 = function (left, r) {
+	            return { 'type': 'or', 'left': left, 'right': r ? r : null };
+	        }, peg$c4 = ".", peg$c5 = { type: "literal", value: ".", description: "\".\"" }, peg$c6 = function (left, r) {
+	            return { 'type': 'dot', 'left': left, 'right': r };
+	        }, peg$c7 = "$", peg$c8 = { type: "literal", value: "$", description: "\"$\"" }, peg$c9 = function () {
+	            return { 'type': 'parent' };
+	        }, peg$c10 = "$$", peg$c11 = { type: "literal", value: "$$", description: "\"$$\"" }, peg$c12 = function () {
+	            return { 'type': 'ancestor' };
+	        }, peg$c13 = "**", peg$c14 = { type: "literal", value: "**", description: "\"**\"" }, peg$c15 = function () {
+	            return { 'type': 'descendant' };
+	        }, peg$c16 = "*", peg$c17 = { type: "literal", value: "*", description: "\"*\"" }, peg$c18 = function () {
+	            return { 'type': 'child' };
+	        }, peg$c19 = [], peg$c20 = /^[A-z]/, peg$c21 = { type: "class", value: "[A-z]", description: "[A-z]" }, peg$c22 = function (chars) {
+	            return { 'type': 'classLiteral', "name": chars.join("") };
+	        }, peg$currPos = 0, peg$reportedPos = 0, peg$cachedPos = 0, peg$cachedPosDetails = { line: 1, column: 1, seenCR: false }, peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
+	        if ("startRule" in options) {
+	            if (!(options.startRule in peg$startRuleFunctions)) {
+	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
+	            }
+	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
+	        }
+	        function text() {
+	            return input.substring(peg$reportedPos, peg$currPos);
+	        }
+	        function offset() {
+	            return peg$reportedPos;
+	        }
+	        function line() {
+	            return peg$computePosDetails(peg$reportedPos).line;
+	        }
+	        function column() {
+	            return peg$computePosDetails(peg$reportedPos).column;
+	        }
+	        function expected(description) {
+	            throw peg$buildException(null, [{ type: "other", description: description }], peg$reportedPos);
+	        }
+	        function error(message) {
+	            throw peg$buildException(message, null, peg$reportedPos);
+	        }
+	        function peg$computePosDetails(pos) {
+	            function advance(details, startPos, endPos) {
+	                var p, ch;
+	                for (p = startPos; p < endPos; p++) {
+	                    ch = input.charAt(p);
+	                    if (ch === "\n") {
+	                        if (!details.seenCR) {
+	                            details.line++;
+	                        }
+	                        details.column = 1;
+	                        details.seenCR = false;
+	                    }
+	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
+	                        details.line++;
+	                        details.column = 1;
+	                        details.seenCR = true;
+	                    }
+	                    else {
+	                        details.column++;
+	                        details.seenCR = false;
+	                    }
+	                }
+	            }
+	            if (peg$cachedPos !== pos) {
+	                if (peg$cachedPos > pos) {
+	                    peg$cachedPos = 0;
+	                    peg$cachedPosDetails = { line: 1, column: 1, seenCR: false };
+	                }
+	                advance(peg$cachedPosDetails, peg$cachedPos, pos);
+	                peg$cachedPos = pos;
+	            }
+	            return peg$cachedPosDetails;
+	        }
+	        function peg$fail(expected) {
+	            if (peg$currPos < peg$maxFailPos) {
+	                return;
+	            }
+	            if (peg$currPos > peg$maxFailPos) {
+	                peg$maxFailPos = peg$currPos;
+	                peg$maxFailExpected = [];
+	            }
+	            peg$maxFailExpected.push(expected);
+	        }
+	        function peg$buildException(message, expected, pos) {
+	            function cleanupExpected(expected) {
+	                var i = 1;
+	                expected.sort(function (a, b) {
+	                    if (a.description < b.description) {
+	                        return -1;
+	                    }
+	                    else if (a.description > b.description) {
+	                        return 1;
+	                    }
+	                    else {
+	                        return 0;
+	                    }
+	                });
+	                while (i < expected.length) {
+	                    if (expected[i - 1] === expected[i]) {
+	                        expected.splice(i, 1);
+	                    }
+	                    else {
+	                        i++;
+	                    }
+	                }
+	            }
+	            function buildMessage(expected, found) {
+	                function stringEscape(s) {
+	                    function hex(ch) {
+	                        return ch.charCodeAt(0).toString(16).toUpperCase();
+	                    }
+	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
+	                        return '\\x0' + hex(ch);
+	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
+	                        return '\\x' + hex(ch);
+	                    }).replace(/[\u0180-\u0FFF]/g, function (ch) {
+	                        return '\\u0' + hex(ch);
+	                    }).replace(/[\u1080-\uFFFF]/g, function (ch) {
+	                        return '\\u' + hex(ch);
+	                    });
+	                }
+	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
+	                for (i = 0; i < expected.length; i++) {
+	                    expectedDescs[i] = expected[i].description;
+	                }
+	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
+	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
+	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
+	            }
+	            var posDetails = peg$computePosDetails(pos), found = pos < input.length ? input.charAt(pos) : null;
+	            if (expected !== null) {
+	                cleanupExpected(expected);
+	            }
+	            return new SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, pos, posDetails.line, posDetails.column);
+	        }
+	        function peg$parsestart() {
+	            var s0;
+	            s0 = peg$parseor();
+	            return s0;
+	        }
+	        function peg$parseor() {
+	            var s0, s1, s2, s3;
+	            s0 = peg$currPos;
+	            s1 = peg$parsesequence();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 124) {
+	                    s2 = peg$c1;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c2);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parseor();
+	                    if (s3 !== peg$FAILED) {
+	                        peg$reportedPos = s0;
+	                        s1 = peg$c3(s1, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$c0;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$c0;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$c0;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parsesequence();
+	            }
+	            return s0;
+	        }
+	        function peg$parsesequence() {
+	            var s0, s1, s2, s3;
+	            s0 = peg$currPos;
+	            s1 = peg$parseprimary();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 46) {
+	                    s2 = peg$c4;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c5);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parsesequence();
+	                    if (s3 !== peg$FAILED) {
+	                        peg$reportedPos = s0;
+	                        s1 = peg$c6(s1, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$c0;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$c0;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$c0;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parseprimary();
+	            }
+	            return s0;
+	        }
+	        function peg$parseprimary() {
+	            var s0;
+	            s0 = peg$parsechildRef();
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parsedoubleStar();
+	                if (s0 === peg$FAILED) {
+	                    s0 = peg$parsestar();
+	                    if (s0 === peg$FAILED) {
+	                        s0 = peg$parsedoubleDollar();
+	                        if (s0 === peg$FAILED) {
+	                            s0 = peg$parsedollar();
+	                        }
+	                    }
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parsedollar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 36) {
+	                s1 = peg$c7;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c8);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c9();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsedoubleDollar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.substr(peg$currPos, 2) === peg$c10) {
+	                s1 = peg$c10;
+	                peg$currPos += 2;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c11);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c12();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsedoubleStar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.substr(peg$currPos, 2) === peg$c13) {
+	                s1 = peg$c13;
+	                peg$currPos += 2;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c14);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c15();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsestar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 42) {
+	                s1 = peg$c16;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c17);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c18();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsechildRef() {
+	            var s0, s1, s2;
+	            s0 = peg$currPos;
+	            s1 = [];
+	            if (peg$c20.test(input.charAt(peg$currPos))) {
+	                s2 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s2 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c21);
+	                }
+	            }
+	            if (s2 !== peg$FAILED) {
+	                while (s2 !== peg$FAILED) {
+	                    s1.push(s2);
+	                    if (peg$c20.test(input.charAt(peg$currPos))) {
+	                        s2 = input.charAt(peg$currPos);
+	                        peg$currPos++;
+	                    }
+	                    else {
+	                        s2 = peg$FAILED;
+	                        if (peg$silentFails === 0) {
+	                            peg$fail(peg$c21);
+	                        }
+	                    }
+	                }
+	            }
+	            else {
+	                s1 = peg$c0;
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c22(s1);
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        peg$result = peg$startRuleFunction();
+	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
+	            return peg$result;
+	        }
+	        else {
+	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+	                peg$fail({ type: "end", description: "end of input" });
+	            }
+	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos);
+	        }
+	    }
+	    return {
+	        SyntaxError: SyntaxError,
+	        parse: parse
+	    };
+	})();
+	module.exports = mod;
+	//# sourceMappingURL=ramlselector.js.map
+
+/***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*jshint node:true*/
+
+	if (false) {
+	    var define = require('amdefine')(module);
+	}
+
+	!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	    "use strict";
+
+	    var statusCodes = __webpack_require__(112),
+	        statusCodesToPhrases = {},
+	        statusPhrasesToCodes = {},
+	        methods = __webpack_require__(113),
+	        headers = __webpack_require__(114),
+	        relations = __webpack_require__(115);
+
+	    statusCodes.forEach(function(item) {
+	        var code = parseInt(item.code, 10),
+	            phrase;
+
+	        // Ignore codes for classes
+	        if (code.toString() !== item.code) {
+	            return;
+	        }
+
+	        phrase = item.phrase.toUpperCase().replace(/[^A-Z]/g, '_');
+
+	        statusCodesToPhrases[code] = item.phrase;
+	        statusPhrasesToCodes[phrase] = item.code;
+	    });
+
+	    return {
+	        statusCodes: statusCodes,
+	        statusCodesToPhrases: statusCodesToPhrases,
+	        statusPhrasesToCodes: statusPhrasesToCodes,
+	        methods: methods,
+	        headers: headers,
+	        relations: relations
+	    };
+	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
 /* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../typings/tsd.d.ts" />
+	'use strict';
+	var common = __webpack_require__(69);
+	var Mark = (function () {
+	    function Mark(name, buffer, position, line, column) {
+	        this.name = name;
+	        this.buffer = buffer;
+	        this.position = position;
+	        this.line = line;
+	        this.column = column;
+	    }
+	    Mark.prototype.getSnippet = function (indent, maxLength) {
+	        if (indent === void 0) { indent = 0; }
+	        if (maxLength === void 0) { maxLength = 75; }
+	        var head, start, tail, end, snippet;
+	        if (!this.buffer) {
+	            return null;
+	        }
+	        indent = indent || 4;
+	        maxLength = maxLength || 75;
+	        head = '';
+	        start = this.position;
+	        while (start > 0 && -1 === '\x00\r\n\x85\u2028\u2029'.indexOf(this.buffer.charAt(start - 1))) {
+	            start -= 1;
+	            if (this.position - start > (maxLength / 2 - 1)) {
+	                head = ' ... ';
+	                start += 5;
+	                break;
+	            }
+	        }
+	        tail = '';
+	        end = this.position;
+	        while (end < this.buffer.length && -1 === '\x00\r\n\x85\u2028\u2029'.indexOf(this.buffer.charAt(end))) {
+	            end += 1;
+	            if (end - this.position > (maxLength / 2 - 1)) {
+	                tail = ' ... ';
+	                end -= 5;
+	                break;
+	            }
+	        }
+	        snippet = this.buffer.slice(start, end);
+	        return common.repeat(' ', indent) + head + snippet + tail + '\n' + common.repeat(' ', indent + this.position - start + head.length) + '^';
+	    };
+	    Mark.prototype.toString = function (compact) {
+	        if (compact === void 0) { compact = true; }
+	        var snippet, where = '';
+	        if (this.name) {
+	            where += 'in "' + this.name + '" ';
+	        }
+	        where += 'at line ' + (this.line + 1) + ', column ' + (this.column + 1);
+	        if (!compact) {
+	            snippet = this.getSnippet();
+	            if (snippet) {
+	                where += ':\n' + snippet;
+	            }
+	        }
+	        return where;
+	    };
+	    return Mark;
+	})();
+	module.exports = Mark;
+	//# sourceMappingURL=mark.js.map
+
+/***/ },
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	module.exports = new Type('tag:yaml.org,2002:str', {
 	    kind: 'scalar',
 	    construct: function (data) {
@@ -48128,12 +48502,12 @@
 	//# sourceMappingURL=str.js.map
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	module.exports = new Type('tag:yaml.org,2002:seq', {
 	    kind: 'sequence',
 	    construct: function (data) {
@@ -48143,12 +48517,12 @@
 	//# sourceMappingURL=seq.js.map
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	module.exports = new Type('tag:yaml.org,2002:map', {
 	    kind: 'mapping',
 	    construct: function (data) {
@@ -48158,12 +48532,12 @@
 	//# sourceMappingURL=map.js.map
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	function resolveYamlNull(data) {
 	    if (null === data) {
 	        return true;
@@ -48201,12 +48575,12 @@
 	//# sourceMappingURL=null.js.map
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	function resolveYamlBoolean(data) {
 	    if (null === data) {
 	        return false;
@@ -48241,13 +48615,13 @@
 	//# sourceMappingURL=bool.js.map
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var common = __webpack_require__(70);
-	var Type = __webpack_require__(63);
+	var common = __webpack_require__(69);
+	var Type = __webpack_require__(62);
 	function isHexCode(c) {
 	    return ((0x30 <= c) && (c <= 0x39)) || ((0x41 <= c) && (c <= 0x46)) || ((0x61 <= c) && (c <= 0x66));
 	}
@@ -48414,13 +48788,13 @@
 	//# sourceMappingURL=int.js.map
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var common = __webpack_require__(70);
-	var Type = __webpack_require__(63);
+	var common = __webpack_require__(69);
+	var Type = __webpack_require__(62);
 	var YAML_FLOAT_PATTERN = new RegExp('^(?:[-+]?(?:[0-9][0-9_]*)\\.[0-9_]*(?:[eE][-+][0-9]+)?' + '|\\.[0-9_]+(?:[eE][-+][0-9]+)?' + '|[-+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*' + '|[-+]?\\.(?:inf|Inf|INF)' + '|\\.(?:nan|NaN|NAN))$');
 	function resolveYamlFloat(data) {
 	    if (null === data) {
@@ -48510,79 +48884,12 @@
 	//# sourceMappingURL=float.js.map
 
 /***/ },
-/* 93 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../typings/tsd.d.ts" />
-	'use strict';
-	var common = __webpack_require__(70);
-	var Mark = (function () {
-	    function Mark(name, buffer, position, line, column) {
-	        this.name = name;
-	        this.buffer = buffer;
-	        this.position = position;
-	        this.line = line;
-	        this.column = column;
-	    }
-	    Mark.prototype.getSnippet = function (indent, maxLength) {
-	        if (indent === void 0) { indent = 0; }
-	        if (maxLength === void 0) { maxLength = 75; }
-	        var head, start, tail, end, snippet;
-	        if (!this.buffer) {
-	            return null;
-	        }
-	        indent = indent || 4;
-	        maxLength = maxLength || 75;
-	        head = '';
-	        start = this.position;
-	        while (start > 0 && -1 === '\x00\r\n\x85\u2028\u2029'.indexOf(this.buffer.charAt(start - 1))) {
-	            start -= 1;
-	            if (this.position - start > (maxLength / 2 - 1)) {
-	                head = ' ... ';
-	                start += 5;
-	                break;
-	            }
-	        }
-	        tail = '';
-	        end = this.position;
-	        while (end < this.buffer.length && -1 === '\x00\r\n\x85\u2028\u2029'.indexOf(this.buffer.charAt(end))) {
-	            end += 1;
-	            if (end - this.position > (maxLength / 2 - 1)) {
-	                tail = ' ... ';
-	                end -= 5;
-	                break;
-	            }
-	        }
-	        snippet = this.buffer.slice(start, end);
-	        return common.repeat(' ', indent) + head + snippet + tail + '\n' + common.repeat(' ', indent + this.position - start + head.length) + '^';
-	    };
-	    Mark.prototype.toString = function (compact) {
-	        if (compact === void 0) { compact = true; }
-	        var snippet, where = '';
-	        if (this.name) {
-	            where += 'in "' + this.name + '" ';
-	        }
-	        where += 'at line ' + (this.line + 1) + ', column ' + (this.column + 1);
-	        if (!compact) {
-	            snippet = this.getSnippet();
-	            if (snippet) {
-	                where += ':\n' + snippet;
-	            }
-	        }
-	        return where;
-	    };
-	    return Mark;
-	})();
-	module.exports = Mark;
-	//# sourceMappingURL=mark.js.map
-
-/***/ },
 /* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	var YAML_TIMESTAMP_REGEXP = new RegExp('^([0-9][0-9][0-9][0-9])' + '-([0-9][0-9]?)' + '-([0-9][0-9]?)' + '(?:(?:[Tt]|[ \\t]+)' + '([0-9][0-9]?)' + ':([0-9][0-9])' + ':([0-9][0-9])' + '(?:\\.([0-9]*))?' + '(?:[ \\t]*(Z|([-+])([0-9][0-9]?)' + '(?::([0-9][0-9]))?))?)?$'); // [11] tz_minute
 	function resolveYamlTimestamp(data) {
 	    if (null === data) {
@@ -48652,7 +48959,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	function resolveYamlMerge(data) {
 	    return '<<' === data || null === data;
 	}
@@ -48672,7 +48979,7 @@
 	// A trick for browserified version.
 	// Since we make browserifier to ignore `buffer` module, NodeBuffer will be undefined
 	var NodeBuffer = __webpack_require__(77).Buffer;
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	// [ 64, 65, 66 ] -> [ padding, CR, LF ]
 	var BASE64_MAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r';
 	function resolveYamlBinary(data) {
@@ -48776,7 +49083,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	var _toString = Object.prototype.toString;
 	function resolveYamlOmap(data) {
@@ -48828,7 +49135,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	var _toString = Object.prototype.toString;
 	function resolveYamlPairs(data) {
 	    if (null === data) {
@@ -48875,7 +49182,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	function resolveYamlSet(data) {
 	    if (null === data) {
@@ -48907,7 +49214,7 @@
 
 	/// <reference path="../../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	function resolveJavascriptUndefined() {
 	    return true;
 	}
@@ -48936,7 +49243,7 @@
 
 	/// <reference path="../../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	function resolveJavascriptRegExp(data) {
 	    if (null === data) {
 	        return false;
@@ -49018,7 +49325,7 @@
 	//    If not found - try to fallback to window.esprima. If not
 	//    found too - then fail to parse.
 	//
-	var Type = __webpack_require__(63);
+	var Type = __webpack_require__(62);
 	function resolveJavascriptFunction(data) {
 	    if (null === data) {
 	        return false;
@@ -49584,8 +49891,8 @@
 
 	'use strict';
 
-	var parse = __webpack_require__(127).parse;
-	var stringify = __webpack_require__(127).stringify;
+	var parse = __webpack_require__(126).parse;
+	var stringify = __webpack_require__(126).stringify;
 
 	module.exports = handleQs;
 	function handleQs(url, query) {
@@ -50135,7 +50442,7 @@
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(126);
+	exports.isBuffer = __webpack_require__(127);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -50179,7 +50486,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(137);
+	exports.inherits = __webpack_require__(138);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -50197,7 +50504,7 @@
 	  return Object.prototype.hasOwnProperty.call(obj, prop);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(61)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(70)))
 
 /***/ },
 /* 108 */
@@ -50209,1946 +50516,6 @@
 
 /***/ },
 /* 109 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
-	  var e, m,
-	      eLen = nBytes * 8 - mLen - 1,
-	      eMax = (1 << eLen) - 1,
-	      eBias = eMax >> 1,
-	      nBits = -7,
-	      i = isLE ? (nBytes - 1) : 0,
-	      d = isLE ? -1 : 1,
-	      s = buffer[offset + i];
-
-	  i += d;
-
-	  e = s & ((1 << (-nBits)) - 1);
-	  s >>= (-nBits);
-	  nBits += eLen;
-	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8);
-
-	  m = e & ((1 << (-nBits)) - 1);
-	  e >>= (-nBits);
-	  nBits += mLen;
-	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8);
-
-	  if (e === 0) {
-	    e = 1 - eBias;
-	  } else if (e === eMax) {
-	    return m ? NaN : ((s ? -1 : 1) * Infinity);
-	  } else {
-	    m = m + Math.pow(2, mLen);
-	    e = e - eBias;
-	  }
-	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
-	};
-
-	exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
-	  var e, m, c,
-	      eLen = nBytes * 8 - mLen - 1,
-	      eMax = (1 << eLen) - 1,
-	      eBias = eMax >> 1,
-	      rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0),
-	      i = isLE ? 0 : (nBytes - 1),
-	      d = isLE ? 1 : -1,
-	      s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0;
-
-	  value = Math.abs(value);
-
-	  if (isNaN(value) || value === Infinity) {
-	    m = isNaN(value) ? 1 : 0;
-	    e = eMax;
-	  } else {
-	    e = Math.floor(Math.log(value) / Math.LN2);
-	    if (value * (c = Math.pow(2, -e)) < 1) {
-	      e--;
-	      c *= 2;
-	    }
-	    if (e + eBias >= 1) {
-	      value += rt / c;
-	    } else {
-	      value += rt * Math.pow(2, 1 - eBias);
-	    }
-	    if (value * c >= 2) {
-	      e++;
-	      c /= 2;
-	    }
-
-	    if (e + eBias >= eMax) {
-	      m = 0;
-	      e = eMax;
-	    } else if (e + eBias >= 1) {
-	      m = (value * c - 1) * Math.pow(2, mLen);
-	      e = e + eBias;
-	    } else {
-	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
-	      e = 0;
-	    }
-	  }
-
-	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8);
-
-	  e = (e << mLen) | m;
-	  eLen += mLen;
-	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
-
-	  buffer[offset + i - d] |= s * 128;
-	};
-
-
-/***/ },
-/* 110 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * isArray
-	 */
-
-	var isArray = Array.isArray;
-
-	/**
-	 * toString
-	 */
-
-	var str = Object.prototype.toString;
-
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
-	};
-
-
-/***/ },
-/* 111 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = [
-		{
-			"code": "1xx",
-			"phrase": "**Informational**",
-			"description": "\"indicates an interim response for communicating connection status or request progress prior to completing the requested action and sending a final response.\" ~ [sure](http://www.urbandictionary.com/define.php?term=sure)",
-			"spec_title": "RFC7231#6.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.2"
-		},
-		{
-			"code": "100",
-			"phrase": "Continue",
-			"description": "\"indicates that the initial part of a request has been received and has not yet been rejected by the server.\"",
-			"spec_title": "RFC7231#6.2.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.2.1"
-		},
-		{
-			"code": "101",
-			"phrase": "Switching Protocols",
-			"description": "\"indicates that the server understands and is willing to comply with the client's request, via the Upgrade header field, for a change in the application protocol being used on this connection.\"",
-			"spec_title": "RFC7231#6.2.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.2.2"
-		},
-		{
-			"code": "2xx",
-			"phrase": "**Successful**",
-			"description": "\"indicates that the client's request was successfully received, understood, and accepted.\" ~ [cool](https://twitter.com/DanaDanger/status/183316183494311936)",
-			"spec_title": "RFC7231#6.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3"
-		},
-		{
-			"code": "200",
-			"phrase": "OK",
-			"description": "\"indicates that the request has succeeded.\"",
-			"spec_title": "RFC7231#6.3.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.1"
-		},
-		{
-			"code": "201",
-			"phrase": "Created",
-			"description": "\"indicates that the request has been fulfilled and has resulted in one or more new resources being created.\"",
-			"spec_title": "RFC7231#6.3.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.2"
-		},
-		{
-			"code": "202",
-			"phrase": "Accepted",
-			"description": "\"indicates that the request has been accepted for processing, but the processing has not been completed.\"",
-			"spec_title": "RFC7231#6.3.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.3"
-		},
-		{
-			"code": "203",
-			"phrase": "Non-Authoritative Information",
-			"description": "\"indicates that the request was successful but the enclosed payload has been modified from that of the origin server's 200 (OK) response by a transforming proxy.\"",
-			"spec_title": "RFC7231#6.3.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.4"
-		},
-		{
-			"code": "204",
-			"phrase": "No Content",
-			"description": "\"indicates that the server has successfully fulfilled the request and that there is no additional content to send in the response payload body.\"",
-			"spec_title": "RFC7231#6.3.5",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.5"
-		},
-		{
-			"code": "205",
-			"phrase": "Reset Content",
-			"description": "\"indicates that the server has fulfilled the request and desires that the user agent reset the \"document view\", which caused the request to be sent, to its original state as received from the origin server.\"",
-			"spec_title": "RFC7231#6.3.6",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.6"
-		},
-		{
-			"code": "206",
-			"phrase": "Partial Content",
-			"description": "\"indicates that the server is successfully fulfilling a range request for the target resource by transferring one or more parts of the selected representation that correspond to the satisfiable ranges found in the requests's Range header field.\"",
-			"spec_title": "RFC7233#4.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7233#section-4.1"
-		},
-		{
-			"code": "3xx",
-			"phrase": "**Redirection**",
-			"description": "\"indicates that further action needs to be taken by the user agent in order to fulfill the request.\" ~ [ask that dude over there](https://twitter.com/DanaDanger/status/183316183494311936)",
-			"spec_title": "RFC7231#6.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4"
-		},
-		{
-			"code": "300",
-			"phrase": "Multiple Choices",
-			"description": "\"indicates that the target resource has more than one representation, each with its own more specific identifier, and information about the alternatives is being provided so that the user (or user agent) can select a preferred representation by redirecting its request to one or more of those identifiers.\"",
-			"spec_title": "RFC7231#6.4.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.1"
-		},
-		{
-			"code": "301",
-			"phrase": "Moved Permanently",
-			"description": "\"indicates that the target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.\"",
-			"spec_title": "RFC7231#6.4.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.2"
-		},
-		{
-			"code": "302",
-			"phrase": "Found",
-			"description": "\"indicates that the target resource resides temporarily under a different URI.\"",
-			"spec_title": "RFC7231#6.4.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.3"
-		},
-		{
-			"code": "303",
-			"phrase": "See Other",
-			"description": "\"indicates that the server is redirecting the user agent to a different resource, as indicated by a URI in the Location header field, that is intended to provide an indirect response to the original request.\"",
-			"spec_title": "RFC7231#6.4.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.4"
-		},
-		{
-			"code": "304",
-			"phrase": "Not Modified",
-			"description": "\"indicates that a conditional GET request has been received and would have resulted in a 200 (OK) response if it were not for the fact that the condition has evaluated to false.\"",
-			"spec_title": "RFC7232#4.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7232#section-4.1"
-		},
-		{
-			"code": "305",
-			"phrase": "Use Proxy",
-			"description": "*deprecated*",
-			"spec_title": "RFC7231#6.4.5",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.5"
-		},
-		{
-			"code": "307",
-			"phrase": "Temporary Redirect",
-			"description": "\"indicates that the target resource resides temporarily under a different URI and the user agent MUST NOT change the request method if it performs an automatic redirection to that URI.\"",
-			"spec_title": "RFC7231#6.4.7",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.7"
-		},
-		{
-			"code": "4xx",
-			"phrase": "**Client Error**",
-			"description": "\"indicates that the client seems to have erred.\" ~ [*you* fucked up](https://twitter.com/DanaDanger/status/183316183494311936)",
-			"spec_title": "RFC7231#6.5",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5"
-		},
-		{
-			"code": "400",
-			"phrase": "Bad Request",
-			"description": "\"indicates that the server cannot or will not process the request because the received syntax is invalid, nonsensical, or exceeds some limitation on what the server is willing to process.\"",
-			"spec_title": "RFC7231#6.5.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.1"
-		},
-		{
-			"code": "401",
-			"phrase": "Unauthorized",
-			"description": "\"indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.\"",
-			"spec_title": "RFC7235#6.3.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7235#section-3.1"
-		},
-		{
-			"code": "402",
-			"phrase": "Payment Required",
-			"description": "*reserved*",
-			"spec_title": "RFC7231#6.5.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.2"
-		},
-		{
-			"code": "403",
-			"phrase": "Forbidden",
-			"description": "\"indicates that the server understood the request but refuses to authorize it.\"",
-			"spec_title": "RFC7231#6.5.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.3"
-		},
-		{
-			"code": "404",
-			"phrase": "Not Found",
-			"description": "\"indicates that the origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\"",
-			"spec_title": "RFC7231#6.5.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.4"
-		},
-		{
-			"code": "405",
-			"phrase": "Method Not Allowed",
-			"description": "\"indicates that the method specified in the request-line is known by the origin server but not supported by the target resource.\"",
-			"spec_title": "RFC7231#6.5.5",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.5"
-		},
-		{
-			"code": "406",
-			"phrase": "Not Acceptable",
-			"description": "\"indicates that the target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.\"",
-			"spec_title": "RFC7231#6.5.6",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.6"
-		},
-		{
-			"code": "407",
-			"phrase": "Proxy Authentication Required",
-			"description": "\"is similar to 401 (Unauthorized), but indicates that the client needs to authenticate itself in order to use a proxy.\"",
-			"spec_title": "RFC7231#6.3.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.2"
-		},
-		{
-			"code": "408",
-			"phrase": "Request Timeout",
-			"description": "\"indicates that the server did not receive a complete request message within the time that it was prepared to wait.\"",
-			"spec_title": "RFC7231#6.5.7",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.7"
-		},
-		{
-			"code": "409",
-			"phrase": "Conflict",
-			"description": "\"indicates that the request could not be completed due to a conflict with the current state of the resource.\"",
-			"spec_title": "RFC7231#6.5.8",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.8"
-		},
-		{
-			"code": "410",
-			"phrase": "Gone",
-			"description": "\"indicates that access to the target resource is no longer available at the origin server and that this condition is likely to be permanent.\"",
-			"spec_title": "RFC7231#6.5.9",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.9"
-		},
-		{
-			"code": "411",
-			"phrase": "Length Required",
-			"description": "\"indicates that the server refuses to accept the request without a defined Content-Length.\"",
-			"spec_title": "RFC7231#6.5.10",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.10"
-		},
-		{
-			"code": "412",
-			"phrase": "Precondition Failed",
-			"description": "\"indicates that one or more preconditions given in the request header fields evaluated to false when tested on the server.\"",
-			"spec_title": "RFC7232#4.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7232#section-4.2"
-		},
-		{
-			"code": "413",
-			"phrase": "Payload Too Large",
-			"description": "\"indicates that the server is refusing to process a request because the request payload is larger than the server is willing or able to process.\"",
-			"spec_title": "RFC7231#6.5.11",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.11"
-		},
-		{
-			"code": "414",
-			"phrase": "URI Too Long",
-			"description": "\"indicates that the server is refusing to service the request because the request-target is longer than the server is willing to interpret.\"",
-			"spec_title": "RFC7231#6.5.12",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.12"
-		},
-		{
-			"code": "415",
-			"phrase": "Unsupported Media Type",
-			"description": "\"indicates that the origin server is refusing to service the request because the payload is in a format not supported by the target resource for this method.\"",
-			"spec_title": "RFC7231#6.5.13",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.13"
-		},
-		{
-			"code": "416",
-			"phrase": "Range Not Satisfiable",
-			"description": "\"indicates that none of the ranges in the request's Range header field overlap the current extent of the selected resource or that the set of ranges requested has been rejected due to invalid ranges or an excessive request of small or overlapping ranges.\"",
-			"spec_title": "RFC7233#4.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7233#section-4.4"
-		},
-		{
-			"code": "417",
-			"phrase": "Expectation Failed",
-			"description": "\"indicates that the expectation given in the request's Expect header field could not be met by at least one of the inbound servers.\"",
-			"spec_title": "RFC7231#6.5.14",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.14"
-		},
-		{
-			"code": "426",
-			"phrase": "Upgrade Required",
-			"description": "\"indicates that the server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol.\"",
-			"spec_title": "RFC7231#6.5.15",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.15"
-		},
-		{
-			"code": "5xx",
-			"phrase": "**Server Error**",
-			"description": "\"indicates that the server is aware that it has erred or is incapable of performing the requested method.\" ~ [*we* fucked up](https://twitter.com/DanaDanger/status/183316183494311936)",
-			"spec_title": "RFC7231#6.6",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6"
-		},
-		{
-			"code": "500",
-			"phrase": "Internal Server Error",
-			"description": "\"indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.\"",
-			"spec_title": "RFC7231#6.6.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.1"
-		},
-		{
-			"code": "501",
-			"phrase": "Not Implemented",
-			"description": "\"indicates that the server does not support the functionality required to fulfill the request.\"",
-			"spec_title": "RFC7231#6.6.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.2"
-		},
-		{
-			"code": "502",
-			"phrase": "Bad Gateway",
-			"description": "\"indicates that the server, while acting as a gateway or proxy, received an invalid response from an inbound server it accessed while attempting to fulfill the request.\"",
-			"spec_title": "RFC7231#6.6.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.3"
-		},
-		{
-			"code": "503",
-			"phrase": "Service Unavailable",
-			"description": "\"indicates that the server is currently unable to handle the request due to a temporary overload or scheduled maintenance, which will likely be alleviated after some delay.\"",
-			"spec_title": "RFC7231#6.6.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.4"
-		},
-		{
-			"code": "504",
-			"phrase": "Gateway Time-out",
-			"description": "\"indicates that the server, while acting as a gateway or proxy, did not receive a timely response from an upstream server it needed to access in order to complete the request.\"",
-			"spec_title": "RFC7231#6.6.5",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.5"
-		},
-		{
-			"code": "505",
-			"phrase": "HTTP Version Not Supported",
-			"description": "\"indicates that the server does not support, or refuses to support, the protocol version that was used in the request message.\"",
-			"spec_title": "RFC7231#6.6.6",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.6"
-		},
-		{
-			"code": "102",
-			"phrase": "Processing",
-			"description": "\"is an interim response used to inform the client that the server has accepted the complete request, but has not yet completed it.\"",
-			"spec_title": "RFC5218#10.1",
-			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.1"
-		},
-		{
-			"code": "207",
-			"phrase": "Multi-Status",
-			"description": "\"provides status for multiple independent operations.\"",
-			"spec_title": "RFC5218#10.2",
-			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.2"
-		},
-		{
-			"code": "226",
-			"phrase": "IM Used",
-			"description": "\"The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more instance-manipulations applied to the current instance.\"",
-			"spec_title": "RFC3229#10.4.1",
-			"spec_href": "http://tools.ietf.org/html/rfc3229#section-10.4.1"
-		},
-		{
-			"code": "308",
-			"phrase": "Permanent Redirect",
-			"description": "\"The target resource has been assigned a new permanent URI and any future references to this resource SHOULD use one of the returned URIs. [...] This status code is similar to 301 Moved Permanently (Section 7.3.2 of rfc7231), except that it does not allow rewriting the request method from POST to GET.\"",
-			"spec_title": "RFC7238",
-			"spec_href": "http://tools.ietf.org/html/rfc7238"
-		},
-		{
-			"code": "422",
-			"phrase": "Unprocessable Entity",
-			"description": "\"means the server understands the content type of the request entity (hence a 415(Unsupported Media Type) status code is inappropriate), and the syntax of the request entity is correct (thus a 400 (Bad Request) status code is inappropriate) but was unable to process the contained instructions.\"",
-			"spec_title": "RFC5218#10.3",
-			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.3"
-		},
-		{
-			"code": "423",
-			"phrase": "Locked",
-			"description": "\"means the source or destination resource of a method is locked.\"",
-			"spec_title": "RFC5218#10.4",
-			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.4"
-		},
-		{
-			"code": "424",
-			"phrase": "Failed Dependency",
-			"description": "\"means that the method could not be performed on the resource because the requested action depended on another action and that action failed.\"",
-			"spec_title": "RFC5218#10.5",
-			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.5"
-		},
-		{
-			"code": "428",
-			"phrase": "Precondition Required",
-			"description": "\"indicates that the origin server requires the request to be conditional.\"",
-			"spec_title": "RFC6585#3",
-			"spec_href": "http://tools.ietf.org/html/rfc6585#section-3"
-		},
-		{
-			"code": "429",
-			"phrase": "Too Many Requests",
-			"description": "\"indicates that the user has sent too many requests in a given amount of time (\"rate limiting\").\"",
-			"spec_title": "RFC6585#4",
-			"spec_href": "http://tools.ietf.org/html/rfc6585#section-4"
-		},
-		{
-			"code": "431",
-			"phrase": "Request Header Fields Too Large",
-			"description": "\"indicates that the server is unwilling to process the request because its header fields are too large.\"",
-			"spec_title": "RFC6585#5",
-			"spec_href": "http://tools.ietf.org/html/rfc6585#section-5"
-		},
-		{
-			"code": "451",
-			"phrase": "Unavailable For Legal Reasons",
-			"description": "\"This status code indicates that the server is denying access to the resource in response to a legal demand.\"",
-			"spec_title": "draft-tbray-http-legally-restricted-status",
-			"spec_href": "http://tools.ietf.org/html/draft-tbray-http-legally-restricted-status"
-		},
-		{
-			"code": "506",
-			"phrase": "Variant Also Negotiates",
-			"description": "\"indicates that the server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.\"",
-			"spec_title": "RFC2295#8.1",
-			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.1"
-		},
-		{
-			"code": "507",
-			"phrase": "Insufficient Storage",
-			"description": "\"means the method could not be performed on the resource because the server is unable to store the representation needed to successfully complete the request.\"",
-			"spec_title": "RFC5218#10.6",
-			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.6"
-		},
-		{
-			"code": "511",
-			"phrase": "Network Authentication Required",
-			"description": "\"indicates that the client needs to authenticate to gain network access.\"",
-			"spec_title": "RFC6585#6",
-			"spec_href": "http://tools.ietf.org/html/rfc6585#section-6"
-		},
-		{
-			"code": "7xx",
-			"phrase": "**Developer Error**",
-			"description": "[err](http://www.urbandictionary.com/define.php?term=err)",
-			"spec_title": "7xx-rfc",
-			"spec_href": "http://documentup.com/joho/7XX-rfc"
-		}
-	]
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = [
-		{
-			"method": "CONNECT",
-			"description": "\"requests that the recipient establish a tunnel to the destination origin server identified by the request-target and, if successful, thereafter restrict its behavior to blind forwarding of packets, in both directions, until the connection is closed.\"",
-			"safe": true,
-			"idempotent": true,
-			"cacheable": false,
-			"spec_title": "RFC7231#4.3.6",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.6"
-		},
-		{
-			"method": "DELETE",
-			"description": "\"requests that the origin server remove the association between the target resource and its current functionality.\"",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": false,
-			"spec_title": "RFC7231#4.3.5",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.5"
-		},
-		{
-			"method": "GET",
-			"description": "\"requests transfer of a current selected representation for the target resource.\"",
-			"safe": true,
-			"idempotent": true,
-			"cacheable": true,
-			"spec_title": "RFC7231#4.3.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.1"
-		},
-		{
-			"method": "HEAD",
-			"description": "\"is identical to GET except that the server MUST NOT send a message body in the response (i.e., the response terminates at the end of the header block).\"",
-			"safe": true,
-			"idempotent": true,
-			"cacheable": true,
-			"spec_title": "RFC7231#4.3.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.2"
-		},
-		{
-			"method": "OPTIONS",
-			"description": "\"requests information about the communication options available on the request/response chain identified by the effective request URI.\"",
-			"safe": true,
-			"idempotent": true,
-			"cacheable": false,
-			"spec_title": "RFC7231#4.3.7",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.7"
-		},
-		{
-			"method": "POST",
-			"description": "\"requests that the target resource process the representation enclosed in the request according to the resource's own specific semantics.\"",
-			"safe": false,
-			"idempotent": false,
-			"cacheable": false,
-			"spec_title": "RFC7231#4.3.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.3"
-		},
-		{
-			"method": "PUT",
-			"description": "\"requests that the state of the target resource be created or replaced with the state defined by the representation enclosed in the request message payload.\"",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": false,
-			"spec_title": "RFC7231#4.3.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.4"
-		},
-		{
-			"method": "TRACE",
-			"description": "\"is used to invoke a remote, application-layer loopback of the request message.\"",
-			"safe": true,
-			"idempotent": true,
-			"cacheable": false,
-			"spec_title": "RFC7231#4.3.8",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.8"
-		},
-		{
-			"method": "ACL",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3744#8.1",
-			"spec_href": "http://tools.ietf.org/html/rfc3744#section-8.1"
-		},
-		{
-			"method": "BASELINE-CONTROL",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#12.6",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-12.6"
-		},
-		{
-			"method": "BIND",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC5842#4",
-			"spec_href": "http://tools.ietf.org/html/rfc5842#section-4"
-		},
-		{
-			"method": "CHECKIN",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#4.4",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-4.4"
-		},
-		{
-			"method": "CHECKOUT",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#4.3",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-4.3"
-		},
-		{
-			"method": "COPY",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4918#9.8",
-			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.8"
-		},
-		{
-			"method": "LABEL",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#8.2",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-8.2"
-		},
-		{
-			"method": "LINK",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC2068#19.6.1.2",
-			"spec_href": "http://tools.ietf.org/html/rfc2068#section-19.6.1.2"
-		},
-		{
-			"method": "LOCK",
-			"description": "",
-			"safe": false,
-			"idempotent": false,
-			"cacheable": "",
-			"spec_title": "RFC4918#9.10",
-			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.10"
-		},
-		{
-			"method": "MERGE",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#11.2",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-11.2"
-		},
-		{
-			"method": "MKACTIVITY",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#13.5",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-13.5"
-		},
-		{
-			"method": "MKCALENDAR",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4791#5.3.1",
-			"spec_href": "http://tools.ietf.org/html/rfc4791#section-5.3.1"
-		},
-		{
-			"method": "MKCOL",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4918#9.3",
-			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.3"
-		},
-		{
-			"method": "MKREDIRECTREF",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4437#6",
-			"spec_href": "http://tools.ietf.org/html/rfc4437#section-6"
-		},
-		{
-			"method": "MKWORKSPACE",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#6.3",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-6.3"
-		},
-		{
-			"method": "MOVE",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4918#9.9",
-			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.9"
-		},
-		{
-			"method": "ORDERPATCH",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3648#7",
-			"spec_href": "http://tools.ietf.org/html/rfc3648#section-7"
-		},
-		{
-			"method": "PATCH",
-			"description": "\"requests that a set of changes described in the request entity be applied to the resource identified by the Request-URI.\"",
-			"safe": false,
-			"idempotent": false,
-			"cacheable": false,
-			"spec_title": "RFC5789",
-			"spec_href": "http://tools.ietf.org/html/rfc5789#section-2"
-		},
-		{
-			"method": "PROPFIND",
-			"description": "",
-			"safe": true,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4918#9.1",
-			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.1"
-		},
-		{
-			"method": "PROPPATCH",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4918#9.2",
-			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.2"
-		},
-		{
-			"method": "REBIND",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC5842#6",
-			"spec_href": "http://tools.ietf.org/html/rfc5842#section-6"
-		},
-		{
-			"method": "REPORT",
-			"description": "",
-			"safe": true,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#3.6",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-3.6"
-		},
-		{
-			"method": "SEARCH",
-			"description": "",
-			"safe": true,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC5323#2",
-			"spec_href": "http://tools.ietf.org/html/rfc5323#section-2"
-		},
-		{
-			"method": "UNBIND",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC5842#5",
-			"spec_href": "http://tools.ietf.org/html/rfc5842#section-5"
-		},
-		{
-			"method": "UNCHECKOUT",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#4.5",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-4.5"
-		},
-		{
-			"method": "UNLINK",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC2068#19.6.1.3",
-			"spec_href": "http://tools.ietf.org/html/rfc2068#section-19.6.1.3"
-		},
-		{
-			"method": "UNLOCK",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4918#9.11",
-			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.11"
-		},
-		{
-			"method": "UPDATE",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#7.1",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-7.1"
-		},
-		{
-			"method": "UPDATEREDIRECTREF",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC4437#7",
-			"spec_href": "http://tools.ietf.org/html/rfc4437#section-7"
-		},
-		{
-			"method": "VERSION-CONTROL",
-			"description": "",
-			"safe": false,
-			"idempotent": true,
-			"cacheable": "",
-			"spec_title": "RFC3253#3.5",
-			"spec_href": "http://tools.ietf.org/html/rfc3253#section-3.5"
-		}
-	]
-
-/***/ },
-/* 113 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = [
-		{
-			"header": "Content-Encoding",
-			"description": "\"indicates what content codings have been applied to the representation, beyond those inherent in the media type, and thus what decoding mechanisms have to be applied in order to obtain data in the media type referenced by the Content-Type header field.\"",
-			"spec_title": "RFC7231#3.1.2.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-3.1.2.2"
-		},
-		{
-			"header": "Content-Language",
-			"description": "\"describes the natural language(s) of the intended audience for the representation.\"",
-			"spec_title": "RFC7231#3.1.3.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-3.1.3.2"
-		},
-		{
-			"header": "Content-Location",
-			"description": "\"references a URI that can be used as an identifier for a specific resource corresponding to the representation in this message's payload.\"",
-			"spec_title": "RFC7231#3.1.4.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-3.1.4.2"
-		},
-		{
-			"header": "Content-Type",
-			"description": "\"indicates the media type of the associated representation: either the representation enclosed in the message payload or the selected representation, as determined by the message semantics.\"",
-			"spec_title": "RFC7231#3.1.1.5",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-3.1.1.5"
-		},
-		{
-			"header": "Content-Length",
-			"description": "\"can provide the anticipated size, as a decimal number of octets, for a potential payload body.\"",
-			"spec_title": "RFC7230#3.3.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7230#section-3.3.2"
-		},
-		{
-			"header": "Content-Range",
-			"description": "\"is sent in a single part 206 (Partial Content) response to indicate the partial range of the selected representation enclosed as the message payload, sent in each part of a multipart 206 response to indicate the range enclosed within each body part, and sent in 416 (Range Not Satisfiable) responses to provide information about the selected representation.\"",
-			"spec_title": "RFC7233#4.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7233#section-4.2"
-		},
-		{
-			"header": "Transfer-Encoding",
-			"description": "\"lists the transfer coding names corresponding to the sequence of transfer codings that have been (or will be) applied to the payload body in order to form the message body.\"",
-			"spec_title": "RFC7230#3.3.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7230#section-3.3.1"
-		},
-		{
-			"header": "Cache-Control",
-			"description": "\"is used to specify directives for caches along the request/response chain.\"",
-			"spec_title": "RFC7234#7.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.2"
-		},
-		{
-			"header": "Expect",
-			"description": "\"is used to indicate that particular server behaviors are required by the client.\"",
-			"spec_title": "RFC7231#5.1.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.1.1"
-		},
-		{
-			"header": "Host",
-			"description": "\"provides the host and port information from the target URI, enabling the origin server to distinguish among resources while servicing requests for multiple host names on a single IP address.\"",
-			"spec_title": "RFC7230#5.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7230#section-5.4"
-		},
-		{
-			"header": "Max-Forwards",
-			"description": "\"provides a mechanism with the TRACE and OPTIONS methods to limit the number of times that the request is forwarded by proxies.\"",
-			"spec_title": "RFC7231#5.1.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.1.2"
-		},
-		{
-			"header": "Pragma",
-			"description": "\"allows backwards compatibility with HTTP/1.0 caches, so that clients can specify a \"no-cache\" request that they will understand (as Cache-Control was not defined until HTTP/1.1).\"",
-			"spec_title": "RFC7234#7.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.4"
-		},
-		{
-			"header": "Range",
-			"description": "\"modifies the method semantics to request transfer of only one or more subranges of the selected representation data, rather than the entire selected representation data.\"",
-			"spec_title": "RFC7233#3.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7233#section-3.1"
-		},
-		{
-			"header": "TE",
-			"description": "\"indicates what transfer codings, besides chunked, the client is willing to accept in response, and whether or not the client is willing to accept trailer fields in a chunked transfer coding.\"",
-			"spec_title": "RFC7230#4.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7230#section-4.3"
-		},
-		{
-			"header": "If-Match",
-			"description": "\"can be used to make a request method conditional on the current existence or value of an entity-tag for one or more representations of the target resource.\"",
-			"spec_title": "RFC7232#3.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7232#section-3.1"
-		},
-		{
-			"header": "If-Modified-Since",
-			"description": "\"can be used with GET or HEAD to make the method conditional by modification date: if the selected representation has not been modified since the time specified in this field, then do not perform the request method; instead, respond as detailed below.\"",
-			"spec_title": "RFC7232#3.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7232#section-3.3"
-		},
-		{
-			"header": "If-None-Match",
-			"description": "\"can be used to make a request method conditional on not matching any of the current entity-tag values for representations of the target resource.\"",
-			"spec_title": "RFC7232#3.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7232#section-3.2"
-		},
-		{
-			"header": "If-Range",
-			"description": "\"Informally, its meaning is: if the representation is unchanged, send me the part(s) that I am requesting in Range; otherwise, send me the entire representation.\"",
-			"spec_title": "RFC7233#3.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7233#section-3.2"
-		},
-		{
-			"header": "If-Unmodified-Since",
-			"description": "\"can be used to make a request method conditional by modification date: if the selected representation has been modified since the time specified in this field, then the server MUST NOT perform the requested operation and MUST instead respond with the 412 (Precondition Failed) status code.\"",
-			"spec_title": "RFC7232#3.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7232#section-3.4"
-		},
-		{
-			"header": "Accept",
-			"description": "\"can be used to specify certain media types which are acceptable for the response.\"",
-			"spec_title": "RFC7231#5.3.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.3.2"
-		},
-		{
-			"header": "Accept-Charset",
-			"description": "\"can be sent by a user agent to indicate what charsets are acceptable in textual response content.\"",
-			"spec_title": "RFC7231#5.3.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.3.3"
-		},
-		{
-			"header": "Accept-Encoding",
-			"description": "\"can be used by user agents to indicate what response content-codings are acceptable in the response.\"",
-			"spec_title": "RFC7231#5.3.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.3.4"
-		},
-		{
-			"header": "Accept-Language",
-			"description": "\"can be used by user agents to indicate the set of natural languages that are preferred in the response.\"",
-			"spec_title": "RFC7231#5.3.5",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.3.5"
-		},
-		{
-			"header": "Authorization",
-			"description": "\"allows a user agent to authenticate itself with a server -- usually, but not necessarily, after receiving a 401 (Unauthorized) response.\"",
-			"spec_title": "RFC7235#4.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7235#section-4.1"
-		},
-		{
-			"header": "Proxy-Authorization",
-			"description": "\"allows the client to identify itself (or its user) to a proxy that requires authentication.\"",
-			"spec_title": "RFC7235#4.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7235#section-4.3"
-		},
-		{
-			"header": "DNT",
-			"description": "\"defined as the means for expressing a user's tracking preference via HTTP.\"",
-			"spec_title": "Tracking Preference Expression (DNT)",
-			"spec_href": "http://www.w3.org/TR/tracking-dnt/#dnt-header-field"
-		},
-		{
-			"header": "From",
-			"description": "\"contains an Internet email address for a human user who controls the requesting user agent.\"",
-			"spec_title": "RFC7231#5.5.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.5.1"
-		},
-		{
-			"header": "Referer",
-			"description": "\"allows the user agent to specify a URI reference for the resource from which the target URI was obtained (i.e., the \"referrer\", though the field name is misspelled).\"",
-			"spec_title": "RFC7231#5.5.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.5.2"
-		},
-		{
-			"header": "User-Agent",
-			"description": "\"contains information about the user agent originating the request, which is often used by servers to help identify the scope of reported interoperability problems, to work around or tailor responses to avoid particular user agent limitations, and for analytics regarding browser or operating system use.\"",
-			"spec_title": "RFC7231#5.5.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.5.3"
-		},
-		{
-			"header": "Age",
-			"description": "\"conveys the sender's estimate of the amount of time since the response was generated or successfully validated at the origin server.\"",
-			"spec_title": "RFC7234#5.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7234#section-5.1"
-		},
-		{
-			"header": "Cache-Control",
-			"description": "\"is used to specify directives for caches along the request/response chain.\"",
-			"spec_title": "RFC7234#7.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.2"
-		},
-		{
-			"header": "Expires",
-			"description": "\"gives the date/time after which the response is considered stale.\"",
-			"spec_title": "RFC7234#7.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.3"
-		},
-		{
-			"header": "Date",
-			"description": "\"represents the date and time at which the message was originated\"",
-			"spec_title": "RFC7231#7.1.1.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.1.1.2"
-		},
-		{
-			"header": "Location",
-			"description": "\"is used in some responses to refer to a specific resource in relation to the response.\"",
-			"spec_title": "RFC7231#7.1.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.1.2"
-		},
-		{
-			"header": "Retry-After",
-			"description": "\"indicates how long the user agent ought to wait before making a follow-up request.\"",
-			"spec_title": "RFC7231#7.1.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.1.3"
-		},
-		{
-			"header": "Tk",
-			"description": "\"defined as an OPTIONAL means for indicating the tracking status that applied to the corresponding request and as a REQUIRED means for indicating that a state-changing request has resulted in an interactive change to the tracking status. \"",
-			"spec_title": "Tracking Preference Expression (DNT)",
-			"spec_href": "http://www.w3.org/TR/tracking-dnt/#response-header-field"
-		},
-		{
-			"header": "Vary",
-			"description": "\"describes what parts of a request message, aside from the method and request target, might influence the origin server's process for selecting and representing the response.\"",
-			"spec_title": "RFC7231#7.1.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.1.4"
-		},
-		{
-			"header": "Warning",
-			"description": "\"is used to carry additional information about the status or transformation of a message that might not be reflected in the message.\"",
-			"spec_title": "RFC7234#7.6",
-			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.6"
-		},
-		{
-			"header": "ETag",
-			"description": "\"provides the current entity-tag for the selected representation, as determined at the conclusion of handling the request.\"",
-			"spec_title": "RFC7232#2.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7232#section-2.3"
-		},
-		{
-			"header": "Last-Modified",
-			"description": "\"provides a timestamp indicating the date and time at which the origin server believes the selected representation was last modified, as determined at the conclusion of handling the request.\"",
-			"spec_title": "RFC7232#2.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7232#section-2.2"
-		},
-		{
-			"header": "WWW-Authenticate",
-			"description": "\"consists of at least one challenge that indicates the authentication scheme(s) and parameters applicable to the effective request URI.\"",
-			"spec_title": "RFC7235#4.4",
-			"spec_href": "http://tools.ietf.org/html/rfc7235#section-4.4"
-		},
-		{
-			"header": "Proxy-Authenticate",
-			"description": "\"consists of at least one challenge that indicates the authentication scheme(s) and parameters applicable to the proxy for this effective request URI.\"",
-			"spec_title": "RFC7235#4.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7235#section-4.2"
-		},
-		{
-			"header": "Accept-Ranges",
-			"description": "\"allows a server to indicate that it supports range requests for the target resource.\"",
-			"spec_title": "RFC7233#2.3",
-			"spec_href": "http://tools.ietf.org/html/rfc7233#section-2.3"
-		},
-		{
-			"header": "Allow",
-			"description": "\"lists the set of methods advertised as supported by the target resource.\"",
-			"spec_title": "RFC7231#7.4.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.4.1"
-		},
-		{
-			"header": "Server",
-			"description": "\"contains information about the software used by the origin server to handle the request, which is often used by clients to help identify the scope of reported interoperability problems, to work around or tailor requests to avoid particular server limitations, and for analytics regarding server or operating system use.\"",
-			"spec_title": "RFC7231#7.4.2",
-			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.4.2"
-		},
-		{
-			"header": "Accept-Patch",
-			"description": "\"used to specify the patch document formats accepted by the server.\"",
-			"spec_title": "RFC5789#3.1",
-			"spec_href": "http://tools.ietf.org/html/rfc5789#section-3.1"
-		},
-		{
-			"header": "Accept-Post",
-			"description": "\"indicates server support for specific media types for entity bodies in HTTP POST requests.\"",
-			"spec_title": "draft-wilde-accept-post",
-			"spec_href": "http://tools.ietf.org/html/draft-wilde-accept-post"
-		},
-		{
-			"header": "Access-Control-Allow-Credentials",
-			"description": "\"indicates whether the response to request can be exposed when the omit credentials flag is unset\"",
-			"spec_title": "CORS",
-			"spec_href": "http://www.w3.org/TR/cors/#access-control-allow-credentials-response-header"
-		},
-		{
-			"header": "Access-Control-Allow-Headers",
-			"description": "\"indicates, as part of the response to a preflight request, which header field names can be used during the actual request\"",
-			"spec_title": "CORS",
-			"spec_href": "http://www.w3.org/TR/cors/#access-control-allow-headers-response-header"
-		},
-		{
-			"header": "Access-Control-Allow-Methods",
-			"description": "\"indicates, as part of the response to a preflight request, which methods can be used during the actual request\"",
-			"spec_title": "CORS",
-			"spec_href": "http://www.w3.org/TR/cors/#access-control-allow-methods-response-header"
-		},
-		{
-			"header": "Access-Control-Allow-Origin",
-			"description": "\"indicates whether a resource can be shared\"",
-			"spec_title": "CORS",
-			"spec_href": "http://www.w3.org/TR/cors/#access-control-allow-origin-response-header"
-		},
-		{
-			"header": "Access-Control-Expose-Headers",
-			"description": "\"indicates which headers are safe to expose to the API of a CORS API specification\"",
-			"spec_title": "CORS",
-			"spec_href": "http://www.w3.org/TR/cors/#access-control-expose-headers-response-header"
-		},
-		{
-			"header": "Access-Control-Max-Age",
-			"description": "\"indicates how long the results of a preflight request can be cached in a preflight result cache\"",
-			"spec_title": "CORS",
-			"spec_href": "http://www.w3.org/TR/cors/#access-control-max-age-response-header"
-		},
-		{
-			"header": "Access-Control-Request-Headers",
-			"description": "\"indicates which headers will be used in the actual request as part of the preflight request\"",
-			"spec_title": "CORS",
-			"spec_href": "http://www.w3.org/TR/cors/#access-control-request-headers-request-header"
-		},
-		{
-			"header": "Access-Control-Request-Method",
-			"description": "\"indicates which method will be used in the actual request as part of the preflight request\"",
-			"spec_title": "CORS",
-			"spec_href": "http://www.w3.org/TR/cors/#access-control-request-method-request-header"
-		},
-		{
-			"header": "Content-Disposition",
-			"description": "\"standard\"",
-			"spec_title": "RFC6266",
-			"spec_href": "http://tools.ietf.org/html/rfc6266"
-		},
-		{
-			"header": "Content-Security-Policy",
-			"description": "\"is the preferred mechanism for delivering a CSP policy\"",
-			"spec_title": "CSP",
-			"spec_href": "http://www.w3.org/TR/CSP/#content-security-policy-header-field"
-		},
-		{
-			"header": "Content-Security-Policy-Report-Only",
-			"description": "\"lets servers experiment with policies by monitoring (rather than enforcing) a policy\"",
-			"spec_title": "CSP",
-			"spec_href": "http://www.w3.org/TR/CSP/#content-security-policy-report-only-header-field"
-		},
-		{
-			"header": "Cookie",
-			"description": "\"standard\"",
-			"spec_title": "RFC6265",
-			"spec_href": "http://tools.ietf.org/html/rfc6265"
-		},
-		{
-			"header": "Forwarded",
-			"description": "\"standard\"",
-			"spec_title": "RFC7239",
-			"spec_href": "http://tools.ietf.org/html/rfc7239"
-		},
-		{
-			"header": "Link",
-			"description": "\"provides a means for serialising one or more links in HTTP headers.\"",
-			"spec_title": "RFC5988#5",
-			"spec_href": "http://tools.ietf.org/html/rfc5988#section-5"
-		},
-		{
-			"header": "Origin",
-			"description": "\"standard\"",
-			"spec_title": "RFC6454",
-			"spec_href": "http://tools.ietf.org/html/rfc6454"
-		},
-		{
-			"header": "Prefer",
-			"description": "\"is used to indicate that particular server behaviors are preferred by the client, but not required for successful completion of the request.\"",
-			"spec_title": "draft-snell-http-prefer#2",
-			"spec_href": "http://tools.ietf.org/html/draft-snell-http-prefer#section-2"
-		},
-		{
-			"header": "Preference-Applied",
-			"description": "\"MAY be included within a response message as an indication as to which Prefer tokens were honored by the server and applied to the processing of a request.\"",
-			"spec_title": "draft-snell-http-prefer#3",
-			"spec_href": "http://tools.ietf.org/html/draft-snell-http-prefer#section-3"
-		},
-		{
-			"header": "Set-Cookie",
-			"description": "\"standard\"",
-			"spec_title": "RFC6265",
-			"spec_href": "http://tools.ietf.org/html/rfc6265"
-		},
-		{
-			"header": "Strict-Transport-Security",
-			"description": "\"standard\"",
-			"spec_title": "RFC6797",
-			"spec_href": "http://tools.ietf.org/html/rfc6797"
-		},
-		{
-			"header": "Via",
-			"description": "\"\"",
-			"spec_title": "RFC7230#5.7.1",
-			"spec_href": "http://tools.ietf.org/html/rfc7230#section-5.7.1"
-		},
-		{
-			"header": "A-IM",
-			"description": "\"\"",
-			"spec_title": "RFC3229#10.5.3",
-			"spec_href": "http://tools.ietf.org/html/rfc3229#section-10.5.3"
-		},
-		{
-			"header": "Accept-Features",
-			"description": "\"can be used by a user agent to give information about the presence or absence of certain features in the feature set of the current request.\"",
-			"spec_title": "RFC2295#8.2",
-			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.2"
-		},
-		{
-			"header": "Alt-Svc",
-			"description": "\"is advertising the availability of alternate services to HTTP/1.1 and HTTP/2.0 clients by adding an Alt-Svc header field to responses.\"",
-			"spec_title": "draft-nottingham-httpbis-alt-svc",
-			"spec_href": "http://tools.ietf.org/html/draft-nottingham-httpbis-alt-svc"
-		},
-		{
-			"header": "Alternates",
-			"description": "\"is used to convey the list of variants bound to a negotiable resource.\"",
-			"spec_title": "RFC2295#8.3",
-			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.3"
-		},
-		{
-			"header": "Apply-To-Redirect-Ref",
-			"description": "\"\"",
-			"spec_title": "RFC4437",
-			"spec_href": "http://tools.ietf.org/html/rfc4437"
-		},
-		{
-			"header": "CH",
-			"description": "\"describes an example list of client preferences that the server can use to adapt and optimize the resource to satisfy a given request.\"",
-			"spec_title": "draft-grigorik-http-client-hints",
-			"spec_href": "http://tools.ietf.org/html/draft-grigorik-http-client-hints"
-		},
-		{
-			"header": "Content-Base",
-			"description": "\"obsoleted\"",
-			"spec_title": "RFC2068",
-			"spec_href": "http://tools.ietf.org/html/rfc2068"
-		},
-		{
-			"header": "Cookie2",
-			"description": "\"obsoleted\"",
-			"spec_title": "RFC2965",
-			"spec_href": "http://tools.ietf.org/html/rfc2965"
-		},
-		{
-			"header": "DASL",
-			"description": "\"standard\"",
-			"spec_title": "RFC5323",
-			"spec_href": "http://tools.ietf.org/html/rfc5323"
-		},
-		{
-			"header": "DAV",
-			"description": "\"standard\"",
-			"spec_title": "RFC4918",
-			"spec_href": "http://tools.ietf.org/html/rfc4918"
-		},
-		{
-			"header": "Delta-Base",
-			"description": "\"\"",
-			"spec_title": "RFC3229#10.5.1",
-			"spec_href": "http://tools.ietf.org/html/rfc3229#section-10.5.1"
-		},
-		{
-			"header": "Depth",
-			"description": "\"standard\"",
-			"spec_title": "RFC4918",
-			"spec_href": "http://tools.ietf.org/html/rfc4918"
-		},
-		{
-			"header": "Destination",
-			"description": "\"standard\"",
-			"spec_title": "RFC4918",
-			"spec_href": "http://tools.ietf.org/html/rfc4918"
-		},
-		{
-			"header": "IM",
-			"description": "\"\"",
-			"spec_title": "RFC3229#10.5.2",
-			"spec_href": "http://tools.ietf.org/html/rfc3229#section-10.5.2"
-		},
-		{
-			"header": "If",
-			"description": "\"standard\"",
-			"spec_title": "RFC4918",
-			"spec_href": "http://tools.ietf.org/html/rfc4918"
-		},
-		{
-			"header": "If-Schedule-Tag-Match",
-			"description": "\"standard\"",
-			"spec_title": "RFC6638",
-			"spec_href": "http://tools.ietf.org/html/rfc6638"
-		},
-		{
-			"header": "Last-Event-ID",
-			"description": "\"The value of the event source's last event ID string, encoded as UTF-8.\"",
-			"spec_title": "Server-Sent Events",
-			"spec_href": "http://www.w3.org/TR/eventsource/#last-event-id"
-		},
-		{
-			"header": "Link-Template",
-			"description": "\"provides a means for serialising one or more links into HTTP headers.\"",
-			"spec_title": "draft-nottingham-link-template",
-			"spec_href": "http://tools.ietf.org/html/draft-nottingham-link-template"
-		},
-		{
-			"header": "Lock-Token",
-			"description": "\"standard\"",
-			"spec_title": "RFC4918",
-			"spec_href": "http://tools.ietf.org/html/rfc4918"
-		},
-		{
-			"header": "Negotiate",
-			"description": "\"can contain directives for any content negotiation process initiated by the request.\"",
-			"spec_title": "RFC2295#8.4",
-			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.4"
-		},
-		{
-			"header": "Nice",
-			"description": "\"indicates that a request is less important than a request that doesn't bear this header.\"",
-			"spec_title": "draft-thomson-http-nice",
-			"spec_href": "http://tools.ietf.org/html/draft-thomson-http-nice"
-		},
-		{
-			"header": "Overwrite",
-			"description": "\"standard\"",
-			"spec_title": "RFC4918",
-			"spec_href": "http://tools.ietf.org/html/rfc4918"
-		},
-		{
-			"header": "Redirect-Ref",
-			"description": "\"\"",
-			"spec_title": "RFC4437",
-			"spec_href": "http://tools.ietf.org/html/rfc4437"
-		},
-		{
-			"header": "Schedule-Reply",
-			"description": "\"standard\"",
-			"spec_title": "RFC6638",
-			"spec_href": "http://tools.ietf.org/html/rfc6638"
-		},
-		{
-			"header": "Schedule-Tag",
-			"description": "\"standard\"",
-			"spec_title": "RFC6638",
-			"spec_href": "http://tools.ietf.org/html/rfc6638"
-		},
-		{
-			"header": "Sec-WebSocket-Accept",
-			"description": "\"standard\"",
-			"spec_title": "RFC6455",
-			"spec_href": "http://tools.ietf.org/html/rfc6455"
-		},
-		{
-			"header": "Sec-WebSocket-Extensions",
-			"description": "\"standard\"",
-			"spec_title": "RFC6455",
-			"spec_href": "http://tools.ietf.org/html/rfc6455"
-		},
-		{
-			"header": "Sec-WebSocket-Key",
-			"description": "\"standard\"",
-			"spec_title": "RFC6455",
-			"spec_href": "http://tools.ietf.org/html/rfc6455"
-		},
-		{
-			"header": "Sec-WebSocket-Protocol",
-			"description": "\"standard\"",
-			"spec_title": "RFC6455",
-			"spec_href": "http://tools.ietf.org/html/rfc6455"
-		},
-		{
-			"header": "Sec-WebSocket-Version",
-			"description": "\"standard\"",
-			"spec_title": "RFC6455",
-			"spec_href": "http://tools.ietf.org/html/rfc6455"
-		},
-		{
-			"header": "Set-Cookie2",
-			"description": "\"obsoleted\"",
-			"spec_title": "RFC2965",
-			"spec_href": "http://tools.ietf.org/html/rfc2965"
-		},
-		{
-			"header": "SLUG",
-			"description": "\"standard\"",
-			"spec_title": "RFC5023",
-			"spec_href": "http://tools.ietf.org/html/rfc5023"
-		},
-		{
-			"header": "TCN",
-			"description": "\"is used by a server to signal that the resource is transparently negotiated.\"",
-			"spec_title": "RFC2295#8.5",
-			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.5"
-		},
-		{
-			"header": "Timeout",
-			"description": "\"standard\"",
-			"spec_title": "RFC4918",
-			"spec_href": "http://tools.ietf.org/html/rfc4918"
-		},
-		{
-			"header": "Variant-Vary",
-			"description": "\"can be used in a choice response to record any vary information which applies to the variant data (the entity body combined with some of the entity headers) contained in the response, rather than to the response as a whole.\"",
-			"spec_title": "RFC2295#8.6",
-			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.6"
-		},
-		{
-			"header": "X-Frame-Options",
-			"description": "\"indicates a policy that specifies whether the browser should render the transmitted resource within a <frame> or an <iframe>. Servers can declare this policy in the header of their HTTP responses to prevent clickjacking attacks, which ensures that their content is not embedded into other pages or frames.\"",
-			"spec_title": "RFC7034",
-			"spec_href": "http://tools.ietf.org/html/rfc7034"
-		}
-	]
-
-/***/ },
-/* 114 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = [
-		{
-			"relation": "about",
-			"description": "\"Refers to a resource that is the subject of the link's context.\"",
-			"spec_title": "RFC6903",
-			"spec_href": "http://tools.ietf.org/html/rfc6903"
-		},
-		{
-			"relation": "alternate",
-			"description": "\"Refers to a substitute for this context\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-alternate"
-		},
-		{
-			"relation": "appendix",
-			"description": "\"Refers to an appendix.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "archives",
-			"description": "\"Refers to a collection of records, documents, or other materials of historical interest.\"",
-			"spec_title": "HTML5linksWD",
-			"spec_href": "http://www.w3.org/TR/2011/WD-html5-20110113/links.html#rel-archives"
-		},
-		{
-			"relation": "author",
-			"description": "\"Refers to the context's author.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-author"
-		},
-		{
-			"relation": "bookmark",
-			"description": "\"Gives a permanent link to use for bookmarking purposes.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-bookmark"
-		},
-		{
-			"relation": "canonical",
-			"description": "\"Designates the preferred version of a resource (the IRI and its contents).\"",
-			"spec_title": "RFC6596",
-			"spec_href": "http://tools.ietf.org/html/rfc6596"
-		},
-		{
-			"relation": "chapter",
-			"description": "\"Refers to a chapter in a collection of resources.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "collection",
-			"description": "\"The target IRI points to a resource which represents the collection resource for the context IRI.\"",
-			"spec_title": "RFC6573",
-			"spec_href": "http://tools.ietf.org/html/rfc6573"
-		},
-		{
-			"relation": "contents",
-			"description": "\"Refers to a table of contents.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "copyright",
-			"description": "\"Refers to a copyright statement that applies to the link's context.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "create-form",
-			"description": "\"The target IRI points to a resource where a submission form can be obtained.\"",
-			"spec_title": "RFC6861",
-			"spec_href": "http://tools.ietf.org/html/rfc6861"
-		},
-		{
-			"relation": "current",
-			"description": "\"Refers to a resource containing the most recent item(s) in a collection of resources.\"",
-			"spec_title": "RFC5005",
-			"spec_href": "http://tools.ietf.org/html/rfc5005"
-		},
-		{
-			"relation": "describedby",
-			"description": "\"Refers to a resource providing information about the link's context.\"",
-			"spec_title": "POWDER",
-			"spec_href": "http://www.w3.org/TR/powder-dr/#assoc-linking"
-		},
-		{
-			"relation": "describes",
-			"description": "\"The relationship A 'describes' B asserts that resource A provides a description of resource B. There are no constraints on the format or representation of either A or B, neither are there any further constraints on either resource.\"",
-			"spec_title": "RFC6892",
-			"spec_href": "http://tools.ietf.org/html/rfc6892"
-		},
-		{
-			"relation": "disclosure",
-			"description": "\"Refers to a list of patent disclosures made with respect to material for which `disclosure` relation is specified.\"",
-			"spec_title": "RFC6579",
-			"spec_href": "http://tools.ietf.org/html/rfc6579"
-		},
-		{
-			"relation": "duplicate",
-			"description": "\"Refers to a resource whose available representations are byte-for-byte identical with the corresponding representations of the context IRI.\"",
-			"spec_title": "RFC6249",
-			"spec_href": "http://tools.ietf.org/html/rfc6249"
-		},
-		{
-			"relation": "edit",
-			"description": "\"Refers to a resource that can be used to edit the link's context.\"",
-			"spec_title": "RFC5023",
-			"spec_href": "http://tools.ietf.org/html/rfc5023"
-		},
-		{
-			"relation": "edit-form",
-			"description": "\"The target IRI points to a resource where a submission form for editing associated resource can be obtained.\"",
-			"spec_title": "RFC6861",
-			"spec_href": "http://tools.ietf.org/html/rfc6861"
-		},
-		{
-			"relation": "edit-media",
-			"description": "\"Refers to a resource that can be used to edit media associated with the link's context.\"",
-			"spec_title": "RFC5023",
-			"spec_href": "http://tools.ietf.org/html/rfc5023"
-		},
-		{
-			"relation": "enclosure",
-			"description": "\"Identifies a related resource that is potentially large and might require special handling.\"",
-			"spec_title": "RFC4287",
-			"spec_href": "http://tools.ietf.org/html/rfc4287"
-		},
-		{
-			"relation": "first",
-			"description": "\"An IRI that refers to the furthest preceding resource in a series of resources.\"",
-			"spec_title": "RFC5988",
-			"spec_href": "http://tools.ietf.org/html/rfc5988"
-		},
-		{
-			"relation": "glossary",
-			"description": "\"Refers to a glossary of terms.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "help",
-			"description": "\"Refers to context-sensitive help.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-help"
-		},
-		{
-			"relation": "hosts",
-			"description": "\"Refers to a resource hosted by the server indicated by the link context.\"",
-			"spec_title": "RFC6690",
-			"spec_href": "http://tools.ietf.org/html/rfc6690"
-		},
-		{
-			"relation": "hub",
-			"description": "\"Refers to a hub that enables registration for notification of updates to the context.\"",
-			"spec_title": "pubsubhubbub",
-			"spec_href": "http://pubsubhubbub.googlecode.com"
-		},
-		{
-			"relation": "icon",
-			"description": "\"Refers to an icon representing the link's context.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-icon"
-		},
-		{
-			"relation": "index",
-			"description": "\"Refers to an index.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "item",
-			"description": "\"The target IRI points to a resource that is a member of the collection represented by the context IRI.\"",
-			"spec_title": "RFC6573",
-			"spec_href": "http://tools.ietf.org/html/rfc6573"
-		},
-		{
-			"relation": "last",
-			"description": "\"An IRI that refers to the furthest following resource in a series of resources.\"",
-			"spec_title": "RFC5988",
-			"spec_href": "http://tools.ietf.org/html/rfc5988"
-		},
-		{
-			"relation": "latest-version",
-			"description": "\"Points to a resource containing the latest (e.g., current) version of the context.\"",
-			"spec_title": "RFC5829",
-			"spec_href": "http://tools.ietf.org/html/rfc5829"
-		},
-		{
-			"relation": "license",
-			"description": "\"Refers to a license associated with this context.\"",
-			"spec_title": "RFC4946",
-			"spec_href": "http://tools.ietf.org/html/rfc4946"
-		},
-		{
-			"relation": "lrdd",
-			"description": "\"Refers to further information about the link's context, expressed as a LRDD (Link-based Resource Descriptor Document) resource. See [RFC6415](http://tools.ietf.org/html/rfc6415) for information about processing this relation type in host-meta documents. When used elsewhere, it refers to additional links and other metadata. Multiple instances indicate additional LRDD resources. LRDD resources MUST have an \"application/xrd+xml\" representation, and MAY have others.\"",
-			"spec_title": "RFC6415",
-			"spec_href": "http://tools.ietf.org/html/rfc6415"
-		},
-		{
-			"relation": "monitor",
-			"description": "\"Refers to a resource that can be used to monitor changes in an HTTP resource.\"",
-			"spec_title": "RFC5989",
-			"spec_href": "http://tools.ietf.org/html/rfc5989"
-		},
-		{
-			"relation": "monitor-group",
-			"description": "\"Refers to a resource that can be used to monitor changes in a specified group of HTTP resources.\"",
-			"spec_title": "RFC5989",
-			"spec_href": "http://tools.ietf.org/html/rfc5989"
-		},
-		{
-			"relation": "next",
-			"description": "\"Indicates that the link's context is a part of a series, and that the next in the series is the link target.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-next"
-		},
-		{
-			"relation": "next-archive",
-			"description": "\"Refers to the immediately following archive resource.\"",
-			"spec_title": "RFC5005",
-			"spec_href": "http://tools.ietf.org/html/rfc5005"
-		},
-		{
-			"relation": "nofollow",
-			"description": "\"Indicates that the context’s original author or publisher does not endorse the link target.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-nofollow"
-		},
-		{
-			"relation": "noreferrer",
-			"description": "\"Indicates that no referrer information is to be leaked when following the link.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-noreferrer"
-		},
-		{
-			"relation": "payment",
-			"description": "\"Indicates a resource where payment is accepted.\"",
-			"spec_title": "RFC5988",
-			"spec_href": "http://tools.ietf.org/html/rfc5988"
-		},
-		{
-			"relation": "predecessor-version",
-			"description": "\"Points to a resource containing the predecessor version in the version history.\"",
-			"spec_title": "RFC5829",
-			"spec_href": "http://tools.ietf.org/html/rfc5829"
-		},
-		{
-			"relation": "prefetch",
-			"description": "\"Indicates that the link target should be preemptively cached.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-prefetch"
-		},
-		{
-			"relation": "prev",
-			"description": "\"Indicates that the link's context is a part of a series, and that the previous in the series is the link target.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-prev"
-		},
-		{
-			"relation": "preview",
-			"description": "\"Refers to a resource that provides a preview of the link's context.\"",
-			"spec_title": "RFC6903",
-			"spec_href": "http://tools.ietf.org/html/rfc6903"
-		},
-		{
-			"relation": "previous",
-			"description": "\"Refers to the previous resource in an ordered series of resources. Synonym for `prev`.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "prev-archive",
-			"description": "\"Refers to the immediately preceding archive resource.\"",
-			"spec_title": "RFC5005",
-			"spec_href": "http://tools.ietf.org/html/rfc5005"
-		},
-		{
-			"relation": "privacy-policy",
-			"description": "\"Refers to a privacy policy associated with the link's context.\"",
-			"spec_title": "RFC6903",
-			"spec_href": "http://tools.ietf.org/html/rfc6903"
-		},
-		{
-			"relation": "profile",
-			"description": "Identifying that a resource representation conforms to a certain profile, without affecting the non-profile semantics of the resource representation",
-			"spec_title": "RFC6906",
-			"spec_href": "http://tools.ietf.org/html/rfc6906"
-		},
-		{
-			"relation": "related",
-			"description": "\"Identifies a related resource.\"",
-			"spec_title": "RFC4287",
-			"spec_href": "http://tools.ietf.org/html/rfc4287"
-		},
-		{
-			"relation": "replies",
-			"description": "\"Identifies a resource that is a reply to the context of the link.\"",
-			"spec_title": "RFC4685",
-			"spec_href": "http://tools.ietf.org/html/rfc4685"
-		},
-		{
-			"relation": "search",
-			"description": "\"Refers to a resource that can be used to search through the link's context and related resources.\"",
-			"spec_title": "OpenSearch",
-			"spec_href": "http://www.opensearch.org/Specifications/OpenSearch/1.1"
-		},
-		{
-			"relation": "section",
-			"description": "\"Refers to a section in a collection of resources.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "self",
-			"description": "\"Conveys an identifier for the link's context.\"",
-			"spec_title": "RFC4287",
-			"spec_href": "http://tools.ietf.org/html/rfc4287"
-		},
-		{
-			"relation": "service",
-			"description": "\"Indicates a URI that can be used to retrieve a service document.\"",
-			"spec_title": "RFC5023",
-			"spec_href": "http://tools.ietf.org/html/rfc5023"
-		},
-		{
-			"relation": "start",
-			"description": "\"Refers to the first resource in a collection of resources.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "stylesheet",
-			"description": "\"Refers to a stylesheet.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-stylesheet"
-		},
-		{
-			"relation": "subsection",
-			"description": "\"Refers to a resource serving as a subsection in a collection of resources.\"",
-			"spec_title": "HTML401",
-			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
-		},
-		{
-			"relation": "successor-version",
-			"description": "\"Points to a resource containing the successor version in the version history.\"",
-			"spec_title": "RFC5829",
-			"spec_href": "http://tools.ietf.org/html/rfc5829"
-		},
-		{
-			"relation": "tag",
-			"description": "\"Gives a tag (identified by the given address) that applies to the current document.\"",
-			"spec_title": "HTML5links",
-			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-tag"
-		},
-		{
-			"relation": "terms-of-service",
-			"description": "\"Refers to the terms of service associated with the link's context.\"",
-			"spec_title": "RFC6903",
-			"spec_href": "http://tools.ietf.org/html/rfc6903"
-		},
-		{
-			"relation": "type",
-			"description": "\"Refers to a resource identifying the abstract semantic type of which the link's context is considered to be an instance.\"",
-			"spec_title": "RFC6903",
-			"spec_href": "http://tools.ietf.org/html/rfc6903"
-		},
-		{
-			"relation": "up",
-			"description": "\"Refers to a parent document in a hierarchy of documents.\"",
-			"spec_title": "RFC5988",
-			"spec_href": "http://tools.ietf.org/html/rfc5988"
-		},
-		{
-			"relation": "version-history",
-			"description": "\"Points to a resource containing the version history for the context.\"",
-			"spec_title": "RFC5829",
-			"spec_href": "http://tools.ietf.org/html/rfc5829"
-		},
-		{
-			"relation": "via",
-			"description": "\"Identifies a resource that is the source of the information in the link's context.\"",
-			"spec_title": "RFC4287",
-			"spec_href": "http://tools.ietf.org/html/rfc4287"
-		},
-		{
-			"relation": "working-copy",
-			"description": "\"Points to a working copy for this resource.\"",
-			"spec_title": "RFC5829",
-			"spec_href": "http://tools.ietf.org/html/rfc5829"
-		},
-		{
-			"relation": "working-copy-of",
-			"description": "\"Points to the versioned resource from which this working copy was obtained.\"",
-			"spec_title": "RFC5829",
-			"spec_href": "http://tools.ietf.org/html/rfc5829"
-		}
-	]
-
-/***/ },
-/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var undefined = (void 0); // Paranoia
@@ -52784,25 +51151,1976 @@
 
 
 /***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
+	  var e, m,
+	      eLen = nBytes * 8 - mLen - 1,
+	      eMax = (1 << eLen) - 1,
+	      eBias = eMax >> 1,
+	      nBits = -7,
+	      i = isLE ? (nBytes - 1) : 0,
+	      d = isLE ? -1 : 1,
+	      s = buffer[offset + i];
+
+	  i += d;
+
+	  e = s & ((1 << (-nBits)) - 1);
+	  s >>= (-nBits);
+	  nBits += eLen;
+	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8);
+
+	  m = e & ((1 << (-nBits)) - 1);
+	  e >>= (-nBits);
+	  nBits += mLen;
+	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8);
+
+	  if (e === 0) {
+	    e = 1 - eBias;
+	  } else if (e === eMax) {
+	    return m ? NaN : ((s ? -1 : 1) * Infinity);
+	  } else {
+	    m = m + Math.pow(2, mLen);
+	    e = e - eBias;
+	  }
+	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
+	};
+
+	exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
+	  var e, m, c,
+	      eLen = nBytes * 8 - mLen - 1,
+	      eMax = (1 << eLen) - 1,
+	      eBias = eMax >> 1,
+	      rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0),
+	      i = isLE ? 0 : (nBytes - 1),
+	      d = isLE ? 1 : -1,
+	      s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0;
+
+	  value = Math.abs(value);
+
+	  if (isNaN(value) || value === Infinity) {
+	    m = isNaN(value) ? 1 : 0;
+	    e = eMax;
+	  } else {
+	    e = Math.floor(Math.log(value) / Math.LN2);
+	    if (value * (c = Math.pow(2, -e)) < 1) {
+	      e--;
+	      c *= 2;
+	    }
+	    if (e + eBias >= 1) {
+	      value += rt / c;
+	    } else {
+	      value += rt * Math.pow(2, 1 - eBias);
+	    }
+	    if (value * c >= 2) {
+	      e++;
+	      c /= 2;
+	    }
+
+	    if (e + eBias >= eMax) {
+	      m = 0;
+	      e = eMax;
+	    } else if (e + eBias >= 1) {
+	      m = (value * c - 1) * Math.pow(2, mLen);
+	      e = e + eBias;
+	    } else {
+	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
+	      e = 0;
+	    }
+	  }
+
+	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8);
+
+	  e = (e << mLen) | m;
+	  eLen += mLen;
+	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
+
+	  buffer[offset + i - d] |= s * 128;
+	};
+
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * isArray
+	 */
+
+	var isArray = Array.isArray;
+
+	/**
+	 * toString
+	 */
+
+	var str = Object.prototype.toString;
+
+	/**
+	 * Whether or not the given `val`
+	 * is an array.
+	 *
+	 * example:
+	 *
+	 *        isArray([]);
+	 *        // > true
+	 *        isArray(arguments);
+	 *        // > false
+	 *        isArray('');
+	 *        // > false
+	 *
+	 * @param {mixed} val
+	 * @return {bool}
+	 */
+
+	module.exports = isArray || function (val) {
+	  return !! val && '[object Array]' == str.call(val);
+	};
+
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = [
+		{
+			"code": "1xx",
+			"phrase": "**Informational**",
+			"description": "\"indicates an interim response for communicating connection status or request progress prior to completing the requested action and sending a final response.\" ~ [sure](http://www.urbandictionary.com/define.php?term=sure)",
+			"spec_title": "RFC7231#6.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.2"
+		},
+		{
+			"code": "100",
+			"phrase": "Continue",
+			"description": "\"indicates that the initial part of a request has been received and has not yet been rejected by the server.\"",
+			"spec_title": "RFC7231#6.2.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.2.1"
+		},
+		{
+			"code": "101",
+			"phrase": "Switching Protocols",
+			"description": "\"indicates that the server understands and is willing to comply with the client's request, via the Upgrade header field, for a change in the application protocol being used on this connection.\"",
+			"spec_title": "RFC7231#6.2.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.2.2"
+		},
+		{
+			"code": "2xx",
+			"phrase": "**Successful**",
+			"description": "\"indicates that the client's request was successfully received, understood, and accepted.\" ~ [cool](https://twitter.com/DanaDanger/status/183316183494311936)",
+			"spec_title": "RFC7231#6.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3"
+		},
+		{
+			"code": "200",
+			"phrase": "OK",
+			"description": "\"indicates that the request has succeeded.\"",
+			"spec_title": "RFC7231#6.3.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.1"
+		},
+		{
+			"code": "201",
+			"phrase": "Created",
+			"description": "\"indicates that the request has been fulfilled and has resulted in one or more new resources being created.\"",
+			"spec_title": "RFC7231#6.3.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.2"
+		},
+		{
+			"code": "202",
+			"phrase": "Accepted",
+			"description": "\"indicates that the request has been accepted for processing, but the processing has not been completed.\"",
+			"spec_title": "RFC7231#6.3.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.3"
+		},
+		{
+			"code": "203",
+			"phrase": "Non-Authoritative Information",
+			"description": "\"indicates that the request was successful but the enclosed payload has been modified from that of the origin server's 200 (OK) response by a transforming proxy.\"",
+			"spec_title": "RFC7231#6.3.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.4"
+		},
+		{
+			"code": "204",
+			"phrase": "No Content",
+			"description": "\"indicates that the server has successfully fulfilled the request and that there is no additional content to send in the response payload body.\"",
+			"spec_title": "RFC7231#6.3.5",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.5"
+		},
+		{
+			"code": "205",
+			"phrase": "Reset Content",
+			"description": "\"indicates that the server has fulfilled the request and desires that the user agent reset the \"document view\", which caused the request to be sent, to its original state as received from the origin server.\"",
+			"spec_title": "RFC7231#6.3.6",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.6"
+		},
+		{
+			"code": "206",
+			"phrase": "Partial Content",
+			"description": "\"indicates that the server is successfully fulfilling a range request for the target resource by transferring one or more parts of the selected representation that correspond to the satisfiable ranges found in the requests's Range header field.\"",
+			"spec_title": "RFC7233#4.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7233#section-4.1"
+		},
+		{
+			"code": "3xx",
+			"phrase": "**Redirection**",
+			"description": "\"indicates that further action needs to be taken by the user agent in order to fulfill the request.\" ~ [ask that dude over there](https://twitter.com/DanaDanger/status/183316183494311936)",
+			"spec_title": "RFC7231#6.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4"
+		},
+		{
+			"code": "300",
+			"phrase": "Multiple Choices",
+			"description": "\"indicates that the target resource has more than one representation, each with its own more specific identifier, and information about the alternatives is being provided so that the user (or user agent) can select a preferred representation by redirecting its request to one or more of those identifiers.\"",
+			"spec_title": "RFC7231#6.4.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.1"
+		},
+		{
+			"code": "301",
+			"phrase": "Moved Permanently",
+			"description": "\"indicates that the target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.\"",
+			"spec_title": "RFC7231#6.4.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.2"
+		},
+		{
+			"code": "302",
+			"phrase": "Found",
+			"description": "\"indicates that the target resource resides temporarily under a different URI.\"",
+			"spec_title": "RFC7231#6.4.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.3"
+		},
+		{
+			"code": "303",
+			"phrase": "See Other",
+			"description": "\"indicates that the server is redirecting the user agent to a different resource, as indicated by a URI in the Location header field, that is intended to provide an indirect response to the original request.\"",
+			"spec_title": "RFC7231#6.4.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.4"
+		},
+		{
+			"code": "304",
+			"phrase": "Not Modified",
+			"description": "\"indicates that a conditional GET request has been received and would have resulted in a 200 (OK) response if it were not for the fact that the condition has evaluated to false.\"",
+			"spec_title": "RFC7232#4.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7232#section-4.1"
+		},
+		{
+			"code": "305",
+			"phrase": "Use Proxy",
+			"description": "*deprecated*",
+			"spec_title": "RFC7231#6.4.5",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.5"
+		},
+		{
+			"code": "307",
+			"phrase": "Temporary Redirect",
+			"description": "\"indicates that the target resource resides temporarily under a different URI and the user agent MUST NOT change the request method if it performs an automatic redirection to that URI.\"",
+			"spec_title": "RFC7231#6.4.7",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.4.7"
+		},
+		{
+			"code": "4xx",
+			"phrase": "**Client Error**",
+			"description": "\"indicates that the client seems to have erred.\" ~ [*you* fucked up](https://twitter.com/DanaDanger/status/183316183494311936)",
+			"spec_title": "RFC7231#6.5",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5"
+		},
+		{
+			"code": "400",
+			"phrase": "Bad Request",
+			"description": "\"indicates that the server cannot or will not process the request because the received syntax is invalid, nonsensical, or exceeds some limitation on what the server is willing to process.\"",
+			"spec_title": "RFC7231#6.5.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.1"
+		},
+		{
+			"code": "401",
+			"phrase": "Unauthorized",
+			"description": "\"indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.\"",
+			"spec_title": "RFC7235#6.3.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7235#section-3.1"
+		},
+		{
+			"code": "402",
+			"phrase": "Payment Required",
+			"description": "*reserved*",
+			"spec_title": "RFC7231#6.5.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.2"
+		},
+		{
+			"code": "403",
+			"phrase": "Forbidden",
+			"description": "\"indicates that the server understood the request but refuses to authorize it.\"",
+			"spec_title": "RFC7231#6.5.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.3"
+		},
+		{
+			"code": "404",
+			"phrase": "Not Found",
+			"description": "\"indicates that the origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\"",
+			"spec_title": "RFC7231#6.5.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.4"
+		},
+		{
+			"code": "405",
+			"phrase": "Method Not Allowed",
+			"description": "\"indicates that the method specified in the request-line is known by the origin server but not supported by the target resource.\"",
+			"spec_title": "RFC7231#6.5.5",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.5"
+		},
+		{
+			"code": "406",
+			"phrase": "Not Acceptable",
+			"description": "\"indicates that the target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request, and the server is unwilling to supply a default representation.\"",
+			"spec_title": "RFC7231#6.5.6",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.6"
+		},
+		{
+			"code": "407",
+			"phrase": "Proxy Authentication Required",
+			"description": "\"is similar to 401 (Unauthorized), but indicates that the client needs to authenticate itself in order to use a proxy.\"",
+			"spec_title": "RFC7231#6.3.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.3.2"
+		},
+		{
+			"code": "408",
+			"phrase": "Request Timeout",
+			"description": "\"indicates that the server did not receive a complete request message within the time that it was prepared to wait.\"",
+			"spec_title": "RFC7231#6.5.7",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.7"
+		},
+		{
+			"code": "409",
+			"phrase": "Conflict",
+			"description": "\"indicates that the request could not be completed due to a conflict with the current state of the resource.\"",
+			"spec_title": "RFC7231#6.5.8",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.8"
+		},
+		{
+			"code": "410",
+			"phrase": "Gone",
+			"description": "\"indicates that access to the target resource is no longer available at the origin server and that this condition is likely to be permanent.\"",
+			"spec_title": "RFC7231#6.5.9",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.9"
+		},
+		{
+			"code": "411",
+			"phrase": "Length Required",
+			"description": "\"indicates that the server refuses to accept the request without a defined Content-Length.\"",
+			"spec_title": "RFC7231#6.5.10",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.10"
+		},
+		{
+			"code": "412",
+			"phrase": "Precondition Failed",
+			"description": "\"indicates that one or more preconditions given in the request header fields evaluated to false when tested on the server.\"",
+			"spec_title": "RFC7232#4.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7232#section-4.2"
+		},
+		{
+			"code": "413",
+			"phrase": "Payload Too Large",
+			"description": "\"indicates that the server is refusing to process a request because the request payload is larger than the server is willing or able to process.\"",
+			"spec_title": "RFC7231#6.5.11",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.11"
+		},
+		{
+			"code": "414",
+			"phrase": "URI Too Long",
+			"description": "\"indicates that the server is refusing to service the request because the request-target is longer than the server is willing to interpret.\"",
+			"spec_title": "RFC7231#6.5.12",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.12"
+		},
+		{
+			"code": "415",
+			"phrase": "Unsupported Media Type",
+			"description": "\"indicates that the origin server is refusing to service the request because the payload is in a format not supported by the target resource for this method.\"",
+			"spec_title": "RFC7231#6.5.13",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.13"
+		},
+		{
+			"code": "416",
+			"phrase": "Range Not Satisfiable",
+			"description": "\"indicates that none of the ranges in the request's Range header field overlap the current extent of the selected resource or that the set of ranges requested has been rejected due to invalid ranges or an excessive request of small or overlapping ranges.\"",
+			"spec_title": "RFC7233#4.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7233#section-4.4"
+		},
+		{
+			"code": "417",
+			"phrase": "Expectation Failed",
+			"description": "\"indicates that the expectation given in the request's Expect header field could not be met by at least one of the inbound servers.\"",
+			"spec_title": "RFC7231#6.5.14",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.14"
+		},
+		{
+			"code": "426",
+			"phrase": "Upgrade Required",
+			"description": "\"indicates that the server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol.\"",
+			"spec_title": "RFC7231#6.5.15",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.5.15"
+		},
+		{
+			"code": "5xx",
+			"phrase": "**Server Error**",
+			"description": "\"indicates that the server is aware that it has erred or is incapable of performing the requested method.\" ~ [*we* fucked up](https://twitter.com/DanaDanger/status/183316183494311936)",
+			"spec_title": "RFC7231#6.6",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6"
+		},
+		{
+			"code": "500",
+			"phrase": "Internal Server Error",
+			"description": "\"indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.\"",
+			"spec_title": "RFC7231#6.6.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.1"
+		},
+		{
+			"code": "501",
+			"phrase": "Not Implemented",
+			"description": "\"indicates that the server does not support the functionality required to fulfill the request.\"",
+			"spec_title": "RFC7231#6.6.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.2"
+		},
+		{
+			"code": "502",
+			"phrase": "Bad Gateway",
+			"description": "\"indicates that the server, while acting as a gateway or proxy, received an invalid response from an inbound server it accessed while attempting to fulfill the request.\"",
+			"spec_title": "RFC7231#6.6.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.3"
+		},
+		{
+			"code": "503",
+			"phrase": "Service Unavailable",
+			"description": "\"indicates that the server is currently unable to handle the request due to a temporary overload or scheduled maintenance, which will likely be alleviated after some delay.\"",
+			"spec_title": "RFC7231#6.6.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.4"
+		},
+		{
+			"code": "504",
+			"phrase": "Gateway Time-out",
+			"description": "\"indicates that the server, while acting as a gateway or proxy, did not receive a timely response from an upstream server it needed to access in order to complete the request.\"",
+			"spec_title": "RFC7231#6.6.5",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.5"
+		},
+		{
+			"code": "505",
+			"phrase": "HTTP Version Not Supported",
+			"description": "\"indicates that the server does not support, or refuses to support, the protocol version that was used in the request message.\"",
+			"spec_title": "RFC7231#6.6.6",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-6.6.6"
+		},
+		{
+			"code": "102",
+			"phrase": "Processing",
+			"description": "\"is an interim response used to inform the client that the server has accepted the complete request, but has not yet completed it.\"",
+			"spec_title": "RFC5218#10.1",
+			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.1"
+		},
+		{
+			"code": "207",
+			"phrase": "Multi-Status",
+			"description": "\"provides status for multiple independent operations.\"",
+			"spec_title": "RFC5218#10.2",
+			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.2"
+		},
+		{
+			"code": "226",
+			"phrase": "IM Used",
+			"description": "\"The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more instance-manipulations applied to the current instance.\"",
+			"spec_title": "RFC3229#10.4.1",
+			"spec_href": "http://tools.ietf.org/html/rfc3229#section-10.4.1"
+		},
+		{
+			"code": "308",
+			"phrase": "Permanent Redirect",
+			"description": "\"The target resource has been assigned a new permanent URI and any future references to this resource SHOULD use one of the returned URIs. [...] This status code is similar to 301 Moved Permanently (Section 7.3.2 of rfc7231), except that it does not allow rewriting the request method from POST to GET.\"",
+			"spec_title": "RFC7238",
+			"spec_href": "http://tools.ietf.org/html/rfc7238"
+		},
+		{
+			"code": "422",
+			"phrase": "Unprocessable Entity",
+			"description": "\"means the server understands the content type of the request entity (hence a 415(Unsupported Media Type) status code is inappropriate), and the syntax of the request entity is correct (thus a 400 (Bad Request) status code is inappropriate) but was unable to process the contained instructions.\"",
+			"spec_title": "RFC5218#10.3",
+			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.3"
+		},
+		{
+			"code": "423",
+			"phrase": "Locked",
+			"description": "\"means the source or destination resource of a method is locked.\"",
+			"spec_title": "RFC5218#10.4",
+			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.4"
+		},
+		{
+			"code": "424",
+			"phrase": "Failed Dependency",
+			"description": "\"means that the method could not be performed on the resource because the requested action depended on another action and that action failed.\"",
+			"spec_title": "RFC5218#10.5",
+			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.5"
+		},
+		{
+			"code": "428",
+			"phrase": "Precondition Required",
+			"description": "\"indicates that the origin server requires the request to be conditional.\"",
+			"spec_title": "RFC6585#3",
+			"spec_href": "http://tools.ietf.org/html/rfc6585#section-3"
+		},
+		{
+			"code": "429",
+			"phrase": "Too Many Requests",
+			"description": "\"indicates that the user has sent too many requests in a given amount of time (\"rate limiting\").\"",
+			"spec_title": "RFC6585#4",
+			"spec_href": "http://tools.ietf.org/html/rfc6585#section-4"
+		},
+		{
+			"code": "431",
+			"phrase": "Request Header Fields Too Large",
+			"description": "\"indicates that the server is unwilling to process the request because its header fields are too large.\"",
+			"spec_title": "RFC6585#5",
+			"spec_href": "http://tools.ietf.org/html/rfc6585#section-5"
+		},
+		{
+			"code": "451",
+			"phrase": "Unavailable For Legal Reasons",
+			"description": "\"This status code indicates that the server is denying access to the resource in response to a legal demand.\"",
+			"spec_title": "draft-tbray-http-legally-restricted-status",
+			"spec_href": "http://tools.ietf.org/html/draft-tbray-http-legally-restricted-status"
+		},
+		{
+			"code": "506",
+			"phrase": "Variant Also Negotiates",
+			"description": "\"indicates that the server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.\"",
+			"spec_title": "RFC2295#8.1",
+			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.1"
+		},
+		{
+			"code": "507",
+			"phrase": "Insufficient Storage",
+			"description": "\"means the method could not be performed on the resource because the server is unable to store the representation needed to successfully complete the request.\"",
+			"spec_title": "RFC5218#10.6",
+			"spec_href": "http://tools.ietf.org/html/rfc2518#section-10.6"
+		},
+		{
+			"code": "511",
+			"phrase": "Network Authentication Required",
+			"description": "\"indicates that the client needs to authenticate to gain network access.\"",
+			"spec_title": "RFC6585#6",
+			"spec_href": "http://tools.ietf.org/html/rfc6585#section-6"
+		},
+		{
+			"code": "7xx",
+			"phrase": "**Developer Error**",
+			"description": "[err](http://www.urbandictionary.com/define.php?term=err)",
+			"spec_title": "7xx-rfc",
+			"spec_href": "http://documentup.com/joho/7XX-rfc"
+		}
+	]
+
+/***/ },
+/* 113 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = [
+		{
+			"method": "CONNECT",
+			"description": "\"requests that the recipient establish a tunnel to the destination origin server identified by the request-target and, if successful, thereafter restrict its behavior to blind forwarding of packets, in both directions, until the connection is closed.\"",
+			"safe": true,
+			"idempotent": true,
+			"cacheable": false,
+			"spec_title": "RFC7231#4.3.6",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.6"
+		},
+		{
+			"method": "DELETE",
+			"description": "\"requests that the origin server remove the association between the target resource and its current functionality.\"",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": false,
+			"spec_title": "RFC7231#4.3.5",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.5"
+		},
+		{
+			"method": "GET",
+			"description": "\"requests transfer of a current selected representation for the target resource.\"",
+			"safe": true,
+			"idempotent": true,
+			"cacheable": true,
+			"spec_title": "RFC7231#4.3.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.1"
+		},
+		{
+			"method": "HEAD",
+			"description": "\"is identical to GET except that the server MUST NOT send a message body in the response (i.e., the response terminates at the end of the header block).\"",
+			"safe": true,
+			"idempotent": true,
+			"cacheable": true,
+			"spec_title": "RFC7231#4.3.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.2"
+		},
+		{
+			"method": "OPTIONS",
+			"description": "\"requests information about the communication options available on the request/response chain identified by the effective request URI.\"",
+			"safe": true,
+			"idempotent": true,
+			"cacheable": false,
+			"spec_title": "RFC7231#4.3.7",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.7"
+		},
+		{
+			"method": "POST",
+			"description": "\"requests that the target resource process the representation enclosed in the request according to the resource's own specific semantics.\"",
+			"safe": false,
+			"idempotent": false,
+			"cacheable": false,
+			"spec_title": "RFC7231#4.3.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.3"
+		},
+		{
+			"method": "PUT",
+			"description": "\"requests that the state of the target resource be created or replaced with the state defined by the representation enclosed in the request message payload.\"",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": false,
+			"spec_title": "RFC7231#4.3.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.4"
+		},
+		{
+			"method": "TRACE",
+			"description": "\"is used to invoke a remote, application-layer loopback of the request message.\"",
+			"safe": true,
+			"idempotent": true,
+			"cacheable": false,
+			"spec_title": "RFC7231#4.3.8",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-4.3.8"
+		},
+		{
+			"method": "ACL",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3744#8.1",
+			"spec_href": "http://tools.ietf.org/html/rfc3744#section-8.1"
+		},
+		{
+			"method": "BASELINE-CONTROL",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#12.6",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-12.6"
+		},
+		{
+			"method": "BIND",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC5842#4",
+			"spec_href": "http://tools.ietf.org/html/rfc5842#section-4"
+		},
+		{
+			"method": "CHECKIN",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#4.4",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-4.4"
+		},
+		{
+			"method": "CHECKOUT",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#4.3",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-4.3"
+		},
+		{
+			"method": "COPY",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4918#9.8",
+			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.8"
+		},
+		{
+			"method": "LABEL",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#8.2",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-8.2"
+		},
+		{
+			"method": "LINK",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC2068#19.6.1.2",
+			"spec_href": "http://tools.ietf.org/html/rfc2068#section-19.6.1.2"
+		},
+		{
+			"method": "LOCK",
+			"description": "",
+			"safe": false,
+			"idempotent": false,
+			"cacheable": "",
+			"spec_title": "RFC4918#9.10",
+			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.10"
+		},
+		{
+			"method": "MERGE",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#11.2",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-11.2"
+		},
+		{
+			"method": "MKACTIVITY",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#13.5",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-13.5"
+		},
+		{
+			"method": "MKCALENDAR",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4791#5.3.1",
+			"spec_href": "http://tools.ietf.org/html/rfc4791#section-5.3.1"
+		},
+		{
+			"method": "MKCOL",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4918#9.3",
+			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.3"
+		},
+		{
+			"method": "MKREDIRECTREF",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4437#6",
+			"spec_href": "http://tools.ietf.org/html/rfc4437#section-6"
+		},
+		{
+			"method": "MKWORKSPACE",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#6.3",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-6.3"
+		},
+		{
+			"method": "MOVE",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4918#9.9",
+			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.9"
+		},
+		{
+			"method": "ORDERPATCH",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3648#7",
+			"spec_href": "http://tools.ietf.org/html/rfc3648#section-7"
+		},
+		{
+			"method": "PATCH",
+			"description": "\"requests that a set of changes described in the request entity be applied to the resource identified by the Request-URI.\"",
+			"safe": false,
+			"idempotent": false,
+			"cacheable": false,
+			"spec_title": "RFC5789",
+			"spec_href": "http://tools.ietf.org/html/rfc5789#section-2"
+		},
+		{
+			"method": "PROPFIND",
+			"description": "",
+			"safe": true,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4918#9.1",
+			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.1"
+		},
+		{
+			"method": "PROPPATCH",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4918#9.2",
+			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.2"
+		},
+		{
+			"method": "REBIND",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC5842#6",
+			"spec_href": "http://tools.ietf.org/html/rfc5842#section-6"
+		},
+		{
+			"method": "REPORT",
+			"description": "",
+			"safe": true,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#3.6",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-3.6"
+		},
+		{
+			"method": "SEARCH",
+			"description": "",
+			"safe": true,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC5323#2",
+			"spec_href": "http://tools.ietf.org/html/rfc5323#section-2"
+		},
+		{
+			"method": "UNBIND",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC5842#5",
+			"spec_href": "http://tools.ietf.org/html/rfc5842#section-5"
+		},
+		{
+			"method": "UNCHECKOUT",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#4.5",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-4.5"
+		},
+		{
+			"method": "UNLINK",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC2068#19.6.1.3",
+			"spec_href": "http://tools.ietf.org/html/rfc2068#section-19.6.1.3"
+		},
+		{
+			"method": "UNLOCK",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4918#9.11",
+			"spec_href": "http://tools.ietf.org/html/rfc4918#section-9.11"
+		},
+		{
+			"method": "UPDATE",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#7.1",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-7.1"
+		},
+		{
+			"method": "UPDATEREDIRECTREF",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC4437#7",
+			"spec_href": "http://tools.ietf.org/html/rfc4437#section-7"
+		},
+		{
+			"method": "VERSION-CONTROL",
+			"description": "",
+			"safe": false,
+			"idempotent": true,
+			"cacheable": "",
+			"spec_title": "RFC3253#3.5",
+			"spec_href": "http://tools.ietf.org/html/rfc3253#section-3.5"
+		}
+	]
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = [
+		{
+			"header": "Content-Encoding",
+			"description": "\"indicates what content codings have been applied to the representation, beyond those inherent in the media type, and thus what decoding mechanisms have to be applied in order to obtain data in the media type referenced by the Content-Type header field.\"",
+			"spec_title": "RFC7231#3.1.2.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-3.1.2.2"
+		},
+		{
+			"header": "Content-Language",
+			"description": "\"describes the natural language(s) of the intended audience for the representation.\"",
+			"spec_title": "RFC7231#3.1.3.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-3.1.3.2"
+		},
+		{
+			"header": "Content-Location",
+			"description": "\"references a URI that can be used as an identifier for a specific resource corresponding to the representation in this message's payload.\"",
+			"spec_title": "RFC7231#3.1.4.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-3.1.4.2"
+		},
+		{
+			"header": "Content-Type",
+			"description": "\"indicates the media type of the associated representation: either the representation enclosed in the message payload or the selected representation, as determined by the message semantics.\"",
+			"spec_title": "RFC7231#3.1.1.5",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-3.1.1.5"
+		},
+		{
+			"header": "Content-Length",
+			"description": "\"can provide the anticipated size, as a decimal number of octets, for a potential payload body.\"",
+			"spec_title": "RFC7230#3.3.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7230#section-3.3.2"
+		},
+		{
+			"header": "Content-Range",
+			"description": "\"is sent in a single part 206 (Partial Content) response to indicate the partial range of the selected representation enclosed as the message payload, sent in each part of a multipart 206 response to indicate the range enclosed within each body part, and sent in 416 (Range Not Satisfiable) responses to provide information about the selected representation.\"",
+			"spec_title": "RFC7233#4.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7233#section-4.2"
+		},
+		{
+			"header": "Transfer-Encoding",
+			"description": "\"lists the transfer coding names corresponding to the sequence of transfer codings that have been (or will be) applied to the payload body in order to form the message body.\"",
+			"spec_title": "RFC7230#3.3.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7230#section-3.3.1"
+		},
+		{
+			"header": "Cache-Control",
+			"description": "\"is used to specify directives for caches along the request/response chain.\"",
+			"spec_title": "RFC7234#7.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.2"
+		},
+		{
+			"header": "Expect",
+			"description": "\"is used to indicate that particular server behaviors are required by the client.\"",
+			"spec_title": "RFC7231#5.1.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.1.1"
+		},
+		{
+			"header": "Host",
+			"description": "\"provides the host and port information from the target URI, enabling the origin server to distinguish among resources while servicing requests for multiple host names on a single IP address.\"",
+			"spec_title": "RFC7230#5.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7230#section-5.4"
+		},
+		{
+			"header": "Max-Forwards",
+			"description": "\"provides a mechanism with the TRACE and OPTIONS methods to limit the number of times that the request is forwarded by proxies.\"",
+			"spec_title": "RFC7231#5.1.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.1.2"
+		},
+		{
+			"header": "Pragma",
+			"description": "\"allows backwards compatibility with HTTP/1.0 caches, so that clients can specify a \"no-cache\" request that they will understand (as Cache-Control was not defined until HTTP/1.1).\"",
+			"spec_title": "RFC7234#7.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.4"
+		},
+		{
+			"header": "Range",
+			"description": "\"modifies the method semantics to request transfer of only one or more subranges of the selected representation data, rather than the entire selected representation data.\"",
+			"spec_title": "RFC7233#3.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7233#section-3.1"
+		},
+		{
+			"header": "TE",
+			"description": "\"indicates what transfer codings, besides chunked, the client is willing to accept in response, and whether or not the client is willing to accept trailer fields in a chunked transfer coding.\"",
+			"spec_title": "RFC7230#4.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7230#section-4.3"
+		},
+		{
+			"header": "If-Match",
+			"description": "\"can be used to make a request method conditional on the current existence or value of an entity-tag for one or more representations of the target resource.\"",
+			"spec_title": "RFC7232#3.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7232#section-3.1"
+		},
+		{
+			"header": "If-Modified-Since",
+			"description": "\"can be used with GET or HEAD to make the method conditional by modification date: if the selected representation has not been modified since the time specified in this field, then do not perform the request method; instead, respond as detailed below.\"",
+			"spec_title": "RFC7232#3.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7232#section-3.3"
+		},
+		{
+			"header": "If-None-Match",
+			"description": "\"can be used to make a request method conditional on not matching any of the current entity-tag values for representations of the target resource.\"",
+			"spec_title": "RFC7232#3.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7232#section-3.2"
+		},
+		{
+			"header": "If-Range",
+			"description": "\"Informally, its meaning is: if the representation is unchanged, send me the part(s) that I am requesting in Range; otherwise, send me the entire representation.\"",
+			"spec_title": "RFC7233#3.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7233#section-3.2"
+		},
+		{
+			"header": "If-Unmodified-Since",
+			"description": "\"can be used to make a request method conditional by modification date: if the selected representation has been modified since the time specified in this field, then the server MUST NOT perform the requested operation and MUST instead respond with the 412 (Precondition Failed) status code.\"",
+			"spec_title": "RFC7232#3.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7232#section-3.4"
+		},
+		{
+			"header": "Accept",
+			"description": "\"can be used to specify certain media types which are acceptable for the response.\"",
+			"spec_title": "RFC7231#5.3.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.3.2"
+		},
+		{
+			"header": "Accept-Charset",
+			"description": "\"can be sent by a user agent to indicate what charsets are acceptable in textual response content.\"",
+			"spec_title": "RFC7231#5.3.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.3.3"
+		},
+		{
+			"header": "Accept-Encoding",
+			"description": "\"can be used by user agents to indicate what response content-codings are acceptable in the response.\"",
+			"spec_title": "RFC7231#5.3.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.3.4"
+		},
+		{
+			"header": "Accept-Language",
+			"description": "\"can be used by user agents to indicate the set of natural languages that are preferred in the response.\"",
+			"spec_title": "RFC7231#5.3.5",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.3.5"
+		},
+		{
+			"header": "Authorization",
+			"description": "\"allows a user agent to authenticate itself with a server -- usually, but not necessarily, after receiving a 401 (Unauthorized) response.\"",
+			"spec_title": "RFC7235#4.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7235#section-4.1"
+		},
+		{
+			"header": "Proxy-Authorization",
+			"description": "\"allows the client to identify itself (or its user) to a proxy that requires authentication.\"",
+			"spec_title": "RFC7235#4.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7235#section-4.3"
+		},
+		{
+			"header": "DNT",
+			"description": "\"defined as the means for expressing a user's tracking preference via HTTP.\"",
+			"spec_title": "Tracking Preference Expression (DNT)",
+			"spec_href": "http://www.w3.org/TR/tracking-dnt/#dnt-header-field"
+		},
+		{
+			"header": "From",
+			"description": "\"contains an Internet email address for a human user who controls the requesting user agent.\"",
+			"spec_title": "RFC7231#5.5.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.5.1"
+		},
+		{
+			"header": "Referer",
+			"description": "\"allows the user agent to specify a URI reference for the resource from which the target URI was obtained (i.e., the \"referrer\", though the field name is misspelled).\"",
+			"spec_title": "RFC7231#5.5.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.5.2"
+		},
+		{
+			"header": "User-Agent",
+			"description": "\"contains information about the user agent originating the request, which is often used by servers to help identify the scope of reported interoperability problems, to work around or tailor responses to avoid particular user agent limitations, and for analytics regarding browser or operating system use.\"",
+			"spec_title": "RFC7231#5.5.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-5.5.3"
+		},
+		{
+			"header": "Age",
+			"description": "\"conveys the sender's estimate of the amount of time since the response was generated or successfully validated at the origin server.\"",
+			"spec_title": "RFC7234#5.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7234#section-5.1"
+		},
+		{
+			"header": "Cache-Control",
+			"description": "\"is used to specify directives for caches along the request/response chain.\"",
+			"spec_title": "RFC7234#7.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.2"
+		},
+		{
+			"header": "Expires",
+			"description": "\"gives the date/time after which the response is considered stale.\"",
+			"spec_title": "RFC7234#7.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.3"
+		},
+		{
+			"header": "Date",
+			"description": "\"represents the date and time at which the message was originated\"",
+			"spec_title": "RFC7231#7.1.1.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.1.1.2"
+		},
+		{
+			"header": "Location",
+			"description": "\"is used in some responses to refer to a specific resource in relation to the response.\"",
+			"spec_title": "RFC7231#7.1.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.1.2"
+		},
+		{
+			"header": "Retry-After",
+			"description": "\"indicates how long the user agent ought to wait before making a follow-up request.\"",
+			"spec_title": "RFC7231#7.1.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.1.3"
+		},
+		{
+			"header": "Tk",
+			"description": "\"defined as an OPTIONAL means for indicating the tracking status that applied to the corresponding request and as a REQUIRED means for indicating that a state-changing request has resulted in an interactive change to the tracking status. \"",
+			"spec_title": "Tracking Preference Expression (DNT)",
+			"spec_href": "http://www.w3.org/TR/tracking-dnt/#response-header-field"
+		},
+		{
+			"header": "Vary",
+			"description": "\"describes what parts of a request message, aside from the method and request target, might influence the origin server's process for selecting and representing the response.\"",
+			"spec_title": "RFC7231#7.1.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.1.4"
+		},
+		{
+			"header": "Warning",
+			"description": "\"is used to carry additional information about the status or transformation of a message that might not be reflected in the message.\"",
+			"spec_title": "RFC7234#7.6",
+			"spec_href": "http://tools.ietf.org/html/rfc7234#section-7.6"
+		},
+		{
+			"header": "ETag",
+			"description": "\"provides the current entity-tag for the selected representation, as determined at the conclusion of handling the request.\"",
+			"spec_title": "RFC7232#2.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7232#section-2.3"
+		},
+		{
+			"header": "Last-Modified",
+			"description": "\"provides a timestamp indicating the date and time at which the origin server believes the selected representation was last modified, as determined at the conclusion of handling the request.\"",
+			"spec_title": "RFC7232#2.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7232#section-2.2"
+		},
+		{
+			"header": "WWW-Authenticate",
+			"description": "\"consists of at least one challenge that indicates the authentication scheme(s) and parameters applicable to the effective request URI.\"",
+			"spec_title": "RFC7235#4.4",
+			"spec_href": "http://tools.ietf.org/html/rfc7235#section-4.4"
+		},
+		{
+			"header": "Proxy-Authenticate",
+			"description": "\"consists of at least one challenge that indicates the authentication scheme(s) and parameters applicable to the proxy for this effective request URI.\"",
+			"spec_title": "RFC7235#4.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7235#section-4.2"
+		},
+		{
+			"header": "Accept-Ranges",
+			"description": "\"allows a server to indicate that it supports range requests for the target resource.\"",
+			"spec_title": "RFC7233#2.3",
+			"spec_href": "http://tools.ietf.org/html/rfc7233#section-2.3"
+		},
+		{
+			"header": "Allow",
+			"description": "\"lists the set of methods advertised as supported by the target resource.\"",
+			"spec_title": "RFC7231#7.4.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.4.1"
+		},
+		{
+			"header": "Server",
+			"description": "\"contains information about the software used by the origin server to handle the request, which is often used by clients to help identify the scope of reported interoperability problems, to work around or tailor requests to avoid particular server limitations, and for analytics regarding server or operating system use.\"",
+			"spec_title": "RFC7231#7.4.2",
+			"spec_href": "http://tools.ietf.org/html/rfc7231#section-7.4.2"
+		},
+		{
+			"header": "Accept-Patch",
+			"description": "\"used to specify the patch document formats accepted by the server.\"",
+			"spec_title": "RFC5789#3.1",
+			"spec_href": "http://tools.ietf.org/html/rfc5789#section-3.1"
+		},
+		{
+			"header": "Accept-Post",
+			"description": "\"indicates server support for specific media types for entity bodies in HTTP POST requests.\"",
+			"spec_title": "draft-wilde-accept-post",
+			"spec_href": "http://tools.ietf.org/html/draft-wilde-accept-post"
+		},
+		{
+			"header": "Access-Control-Allow-Credentials",
+			"description": "\"indicates whether the response to request can be exposed when the omit credentials flag is unset\"",
+			"spec_title": "CORS",
+			"spec_href": "http://www.w3.org/TR/cors/#access-control-allow-credentials-response-header"
+		},
+		{
+			"header": "Access-Control-Allow-Headers",
+			"description": "\"indicates, as part of the response to a preflight request, which header field names can be used during the actual request\"",
+			"spec_title": "CORS",
+			"spec_href": "http://www.w3.org/TR/cors/#access-control-allow-headers-response-header"
+		},
+		{
+			"header": "Access-Control-Allow-Methods",
+			"description": "\"indicates, as part of the response to a preflight request, which methods can be used during the actual request\"",
+			"spec_title": "CORS",
+			"spec_href": "http://www.w3.org/TR/cors/#access-control-allow-methods-response-header"
+		},
+		{
+			"header": "Access-Control-Allow-Origin",
+			"description": "\"indicates whether a resource can be shared\"",
+			"spec_title": "CORS",
+			"spec_href": "http://www.w3.org/TR/cors/#access-control-allow-origin-response-header"
+		},
+		{
+			"header": "Access-Control-Expose-Headers",
+			"description": "\"indicates which headers are safe to expose to the API of a CORS API specification\"",
+			"spec_title": "CORS",
+			"spec_href": "http://www.w3.org/TR/cors/#access-control-expose-headers-response-header"
+		},
+		{
+			"header": "Access-Control-Max-Age",
+			"description": "\"indicates how long the results of a preflight request can be cached in a preflight result cache\"",
+			"spec_title": "CORS",
+			"spec_href": "http://www.w3.org/TR/cors/#access-control-max-age-response-header"
+		},
+		{
+			"header": "Access-Control-Request-Headers",
+			"description": "\"indicates which headers will be used in the actual request as part of the preflight request\"",
+			"spec_title": "CORS",
+			"spec_href": "http://www.w3.org/TR/cors/#access-control-request-headers-request-header"
+		},
+		{
+			"header": "Access-Control-Request-Method",
+			"description": "\"indicates which method will be used in the actual request as part of the preflight request\"",
+			"spec_title": "CORS",
+			"spec_href": "http://www.w3.org/TR/cors/#access-control-request-method-request-header"
+		},
+		{
+			"header": "Content-Disposition",
+			"description": "\"standard\"",
+			"spec_title": "RFC6266",
+			"spec_href": "http://tools.ietf.org/html/rfc6266"
+		},
+		{
+			"header": "Content-Security-Policy",
+			"description": "\"is the preferred mechanism for delivering a CSP policy\"",
+			"spec_title": "CSP",
+			"spec_href": "http://www.w3.org/TR/CSP/#content-security-policy-header-field"
+		},
+		{
+			"header": "Content-Security-Policy-Report-Only",
+			"description": "\"lets servers experiment with policies by monitoring (rather than enforcing) a policy\"",
+			"spec_title": "CSP",
+			"spec_href": "http://www.w3.org/TR/CSP/#content-security-policy-report-only-header-field"
+		},
+		{
+			"header": "Cookie",
+			"description": "\"standard\"",
+			"spec_title": "RFC6265",
+			"spec_href": "http://tools.ietf.org/html/rfc6265"
+		},
+		{
+			"header": "Forwarded",
+			"description": "\"standard\"",
+			"spec_title": "RFC7239",
+			"spec_href": "http://tools.ietf.org/html/rfc7239"
+		},
+		{
+			"header": "Link",
+			"description": "\"provides a means for serialising one or more links in HTTP headers.\"",
+			"spec_title": "RFC5988#5",
+			"spec_href": "http://tools.ietf.org/html/rfc5988#section-5"
+		},
+		{
+			"header": "Origin",
+			"description": "\"standard\"",
+			"spec_title": "RFC6454",
+			"spec_href": "http://tools.ietf.org/html/rfc6454"
+		},
+		{
+			"header": "Prefer",
+			"description": "\"is used to indicate that particular server behaviors are preferred by the client, but not required for successful completion of the request.\"",
+			"spec_title": "draft-snell-http-prefer#2",
+			"spec_href": "http://tools.ietf.org/html/draft-snell-http-prefer#section-2"
+		},
+		{
+			"header": "Preference-Applied",
+			"description": "\"MAY be included within a response message as an indication as to which Prefer tokens were honored by the server and applied to the processing of a request.\"",
+			"spec_title": "draft-snell-http-prefer#3",
+			"spec_href": "http://tools.ietf.org/html/draft-snell-http-prefer#section-3"
+		},
+		{
+			"header": "Set-Cookie",
+			"description": "\"standard\"",
+			"spec_title": "RFC6265",
+			"spec_href": "http://tools.ietf.org/html/rfc6265"
+		},
+		{
+			"header": "Strict-Transport-Security",
+			"description": "\"standard\"",
+			"spec_title": "RFC6797",
+			"spec_href": "http://tools.ietf.org/html/rfc6797"
+		},
+		{
+			"header": "Via",
+			"description": "\"\"",
+			"spec_title": "RFC7230#5.7.1",
+			"spec_href": "http://tools.ietf.org/html/rfc7230#section-5.7.1"
+		},
+		{
+			"header": "A-IM",
+			"description": "\"\"",
+			"spec_title": "RFC3229#10.5.3",
+			"spec_href": "http://tools.ietf.org/html/rfc3229#section-10.5.3"
+		},
+		{
+			"header": "Accept-Features",
+			"description": "\"can be used by a user agent to give information about the presence or absence of certain features in the feature set of the current request.\"",
+			"spec_title": "RFC2295#8.2",
+			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.2"
+		},
+		{
+			"header": "Alt-Svc",
+			"description": "\"is advertising the availability of alternate services to HTTP/1.1 and HTTP/2.0 clients by adding an Alt-Svc header field to responses.\"",
+			"spec_title": "draft-nottingham-httpbis-alt-svc",
+			"spec_href": "http://tools.ietf.org/html/draft-nottingham-httpbis-alt-svc"
+		},
+		{
+			"header": "Alternates",
+			"description": "\"is used to convey the list of variants bound to a negotiable resource.\"",
+			"spec_title": "RFC2295#8.3",
+			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.3"
+		},
+		{
+			"header": "Apply-To-Redirect-Ref",
+			"description": "\"\"",
+			"spec_title": "RFC4437",
+			"spec_href": "http://tools.ietf.org/html/rfc4437"
+		},
+		{
+			"header": "CH",
+			"description": "\"describes an example list of client preferences that the server can use to adapt and optimize the resource to satisfy a given request.\"",
+			"spec_title": "draft-grigorik-http-client-hints",
+			"spec_href": "http://tools.ietf.org/html/draft-grigorik-http-client-hints"
+		},
+		{
+			"header": "Content-Base",
+			"description": "\"obsoleted\"",
+			"spec_title": "RFC2068",
+			"spec_href": "http://tools.ietf.org/html/rfc2068"
+		},
+		{
+			"header": "Cookie2",
+			"description": "\"obsoleted\"",
+			"spec_title": "RFC2965",
+			"spec_href": "http://tools.ietf.org/html/rfc2965"
+		},
+		{
+			"header": "DASL",
+			"description": "\"standard\"",
+			"spec_title": "RFC5323",
+			"spec_href": "http://tools.ietf.org/html/rfc5323"
+		},
+		{
+			"header": "DAV",
+			"description": "\"standard\"",
+			"spec_title": "RFC4918",
+			"spec_href": "http://tools.ietf.org/html/rfc4918"
+		},
+		{
+			"header": "Delta-Base",
+			"description": "\"\"",
+			"spec_title": "RFC3229#10.5.1",
+			"spec_href": "http://tools.ietf.org/html/rfc3229#section-10.5.1"
+		},
+		{
+			"header": "Depth",
+			"description": "\"standard\"",
+			"spec_title": "RFC4918",
+			"spec_href": "http://tools.ietf.org/html/rfc4918"
+		},
+		{
+			"header": "Destination",
+			"description": "\"standard\"",
+			"spec_title": "RFC4918",
+			"spec_href": "http://tools.ietf.org/html/rfc4918"
+		},
+		{
+			"header": "IM",
+			"description": "\"\"",
+			"spec_title": "RFC3229#10.5.2",
+			"spec_href": "http://tools.ietf.org/html/rfc3229#section-10.5.2"
+		},
+		{
+			"header": "If",
+			"description": "\"standard\"",
+			"spec_title": "RFC4918",
+			"spec_href": "http://tools.ietf.org/html/rfc4918"
+		},
+		{
+			"header": "If-Schedule-Tag-Match",
+			"description": "\"standard\"",
+			"spec_title": "RFC6638",
+			"spec_href": "http://tools.ietf.org/html/rfc6638"
+		},
+		{
+			"header": "Last-Event-ID",
+			"description": "\"The value of the event source's last event ID string, encoded as UTF-8.\"",
+			"spec_title": "Server-Sent Events",
+			"spec_href": "http://www.w3.org/TR/eventsource/#last-event-id"
+		},
+		{
+			"header": "Link-Template",
+			"description": "\"provides a means for serialising one or more links into HTTP headers.\"",
+			"spec_title": "draft-nottingham-link-template",
+			"spec_href": "http://tools.ietf.org/html/draft-nottingham-link-template"
+		},
+		{
+			"header": "Lock-Token",
+			"description": "\"standard\"",
+			"spec_title": "RFC4918",
+			"spec_href": "http://tools.ietf.org/html/rfc4918"
+		},
+		{
+			"header": "Negotiate",
+			"description": "\"can contain directives for any content negotiation process initiated by the request.\"",
+			"spec_title": "RFC2295#8.4",
+			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.4"
+		},
+		{
+			"header": "Nice",
+			"description": "\"indicates that a request is less important than a request that doesn't bear this header.\"",
+			"spec_title": "draft-thomson-http-nice",
+			"spec_href": "http://tools.ietf.org/html/draft-thomson-http-nice"
+		},
+		{
+			"header": "Overwrite",
+			"description": "\"standard\"",
+			"spec_title": "RFC4918",
+			"spec_href": "http://tools.ietf.org/html/rfc4918"
+		},
+		{
+			"header": "Redirect-Ref",
+			"description": "\"\"",
+			"spec_title": "RFC4437",
+			"spec_href": "http://tools.ietf.org/html/rfc4437"
+		},
+		{
+			"header": "Schedule-Reply",
+			"description": "\"standard\"",
+			"spec_title": "RFC6638",
+			"spec_href": "http://tools.ietf.org/html/rfc6638"
+		},
+		{
+			"header": "Schedule-Tag",
+			"description": "\"standard\"",
+			"spec_title": "RFC6638",
+			"spec_href": "http://tools.ietf.org/html/rfc6638"
+		},
+		{
+			"header": "Sec-WebSocket-Accept",
+			"description": "\"standard\"",
+			"spec_title": "RFC6455",
+			"spec_href": "http://tools.ietf.org/html/rfc6455"
+		},
+		{
+			"header": "Sec-WebSocket-Extensions",
+			"description": "\"standard\"",
+			"spec_title": "RFC6455",
+			"spec_href": "http://tools.ietf.org/html/rfc6455"
+		},
+		{
+			"header": "Sec-WebSocket-Key",
+			"description": "\"standard\"",
+			"spec_title": "RFC6455",
+			"spec_href": "http://tools.ietf.org/html/rfc6455"
+		},
+		{
+			"header": "Sec-WebSocket-Protocol",
+			"description": "\"standard\"",
+			"spec_title": "RFC6455",
+			"spec_href": "http://tools.ietf.org/html/rfc6455"
+		},
+		{
+			"header": "Sec-WebSocket-Version",
+			"description": "\"standard\"",
+			"spec_title": "RFC6455",
+			"spec_href": "http://tools.ietf.org/html/rfc6455"
+		},
+		{
+			"header": "Set-Cookie2",
+			"description": "\"obsoleted\"",
+			"spec_title": "RFC2965",
+			"spec_href": "http://tools.ietf.org/html/rfc2965"
+		},
+		{
+			"header": "SLUG",
+			"description": "\"standard\"",
+			"spec_title": "RFC5023",
+			"spec_href": "http://tools.ietf.org/html/rfc5023"
+		},
+		{
+			"header": "TCN",
+			"description": "\"is used by a server to signal that the resource is transparently negotiated.\"",
+			"spec_title": "RFC2295#8.5",
+			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.5"
+		},
+		{
+			"header": "Timeout",
+			"description": "\"standard\"",
+			"spec_title": "RFC4918",
+			"spec_href": "http://tools.ietf.org/html/rfc4918"
+		},
+		{
+			"header": "Variant-Vary",
+			"description": "\"can be used in a choice response to record any vary information which applies to the variant data (the entity body combined with some of the entity headers) contained in the response, rather than to the response as a whole.\"",
+			"spec_title": "RFC2295#8.6",
+			"spec_href": "http://tools.ietf.org/html/rfc2295#section-8.6"
+		},
+		{
+			"header": "X-Frame-Options",
+			"description": "\"indicates a policy that specifies whether the browser should render the transmitted resource within a <frame> or an <iframe>. Servers can declare this policy in the header of their HTTP responses to prevent clickjacking attacks, which ensures that their content is not embedded into other pages or frames.\"",
+			"spec_title": "RFC7034",
+			"spec_href": "http://tools.ietf.org/html/rfc7034"
+		}
+	]
+
+/***/ },
+/* 115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = [
+		{
+			"relation": "about",
+			"description": "\"Refers to a resource that is the subject of the link's context.\"",
+			"spec_title": "RFC6903",
+			"spec_href": "http://tools.ietf.org/html/rfc6903"
+		},
+		{
+			"relation": "alternate",
+			"description": "\"Refers to a substitute for this context\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-alternate"
+		},
+		{
+			"relation": "appendix",
+			"description": "\"Refers to an appendix.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "archives",
+			"description": "\"Refers to a collection of records, documents, or other materials of historical interest.\"",
+			"spec_title": "HTML5linksWD",
+			"spec_href": "http://www.w3.org/TR/2011/WD-html5-20110113/links.html#rel-archives"
+		},
+		{
+			"relation": "author",
+			"description": "\"Refers to the context's author.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-author"
+		},
+		{
+			"relation": "bookmark",
+			"description": "\"Gives a permanent link to use for bookmarking purposes.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-bookmark"
+		},
+		{
+			"relation": "canonical",
+			"description": "\"Designates the preferred version of a resource (the IRI and its contents).\"",
+			"spec_title": "RFC6596",
+			"spec_href": "http://tools.ietf.org/html/rfc6596"
+		},
+		{
+			"relation": "chapter",
+			"description": "\"Refers to a chapter in a collection of resources.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "collection",
+			"description": "\"The target IRI points to a resource which represents the collection resource for the context IRI.\"",
+			"spec_title": "RFC6573",
+			"spec_href": "http://tools.ietf.org/html/rfc6573"
+		},
+		{
+			"relation": "contents",
+			"description": "\"Refers to a table of contents.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "copyright",
+			"description": "\"Refers to a copyright statement that applies to the link's context.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "create-form",
+			"description": "\"The target IRI points to a resource where a submission form can be obtained.\"",
+			"spec_title": "RFC6861",
+			"spec_href": "http://tools.ietf.org/html/rfc6861"
+		},
+		{
+			"relation": "current",
+			"description": "\"Refers to a resource containing the most recent item(s) in a collection of resources.\"",
+			"spec_title": "RFC5005",
+			"spec_href": "http://tools.ietf.org/html/rfc5005"
+		},
+		{
+			"relation": "describedby",
+			"description": "\"Refers to a resource providing information about the link's context.\"",
+			"spec_title": "POWDER",
+			"spec_href": "http://www.w3.org/TR/powder-dr/#assoc-linking"
+		},
+		{
+			"relation": "describes",
+			"description": "\"The relationship A 'describes' B asserts that resource A provides a description of resource B. There are no constraints on the format or representation of either A or B, neither are there any further constraints on either resource.\"",
+			"spec_title": "RFC6892",
+			"spec_href": "http://tools.ietf.org/html/rfc6892"
+		},
+		{
+			"relation": "disclosure",
+			"description": "\"Refers to a list of patent disclosures made with respect to material for which `disclosure` relation is specified.\"",
+			"spec_title": "RFC6579",
+			"spec_href": "http://tools.ietf.org/html/rfc6579"
+		},
+		{
+			"relation": "duplicate",
+			"description": "\"Refers to a resource whose available representations are byte-for-byte identical with the corresponding representations of the context IRI.\"",
+			"spec_title": "RFC6249",
+			"spec_href": "http://tools.ietf.org/html/rfc6249"
+		},
+		{
+			"relation": "edit",
+			"description": "\"Refers to a resource that can be used to edit the link's context.\"",
+			"spec_title": "RFC5023",
+			"spec_href": "http://tools.ietf.org/html/rfc5023"
+		},
+		{
+			"relation": "edit-form",
+			"description": "\"The target IRI points to a resource where a submission form for editing associated resource can be obtained.\"",
+			"spec_title": "RFC6861",
+			"spec_href": "http://tools.ietf.org/html/rfc6861"
+		},
+		{
+			"relation": "edit-media",
+			"description": "\"Refers to a resource that can be used to edit media associated with the link's context.\"",
+			"spec_title": "RFC5023",
+			"spec_href": "http://tools.ietf.org/html/rfc5023"
+		},
+		{
+			"relation": "enclosure",
+			"description": "\"Identifies a related resource that is potentially large and might require special handling.\"",
+			"spec_title": "RFC4287",
+			"spec_href": "http://tools.ietf.org/html/rfc4287"
+		},
+		{
+			"relation": "first",
+			"description": "\"An IRI that refers to the furthest preceding resource in a series of resources.\"",
+			"spec_title": "RFC5988",
+			"spec_href": "http://tools.ietf.org/html/rfc5988"
+		},
+		{
+			"relation": "glossary",
+			"description": "\"Refers to a glossary of terms.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "help",
+			"description": "\"Refers to context-sensitive help.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-help"
+		},
+		{
+			"relation": "hosts",
+			"description": "\"Refers to a resource hosted by the server indicated by the link context.\"",
+			"spec_title": "RFC6690",
+			"spec_href": "http://tools.ietf.org/html/rfc6690"
+		},
+		{
+			"relation": "hub",
+			"description": "\"Refers to a hub that enables registration for notification of updates to the context.\"",
+			"spec_title": "pubsubhubbub",
+			"spec_href": "http://pubsubhubbub.googlecode.com"
+		},
+		{
+			"relation": "icon",
+			"description": "\"Refers to an icon representing the link's context.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-icon"
+		},
+		{
+			"relation": "index",
+			"description": "\"Refers to an index.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "item",
+			"description": "\"The target IRI points to a resource that is a member of the collection represented by the context IRI.\"",
+			"spec_title": "RFC6573",
+			"spec_href": "http://tools.ietf.org/html/rfc6573"
+		},
+		{
+			"relation": "last",
+			"description": "\"An IRI that refers to the furthest following resource in a series of resources.\"",
+			"spec_title": "RFC5988",
+			"spec_href": "http://tools.ietf.org/html/rfc5988"
+		},
+		{
+			"relation": "latest-version",
+			"description": "\"Points to a resource containing the latest (e.g., current) version of the context.\"",
+			"spec_title": "RFC5829",
+			"spec_href": "http://tools.ietf.org/html/rfc5829"
+		},
+		{
+			"relation": "license",
+			"description": "\"Refers to a license associated with this context.\"",
+			"spec_title": "RFC4946",
+			"spec_href": "http://tools.ietf.org/html/rfc4946"
+		},
+		{
+			"relation": "lrdd",
+			"description": "\"Refers to further information about the link's context, expressed as a LRDD (Link-based Resource Descriptor Document) resource. See [RFC6415](http://tools.ietf.org/html/rfc6415) for information about processing this relation type in host-meta documents. When used elsewhere, it refers to additional links and other metadata. Multiple instances indicate additional LRDD resources. LRDD resources MUST have an \"application/xrd+xml\" representation, and MAY have others.\"",
+			"spec_title": "RFC6415",
+			"spec_href": "http://tools.ietf.org/html/rfc6415"
+		},
+		{
+			"relation": "monitor",
+			"description": "\"Refers to a resource that can be used to monitor changes in an HTTP resource.\"",
+			"spec_title": "RFC5989",
+			"spec_href": "http://tools.ietf.org/html/rfc5989"
+		},
+		{
+			"relation": "monitor-group",
+			"description": "\"Refers to a resource that can be used to monitor changes in a specified group of HTTP resources.\"",
+			"spec_title": "RFC5989",
+			"spec_href": "http://tools.ietf.org/html/rfc5989"
+		},
+		{
+			"relation": "next",
+			"description": "\"Indicates that the link's context is a part of a series, and that the next in the series is the link target.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-next"
+		},
+		{
+			"relation": "next-archive",
+			"description": "\"Refers to the immediately following archive resource.\"",
+			"spec_title": "RFC5005",
+			"spec_href": "http://tools.ietf.org/html/rfc5005"
+		},
+		{
+			"relation": "nofollow",
+			"description": "\"Indicates that the context’s original author or publisher does not endorse the link target.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-nofollow"
+		},
+		{
+			"relation": "noreferrer",
+			"description": "\"Indicates that no referrer information is to be leaked when following the link.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-noreferrer"
+		},
+		{
+			"relation": "payment",
+			"description": "\"Indicates a resource where payment is accepted.\"",
+			"spec_title": "RFC5988",
+			"spec_href": "http://tools.ietf.org/html/rfc5988"
+		},
+		{
+			"relation": "predecessor-version",
+			"description": "\"Points to a resource containing the predecessor version in the version history.\"",
+			"spec_title": "RFC5829",
+			"spec_href": "http://tools.ietf.org/html/rfc5829"
+		},
+		{
+			"relation": "prefetch",
+			"description": "\"Indicates that the link target should be preemptively cached.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-prefetch"
+		},
+		{
+			"relation": "prev",
+			"description": "\"Indicates that the link's context is a part of a series, and that the previous in the series is the link target.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-prev"
+		},
+		{
+			"relation": "preview",
+			"description": "\"Refers to a resource that provides a preview of the link's context.\"",
+			"spec_title": "RFC6903",
+			"spec_href": "http://tools.ietf.org/html/rfc6903"
+		},
+		{
+			"relation": "previous",
+			"description": "\"Refers to the previous resource in an ordered series of resources. Synonym for `prev`.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "prev-archive",
+			"description": "\"Refers to the immediately preceding archive resource.\"",
+			"spec_title": "RFC5005",
+			"spec_href": "http://tools.ietf.org/html/rfc5005"
+		},
+		{
+			"relation": "privacy-policy",
+			"description": "\"Refers to a privacy policy associated with the link's context.\"",
+			"spec_title": "RFC6903",
+			"spec_href": "http://tools.ietf.org/html/rfc6903"
+		},
+		{
+			"relation": "profile",
+			"description": "Identifying that a resource representation conforms to a certain profile, without affecting the non-profile semantics of the resource representation",
+			"spec_title": "RFC6906",
+			"spec_href": "http://tools.ietf.org/html/rfc6906"
+		},
+		{
+			"relation": "related",
+			"description": "\"Identifies a related resource.\"",
+			"spec_title": "RFC4287",
+			"spec_href": "http://tools.ietf.org/html/rfc4287"
+		},
+		{
+			"relation": "replies",
+			"description": "\"Identifies a resource that is a reply to the context of the link.\"",
+			"spec_title": "RFC4685",
+			"spec_href": "http://tools.ietf.org/html/rfc4685"
+		},
+		{
+			"relation": "search",
+			"description": "\"Refers to a resource that can be used to search through the link's context and related resources.\"",
+			"spec_title": "OpenSearch",
+			"spec_href": "http://www.opensearch.org/Specifications/OpenSearch/1.1"
+		},
+		{
+			"relation": "section",
+			"description": "\"Refers to a section in a collection of resources.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "self",
+			"description": "\"Conveys an identifier for the link's context.\"",
+			"spec_title": "RFC4287",
+			"spec_href": "http://tools.ietf.org/html/rfc4287"
+		},
+		{
+			"relation": "service",
+			"description": "\"Indicates a URI that can be used to retrieve a service document.\"",
+			"spec_title": "RFC5023",
+			"spec_href": "http://tools.ietf.org/html/rfc5023"
+		},
+		{
+			"relation": "start",
+			"description": "\"Refers to the first resource in a collection of resources.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "stylesheet",
+			"description": "\"Refers to a stylesheet.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-stylesheet"
+		},
+		{
+			"relation": "subsection",
+			"description": "\"Refers to a resource serving as a subsection in a collection of resources.\"",
+			"spec_title": "HTML401",
+			"spec_href": "http://www.w3.org/TR/1999/REC-html401-19991224"
+		},
+		{
+			"relation": "successor-version",
+			"description": "\"Points to a resource containing the successor version in the version history.\"",
+			"spec_title": "RFC5829",
+			"spec_href": "http://tools.ietf.org/html/rfc5829"
+		},
+		{
+			"relation": "tag",
+			"description": "\"Gives a tag (identified by the given address) that applies to the current document.\"",
+			"spec_title": "HTML5links",
+			"spec_href": "http://www.w3.org/TR/html5/links.html#link-type-tag"
+		},
+		{
+			"relation": "terms-of-service",
+			"description": "\"Refers to the terms of service associated with the link's context.\"",
+			"spec_title": "RFC6903",
+			"spec_href": "http://tools.ietf.org/html/rfc6903"
+		},
+		{
+			"relation": "type",
+			"description": "\"Refers to a resource identifying the abstract semantic type of which the link's context is considered to be an instance.\"",
+			"spec_title": "RFC6903",
+			"spec_href": "http://tools.ietf.org/html/rfc6903"
+		},
+		{
+			"relation": "up",
+			"description": "\"Refers to a parent document in a hierarchy of documents.\"",
+			"spec_title": "RFC5988",
+			"spec_href": "http://tools.ietf.org/html/rfc5988"
+		},
+		{
+			"relation": "version-history",
+			"description": "\"Points to a resource containing the version history for the context.\"",
+			"spec_title": "RFC5829",
+			"spec_href": "http://tools.ietf.org/html/rfc5829"
+		},
+		{
+			"relation": "via",
+			"description": "\"Identifies a resource that is the source of the information in the link's context.\"",
+			"spec_title": "RFC4287",
+			"spec_href": "http://tools.ietf.org/html/rfc4287"
+		},
+		{
+			"relation": "working-copy",
+			"description": "\"Points to a working copy for this resource.\"",
+			"spec_title": "RFC5829",
+			"spec_href": "http://tools.ietf.org/html/rfc5829"
+		},
+		{
+			"relation": "working-copy-of",
+			"description": "\"Points to the versioned resource from which this working copy was obtained.\"",
+			"spec_title": "RFC5829",
+			"spec_href": "http://tools.ietf.org/html/rfc5829"
+		}
+	]
+
+/***/ },
 /* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stream = (function (){
 	  try {
-	    return __webpack_require__(138); // hack to fix a circular dependency issue when used with browserify
+	    return __webpack_require__(137); // hack to fix a circular dependency issue when used with browserify
 	  } catch(_){}
 	}());
-	exports = module.exports = __webpack_require__(128);
+	exports = module.exports = __webpack_require__(132);
 	exports.Stream = Stream || exports;
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(129);
-	exports.Duplex = __webpack_require__(130);
-	exports.Transform = __webpack_require__(131);
-	exports.PassThrough = __webpack_require__(132);
+	exports.Writable = __webpack_require__(133);
+	exports.Duplex = __webpack_require__(134);
+	exports.Transform = __webpack_require__(135);
+	exports.PassThrough = __webpack_require__(136);
 
 
 /***/ },
 /* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(128)
+	__webpack_require__(129)
+	__webpack_require__(130)
+	__webpack_require__(131)
+
+/***/ },
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	if (typeof Object.create === 'function') {
@@ -52829,17 +53147,6 @@
 	  }
 	}
 
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = __webpack_require__(133)
-	__webpack_require__(134)
-	__webpack_require__(135)
-	__webpack_require__(136)
 
 /***/ },
 /* 119 */
@@ -60490,6 +60797,13 @@
 /* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(140);
+
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
 	module.exports = function isBuffer(arg) {
 	  return arg && typeof arg === 'object'
 	    && typeof arg.copy === 'function'
@@ -60498,14 +60812,320 @@
 	}
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(140);
+	'use strict';
+
+	var asap = __webpack_require__(147)
+
+	module.exports = Promise;
+	function Promise(fn) {
+	  if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
+	  if (typeof fn !== 'function') throw new TypeError('not a function')
+	  var state = null
+	  var value = null
+	  var deferreds = []
+	  var self = this
+
+	  this.then = function(onFulfilled, onRejected) {
+	    return new self.constructor(function(resolve, reject) {
+	      handle(new Handler(onFulfilled, onRejected, resolve, reject))
+	    })
+	  }
+
+	  function handle(deferred) {
+	    if (state === null) {
+	      deferreds.push(deferred)
+	      return
+	    }
+	    asap(function() {
+	      var cb = state ? deferred.onFulfilled : deferred.onRejected
+	      if (cb === null) {
+	        (state ? deferred.resolve : deferred.reject)(value)
+	        return
+	      }
+	      var ret
+	      try {
+	        ret = cb(value)
+	      }
+	      catch (e) {
+	        deferred.reject(e)
+	        return
+	      }
+	      deferred.resolve(ret)
+	    })
+	  }
+
+	  function resolve(newValue) {
+	    try { //Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+	      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.')
+	      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+	        var then = newValue.then
+	        if (typeof then === 'function') {
+	          doResolve(then.bind(newValue), resolve, reject)
+	          return
+	        }
+	      }
+	      state = true
+	      value = newValue
+	      finale()
+	    } catch (e) { reject(e) }
+	  }
+
+	  function reject(newValue) {
+	    state = false
+	    value = newValue
+	    finale()
+	  }
+
+	  function finale() {
+	    for (var i = 0, len = deferreds.length; i < len; i++)
+	      handle(deferreds[i])
+	    deferreds = null
+	  }
+
+	  doResolve(fn, resolve, reject)
+	}
+
+
+	function Handler(onFulfilled, onRejected, resolve, reject){
+	  this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null
+	  this.onRejected = typeof onRejected === 'function' ? onRejected : null
+	  this.resolve = resolve
+	  this.reject = reject
+	}
+
+	/**
+	 * Take a potentially misbehaving resolver function and make sure
+	 * onFulfilled and onRejected are only called once.
+	 *
+	 * Makes no guarantees about asynchrony.
+	 */
+	function doResolve(fn, onFulfilled, onRejected) {
+	  var done = false;
+	  try {
+	    fn(function (value) {
+	      if (done) return
+	      done = true
+	      onFulfilled(value)
+	    }, function (reason) {
+	      if (done) return
+	      done = true
+	      onRejected(reason)
+	    })
+	  } catch (ex) {
+	    if (done) return
+	    done = true
+	    onRejected(ex)
+	  }
+	}
 
 
 /***/ },
-/* 128 */
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Promise = __webpack_require__(128)
+	var asap = __webpack_require__(147)
+
+	module.exports = Promise
+	Promise.prototype.done = function (onFulfilled, onRejected) {
+	  var self = arguments.length ? this.then.apply(this, arguments) : this
+	  self.then(null, function (err) {
+	    asap(function () {
+	      throw err
+	    })
+	  })
+	}
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	//This file contains the ES6 extensions to the core Promises/A+ API
+
+	var Promise = __webpack_require__(128)
+	var asap = __webpack_require__(147)
+
+	module.exports = Promise
+
+	/* Static Functions */
+
+	function ValuePromise(value) {
+	  this.then = function (onFulfilled) {
+	    if (typeof onFulfilled !== 'function') return this
+	    return new Promise(function (resolve, reject) {
+	      asap(function () {
+	        try {
+	          resolve(onFulfilled(value))
+	        } catch (ex) {
+	          reject(ex);
+	        }
+	      })
+	    })
+	  }
+	}
+	ValuePromise.prototype = Promise.prototype
+
+	var TRUE = new ValuePromise(true)
+	var FALSE = new ValuePromise(false)
+	var NULL = new ValuePromise(null)
+	var UNDEFINED = new ValuePromise(undefined)
+	var ZERO = new ValuePromise(0)
+	var EMPTYSTRING = new ValuePromise('')
+
+	Promise.resolve = function (value) {
+	  if (value instanceof Promise) return value
+
+	  if (value === null) return NULL
+	  if (value === undefined) return UNDEFINED
+	  if (value === true) return TRUE
+	  if (value === false) return FALSE
+	  if (value === 0) return ZERO
+	  if (value === '') return EMPTYSTRING
+
+	  if (typeof value === 'object' || typeof value === 'function') {
+	    try {
+	      var then = value.then
+	      if (typeof then === 'function') {
+	        return new Promise(then.bind(value))
+	      }
+	    } catch (ex) {
+	      return new Promise(function (resolve, reject) {
+	        reject(ex)
+	      })
+	    }
+	  }
+
+	  return new ValuePromise(value)
+	}
+
+	Promise.all = function (arr) {
+	  var args = Array.prototype.slice.call(arr)
+
+	  return new Promise(function (resolve, reject) {
+	    if (args.length === 0) return resolve([])
+	    var remaining = args.length
+	    function res(i, val) {
+	      try {
+	        if (val && (typeof val === 'object' || typeof val === 'function')) {
+	          var then = val.then
+	          if (typeof then === 'function') {
+	            then.call(val, function (val) { res(i, val) }, reject)
+	            return
+	          }
+	        }
+	        args[i] = val
+	        if (--remaining === 0) {
+	          resolve(args);
+	        }
+	      } catch (ex) {
+	        reject(ex)
+	      }
+	    }
+	    for (var i = 0; i < args.length; i++) {
+	      res(i, args[i])
+	    }
+	  })
+	}
+
+	Promise.reject = function (value) {
+	  return new Promise(function (resolve, reject) { 
+	    reject(value);
+	  });
+	}
+
+	Promise.race = function (values) {
+	  return new Promise(function (resolve, reject) { 
+	    values.forEach(function(value){
+	      Promise.resolve(value).then(resolve, reject);
+	    })
+	  });
+	}
+
+	/* Prototype Methods */
+
+	Promise.prototype['catch'] = function (onRejected) {
+	  return this.then(null, onRejected);
+	}
+
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	//This file contains then/promise specific extensions that are only useful for node.js interop
+
+	var Promise = __webpack_require__(128)
+	var asap = __webpack_require__(147)
+
+	module.exports = Promise
+
+	/* Static Functions */
+
+	Promise.denodeify = function (fn, argumentCount) {
+	  argumentCount = argumentCount || Infinity
+	  return function () {
+	    var self = this
+	    var args = Array.prototype.slice.call(arguments)
+	    return new Promise(function (resolve, reject) {
+	      while (args.length && args.length > argumentCount) {
+	        args.pop()
+	      }
+	      args.push(function (err, res) {
+	        if (err) reject(err)
+	        else resolve(res)
+	      })
+	      var res = fn.apply(self, args)
+	      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
+	        resolve(res)
+	      }
+	    })
+	  }
+	}
+	Promise.nodeify = function (fn) {
+	  return function () {
+	    var args = Array.prototype.slice.call(arguments)
+	    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+	    var ctx = this
+	    try {
+	      return fn.apply(this, arguments).nodeify(callback, ctx)
+	    } catch (ex) {
+	      if (callback === null || typeof callback == 'undefined') {
+	        return new Promise(function (resolve, reject) { reject(ex) })
+	      } else {
+	        asap(function () {
+	          callback.call(ctx, ex)
+	        })
+	      }
+	    }
+	  }
+	}
+
+	Promise.prototype.nodeify = function (callback, ctx) {
+	  if (typeof callback != 'function') return this
+
+	  this.then(function (value) {
+	    asap(function () {
+	      callback.call(ctx, null, value)
+	    })
+	  }, function (err) {
+	    asap(function () {
+	      callback.call(ctx, err)
+	    })
+	  })
+	}
+
+
+/***/ },
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -60541,7 +61161,7 @@
 	/*<replacement>*/
 	var Stream;
 	(function (){try{
-	  Stream = __webpack_require__(138);
+	  Stream = __webpack_require__(137);
 	}catch(_){}finally{
 	  if (!Stream)
 	    Stream = __webpack_require__(142).EventEmitter;
@@ -60552,7 +61172,7 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
 
@@ -60571,7 +61191,7 @@
 	util.inherits(Readable, Stream);
 
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(130);
+	  var Duplex = __webpack_require__(134);
 
 	  options = options || {};
 
@@ -60638,7 +61258,7 @@
 	}
 
 	function Readable(options) {
-	  var Duplex = __webpack_require__(130);
+	  var Duplex = __webpack_require__(134);
 
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -61468,10 +62088,10 @@
 	  return -1;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
-/* 129 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// A bit simpler than readable streams.
@@ -61496,7 +62116,7 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
 
@@ -61504,7 +62124,7 @@
 	/*<replacement>*/
 	var Stream;
 	(function (){try{
-	  Stream = __webpack_require__(138);
+	  Stream = __webpack_require__(137);
 	}catch(_){}finally{
 	  if (!Stream)
 	    Stream = __webpack_require__(142).EventEmitter;
@@ -61525,7 +62145,7 @@
 	}
 
 	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(130);
+	  var Duplex = __webpack_require__(134);
 
 	  options = options || {};
 
@@ -61634,7 +62254,7 @@
 
 
 	function Writable(options) {
-	  var Duplex = __webpack_require__(130);
+	  var Duplex = __webpack_require__(134);
 
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -61997,7 +62617,7 @@
 
 
 /***/ },
-/* 130 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a duplex stream is just a stream that is both readable and writable.
@@ -62026,11 +62646,11 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
-	var Readable = __webpack_require__(128);
-	var Writable = __webpack_require__(129);
+	var Readable = __webpack_require__(132);
+	var Writable = __webpack_require__(133);
 
 	util.inherits(Duplex, Readable);
 
@@ -62085,7 +62705,7 @@
 
 
 /***/ },
-/* 131 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a transform stream is a readable/writable stream where you do
@@ -62134,11 +62754,11 @@
 
 	module.exports = Transform;
 
-	var Duplex = __webpack_require__(130);
+	var Duplex = __webpack_require__(134);
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -62288,7 +62908,7 @@
 
 
 /***/ },
-/* 132 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a passthrough stream.
@@ -62299,11 +62919,11 @@
 
 	module.exports = PassThrough;
 
-	var Transform = __webpack_require__(131);
+	var Transform = __webpack_require__(135);
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
 	util.inherits(PassThrough, Transform);
@@ -62321,349 +62941,7 @@
 
 
 /***/ },
-/* 133 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var asap = __webpack_require__(147)
-
-	module.exports = Promise;
-	function Promise(fn) {
-	  if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
-	  if (typeof fn !== 'function') throw new TypeError('not a function')
-	  var state = null
-	  var value = null
-	  var deferreds = []
-	  var self = this
-
-	  this.then = function(onFulfilled, onRejected) {
-	    return new self.constructor(function(resolve, reject) {
-	      handle(new Handler(onFulfilled, onRejected, resolve, reject))
-	    })
-	  }
-
-	  function handle(deferred) {
-	    if (state === null) {
-	      deferreds.push(deferred)
-	      return
-	    }
-	    asap(function() {
-	      var cb = state ? deferred.onFulfilled : deferred.onRejected
-	      if (cb === null) {
-	        (state ? deferred.resolve : deferred.reject)(value)
-	        return
-	      }
-	      var ret
-	      try {
-	        ret = cb(value)
-	      }
-	      catch (e) {
-	        deferred.reject(e)
-	        return
-	      }
-	      deferred.resolve(ret)
-	    })
-	  }
-
-	  function resolve(newValue) {
-	    try { //Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
-	      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.')
-	      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-	        var then = newValue.then
-	        if (typeof then === 'function') {
-	          doResolve(then.bind(newValue), resolve, reject)
-	          return
-	        }
-	      }
-	      state = true
-	      value = newValue
-	      finale()
-	    } catch (e) { reject(e) }
-	  }
-
-	  function reject(newValue) {
-	    state = false
-	    value = newValue
-	    finale()
-	  }
-
-	  function finale() {
-	    for (var i = 0, len = deferreds.length; i < len; i++)
-	      handle(deferreds[i])
-	    deferreds = null
-	  }
-
-	  doResolve(fn, resolve, reject)
-	}
-
-
-	function Handler(onFulfilled, onRejected, resolve, reject){
-	  this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null
-	  this.onRejected = typeof onRejected === 'function' ? onRejected : null
-	  this.resolve = resolve
-	  this.reject = reject
-	}
-
-	/**
-	 * Take a potentially misbehaving resolver function and make sure
-	 * onFulfilled and onRejected are only called once.
-	 *
-	 * Makes no guarantees about asynchrony.
-	 */
-	function doResolve(fn, onFulfilled, onRejected) {
-	  var done = false;
-	  try {
-	    fn(function (value) {
-	      if (done) return
-	      done = true
-	      onFulfilled(value)
-	    }, function (reason) {
-	      if (done) return
-	      done = true
-	      onRejected(reason)
-	    })
-	  } catch (ex) {
-	    if (done) return
-	    done = true
-	    onRejected(ex)
-	  }
-	}
-
-
-/***/ },
-/* 134 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Promise = __webpack_require__(133)
-	var asap = __webpack_require__(147)
-
-	module.exports = Promise
-	Promise.prototype.done = function (onFulfilled, onRejected) {
-	  var self = arguments.length ? this.then.apply(this, arguments) : this
-	  self.then(null, function (err) {
-	    asap(function () {
-	      throw err
-	    })
-	  })
-	}
-
-/***/ },
-/* 135 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	//This file contains the ES6 extensions to the core Promises/A+ API
-
-	var Promise = __webpack_require__(133)
-	var asap = __webpack_require__(147)
-
-	module.exports = Promise
-
-	/* Static Functions */
-
-	function ValuePromise(value) {
-	  this.then = function (onFulfilled) {
-	    if (typeof onFulfilled !== 'function') return this
-	    return new Promise(function (resolve, reject) {
-	      asap(function () {
-	        try {
-	          resolve(onFulfilled(value))
-	        } catch (ex) {
-	          reject(ex);
-	        }
-	      })
-	    })
-	  }
-	}
-	ValuePromise.prototype = Promise.prototype
-
-	var TRUE = new ValuePromise(true)
-	var FALSE = new ValuePromise(false)
-	var NULL = new ValuePromise(null)
-	var UNDEFINED = new ValuePromise(undefined)
-	var ZERO = new ValuePromise(0)
-	var EMPTYSTRING = new ValuePromise('')
-
-	Promise.resolve = function (value) {
-	  if (value instanceof Promise) return value
-
-	  if (value === null) return NULL
-	  if (value === undefined) return UNDEFINED
-	  if (value === true) return TRUE
-	  if (value === false) return FALSE
-	  if (value === 0) return ZERO
-	  if (value === '') return EMPTYSTRING
-
-	  if (typeof value === 'object' || typeof value === 'function') {
-	    try {
-	      var then = value.then
-	      if (typeof then === 'function') {
-	        return new Promise(then.bind(value))
-	      }
-	    } catch (ex) {
-	      return new Promise(function (resolve, reject) {
-	        reject(ex)
-	      })
-	    }
-	  }
-
-	  return new ValuePromise(value)
-	}
-
-	Promise.all = function (arr) {
-	  var args = Array.prototype.slice.call(arr)
-
-	  return new Promise(function (resolve, reject) {
-	    if (args.length === 0) return resolve([])
-	    var remaining = args.length
-	    function res(i, val) {
-	      try {
-	        if (val && (typeof val === 'object' || typeof val === 'function')) {
-	          var then = val.then
-	          if (typeof then === 'function') {
-	            then.call(val, function (val) { res(i, val) }, reject)
-	            return
-	          }
-	        }
-	        args[i] = val
-	        if (--remaining === 0) {
-	          resolve(args);
-	        }
-	      } catch (ex) {
-	        reject(ex)
-	      }
-	    }
-	    for (var i = 0; i < args.length; i++) {
-	      res(i, args[i])
-	    }
-	  })
-	}
-
-	Promise.reject = function (value) {
-	  return new Promise(function (resolve, reject) { 
-	    reject(value);
-	  });
-	}
-
-	Promise.race = function (values) {
-	  return new Promise(function (resolve, reject) { 
-	    values.forEach(function(value){
-	      Promise.resolve(value).then(resolve, reject);
-	    })
-	  });
-	}
-
-	/* Prototype Methods */
-
-	Promise.prototype['catch'] = function (onRejected) {
-	  return this.then(null, onRejected);
-	}
-
-
-/***/ },
-/* 136 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	//This file contains then/promise specific extensions that are only useful for node.js interop
-
-	var Promise = __webpack_require__(133)
-	var asap = __webpack_require__(147)
-
-	module.exports = Promise
-
-	/* Static Functions */
-
-	Promise.denodeify = function (fn, argumentCount) {
-	  argumentCount = argumentCount || Infinity
-	  return function () {
-	    var self = this
-	    var args = Array.prototype.slice.call(arguments)
-	    return new Promise(function (resolve, reject) {
-	      while (args.length && args.length > argumentCount) {
-	        args.pop()
-	      }
-	      args.push(function (err, res) {
-	        if (err) reject(err)
-	        else resolve(res)
-	      })
-	      var res = fn.apply(self, args)
-	      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
-	        resolve(res)
-	      }
-	    })
-	  }
-	}
-	Promise.nodeify = function (fn) {
-	  return function () {
-	    var args = Array.prototype.slice.call(arguments)
-	    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-	    var ctx = this
-	    try {
-	      return fn.apply(this, arguments).nodeify(callback, ctx)
-	    } catch (ex) {
-	      if (callback === null || typeof callback == 'undefined') {
-	        return new Promise(function (resolve, reject) { reject(ex) })
-	      } else {
-	        asap(function () {
-	          callback.call(ctx, ex)
-	        })
-	      }
-	    }
-	  }
-	}
-
-	Promise.prototype.nodeify = function (callback, ctx) {
-	  if (typeof callback != 'function') return this
-
-	  this.then(function (value) {
-	    asap(function () {
-	      callback.call(ctx, null, value)
-	    })
-	  }, function (err) {
-	    asap(function () {
-	      callback.call(ctx, err)
-	    })
-	  })
-	}
-
-
-/***/ },
 /* 137 */
-/***/ function(module, exports, __webpack_require__) {
-
-	if (typeof Object.create === 'function') {
-	  // implementation from standard node.js 'util' module
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	      constructor: {
-	        value: ctor,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	  };
-	} else {
-	  // old school shim for old browsers
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    var TempCtor = function () {}
-	    TempCtor.prototype = superCtor.prototype
-	    ctor.prototype = new TempCtor()
-	    ctor.prototype.constructor = ctor
-	  }
-	}
-
-
-/***/ },
-/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -62693,11 +62971,11 @@
 	var inherits = __webpack_require__(155);
 
 	inherits(Stream, EE);
-	Stream.Readable = __webpack_require__(148);
-	Stream.Writable = __webpack_require__(149);
-	Stream.Duplex = __webpack_require__(150);
-	Stream.Transform = __webpack_require__(151);
-	Stream.PassThrough = __webpack_require__(152);
+	Stream.Readable = __webpack_require__(150);
+	Stream.Writable = __webpack_require__(151);
+	Stream.Duplex = __webpack_require__(152);
+	Stream.Transform = __webpack_require__(153);
+	Stream.PassThrough = __webpack_require__(154);
 
 	// Backwards-compat with node 0.4.x
 	Stream.Stream = Stream;
@@ -62796,6 +63074,35 @@
 
 
 /***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	if (typeof Object.create === 'function') {
+	  // implementation from standard node.js 'util' module
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    ctor.prototype = Object.create(superCtor.prototype, {
+	      constructor: {
+	        value: ctor,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	  };
+	} else {
+	  // old school shim for old browsers
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    var TempCtor = function () {}
+	    TempCtor.prototype = superCtor.prototype
+	    ctor.prototype = new TempCtor()
+	    ctor.prototype.constructor = ctor
+	  }
+	}
+
+
+/***/ },
 /* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -62807,8 +63114,8 @@
 
 	// Load modules
 
-	var Stringify = __webpack_require__(153);
-	var Parse = __webpack_require__(154);
+	var Stringify = __webpack_require__(148);
+	var Parse = __webpack_require__(149);
 
 
 	// Declare internals
@@ -62840,7 +63147,7 @@
 	  });
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
 /* 142 */
@@ -63685,56 +63992,15 @@
 	module.exports = asap;
 
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61), __webpack_require__(162).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70), __webpack_require__(162).setImmediate))
 
 /***/ },
 /* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(156);
-	exports.Stream = __webpack_require__(138);
-	exports.Readable = exports;
-	exports.Writable = __webpack_require__(157);
-	exports.Duplex = __webpack_require__(158);
-	exports.Transform = __webpack_require__(159);
-	exports.PassThrough = __webpack_require__(160);
-
-
-/***/ },
-/* 149 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(157)
-
-
-/***/ },
-/* 150 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(158)
-
-
-/***/ },
-/* 151 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(159)
-
-
-/***/ },
-/* 152 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(160)
-
-
-/***/ },
-/* 153 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// Load modules
 
-	var Utils = __webpack_require__(161);
+	var Utils = __webpack_require__(156);
 
 
 	// Declare internals
@@ -63832,12 +64098,12 @@
 
 
 /***/ },
-/* 154 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Load modules
 
-	var Utils = __webpack_require__(161);
+	var Utils = __webpack_require__(156);
 
 
 	// Declare internals
@@ -63995,6 +64261,47 @@
 
 
 /***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(160);
+	exports.Stream = __webpack_require__(137);
+	exports.Readable = exports;
+	exports.Writable = __webpack_require__(157);
+	exports.Duplex = __webpack_require__(158);
+	exports.Transform = __webpack_require__(161);
+	exports.PassThrough = __webpack_require__(159);
+
+
+/***/ },
+/* 151 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(157)
+
+
+/***/ },
+/* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(158)
+
+
+/***/ },
+/* 153 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(161)
+
+
+/***/ },
+/* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(159)
+
+
+/***/ },
 /* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -64025,6 +64332,776 @@
 
 /***/ },
 /* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Load modules
+
+
+	// Declare internals
+
+	var internals = {};
+
+
+	exports.arrayToObject = function (source) {
+
+	    var obj = {};
+	    for (var i = 0, il = source.length; i < il; ++i) {
+	        if (typeof source[i] !== 'undefined') {
+
+	            obj[i] = source[i];
+	        }
+	    }
+
+	    return obj;
+	};
+
+
+	exports.merge = function (target, source) {
+
+	    if (!source) {
+	        return target;
+	    }
+
+	    if (typeof source !== 'object') {
+	        if (Array.isArray(target)) {
+	            target.push(source);
+	        }
+	        else {
+	            target[source] = true;
+	        }
+
+	        return target;
+	    }
+
+	    if (typeof target !== 'object') {
+	        target = [target].concat(source);
+	        return target;
+	    }
+
+	    if (Array.isArray(target) &&
+	        !Array.isArray(source)) {
+
+	        target = exports.arrayToObject(target);
+	    }
+
+	    var keys = Object.keys(source);
+	    for (var k = 0, kl = keys.length; k < kl; ++k) {
+	        var key = keys[k];
+	        var value = source[key];
+
+	        if (!target[key]) {
+	            target[key] = value;
+	        }
+	        else {
+	            target[key] = exports.merge(target[key], value);
+	        }
+	    }
+
+	    return target;
+	};
+
+
+	exports.decode = function (str) {
+
+	    try {
+	        return decodeURIComponent(str.replace(/\+/g, ' '));
+	    } catch (e) {
+	        return str;
+	    }
+	};
+
+
+	exports.compact = function (obj, refs) {
+
+	    if (typeof obj !== 'object' ||
+	        obj === null) {
+
+	        return obj;
+	    }
+
+	    refs = refs || [];
+	    var lookup = refs.indexOf(obj);
+	    if (lookup !== -1) {
+	        return refs[lookup];
+	    }
+
+	    refs.push(obj);
+
+	    if (Array.isArray(obj)) {
+	        var compacted = [];
+
+	        for (var i = 0, il = obj.length; i < il; ++i) {
+	            if (typeof obj[i] !== 'undefined') {
+	                compacted.push(obj[i]);
+	            }
+	        }
+
+	        return compacted;
+	    }
+
+	    var keys = Object.keys(obj);
+	    for (i = 0, il = keys.length; i < il; ++i) {
+	        var key = keys[i];
+	        obj[key] = exports.compact(obj[key], refs);
+	    }
+
+	    return obj;
+	};
+
+
+	exports.isRegExp = function (obj) {
+	    return Object.prototype.toString.call(obj) === '[object RegExp]';
+	};
+
+
+	exports.isBuffer = function (obj) {
+
+	    if (obj === null ||
+	        typeof obj === 'undefined') {
+
+	        return false;
+	    }
+
+	    return !!(obj.constructor &&
+	        obj.constructor.isBuffer &&
+	        obj.constructor.isBuffer(obj));
+	};
+
+
+/***/ },
+/* 157 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// A bit simpler than readable streams.
+	// Implement an async ._write(chunk, cb), and it'll handle all
+	// the drain event emission and buffering.
+
+	module.exports = Writable;
+
+	/*<replacement>*/
+	var Buffer = __webpack_require__(77).Buffer;
+	/*</replacement>*/
+
+	Writable.WritableState = WritableState;
+
+
+	/*<replacement>*/
+	var util = __webpack_require__(167);
+	util.inherits = __webpack_require__(166);
+	/*</replacement>*/
+
+	var Stream = __webpack_require__(137);
+
+	util.inherits(Writable, Stream);
+
+	function WriteReq(chunk, encoding, cb) {
+	  this.chunk = chunk;
+	  this.encoding = encoding;
+	  this.callback = cb;
+	}
+
+	function WritableState(options, stream) {
+	  var Duplex = __webpack_require__(158);
+
+	  options = options || {};
+
+	  // the point at which write() starts returning false
+	  // Note: 0 is a valid value, means that we always return false if
+	  // the entire buffer is not flushed immediately on write()
+	  var hwm = options.highWaterMark;
+	  var defaultHwm = options.objectMode ? 16 : 16 * 1024;
+	  this.highWaterMark = (hwm || hwm === 0) ? hwm : defaultHwm;
+
+	  // object stream flag to indicate whether or not this stream
+	  // contains buffers or objects.
+	  this.objectMode = !!options.objectMode;
+
+	  if (stream instanceof Duplex)
+	    this.objectMode = this.objectMode || !!options.writableObjectMode;
+
+	  // cast to ints.
+	  this.highWaterMark = ~~this.highWaterMark;
+
+	  this.needDrain = false;
+	  // at the start of calling end()
+	  this.ending = false;
+	  // when end() has been called, and returned
+	  this.ended = false;
+	  // when 'finish' is emitted
+	  this.finished = false;
+
+	  // should we decode strings into buffers before passing to _write?
+	  // this is here so that some node-core streams can optimize string
+	  // handling at a lower level.
+	  var noDecode = options.decodeStrings === false;
+	  this.decodeStrings = !noDecode;
+
+	  // Crypto is kind of old and crusty.  Historically, its default string
+	  // encoding is 'binary' so we have to make this configurable.
+	  // Everything else in the universe uses 'utf8', though.
+	  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+	  // not an actual buffer we keep track of, but a measurement
+	  // of how much we're waiting to get pushed to some underlying
+	  // socket or file.
+	  this.length = 0;
+
+	  // a flag to see when we're in the middle of a write.
+	  this.writing = false;
+
+	  // when true all writes will be buffered until .uncork() call
+	  this.corked = 0;
+
+	  // a flag to be able to tell if the onwrite cb is called immediately,
+	  // or on a later tick.  We set this to true at first, because any
+	  // actions that shouldn't happen until "later" should generally also
+	  // not happen before the first write call.
+	  this.sync = true;
+
+	  // a flag to know if we're processing previously buffered items, which
+	  // may call the _write() callback in the same tick, so that we don't
+	  // end up in an overlapped onwrite situation.
+	  this.bufferProcessing = false;
+
+	  // the callback that's passed to _write(chunk,cb)
+	  this.onwrite = function(er) {
+	    onwrite(stream, er);
+	  };
+
+	  // the callback that the user supplies to write(chunk,encoding,cb)
+	  this.writecb = null;
+
+	  // the amount that is being written when _write is called.
+	  this.writelen = 0;
+
+	  this.buffer = [];
+
+	  // number of pending user-supplied write callbacks
+	  // this must be 0 before 'finish' can be emitted
+	  this.pendingcb = 0;
+
+	  // emit prefinish if the only thing we're waiting for is _write cbs
+	  // This is relevant for synchronous Transform streams
+	  this.prefinished = false;
+
+	  // True if the error was already emitted and should not be thrown again
+	  this.errorEmitted = false;
+	}
+
+	function Writable(options) {
+	  var Duplex = __webpack_require__(158);
+
+	  // Writable ctor is applied to Duplexes, though they're not
+	  // instanceof Writable, they're instanceof Readable.
+	  if (!(this instanceof Writable) && !(this instanceof Duplex))
+	    return new Writable(options);
+
+	  this._writableState = new WritableState(options, this);
+
+	  // legacy.
+	  this.writable = true;
+
+	  Stream.call(this);
+	}
+
+	// Otherwise people can pipe Writable streams, which is just wrong.
+	Writable.prototype.pipe = function() {
+	  this.emit('error', new Error('Cannot pipe. Not readable.'));
+	};
+
+
+	function writeAfterEnd(stream, state, cb) {
+	  var er = new Error('write after end');
+	  // TODO: defer error events consistently everywhere, not just the cb
+	  stream.emit('error', er);
+	  process.nextTick(function() {
+	    cb(er);
+	  });
+	}
+
+	// If we get something that is not a buffer, string, null, or undefined,
+	// and we're not in objectMode, then that's an error.
+	// Otherwise stream chunks are all considered to be of length=1, and the
+	// watermarks determine how many objects to keep in the buffer, rather than
+	// how many bytes or characters.
+	function validChunk(stream, state, chunk, cb) {
+	  var valid = true;
+	  if (!util.isBuffer(chunk) &&
+	      !util.isString(chunk) &&
+	      !util.isNullOrUndefined(chunk) &&
+	      !state.objectMode) {
+	    var er = new TypeError('Invalid non-string/buffer chunk');
+	    stream.emit('error', er);
+	    process.nextTick(function() {
+	      cb(er);
+	    });
+	    valid = false;
+	  }
+	  return valid;
+	}
+
+	Writable.prototype.write = function(chunk, encoding, cb) {
+	  var state = this._writableState;
+	  var ret = false;
+
+	  if (util.isFunction(encoding)) {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (util.isBuffer(chunk))
+	    encoding = 'buffer';
+	  else if (!encoding)
+	    encoding = state.defaultEncoding;
+
+	  if (!util.isFunction(cb))
+	    cb = function() {};
+
+	  if (state.ended)
+	    writeAfterEnd(this, state, cb);
+	  else if (validChunk(this, state, chunk, cb)) {
+	    state.pendingcb++;
+	    ret = writeOrBuffer(this, state, chunk, encoding, cb);
+	  }
+
+	  return ret;
+	};
+
+	Writable.prototype.cork = function() {
+	  var state = this._writableState;
+
+	  state.corked++;
+	};
+
+	Writable.prototype.uncork = function() {
+	  var state = this._writableState;
+
+	  if (state.corked) {
+	    state.corked--;
+
+	    if (!state.writing &&
+	        !state.corked &&
+	        !state.finished &&
+	        !state.bufferProcessing &&
+	        state.buffer.length)
+	      clearBuffer(this, state);
+	  }
+	};
+
+	function decodeChunk(state, chunk, encoding) {
+	  if (!state.objectMode &&
+	      state.decodeStrings !== false &&
+	      util.isString(chunk)) {
+	    chunk = new Buffer(chunk, encoding);
+	  }
+	  return chunk;
+	}
+
+	// if we're already writing something, then just put this
+	// in the queue, and wait our turn.  Otherwise, call _write
+	// If we return false, then we need a drain event, so set that flag.
+	function writeOrBuffer(stream, state, chunk, encoding, cb) {
+	  chunk = decodeChunk(state, chunk, encoding);
+	  if (util.isBuffer(chunk))
+	    encoding = 'buffer';
+	  var len = state.objectMode ? 1 : chunk.length;
+
+	  state.length += len;
+
+	  var ret = state.length < state.highWaterMark;
+	  // we must ensure that previous needDrain will not be reset to false.
+	  if (!ret)
+	    state.needDrain = true;
+
+	  if (state.writing || state.corked)
+	    state.buffer.push(new WriteReq(chunk, encoding, cb));
+	  else
+	    doWrite(stream, state, false, len, chunk, encoding, cb);
+
+	  return ret;
+	}
+
+	function doWrite(stream, state, writev, len, chunk, encoding, cb) {
+	  state.writelen = len;
+	  state.writecb = cb;
+	  state.writing = true;
+	  state.sync = true;
+	  if (writev)
+	    stream._writev(chunk, state.onwrite);
+	  else
+	    stream._write(chunk, encoding, state.onwrite);
+	  state.sync = false;
+	}
+
+	function onwriteError(stream, state, sync, er, cb) {
+	  if (sync)
+	    process.nextTick(function() {
+	      state.pendingcb--;
+	      cb(er);
+	    });
+	  else {
+	    state.pendingcb--;
+	    cb(er);
+	  }
+
+	  stream._writableState.errorEmitted = true;
+	  stream.emit('error', er);
+	}
+
+	function onwriteStateUpdate(state) {
+	  state.writing = false;
+	  state.writecb = null;
+	  state.length -= state.writelen;
+	  state.writelen = 0;
+	}
+
+	function onwrite(stream, er) {
+	  var state = stream._writableState;
+	  var sync = state.sync;
+	  var cb = state.writecb;
+
+	  onwriteStateUpdate(state);
+
+	  if (er)
+	    onwriteError(stream, state, sync, er, cb);
+	  else {
+	    // Check if we're actually ready to finish, but don't emit yet
+	    var finished = needFinish(stream, state);
+
+	    if (!finished &&
+	        !state.corked &&
+	        !state.bufferProcessing &&
+	        state.buffer.length) {
+	      clearBuffer(stream, state);
+	    }
+
+	    if (sync) {
+	      process.nextTick(function() {
+	        afterWrite(stream, state, finished, cb);
+	      });
+	    } else {
+	      afterWrite(stream, state, finished, cb);
+	    }
+	  }
+	}
+
+	function afterWrite(stream, state, finished, cb) {
+	  if (!finished)
+	    onwriteDrain(stream, state);
+	  state.pendingcb--;
+	  cb();
+	  finishMaybe(stream, state);
+	}
+
+	// Must force callback to be called on nextTick, so that we don't
+	// emit 'drain' before the write() consumer gets the 'false' return
+	// value, and has a chance to attach a 'drain' listener.
+	function onwriteDrain(stream, state) {
+	  if (state.length === 0 && state.needDrain) {
+	    state.needDrain = false;
+	    stream.emit('drain');
+	  }
+	}
+
+
+	// if there's something in the buffer waiting, then process it
+	function clearBuffer(stream, state) {
+	  state.bufferProcessing = true;
+
+	  if (stream._writev && state.buffer.length > 1) {
+	    // Fast case, write everything using _writev()
+	    var cbs = [];
+	    for (var c = 0; c < state.buffer.length; c++)
+	      cbs.push(state.buffer[c].callback);
+
+	    // count the one we are adding, as well.
+	    // TODO(isaacs) clean this up
+	    state.pendingcb++;
+	    doWrite(stream, state, true, state.length, state.buffer, '', function(err) {
+	      for (var i = 0; i < cbs.length; i++) {
+	        state.pendingcb--;
+	        cbs[i](err);
+	      }
+	    });
+
+	    // Clear buffer
+	    state.buffer = [];
+	  } else {
+	    // Slow case, write chunks one-by-one
+	    for (var c = 0; c < state.buffer.length; c++) {
+	      var entry = state.buffer[c];
+	      var chunk = entry.chunk;
+	      var encoding = entry.encoding;
+	      var cb = entry.callback;
+	      var len = state.objectMode ? 1 : chunk.length;
+
+	      doWrite(stream, state, false, len, chunk, encoding, cb);
+
+	      // if we didn't call the onwrite immediately, then
+	      // it means that we need to wait until it does.
+	      // also, that means that the chunk and cb are currently
+	      // being processed, so move the buffer counter past them.
+	      if (state.writing) {
+	        c++;
+	        break;
+	      }
+	    }
+
+	    if (c < state.buffer.length)
+	      state.buffer = state.buffer.slice(c);
+	    else
+	      state.buffer.length = 0;
+	  }
+
+	  state.bufferProcessing = false;
+	}
+
+	Writable.prototype._write = function(chunk, encoding, cb) {
+	  cb(new Error('not implemented'));
+
+	};
+
+	Writable.prototype._writev = null;
+
+	Writable.prototype.end = function(chunk, encoding, cb) {
+	  var state = this._writableState;
+
+	  if (util.isFunction(chunk)) {
+	    cb = chunk;
+	    chunk = null;
+	    encoding = null;
+	  } else if (util.isFunction(encoding)) {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (!util.isNullOrUndefined(chunk))
+	    this.write(chunk, encoding);
+
+	  // .end() fully uncorks
+	  if (state.corked) {
+	    state.corked = 1;
+	    this.uncork();
+	  }
+
+	  // ignore unnecessary end() calls.
+	  if (!state.ending && !state.finished)
+	    endWritable(this, state, cb);
+	};
+
+
+	function needFinish(stream, state) {
+	  return (state.ending &&
+	          state.length === 0 &&
+	          !state.finished &&
+	          !state.writing);
+	}
+
+	function prefinish(stream, state) {
+	  if (!state.prefinished) {
+	    state.prefinished = true;
+	    stream.emit('prefinish');
+	  }
+	}
+
+	function finishMaybe(stream, state) {
+	  var need = needFinish(stream, state);
+	  if (need) {
+	    if (state.pendingcb === 0) {
+	      prefinish(stream, state);
+	      state.finished = true;
+	      stream.emit('finish');
+	    } else
+	      prefinish(stream, state);
+	  }
+	  return need;
+	}
+
+	function endWritable(stream, state, cb) {
+	  state.ending = true;
+	  finishMaybe(stream, state);
+	  if (cb) {
+	    if (state.finished)
+	      process.nextTick(cb);
+	    else
+	      stream.once('finish', cb);
+	  }
+	  state.ended = true;
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// a duplex stream is just a stream that is both readable and writable.
+	// Since JS doesn't have multiple prototypal inheritance, this class
+	// prototypally inherits from Readable, and then parasitically from
+	// Writable.
+
+	module.exports = Duplex;
+
+	/*<replacement>*/
+	var objectKeys = Object.keys || function (obj) {
+	  var keys = [];
+	  for (var key in obj) keys.push(key);
+	  return keys;
+	}
+	/*</replacement>*/
+
+
+	/*<replacement>*/
+	var util = __webpack_require__(167);
+	util.inherits = __webpack_require__(166);
+	/*</replacement>*/
+
+	var Readable = __webpack_require__(160);
+	var Writable = __webpack_require__(157);
+
+	util.inherits(Duplex, Readable);
+
+	forEach(objectKeys(Writable.prototype), function(method) {
+	  if (!Duplex.prototype[method])
+	    Duplex.prototype[method] = Writable.prototype[method];
+	});
+
+	function Duplex(options) {
+	  if (!(this instanceof Duplex))
+	    return new Duplex(options);
+
+	  Readable.call(this, options);
+	  Writable.call(this, options);
+
+	  if (options && options.readable === false)
+	    this.readable = false;
+
+	  if (options && options.writable === false)
+	    this.writable = false;
+
+	  this.allowHalfOpen = true;
+	  if (options && options.allowHalfOpen === false)
+	    this.allowHalfOpen = false;
+
+	  this.once('end', onend);
+	}
+
+	// the no-half-open enforcer
+	function onend() {
+	  // if we allow half-open state, or if the writable side ended,
+	  // then we're ok.
+	  if (this.allowHalfOpen || this._writableState.ended)
+	    return;
+
+	  // no more data can be written.
+	  // But allow more writes to happen in this tick.
+	  process.nextTick(this.end.bind(this));
+	}
+
+	function forEach (xs, f) {
+	  for (var i = 0, l = xs.length; i < l; i++) {
+	    f(xs[i], i);
+	  }
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// a passthrough stream.
+	// basically just the most minimal sort of Transform stream.
+	// Every written chunk gets output as-is.
+
+	module.exports = PassThrough;
+
+	var Transform = __webpack_require__(161);
+
+	/*<replacement>*/
+	var util = __webpack_require__(167);
+	util.inherits = __webpack_require__(166);
+	/*</replacement>*/
+
+	util.inherits(PassThrough, Transform);
+
+	function PassThrough(options) {
+	  if (!(this instanceof PassThrough))
+	    return new PassThrough(options);
+
+	  Transform.call(this, options);
+	}
+
+	PassThrough.prototype._transform = function(chunk, encoding, cb) {
+	  cb(null, chunk);
+	};
+
+
+/***/ },
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -64069,11 +65146,11 @@
 	};
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(138);
+	var Stream = __webpack_require__(137);
 
 	/*<replacement>*/
-	var util = __webpack_require__(166);
-	util.inherits = __webpack_require__(167);
+	var util = __webpack_require__(167);
+	util.inherits = __webpack_require__(166);
 	/*</replacement>*/
 
 	var StringDecoder;
@@ -64979,590 +66056,10 @@
 	  return -1;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ },
-/* 157 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// A bit simpler than readable streams.
-	// Implement an async ._write(chunk, cb), and it'll handle all
-	// the drain event emission and buffering.
-
-	module.exports = Writable;
-
-	/*<replacement>*/
-	var Buffer = __webpack_require__(77).Buffer;
-	/*</replacement>*/
-
-	Writable.WritableState = WritableState;
-
-
-	/*<replacement>*/
-	var util = __webpack_require__(166);
-	util.inherits = __webpack_require__(167);
-	/*</replacement>*/
-
-	var Stream = __webpack_require__(138);
-
-	util.inherits(Writable, Stream);
-
-	function WriteReq(chunk, encoding, cb) {
-	  this.chunk = chunk;
-	  this.encoding = encoding;
-	  this.callback = cb;
-	}
-
-	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(158);
-
-	  options = options || {};
-
-	  // the point at which write() starts returning false
-	  // Note: 0 is a valid value, means that we always return false if
-	  // the entire buffer is not flushed immediately on write()
-	  var hwm = options.highWaterMark;
-	  var defaultHwm = options.objectMode ? 16 : 16 * 1024;
-	  this.highWaterMark = (hwm || hwm === 0) ? hwm : defaultHwm;
-
-	  // object stream flag to indicate whether or not this stream
-	  // contains buffers or objects.
-	  this.objectMode = !!options.objectMode;
-
-	  if (stream instanceof Duplex)
-	    this.objectMode = this.objectMode || !!options.writableObjectMode;
-
-	  // cast to ints.
-	  this.highWaterMark = ~~this.highWaterMark;
-
-	  this.needDrain = false;
-	  // at the start of calling end()
-	  this.ending = false;
-	  // when end() has been called, and returned
-	  this.ended = false;
-	  // when 'finish' is emitted
-	  this.finished = false;
-
-	  // should we decode strings into buffers before passing to _write?
-	  // this is here so that some node-core streams can optimize string
-	  // handling at a lower level.
-	  var noDecode = options.decodeStrings === false;
-	  this.decodeStrings = !noDecode;
-
-	  // Crypto is kind of old and crusty.  Historically, its default string
-	  // encoding is 'binary' so we have to make this configurable.
-	  // Everything else in the universe uses 'utf8', though.
-	  this.defaultEncoding = options.defaultEncoding || 'utf8';
-
-	  // not an actual buffer we keep track of, but a measurement
-	  // of how much we're waiting to get pushed to some underlying
-	  // socket or file.
-	  this.length = 0;
-
-	  // a flag to see when we're in the middle of a write.
-	  this.writing = false;
-
-	  // when true all writes will be buffered until .uncork() call
-	  this.corked = 0;
-
-	  // a flag to be able to tell if the onwrite cb is called immediately,
-	  // or on a later tick.  We set this to true at first, because any
-	  // actions that shouldn't happen until "later" should generally also
-	  // not happen before the first write call.
-	  this.sync = true;
-
-	  // a flag to know if we're processing previously buffered items, which
-	  // may call the _write() callback in the same tick, so that we don't
-	  // end up in an overlapped onwrite situation.
-	  this.bufferProcessing = false;
-
-	  // the callback that's passed to _write(chunk,cb)
-	  this.onwrite = function(er) {
-	    onwrite(stream, er);
-	  };
-
-	  // the callback that the user supplies to write(chunk,encoding,cb)
-	  this.writecb = null;
-
-	  // the amount that is being written when _write is called.
-	  this.writelen = 0;
-
-	  this.buffer = [];
-
-	  // number of pending user-supplied write callbacks
-	  // this must be 0 before 'finish' can be emitted
-	  this.pendingcb = 0;
-
-	  // emit prefinish if the only thing we're waiting for is _write cbs
-	  // This is relevant for synchronous Transform streams
-	  this.prefinished = false;
-
-	  // True if the error was already emitted and should not be thrown again
-	  this.errorEmitted = false;
-	}
-
-	function Writable(options) {
-	  var Duplex = __webpack_require__(158);
-
-	  // Writable ctor is applied to Duplexes, though they're not
-	  // instanceof Writable, they're instanceof Readable.
-	  if (!(this instanceof Writable) && !(this instanceof Duplex))
-	    return new Writable(options);
-
-	  this._writableState = new WritableState(options, this);
-
-	  // legacy.
-	  this.writable = true;
-
-	  Stream.call(this);
-	}
-
-	// Otherwise people can pipe Writable streams, which is just wrong.
-	Writable.prototype.pipe = function() {
-	  this.emit('error', new Error('Cannot pipe. Not readable.'));
-	};
-
-
-	function writeAfterEnd(stream, state, cb) {
-	  var er = new Error('write after end');
-	  // TODO: defer error events consistently everywhere, not just the cb
-	  stream.emit('error', er);
-	  process.nextTick(function() {
-	    cb(er);
-	  });
-	}
-
-	// If we get something that is not a buffer, string, null, or undefined,
-	// and we're not in objectMode, then that's an error.
-	// Otherwise stream chunks are all considered to be of length=1, and the
-	// watermarks determine how many objects to keep in the buffer, rather than
-	// how many bytes or characters.
-	function validChunk(stream, state, chunk, cb) {
-	  var valid = true;
-	  if (!util.isBuffer(chunk) &&
-	      !util.isString(chunk) &&
-	      !util.isNullOrUndefined(chunk) &&
-	      !state.objectMode) {
-	    var er = new TypeError('Invalid non-string/buffer chunk');
-	    stream.emit('error', er);
-	    process.nextTick(function() {
-	      cb(er);
-	    });
-	    valid = false;
-	  }
-	  return valid;
-	}
-
-	Writable.prototype.write = function(chunk, encoding, cb) {
-	  var state = this._writableState;
-	  var ret = false;
-
-	  if (util.isFunction(encoding)) {
-	    cb = encoding;
-	    encoding = null;
-	  }
-
-	  if (util.isBuffer(chunk))
-	    encoding = 'buffer';
-	  else if (!encoding)
-	    encoding = state.defaultEncoding;
-
-	  if (!util.isFunction(cb))
-	    cb = function() {};
-
-	  if (state.ended)
-	    writeAfterEnd(this, state, cb);
-	  else if (validChunk(this, state, chunk, cb)) {
-	    state.pendingcb++;
-	    ret = writeOrBuffer(this, state, chunk, encoding, cb);
-	  }
-
-	  return ret;
-	};
-
-	Writable.prototype.cork = function() {
-	  var state = this._writableState;
-
-	  state.corked++;
-	};
-
-	Writable.prototype.uncork = function() {
-	  var state = this._writableState;
-
-	  if (state.corked) {
-	    state.corked--;
-
-	    if (!state.writing &&
-	        !state.corked &&
-	        !state.finished &&
-	        !state.bufferProcessing &&
-	        state.buffer.length)
-	      clearBuffer(this, state);
-	  }
-	};
-
-	function decodeChunk(state, chunk, encoding) {
-	  if (!state.objectMode &&
-	      state.decodeStrings !== false &&
-	      util.isString(chunk)) {
-	    chunk = new Buffer(chunk, encoding);
-	  }
-	  return chunk;
-	}
-
-	// if we're already writing something, then just put this
-	// in the queue, and wait our turn.  Otherwise, call _write
-	// If we return false, then we need a drain event, so set that flag.
-	function writeOrBuffer(stream, state, chunk, encoding, cb) {
-	  chunk = decodeChunk(state, chunk, encoding);
-	  if (util.isBuffer(chunk))
-	    encoding = 'buffer';
-	  var len = state.objectMode ? 1 : chunk.length;
-
-	  state.length += len;
-
-	  var ret = state.length < state.highWaterMark;
-	  // we must ensure that previous needDrain will not be reset to false.
-	  if (!ret)
-	    state.needDrain = true;
-
-	  if (state.writing || state.corked)
-	    state.buffer.push(new WriteReq(chunk, encoding, cb));
-	  else
-	    doWrite(stream, state, false, len, chunk, encoding, cb);
-
-	  return ret;
-	}
-
-	function doWrite(stream, state, writev, len, chunk, encoding, cb) {
-	  state.writelen = len;
-	  state.writecb = cb;
-	  state.writing = true;
-	  state.sync = true;
-	  if (writev)
-	    stream._writev(chunk, state.onwrite);
-	  else
-	    stream._write(chunk, encoding, state.onwrite);
-	  state.sync = false;
-	}
-
-	function onwriteError(stream, state, sync, er, cb) {
-	  if (sync)
-	    process.nextTick(function() {
-	      state.pendingcb--;
-	      cb(er);
-	    });
-	  else {
-	    state.pendingcb--;
-	    cb(er);
-	  }
-
-	  stream._writableState.errorEmitted = true;
-	  stream.emit('error', er);
-	}
-
-	function onwriteStateUpdate(state) {
-	  state.writing = false;
-	  state.writecb = null;
-	  state.length -= state.writelen;
-	  state.writelen = 0;
-	}
-
-	function onwrite(stream, er) {
-	  var state = stream._writableState;
-	  var sync = state.sync;
-	  var cb = state.writecb;
-
-	  onwriteStateUpdate(state);
-
-	  if (er)
-	    onwriteError(stream, state, sync, er, cb);
-	  else {
-	    // Check if we're actually ready to finish, but don't emit yet
-	    var finished = needFinish(stream, state);
-
-	    if (!finished &&
-	        !state.corked &&
-	        !state.bufferProcessing &&
-	        state.buffer.length) {
-	      clearBuffer(stream, state);
-	    }
-
-	    if (sync) {
-	      process.nextTick(function() {
-	        afterWrite(stream, state, finished, cb);
-	      });
-	    } else {
-	      afterWrite(stream, state, finished, cb);
-	    }
-	  }
-	}
-
-	function afterWrite(stream, state, finished, cb) {
-	  if (!finished)
-	    onwriteDrain(stream, state);
-	  state.pendingcb--;
-	  cb();
-	  finishMaybe(stream, state);
-	}
-
-	// Must force callback to be called on nextTick, so that we don't
-	// emit 'drain' before the write() consumer gets the 'false' return
-	// value, and has a chance to attach a 'drain' listener.
-	function onwriteDrain(stream, state) {
-	  if (state.length === 0 && state.needDrain) {
-	    state.needDrain = false;
-	    stream.emit('drain');
-	  }
-	}
-
-
-	// if there's something in the buffer waiting, then process it
-	function clearBuffer(stream, state) {
-	  state.bufferProcessing = true;
-
-	  if (stream._writev && state.buffer.length > 1) {
-	    // Fast case, write everything using _writev()
-	    var cbs = [];
-	    for (var c = 0; c < state.buffer.length; c++)
-	      cbs.push(state.buffer[c].callback);
-
-	    // count the one we are adding, as well.
-	    // TODO(isaacs) clean this up
-	    state.pendingcb++;
-	    doWrite(stream, state, true, state.length, state.buffer, '', function(err) {
-	      for (var i = 0; i < cbs.length; i++) {
-	        state.pendingcb--;
-	        cbs[i](err);
-	      }
-	    });
-
-	    // Clear buffer
-	    state.buffer = [];
-	  } else {
-	    // Slow case, write chunks one-by-one
-	    for (var c = 0; c < state.buffer.length; c++) {
-	      var entry = state.buffer[c];
-	      var chunk = entry.chunk;
-	      var encoding = entry.encoding;
-	      var cb = entry.callback;
-	      var len = state.objectMode ? 1 : chunk.length;
-
-	      doWrite(stream, state, false, len, chunk, encoding, cb);
-
-	      // if we didn't call the onwrite immediately, then
-	      // it means that we need to wait until it does.
-	      // also, that means that the chunk and cb are currently
-	      // being processed, so move the buffer counter past them.
-	      if (state.writing) {
-	        c++;
-	        break;
-	      }
-	    }
-
-	    if (c < state.buffer.length)
-	      state.buffer = state.buffer.slice(c);
-	    else
-	      state.buffer.length = 0;
-	  }
-
-	  state.bufferProcessing = false;
-	}
-
-	Writable.prototype._write = function(chunk, encoding, cb) {
-	  cb(new Error('not implemented'));
-
-	};
-
-	Writable.prototype._writev = null;
-
-	Writable.prototype.end = function(chunk, encoding, cb) {
-	  var state = this._writableState;
-
-	  if (util.isFunction(chunk)) {
-	    cb = chunk;
-	    chunk = null;
-	    encoding = null;
-	  } else if (util.isFunction(encoding)) {
-	    cb = encoding;
-	    encoding = null;
-	  }
-
-	  if (!util.isNullOrUndefined(chunk))
-	    this.write(chunk, encoding);
-
-	  // .end() fully uncorks
-	  if (state.corked) {
-	    state.corked = 1;
-	    this.uncork();
-	  }
-
-	  // ignore unnecessary end() calls.
-	  if (!state.ending && !state.finished)
-	    endWritable(this, state, cb);
-	};
-
-
-	function needFinish(stream, state) {
-	  return (state.ending &&
-	          state.length === 0 &&
-	          !state.finished &&
-	          !state.writing);
-	}
-
-	function prefinish(stream, state) {
-	  if (!state.prefinished) {
-	    state.prefinished = true;
-	    stream.emit('prefinish');
-	  }
-	}
-
-	function finishMaybe(stream, state) {
-	  var need = needFinish(stream, state);
-	  if (need) {
-	    if (state.pendingcb === 0) {
-	      prefinish(stream, state);
-	      state.finished = true;
-	      stream.emit('finish');
-	    } else
-	      prefinish(stream, state);
-	  }
-	  return need;
-	}
-
-	function endWritable(stream, state, cb) {
-	  state.ending = true;
-	  finishMaybe(stream, state);
-	  if (cb) {
-	    if (state.finished)
-	      process.nextTick(cb);
-	    else
-	      stream.once('finish', cb);
-	  }
-	  state.ended = true;
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
-
-/***/ },
-/* 158 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// a duplex stream is just a stream that is both readable and writable.
-	// Since JS doesn't have multiple prototypal inheritance, this class
-	// prototypally inherits from Readable, and then parasitically from
-	// Writable.
-
-	module.exports = Duplex;
-
-	/*<replacement>*/
-	var objectKeys = Object.keys || function (obj) {
-	  var keys = [];
-	  for (var key in obj) keys.push(key);
-	  return keys;
-	}
-	/*</replacement>*/
-
-
-	/*<replacement>*/
-	var util = __webpack_require__(166);
-	util.inherits = __webpack_require__(167);
-	/*</replacement>*/
-
-	var Readable = __webpack_require__(156);
-	var Writable = __webpack_require__(157);
-
-	util.inherits(Duplex, Readable);
-
-	forEach(objectKeys(Writable.prototype), function(method) {
-	  if (!Duplex.prototype[method])
-	    Duplex.prototype[method] = Writable.prototype[method];
-	});
-
-	function Duplex(options) {
-	  if (!(this instanceof Duplex))
-	    return new Duplex(options);
-
-	  Readable.call(this, options);
-	  Writable.call(this, options);
-
-	  if (options && options.readable === false)
-	    this.readable = false;
-
-	  if (options && options.writable === false)
-	    this.writable = false;
-
-	  this.allowHalfOpen = true;
-	  if (options && options.allowHalfOpen === false)
-	    this.allowHalfOpen = false;
-
-	  this.once('end', onend);
-	}
-
-	// the no-half-open enforcer
-	function onend() {
-	  // if we allow half-open state, or if the writable side ended,
-	  // then we're ok.
-	  if (this.allowHalfOpen || this._writableState.ended)
-	    return;
-
-	  // no more data can be written.
-	  // But allow more writes to happen in this tick.
-	  process.nextTick(this.end.bind(this));
-	}
-
-	function forEach (xs, f) {
-	  for (var i = 0, l = xs.length; i < l; i++) {
-	    f(xs[i], i);
-	  }
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(61)))
-
-/***/ },
-/* 159 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -65634,8 +66131,8 @@
 	var Duplex = __webpack_require__(158);
 
 	/*<replacement>*/
-	var util = __webpack_require__(166);
-	util.inherits = __webpack_require__(167);
+	var util = __webpack_require__(167);
+	util.inherits = __webpack_require__(166);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -65777,200 +66274,10 @@
 
 
 /***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// a passthrough stream.
-	// basically just the most minimal sort of Transform stream.
-	// Every written chunk gets output as-is.
-
-	module.exports = PassThrough;
-
-	var Transform = __webpack_require__(159);
-
-	/*<replacement>*/
-	var util = __webpack_require__(166);
-	util.inherits = __webpack_require__(167);
-	/*</replacement>*/
-
-	util.inherits(PassThrough, Transform);
-
-	function PassThrough(options) {
-	  if (!(this instanceof PassThrough))
-	    return new PassThrough(options);
-
-	  Transform.call(this, options);
-	}
-
-	PassThrough.prototype._transform = function(chunk, encoding, cb) {
-	  cb(null, chunk);
-	};
-
-
-/***/ },
-/* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Load modules
-
-
-	// Declare internals
-
-	var internals = {};
-
-
-	exports.arrayToObject = function (source) {
-
-	    var obj = {};
-	    for (var i = 0, il = source.length; i < il; ++i) {
-	        if (typeof source[i] !== 'undefined') {
-
-	            obj[i] = source[i];
-	        }
-	    }
-
-	    return obj;
-	};
-
-
-	exports.merge = function (target, source) {
-
-	    if (!source) {
-	        return target;
-	    }
-
-	    if (typeof source !== 'object') {
-	        if (Array.isArray(target)) {
-	            target.push(source);
-	        }
-	        else {
-	            target[source] = true;
-	        }
-
-	        return target;
-	    }
-
-	    if (typeof target !== 'object') {
-	        target = [target].concat(source);
-	        return target;
-	    }
-
-	    if (Array.isArray(target) &&
-	        !Array.isArray(source)) {
-
-	        target = exports.arrayToObject(target);
-	    }
-
-	    var keys = Object.keys(source);
-	    for (var k = 0, kl = keys.length; k < kl; ++k) {
-	        var key = keys[k];
-	        var value = source[key];
-
-	        if (!target[key]) {
-	            target[key] = value;
-	        }
-	        else {
-	            target[key] = exports.merge(target[key], value);
-	        }
-	    }
-
-	    return target;
-	};
-
-
-	exports.decode = function (str) {
-
-	    try {
-	        return decodeURIComponent(str.replace(/\+/g, ' '));
-	    } catch (e) {
-	        return str;
-	    }
-	};
-
-
-	exports.compact = function (obj, refs) {
-
-	    if (typeof obj !== 'object' ||
-	        obj === null) {
-
-	        return obj;
-	    }
-
-	    refs = refs || [];
-	    var lookup = refs.indexOf(obj);
-	    if (lookup !== -1) {
-	        return refs[lookup];
-	    }
-
-	    refs.push(obj);
-
-	    if (Array.isArray(obj)) {
-	        var compacted = [];
-
-	        for (var i = 0, il = obj.length; i < il; ++i) {
-	            if (typeof obj[i] !== 'undefined') {
-	                compacted.push(obj[i]);
-	            }
-	        }
-
-	        return compacted;
-	    }
-
-	    var keys = Object.keys(obj);
-	    for (i = 0, il = keys.length; i < il; ++i) {
-	        var key = keys[i];
-	        obj[key] = exports.compact(obj[key], refs);
-	    }
-
-	    return obj;
-	};
-
-
-	exports.isRegExp = function (obj) {
-	    return Object.prototype.toString.call(obj) === '[object RegExp]';
-	};
-
-
-	exports.isBuffer = function (obj) {
-
-	    if (obj === null ||
-	        typeof obj === 'undefined') {
-
-	        return false;
-	    }
-
-	    return !!(obj.constructor &&
-	        obj.constructor.isBuffer &&
-	        obj.constructor.isBuffer(obj));
-	};
-
-
-/***/ },
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(61).nextTick;
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(70).nextTick;
 	var apply = Function.prototype.apply;
 	var slice = Array.prototype.slice;
 	var immediateIds = {};
@@ -66294,6 +66601,35 @@
 /* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
+	if (typeof Object.create === 'function') {
+	  // implementation from standard node.js 'util' module
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    ctor.prototype = Object.create(superCtor.prototype, {
+	      constructor: {
+	        value: ctor,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	  };
+	} else {
+	  // old school shim for old browsers
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    var TempCtor = function () {}
+	    TempCtor.prototype = superCtor.prototype
+	    ctor.prototype = new TempCtor()
+	    ctor.prototype.constructor = ctor
+	  }
+	}
+
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
 	//
 	// Permission is hereby granted, free of charge, to any person obtaining a
@@ -66402,35 +66738,6 @@
 	  return Object.prototype.toString.call(o);
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(77).Buffer))
-
-/***/ },
-/* 167 */
-/***/ function(module, exports, __webpack_require__) {
-
-	if (typeof Object.create === 'function') {
-	  // implementation from standard node.js 'util' module
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	      constructor: {
-	        value: ctor,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	  };
-	} else {
-	  // old school shim for old browsers
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    var TempCtor = function () {}
-	    TempCtor.prototype = superCtor.prototype
-	    ctor.prototype = new TempCtor()
-	    ctor.prototype.constructor = ctor
-	  }
-	}
-
 
 /***/ }
 /******/ ]);

@@ -4,8 +4,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import com.mulesoft.raml1.java.parser.core.JavaNodeFactory;
+import com.mulesoft.raml1.java.parser.core.ValidationIssue;
 import com.mulesoft.raml1.java.parser.impl.api.ApiImpl;
 import com.mulesoft.raml1.java.parser.model.api.Api;
 
@@ -13,13 +15,17 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		JavaNodeFactory f = new JavaNodeFactory();
-		Api api = f.createApi("C:/work/apis/Instagram/api.raml");
+		Api api = f.createApi("C:/GIT-repos/raml-labs/automation/input/staging/Parse_1/parse.raml");
+		List<ValidationIssue> errors = api.getErrors();
+		for(ValidationIssue vi : errors){
+			System.out.println(vi.toString());			
+		}
 		print(api);
 	}
 
 	private static void print(Api api) {
 		String str = ((ApiImpl)api).toJSON();
-		File f = new File("C:/work/apis/Instagram/api.json");
+		File f = new File("C:/workspaces/JavaRamlScript/java-raml1-parser/out/api.json");
 		f.getParentFile().mkdirs();
 		if(f.exists()){
 			f.delete();
