@@ -175,11 +175,11 @@ public class CustomTypeRegistry {
 
 			List<CustomSourceFileObject> compilationUnits = Arrays
 					.asList(new CustomSourceFileObject(ucd.simpleName, ucd.content));
-			
+
 			Writer out = new PrintWriter(System.err);
 			JavaCompiler.CompilationTask compile
-				= javac.getTask(out, fileManager, null, options, null, compilationUnits);
-			
+					= javac.getTask(out, fileManager, null, options, null, compilationUnits);
+
 			compile.call();
 
 			set.add(ucd.getSimpleName());
@@ -251,30 +251,30 @@ public class CustomTypeRegistry {
 	private static class CustomClassLoader extends ClassLoader {
 
 		private Map<String, byte[]> resourcesMap;
-		
+
 		private Map<String,CustomFileObject> byteCodeMap = new HashMap<String, CustomFileObject>();
 
 		private CustomClassLoader(Map<String, byte[]> resourcesMap){
 			super(ClassLoader.getSystemClassLoader());
 			this.resourcesMap = resourcesMap;
 		}
-		
+
 		@Override
 		protected Class<?> findClass(String name) throws ClassNotFoundException {
-			
-	        CustomFileObject mbc = byteCodeMap.get(name);       
-	        if (mbc==null){           
-	            mbc = byteCodeMap.get(name.replace(".","/"));           
-	            if (mbc==null){               
-	                return super.findClass(name);           
-	            }       
-	        }       
-	        return defineClass(name, mbc.getBytes(), 0, mbc.getBytes().length);   
-	    }
-		
-		public void addClass(String name, CustomFileObject mbc) {       
-	        byteCodeMap.put(name, mbc);   
-	    }
+
+			CustomFileObject mbc = byteCodeMap.get(name);
+			if (mbc==null){
+				mbc = byteCodeMap.get(name.replace(".","/"));
+				if (mbc==null){
+					return super.findClass(name);
+				}
+			}
+			return defineClass(name, mbc.getBytes(), 0, mbc.getBytes().length);
+		}
+
+		public void addClass(String name, CustomFileObject mbc) {
+			byteCodeMap.put(name, mbc);
+		}
 
 		@Override
 		protected URL findResource(final String name) {
@@ -305,78 +305,78 @@ public class CustomTypeRegistry {
 			return super.findResource(name);
 		}
 	}
-	
+
 	class CustomSourceFileObject extends SimpleJavaFileObject {
-		
-	    private String content;   
-	    
-	    public CustomSourceFileObject(String simpleName, String content) {       
-	        super(URI.create("file:///" + simpleName + ".java"), Kind.SOURCE);       
-	        this.content = content;   
-	    }   
-	    
-	    public CharSequence getCharContent(boolean ignoreEncodingErrors) {       
-	        return content;   
-	    }   
-	    
-	    public OutputStream openOutputStream() {       
-	        throw new IllegalStateException();   
-	    }   
-	    
-	    public InputStream openInputStream() {       
-	        byte[] bytes;
+
+		private String content;
+
+		public CustomSourceFileObject(String simpleName, String content) {
+			super(URI.create("file:///" + simpleName + ".java"), Kind.SOURCE);
+			this.content = content;
+		}
+
+		public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+			return content;
+		}
+
+		public OutputStream openOutputStream() {
+			throw new IllegalStateException();
+		}
+
+		public InputStream openInputStream() {
+			byte[] bytes;
 			try {
 				bytes = content.getBytes("UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				bytes = content.getBytes();
 			}
-			return new ByteArrayInputStream(bytes);   
-	    }
+			return new ByteArrayInputStream(bytes);
+		}
 	}
-	 
-	class CustomFileManager extends ForwardingJavaFileManager {   
-	    private CustomClassLoader classLoader;   
-	    public CustomFileManager(StandardJavaFileManager fileManager, CustomClassLoader classLoader) {       
-	        super(fileManager);       
-	        this.classLoader = classLoader;   
-	    }   
-	    public JavaFileObject getJavaFileForOutput(
-	    		Location loc, String name, JavaFileObject.Kind kind, FileObject sibling) throws IOException {
-	    	
-	        CustomFileObject mbc = new CustomFileObject(name);       
-	        classLoader.addClass(name, mbc);       
-	        return mbc;   
-	    }
-	 
-	    public ClassLoader getClassLoader(Location location) {       
-	        return classLoader;   
-	    }
+
+	class CustomFileManager extends ForwardingJavaFileManager {
+		private CustomClassLoader classLoader;
+		public CustomFileManager(StandardJavaFileManager fileManager, CustomClassLoader classLoader) {
+			super(fileManager);
+			this.classLoader = classLoader;
+		}
+		public JavaFileObject getJavaFileForOutput(
+				Location loc, String name, JavaFileObject.Kind kind, FileObject sibling) throws IOException {
+
+			CustomFileObject mbc = new CustomFileObject(name);
+			classLoader.addClass(name, mbc);
+			return mbc;
+		}
+
+		public ClassLoader getClassLoader(Location location) {
+			return classLoader;
+		}
 	}
-	 
-	class CustomFileObject extends SimpleJavaFileObject {   
-	    
-		private ByteArrayOutputStream baos;   
-	    
-	    public CustomFileObject(String name) {       
-	        super(URI.create("byte:///" + name + ".class"), Kind.CLASS);   
-	    }   
-	    
-	    public CharSequence getCharContent(boolean ignoreEncodingErrors) {       
-	        throw new IllegalStateException();   
-	    }   
-	    
-	    public OutputStream openOutputStream() {       
-	        baos = new ByteArrayOutputStream();       
-	        return baos;   
-	    }   
-	    
-	    public InputStream openInputStream() {       
-	        throw new IllegalStateException();   
-	    }   
-	    
-	    public byte[] getBytes() {       
-	        return baos.toByteArray();   
-	    }
+
+	class CustomFileObject extends SimpleJavaFileObject {
+
+		private ByteArrayOutputStream baos;
+
+		public CustomFileObject(String name) {
+			super(URI.create("byte:///" + name + ".class"), Kind.CLASS);
+		}
+
+		public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+			throw new IllegalStateException();
+		}
+
+		public OutputStream openOutputStream() {
+			baos = new ByteArrayOutputStream();
+			return baos;
+		}
+
+		public InputStream openInputStream() {
+			throw new IllegalStateException();
+		}
+
+		public byte[] getBytes() {
+			return baos.toByteArray();
+		}
 	}
 
 	private static class UserClassData {
