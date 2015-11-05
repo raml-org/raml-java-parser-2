@@ -4609,15 +4609,15 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var yaml = __webpack_require__(21);
-	var lowlevel = __webpack_require__(20);
+	var yaml = __webpack_require__(19);
+	var lowlevel = __webpack_require__(25);
 	var path = __webpack_require__(11);
 	var fs = __webpack_require__(12);
-	var parser = __webpack_require__(34);
-	var dumper = __webpack_require__(35);
-	var Error = __webpack_require__(36);
-	var textutil = __webpack_require__(27);
-	var rr = __webpack_require__(37);
+	var parser = __webpack_require__(26);
+	var dumper = __webpack_require__(27);
+	var Error = __webpack_require__(28);
+	var textutil = __webpack_require__(29);
+	var rr = __webpack_require__(30);
 	var MarkupIndentingBuffer = (function () {
 	    function MarkupIndentingBuffer(indent) {
 	        this.text = '';
@@ -7069,21 +7069,21 @@
 	    d.prototype = new __();
 	};
 	var jsyaml = __webpack_require__(6);
-	var defs = __webpack_require__(19);
+	var defs = __webpack_require__(21);
 	var hl = __webpack_require__(17);
-	var ll = __webpack_require__(20);
+	var ll = __webpack_require__(25);
 	var _ = __webpack_require__(47);
-	var yaml = __webpack_require__(21);
+	var yaml = __webpack_require__(19);
 	var proxy = __webpack_require__(13);
-	var typeExpression = __webpack_require__(22);
-	var def = __webpack_require__(19);
-	var builder = __webpack_require__(23);
-	var linter = __webpack_require__(24);
-	var typeBuilder = __webpack_require__(25);
-	var search = __webpack_require__(26);
-	var textutil = __webpack_require__(27);
-	var ModelFactory = __webpack_require__(28);
-	var ovlval = __webpack_require__(29);
+	var typeExpression = __webpack_require__(31);
+	var def = __webpack_require__(21);
+	var builder = __webpack_require__(32);
+	var linter = __webpack_require__(33);
+	var typeBuilder = __webpack_require__(34);
+	var search = __webpack_require__(35);
+	var textutil = __webpack_require__(29);
+	var ModelFactory = __webpack_require__(36);
+	var ovlval = __webpack_require__(37);
 	function qName(x, context) {
 	    var dr = search.declRoot(context);
 	    var nm = x.name();
@@ -9019,13 +9019,13 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var def = __webpack_require__(19);
-	var td = __webpack_require__(30);
-	var tsutil = __webpack_require__(31);
+	var def = __webpack_require__(21);
+	var td = __webpack_require__(22);
+	var tsutil = __webpack_require__(23);
 	var path = __webpack_require__(11);
 	var mkdirp = __webpack_require__(40);
 	var fs = __webpack_require__(12);
-	var wrappedParserGen = __webpack_require__(32);
+	var wrappedParserGen = __webpack_require__(24);
 	var ParserGenerator = (function () {
 	    function ParserGenerator(cfg, universe) {
 	        this.cfg = cfg;
@@ -9434,7 +9434,7 @@
 	                fieldType = "List<" + fieldType + ">";
 	                arrDim--;
 	            }
-	            fields.push("    @XmlElement(name=\"" + pName + "\")\n    public " + fieldType + " " + fieldName + ";");
+	            fields.push("    //@XmlElement(name=\"" + pName + "\")\n    public " + fieldType + " " + fieldName + ";");
 	        });
 	        if (hasArray) {
 	            imports['import java.util.List;'] = true;
@@ -9461,8 +9461,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var yaml = __webpack_require__(21);
-	var util = __webpack_require__(33);
+	var yaml = __webpack_require__(19);
+	var util = __webpack_require__(20);
 	var llImpl = __webpack_require__(6);
 	var CompilationUnit = (function () {
 	    function CompilationUnit(_absolutePath, _path, _content, _project, _isTopoLevel) {
@@ -9741,9 +9741,9 @@
 	    "Swagger2": "./spec-swagger-2.0/swagger.ts"
 	};
 	var jsonDefinitions = {
-	    "RAML10": __webpack_require__(58),
-	    "RAML08": __webpack_require__(59),
-	    "Swagger2": __webpack_require__(60)
+	    "RAML10": __webpack_require__(49),
+	    "RAML08": __webpack_require__(50),
+	    "Swagger2": __webpack_require__(51)
 	};
 	var getUniverse = (function () {
 	    var x = function (key) {
@@ -9756,7 +9756,7 @@
 	            universe.setUniverseVersion(key);
 	            universes[key] = universe;
 	        }
-	        var mediaTypeParser = __webpack_require__(42);
+	        var mediaTypeParser = __webpack_require__(41);
 	        global.mediaTypeParser = mediaTypeParser;
 	        return universe;
 	    };
@@ -10049,7 +10049,7 @@
 	    }
 	;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
 /* 12 */
@@ -10067,11 +10067,11 @@
 	    __.prototype = b.prototype;
 	    d.prototype = new __();
 	};
-	var yaml = __webpack_require__(21);
+	var yaml = __webpack_require__(19);
 	var json = __webpack_require__(9);
 	var stringify = __webpack_require__(73);
 	var impl = __webpack_require__(6);
-	var util = __webpack_require__(33);
+	var util = __webpack_require__(20);
 	var LowLevelProxyNode = (function () {
 	    function LowLevelProxyNode(_parent, _transformer) {
 	        this._parent = _parent;
@@ -12378,13 +12378,13 @@
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ramlPathMatch = __webpack_require__(49);
+	var ramlPathMatch = __webpack_require__(52);
 	var hl = __webpack_require__(17);
 	var hlimpl = __webpack_require__(7);
 	var Opt = __webpack_require__(5);
-	var util = __webpack_require__(33);
-	var typeexpression = __webpack_require__(25);
-	var search = __webpack_require__(26);
+	var util = __webpack_require__(20);
+	var typeexpression = __webpack_require__(34);
+	var search = __webpack_require__(35);
 	var ll = __webpack_require__(6);
 	var path = __webpack_require__(11);
 	function resolveType(p) {
@@ -12774,8 +12774,8 @@
 	/// <reference path="../../typings/tsd.d.ts" />
 	var hl = __webpack_require__(17);
 	var hlImpl = __webpack_require__(7);
-	var typeExpr = __webpack_require__(22);
-	var ramlSignatureParser = __webpack_require__(50);
+	var typeExpr = __webpack_require__(31);
+	var ramlSignatureParser = __webpack_require__(53);
 	var wrapper = __webpack_require__(3);
 	function validate(s, node, cb) {
 	    var result = ramlSignatureParser.parse(s);
@@ -12881,7 +12881,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
-	var ds = __webpack_require__(19);
+	var ds = __webpack_require__(21);
 	(function (NodeKind) {
 	    NodeKind[NodeKind["BASIC"] = 0] = "BASIC";
 	    NodeKind[NodeKind["NODE"] = 1] = "NODE";
@@ -13251,6 +13251,285 @@
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/// <reference path="../../../typings/tsd.d.ts" />
+	(function (Kind) {
+	    Kind[Kind["SCALAR"] = 0] = "SCALAR";
+	    Kind[Kind["MAPPING"] = 1] = "MAPPING";
+	    Kind[Kind["MAP"] = 2] = "MAP";
+	    Kind[Kind["SEQ"] = 3] = "SEQ";
+	    Kind[Kind["ANCHOR_REF"] = 4] = "ANCHOR_REF";
+	    Kind[Kind["INCLUDE_REF"] = 5] = "INCLUDE_REF";
+	})(exports.Kind || (exports.Kind = {}));
+	var Kind = exports.Kind;
+	function newMapping(key, value) {
+	    var end = (value ? value.endPosition : key.endPosition + 1); //FIXME.workaround, end should be defied by position of ':'
+	    //console.log('key: ' + key.value + ' ' + key.startPosition + '..' + key.endPosition + ' ' + value + ' end: ' + end);
+	    var node = {
+	        key: key,
+	        value: value,
+	        startPosition: key.startPosition,
+	        endPosition: end,
+	        kind: 1 /* MAPPING */,
+	        parent: null,
+	        errors: []
+	    };
+	    return node;
+	}
+	exports.newMapping = newMapping;
+	function newAnchorRef(key, start, end, value) {
+	    return {
+	        errors: [],
+	        referencesAnchor: key,
+	        value: value,
+	        startPosition: start,
+	        endPosition: end,
+	        kind: 4 /* ANCHOR_REF */,
+	        parent: null
+	    };
+	}
+	exports.newAnchorRef = newAnchorRef;
+	function newScalar(v) {
+	    if (v === void 0) { v = ""; }
+	    return {
+	        errors: [],
+	        startPosition: -1,
+	        endPosition: -1,
+	        value: v,
+	        kind: 0 /* SCALAR */,
+	        parent: null,
+	        doubleQuoted: false
+	    };
+	}
+	exports.newScalar = newScalar;
+	function newItems() {
+	    return {
+	        errors: [],
+	        startPosition: -1,
+	        endPosition: -1,
+	        items: [],
+	        kind: 3 /* SEQ */,
+	        parent: null
+	    };
+	}
+	exports.newItems = newItems;
+	function newSeq() {
+	    return newItems();
+	}
+	exports.newSeq = newSeq;
+	function newMap(mappings) {
+	    return {
+	        errors: [],
+	        startPosition: -1,
+	        endPosition: -1,
+	        mappings: mappings ? mappings : [],
+	        kind: 2 /* MAP */,
+	        parent: null
+	    };
+	}
+	exports.newMap = newMap;
+	//# sourceMappingURL=yamlAST.js.map
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var _ = __webpack_require__(47);
+	var Opt = __webpack_require__(5);
+	exports.defined = function (x) { return (x !== null) && (x !== undefined); };
+	/**
+	 * Arrays of Objects are common in RAML08.
+	 * @param x
+	 * @returns {{}}
+	 */
+	function flattenArrayOfObjects(x) {
+	    var res = {};
+	    x.forEach(function (v) { return Object.keys(v).forEach(function (k) { return res[k] = v[k]; }); });
+	    return res;
+	}
+	exports.flattenArrayOfObjects = flattenArrayOfObjects;
+	function find(xs, f) {
+	    return new Opt(_.find(xs || [], f));
+	}
+	exports.find = find;
+	exports.isInstance = function (v, C) { return (v instanceof C) ? [v] : []; };
+	exports.ifInstanceOf = function (v, C, f) { return (v instanceof C) ? f(v) : null; };
+	function toTuples(map) {
+	    return Object.keys(map).map(function (k) { return [k, map[k]]; });
+	}
+	exports.toTuples = toTuples;
+	function fromTuples(tuples) {
+	    var obj = {};
+	    tuples.forEach(function (x) { return obj[x[0]] = x[1]; });
+	    return obj;
+	}
+	exports.fromTuples = fromTuples;
+	exports.collectInstancesOf = function (xs, C) { return tap([], function (res) { return xs.forEach(function (v) { return exports.ifInstanceOf(v, C, function (x) { return res.push(x); }); }); }); };
+	exports.collectInstancesOfInMap = function (map, C) {
+	    return Object.keys(map).map(function (k) { return [k, map[k]]; }).filter(function (x) { return x[1] instanceof C; }).map(function (x) { return x; });
+	};
+	exports.asArray = function (v) { return exports.defined(v) ? ((v instanceof Array) ? v : [v]) : []; };
+	exports.shallowCopy = function (obj) { return tap({}, function (copy) { return Object.keys(obj).forEach(function (k) { return copy[k] = obj[k]; }); }); };
+	exports.flatMap = function (xs, f) { return exports.flatten(xs.map(f)); };
+	exports.flatten = function (xss) { return Array.prototype.concat.apply([], xss); };
+	exports.takeWhile = function (xs, f) { return tap([], function (res) {
+	    for (var i = 0; i < xs.length; i++) {
+	        if (!f(xs[i]))
+	            break;
+	        res.push(xs[i]);
+	    }
+	}); };
+	function tap(v, f) {
+	    f(v);
+	    return v;
+	}
+	exports.tap = tap;
+	function kv(obj, iter) {
+	    if (typeof obj === 'object')
+	        Object.keys(obj).forEach(function (k) { return iter(k, obj[k]); });
+	}
+	exports.kv = kv;
+	function indexed(objects, key, delKey) {
+	    if (delKey === void 0) { delKey = false; }
+	    var obj = {};
+	    objects.forEach(function (original) {
+	        var copy = exports.shallowCopy(original);
+	        if (delKey)
+	            delete copy[key];
+	        obj[original[key]] = copy;
+	    });
+	    return obj;
+	}
+	exports.indexed = indexed;
+	function stringEndsWith(str, search) {
+	    var dif = str.length - search.length;
+	    return dif >= 0 && str.lastIndexOf(search) === dif;
+	}
+	exports.stringEndsWith = stringEndsWith;
+	function stringStartsWith(str, search) {
+	    return str.length - search.length >= 0 && str.substring(0, search.length) === search;
+	}
+	exports.stringStartsWith = stringStartsWith;
+	function lazypropkeyfilter(k) {
+	    return k[k.length - 1] == "_"; // ends with underscore
+	}
+	exports.lazypropkeyfilter = lazypropkeyfilter;
+	function lazyprop(obj, key, func) {
+	    var result, ready = false;
+	    obj[key] = function () {
+	        if (!ready) {
+	            ready = true;
+	            result = func.apply(obj);
+	        }
+	        return result;
+	    };
+	}
+	function lazyprops(obj, keyfilter) {
+	    if (keyfilter === void 0) { keyfilter = lazypropkeyfilter; }
+	    for (var k in obj) {
+	        if (keyfilter(k)) {
+	            exports.ifInstanceOf(obj[k], Function, function (vf) { return (vf.length === 0) ? lazyprop(obj, k, vf) : null; });
+	        }
+	    }
+	}
+	exports.lazyprops = lazyprops;
+	function iff(v, f) {
+	    if (v !== undefined)
+	        f(v);
+	}
+	exports.iff = iff;
+	function isRAMLUrl(str) {
+	    if (typeof str !== 'string' || str == '')
+	        return false;
+	    return stringEndsWith(str, ".raml");
+	}
+	exports.isRAMLUrl = isRAMLUrl;
+	function getAllRequiredExternalModulesFromCode(code) {
+	    var match;
+	    var mods = [];
+	    // both quoting styles
+	    var r1 = new RegExp("require\\('([^']+)'\\)", "gi");
+	    while (match = r1.exec(code)) {
+	        mods.push(match[1]);
+	    }
+	    var r2 = new RegExp('require\\("([^"]+)"\\)', "gi");
+	    while (match = r2.exec(code)) {
+	        mods.push(match[1]);
+	    }
+	    mods = _.unique(mods).filter(function (x) { return x != ""; });
+	    mods.sort();
+	    return mods;
+	}
+	exports.getAllRequiredExternalModulesFromCode = getAllRequiredExternalModulesFromCode;
+	exports.serial = (function () {
+	    var i = 0;
+	    return function () { return i++; };
+	})();
+	function isEssential(arg) {
+	    return typeof arg !== 'undefined' && arg != null;
+	}
+	exports.isEssential = isEssential;
+	function firstToUpper(q) {
+	    if (q.length == 0) {
+	        return q;
+	    }
+	    return q.charAt(0).toUpperCase() + q.substr(1);
+	}
+	exports.firstToUpper = firstToUpper;
+	function updateObject(source, target, addNewFields) {
+	    if (addNewFields === void 0) { addNewFields = false; }
+	    var keySet = Object.keys(target);
+	    if (addNewFields) {
+	        var map = {};
+	        keySet.forEach(function (x) { return map[x] = true; });
+	        Object.keys(source).forEach(function (x) { return map[x] = true; });
+	        keySet = Object.keys(map);
+	    }
+	    keySet.forEach(function (x) {
+	        var value = source[x];
+	        if (value instanceof Object) {
+	            if (!target[x]) {
+	                target[x] = {};
+	            }
+	            updateObject(value, target[x], true);
+	        }
+	        else if (value != undefined) {
+	            target[x] = source[x];
+	        }
+	    });
+	}
+	exports.updateObject = updateObject;
+	;
+	/**
+	 * In 'str' replace all occurences of 'map' keys to their values.
+	 */
+	function replaceMap(str, map) {
+	    Object.keys(map).forEach(function (x) { return str = replace(str, x, map[x]); });
+	    return str;
+	}
+	exports.replaceMap = replaceMap;
+	/**
+	 * Replace all occurences of 'x' in 'str' to 'r' without thinking if 'x' can be passed without
+	 * escaping as argument to RegExp constructor
+	 */
+	function replace(str, x, r) {
+	    var result = '';
+	    var prev = 0;
+	    for (var i = str.indexOf(x); i < str.length && i >= 0; i = str.indexOf(x, prev)) {
+	        result += str.substring(prev, i);
+	        result += r;
+	        prev = i + x.length;
+	    }
+	    result += str.substring(prev, str.length);
+	    return result;
+	}
+	exports.replace = replace;
+	//# sourceMappingURL=index.js.map
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __extends = this.__extends || function (d, b) {
 	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
 	    function __() { this.constructor = d; }
@@ -13260,12 +13539,12 @@
 	var _ = __webpack_require__(47);
 	var hlimpl = __webpack_require__(7);
 	var jsyaml = __webpack_require__(6);
-	var su = __webpack_require__(51);
-	var selector = __webpack_require__(52);
-	var typeBuilder = __webpack_require__(25);
-	var ramlexp = __webpack_require__(53);
-	var defs = __webpack_require__(19);
-	var search = __webpack_require__(26);
+	var su = __webpack_require__(54);
+	var selector = __webpack_require__(55);
+	var typeBuilder = __webpack_require__(34);
+	var ramlexp = __webpack_require__(56);
+	var defs = __webpack_require__(21);
+	var search = __webpack_require__(35);
 	var Annotation = (function () {
 	    function Annotation(_name) {
 	        this._name = _name;
@@ -15276,7 +15555,1231 @@
 	//# sourceMappingURL=definitionSystem.js.map
 
 /***/ },
-/* 20 */
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var __extends = this.__extends || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    __.prototype = b.prototype;
+	    d.prototype = new __();
+	};
+	var tsutil = __webpack_require__(23);
+	var _ = __webpack_require__(47);
+	var assert = __webpack_require__(74);
+	var Opt = __webpack_require__(5);
+	exports.MODEL_CLASS_MODEL_ELEMENT = '$resource-model-element';
+	exports.MODEL_CLASS_TYPE_DECLARATION = '$type-declaration';
+	exports.MODEL_CLASS_INTERFACE = '$interface-declaration';
+	exports.MODEL_CLASS_CLASS_DECLARATION = '$class-declaration';
+	exports.MODEL_CLASS_ANNOTATION_DECLARATION = '$annotation-declaration';
+	exports.MODEL_CLASS_ENUM_DECLARATION = '$enum-declaration';
+	exports.MODEL_CLASS_TYPE_ASSERTION = '$type-assertion';
+	exports.MODEL_CLASS_API_MODULE = '$api-module';
+	exports.MODEL_CLASS_UNIVERSE = '$universe';
+	exports.MODEL_CLASS_MEMBER = '$member';
+	exports.MODEL_CLASS_UNION_TYPE_REFERENCE = '$union-type-reference';
+	exports.MODEL_CLASS_SIMPLE_TYPE_REFERENCE = '$simple-type-reference';
+	exports.MODEL_CLASS_FUNCTION_REFERENCE = '$function-reference';
+	exports.MODEL_CLASS_ARRAY_REFERENCE = '$array-reference';
+	exports.MODEL_CLASS_DECLARED_INTERFACE_REFERENCE = '$declared-interface-reference';
+	exports.MODEL_CLASS_ANY_TYPE_REFERENCE = '$any-type-reference';
+	exports.MODEL_CLASS_STRUCTURAL_TYPE_REFERENCE = '$structural-type-reference';
+	exports.MODEL_CLASS_PARAM = '$param';
+	exports.MODEL_CLASS_STRING_VALUE = '$string-value';
+	exports.MODEL_CLASS_ARRAY_VALUE = '$array-value';
+	exports.MODEL_CLASS_API_ELEMENT_DECLARATION = '$api-element-declaration';
+	exports.MODEL_CLASS_CONSTRUCTOR = '$constructor';
+	//TODO HIDE Fields from unmanagable modification
+	//TODO Refine type decl type ref hieararchy a bit more
+	//TODO add classes, generics, metadata
+	var TSModelElement = (function () {
+	    function TSModelElement(parent, config) {
+	        if (parent === void 0) { parent = exports.Universe; }
+	        this.meta = {};
+	        this._annotations = [];
+	        this._parent = parent;
+	        this._config = config ? config : parent._config;
+	        this._children = [];
+	        assert(parent, "Should never be null");
+	        this._parent.addChild(this);
+	    }
+	    TSModelElement.prototype.annotations = function () {
+	        return this._annotations;
+	    };
+	    TSModelElement.prototype.patchParent = function (parent) {
+	        this._parent = parent; //FIXME
+	    };
+	    TSModelElement.prototype.isEmpty = function () {
+	        return this._children.length == 0;
+	    };
+	    TSModelElement.prototype.parent = function () {
+	        return this._parent;
+	    };
+	    TSModelElement.prototype.children = function () {
+	        return this._children;
+	    };
+	    TSModelElement.prototype.root = function () {
+	        if (this._parent == exports.Universe) {
+	            return this;
+	        }
+	        return this._parent.root();
+	    };
+	    TSModelElement.prototype.removeChild = function (child) {
+	        if (child._parent == this) {
+	            this._children = this._children.filter(function (x) { return x != child; });
+	        }
+	        child._parent = exports.Universe;
+	    };
+	    TSModelElement.prototype.addChild = function (child) {
+	        if (child._parent) {
+	            child._parent.removeChild(child);
+	        }
+	        child._parent = this;
+	        this._children.push(child);
+	    };
+	    TSModelElement.prototype.serializeToString = function () {
+	        throw new Error("You should override serialize to string always");
+	    };
+	    TSModelElement.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_MODEL_ELEMENT;
+	    };
+	    return TSModelElement;
+	})();
+	exports.TSModelElement = TSModelElement;
+	//TODO It should become an interface
+	var TSTypeDeclaration = (function (_super) {
+	    __extends(TSTypeDeclaration, _super);
+	    function TSTypeDeclaration(parent) {
+	        var _this = this;
+	        if (parent === void 0) { parent = null; }
+	        _super.call(this, parent);
+	        this.canBeOmmited = function () { return _this.locked ? false : _this.children().every(function (x) { return x.optional; }); };
+	        this.locked = false;
+	        this.extras = [""];
+	    }
+	    TSTypeDeclaration.prototype.addCode = function (code) {
+	        this.extras.push(code);
+	    };
+	    TSTypeDeclaration.prototype.toReference = function () {
+	        throw new Error("Implement in subclasses");
+	    };
+	    TSTypeDeclaration.prototype.hash = function () {
+	        return this.serializeToString();
+	    };
+	    TSTypeDeclaration.prototype.isFunctor = function () {
+	        return this.children().some(function (x) { return x.isAnonymousFunction(); });
+	    };
+	    TSTypeDeclaration.prototype.getFunctor = function () {
+	        return _.find(this.children(), function (x) { return x.isAnonymousFunction(); });
+	    };
+	    TSTypeDeclaration.prototype.visit = function (v) {
+	        if (v.startTypeDeclaration(this)) {
+	            this.children().forEach(function (x, i, arr) {
+	                x.visit(v);
+	                if (i != arr.length - 1)
+	                    v.betweenElements();
+	            });
+	            v.endTypeDeclaration(this);
+	        }
+	    };
+	    TSTypeDeclaration.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_TYPE_DECLARATION;
+	    };
+	    return TSTypeDeclaration;
+	})(TSModelElement);
+	exports.TSTypeDeclaration = TSTypeDeclaration;
+	var TSInterface = (function (_super) {
+	    __extends(TSInterface, _super);
+	    function TSInterface(p, name) {
+	        _super.call(this, p);
+	        this.extends = [];
+	        this.implements = [];
+	        this.name = name;
+	    }
+	    TSInterface.prototype.hash = function () {
+	        return this.children().filter(function (x) { return !x.isPrivate; }).map(function (x) { return "\n" + x.serializeToString() + "\n"; }).join('');
+	    };
+	    TSInterface.prototype.toReference = function () {
+	        return new TSDeclaredInterfaceReference(exports.Universe, this.name, this);
+	    };
+	    TSInterface.prototype.decl = function () {
+	        return "interface";
+	    };
+	    TSInterface.prototype.serializeToString = function () {
+	        var body = this.hash();
+	        return "export " + this.decl() + " " + this.name.concat(this.extendsString() + this.implementsString()) + "{" + this.extras.join("\n") + body + "}\n";
+	    };
+	    TSInterface.prototype.extendsString = function () {
+	        if (this.extends.length > 0) {
+	            return " extends " + this.extends.map(function (x) { return x.serializeToString(); }).join(",");
+	        }
+	        return "";
+	    };
+	    TSInterface.prototype.implementsString = function () {
+	        if (this.implements.length > 0) {
+	            return " implements " + this.implements.map(function (x) { return x.serializeToString(); }).join(",");
+	        }
+	        return "";
+	    };
+	    TSInterface.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_INTERFACE;
+	    };
+	    return TSInterface;
+	})(TSTypeDeclaration);
+	exports.TSInterface = TSInterface;
+	//TODO INCORRECT INHERITANCE CHAIN
+	var TSClassDecl = (function (_super) {
+	    __extends(TSClassDecl, _super);
+	    function TSClassDecl() {
+	        _super.apply(this, arguments);
+	    }
+	    TSClassDecl.prototype.decl = function () {
+	        return "class";
+	    };
+	    TSClassDecl.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_CLASS_DECLARATION;
+	    };
+	    return TSClassDecl;
+	})(TSInterface);
+	exports.TSClassDecl = TSClassDecl;
+	var TSAnnotationDecl = (function (_super) {
+	    __extends(TSAnnotationDecl, _super);
+	    function TSAnnotationDecl() {
+	        _super.apply(this, arguments);
+	    }
+	    TSAnnotationDecl.prototype.decl = function () {
+	        return "annotation";
+	    };
+	    TSAnnotationDecl.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ANNOTATION_DECLARATION;
+	    };
+	    TSAnnotationDecl.prototype.toReference = function () {
+	        return new TSDeclaredAnnotationReference(exports.Universe, this.name, this);
+	    };
+	    return TSAnnotationDecl;
+	})(TSInterface);
+	exports.TSAnnotationDecl = TSAnnotationDecl;
+	var TSEnumDecl = (function (_super) {
+	    __extends(TSEnumDecl, _super);
+	    function TSEnumDecl() {
+	        _super.apply(this, arguments);
+	    }
+	    TSEnumDecl.prototype.decl = function () {
+	        return "enum";
+	    };
+	    TSEnumDecl.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ENUM_DECLARATION;
+	    };
+	    return TSEnumDecl;
+	})(TSInterface);
+	exports.TSEnumDecl = TSEnumDecl;
+	var TSTypeAssertion = (function (_super) {
+	    __extends(TSTypeAssertion, _super);
+	    function TSTypeAssertion(p, _name, _ref) {
+	        _super.call(this, p);
+	        this._name = _name;
+	        this._ref = _ref;
+	    }
+	    TSTypeAssertion.prototype.toReference = function () {
+	        return new TSSimpleTypeReference(exports.Universe, this._name);
+	    };
+	    TSTypeAssertion.prototype.serializeToString = function () {
+	        return "export type " + this._name + "=" + this._ref.serializeToString() + "\n";
+	    };
+	    TSTypeAssertion.prototype.ref = function () {
+	        return this._ref;
+	    };
+	    TSTypeAssertion.prototype.name = function () {
+	        return this._name;
+	    };
+	    TSTypeAssertion.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_TYPE_ASSERTION;
+	    };
+	    return TSTypeAssertion;
+	})(TSTypeDeclaration);
+	exports.TSTypeAssertion = TSTypeAssertion;
+	var TSUniverse = (function (_super) {
+	    __extends(TSUniverse, _super);
+	    function TSUniverse() {
+	        _super.call(this, this);
+	    }
+	    TSUniverse.prototype.addChild = function (child) {
+	    };
+	    TSUniverse.prototype.setConfig = function (cfg) {
+	        this._config = cfg;
+	    };
+	    TSUniverse.prototype.getConfig = function () {
+	        return this._config;
+	    };
+	    TSUniverse.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_UNIVERSE;
+	    };
+	    return TSUniverse;
+	})(TSModelElement);
+	exports.TSUniverse = TSUniverse;
+	exports.Universe = new TSUniverse();
+	var TSAPIModule = (function (_super) {
+	    __extends(TSAPIModule, _super);
+	    function TSAPIModule() {
+	        _super.apply(this, arguments);
+	    }
+	    TSAPIModule.prototype.getInterface = function (nm) {
+	        return new Opt(_.find(this.children(), function (x) { return x.name == nm; }));
+	    };
+	    TSAPIModule.prototype.serializeToString = function () {
+	        var typeMap = {};
+	        this.children().forEach(function (x) { return typeMap[x.name] = x; });
+	        var covered = {};
+	        var sorted = [];
+	        var append = function (t) {
+	            if (covered[t.name]) {
+	                return;
+	            }
+	            covered[t.name] = true;
+	            var refs = t.extends;
+	            refs.forEach(function (ref) {
+	                if (ref instanceof TSSimpleTypeReference) {
+	                    var name = ref.name;
+	                    var st = typeMap[name];
+	                    if (st) {
+	                        append(st);
+	                    }
+	                }
+	            });
+	            sorted.push(t);
+	        };
+	        this.children().forEach(function (x) { return append(x); });
+	        return sorted.map(function (x) { return x.serializeToString(); }).join("\n");
+	    };
+	    TSAPIModule.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_API_MODULE;
+	    };
+	    return TSAPIModule;
+	})(TSModelElement);
+	exports.TSAPIModule = TSAPIModule;
+	var TSMember = (function (_super) {
+	    __extends(TSMember, _super);
+	    function TSMember() {
+	        _super.apply(this, arguments);
+	    }
+	    TSMember.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_MEMBER;
+	    };
+	    return TSMember;
+	})(TSModelElement);
+	exports.TSMember = TSMember;
+	var TSUnionTypeReference = (function (_super) {
+	    __extends(TSUnionTypeReference, _super);
+	    function TSUnionTypeReference() {
+	        _super.apply(this, arguments);
+	        this.array = function () { return false; };
+	    }
+	    TSUnionTypeReference.prototype.getFunctor = function () {
+	        return null;
+	    };
+	    //TODO FIXIT FIX IT WITH MIX IN
+	    TSUnionTypeReference.prototype.union = function (q) {
+	        var map = {};
+	        this.children().filter(function (x) { return x instanceof TSSimpleTypeReference; }).forEach(function (x) { return map[x.name] = true; });
+	        var gotNew = false;
+	        var flat = flattenUnionType(q);
+	        flat.forEach(function (x) {
+	            if (x instanceof TSSimpleTypeReference) {
+	                gotNew = gotNew || !map[q.name];
+	            }
+	            else {
+	                gotNew = true;
+	            }
+	        });
+	        if (!gotNew) {
+	            return this;
+	        }
+	        var r = new TSUnionTypeReference();
+	        this.children().forEach(function (x) { return r.addChild(x); });
+	        flat.forEach(function (x) { return r.addChild(x); });
+	        return r;
+	    };
+	    TSUnionTypeReference.prototype.isFunctor = function () {
+	        return false;
+	    };
+	    TSUnionTypeReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSUnionTypeReference.prototype.serializeToString = function () {
+	        return this.children().map(function (x) { return x.serializeToString(); }).join(" | ");
+	    };
+	    TSUnionTypeReference.prototype.removeChild = function (child) {
+	    };
+	    TSUnionTypeReference.prototype.addChild = function (child) {
+	        this.children().push(child);
+	    };
+	    TSUnionTypeReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_UNION_TYPE_REFERENCE;
+	    };
+	    return TSUnionTypeReference;
+	})(TSModelElement);
+	exports.TSUnionTypeReference = TSUnionTypeReference;
+	var TSSimpleTypeReference = (function (_super) {
+	    __extends(TSSimpleTypeReference, _super);
+	    function TSSimpleTypeReference(p, tn) {
+	        var _this = this;
+	        _super.call(this, p);
+	        this.array = function () { return false; };
+	        this.genericStr = function () { return _this.typeParameters && _this.typeParameters.length > 0 ? '<' + _this.typeParameters.map(function (p) { return p.serializeToString(); }).join(',') + '>' : ''; };
+	        this.name = tn;
+	    }
+	    TSSimpleTypeReference.prototype.isEmpty = function () {
+	        return false;
+	    };
+	    TSSimpleTypeReference.prototype.getFunctor = function () {
+	        return null;
+	    };
+	    TSSimpleTypeReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSSimpleTypeReference.prototype.isFunctor = function () {
+	        return false;
+	    };
+	    TSSimpleTypeReference.prototype.union = function (q) {
+	        var _this = this;
+	        var flat = flattenUnionType(q);
+	        var gotThis = false;
+	        flat.filter(function (x) { return x instanceof TSSimpleTypeReference; }).map(function (x) { return x; }).forEach(function (x) { return gotThis = gotThis || (x.name == _this.name); });
+	        if (gotThis) {
+	            return q;
+	        }
+	        var r = new TSUnionTypeReference();
+	        r.addChild(this);
+	        flat.forEach(function (x) { return r.addChild(x); });
+	        return r;
+	    };
+	    TSSimpleTypeReference.prototype.serializeToString = function () {
+	        return this.name + this.genericStr();
+	    };
+	    TSSimpleTypeReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_SIMPLE_TYPE_REFERENCE;
+	    };
+	    return TSSimpleTypeReference;
+	})(TSModelElement);
+	exports.TSSimpleTypeReference = TSSimpleTypeReference;
+	var TSFunctionReference = (function (_super) {
+	    __extends(TSFunctionReference, _super);
+	    function TSFunctionReference(p) {
+	        var _this = this;
+	        _super.call(this, p);
+	        this.rangeType = new AnyType();
+	        this.parameters = [];
+	        this.array = function () { return false; };
+	        this.paramStr = function (appendDefault) {
+	            if (appendDefault === void 0) { appendDefault = false; }
+	            return '(' + _this.parameters.filter(function (x) { return !x.isEmpty(); }).map(function (p) { return p.serializeToString(appendDefault); }).join(', ') + ')';
+	        };
+	    }
+	    TSFunctionReference.prototype.isEmpty = function () {
+	        return false;
+	    };
+	    TSFunctionReference.prototype.getFunctor = function () {
+	        return null;
+	    };
+	    TSFunctionReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSFunctionReference.prototype.isFunctor = function () {
+	        return true;
+	    };
+	    TSFunctionReference.prototype.union = function (q) {
+	        var r = new TSUnionTypeReference();
+	        r.addChild(this);
+	        r.addChild(q);
+	        return r;
+	    };
+	    TSFunctionReference.prototype.serializeToString = function () {
+	        return this.paramStr() + '=>' + this.rangeType.serializeToString();
+	    };
+	    TSFunctionReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_FUNCTION_REFERENCE;
+	    };
+	    return TSFunctionReference;
+	})(TSModelElement);
+	exports.TSFunctionReference = TSFunctionReference;
+	var TSArrayReference = (function (_super) {
+	    __extends(TSArrayReference, _super);
+	    function TSArrayReference(componentType) {
+	        if (componentType === void 0) { componentType = new AnyType(); }
+	        _super.call(this, exports.Universe);
+	        this.array = function () { return true; };
+	        this.componentType = componentType;
+	    }
+	    TSArrayReference.prototype.isEmpty = function () {
+	        return this.componentType ? true : false;
+	    };
+	    TSArrayReference.prototype.getFunctor = function () {
+	        return this.componentType.getFunctor();
+	    };
+	    TSArrayReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSArrayReference.prototype.isFunctor = function () {
+	        return this.componentType.isFunctor();
+	    };
+	    TSArrayReference.prototype.union = function (q) {
+	        var r = new TSUnionTypeReference();
+	        r.addChild(this);
+	        r.addChild(q);
+	        return r;
+	    };
+	    TSArrayReference.prototype.serializeToString = function () {
+	        return this.componentType.serializeToString() + '[]';
+	    };
+	    TSArrayReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ARRAY_REFERENCE;
+	    };
+	    return TSArrayReference;
+	})(TSModelElement);
+	exports.TSArrayReference = TSArrayReference;
+	var TSDeclaredInterfaceReference = (function (_super) {
+	    __extends(TSDeclaredInterfaceReference, _super);
+	    function TSDeclaredInterfaceReference(p, tn, _data) {
+	        _super.call(this, p, tn);
+	        this._data = _data;
+	    }
+	    TSDeclaredInterfaceReference.prototype.isEmpty = function () {
+	        return false;
+	    };
+	    TSDeclaredInterfaceReference.prototype.getFunctor = function () {
+	        return null;
+	    };
+	    TSDeclaredInterfaceReference.prototype.canBeOmmited = function () {
+	        return false;
+	    };
+	    TSDeclaredInterfaceReference.prototype.getOriginal = function () {
+	        return this._data;
+	    };
+	    TSDeclaredInterfaceReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_DECLARED_INTERFACE_REFERENCE;
+	    };
+	    return TSDeclaredInterfaceReference;
+	})(TSSimpleTypeReference);
+	exports.TSDeclaredInterfaceReference = TSDeclaredInterfaceReference;
+	var TSAnnotationReference = (function (_super) {
+	    __extends(TSAnnotationReference, _super);
+	    function TSAnnotationReference(p, tn, values) {
+	        if (values === void 0) { values = {}; }
+	        _super.call(this, p, tn);
+	        this.values = values;
+	    }
+	    TSAnnotationReference.prototype.value = function (key) {
+	        if (key === void 0) { key = 'value'; }
+	        return this.values[key];
+	    };
+	    return TSAnnotationReference;
+	})(TSSimpleTypeReference);
+	exports.TSAnnotationReference = TSAnnotationReference;
+	var TSDeclaredAnnotationReference = (function (_super) {
+	    __extends(TSDeclaredAnnotationReference, _super);
+	    function TSDeclaredAnnotationReference() {
+	        _super.apply(this, arguments);
+	        this.values = {};
+	    }
+	    TSDeclaredAnnotationReference.prototype.value = function (key) {
+	        if (key === void 0) { key = 'value'; }
+	        return this.values[key];
+	    };
+	    return TSDeclaredAnnotationReference;
+	})(TSDeclaredInterfaceReference);
+	exports.TSDeclaredAnnotationReference = TSDeclaredAnnotationReference;
+	var AnyType = (function (_super) {
+	    __extends(AnyType, _super);
+	    function AnyType(nm) {
+	        if (nm === void 0) { nm = "any"; }
+	        _super.call(this, exports.Universe, nm);
+	    }
+	    AnyType.prototype.union = function (q) {
+	        return q;
+	    };
+	    AnyType.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ANY_TYPE_REFERENCE;
+	    };
+	    return AnyType;
+	})(TSSimpleTypeReference);
+	exports.AnyType = AnyType;
+	var TSStructuralTypeReference = (function (_super) {
+	    __extends(TSStructuralTypeReference, _super);
+	    function TSStructuralTypeReference(parent) {
+	        var _this = this;
+	        if (parent === void 0) { parent = exports.Universe; }
+	        _super.call(this, parent);
+	        this.array = function () { return false; };
+	        this.canBeOmmited = function () { return _this.locked ? false : _this.children().every(function (x) { return x.optional; }); };
+	    }
+	    TSStructuralTypeReference.prototype.visitReturnType = function (v) {
+	        //v.visitStructuralReturn(this);
+	        this.visit(v);
+	    };
+	    TSStructuralTypeReference.prototype.toReference = function () {
+	        return this;
+	    };
+	    TSStructuralTypeReference.prototype.union = function (q) {
+	        var r = new TSUnionTypeReference();
+	        r.addChild(this);
+	        r.addChild(q);
+	        return r;
+	    };
+	    TSStructuralTypeReference.prototype.serializeToString = function () {
+	        var body = this.children().map(function (x) { return ("\n" + x.serializeToString() + "\n"); }).join('');
+	        return "{" + body + "}";
+	    };
+	    TSStructuralTypeReference.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_STRUCTURAL_TYPE_REFERENCE;
+	    };
+	    return TSStructuralTypeReference;
+	})(TSTypeDeclaration);
+	exports.TSStructuralTypeReference = TSStructuralTypeReference;
+	(function (ParamLocation) {
+	    ParamLocation[ParamLocation["URI"] = 0] = "URI";
+	    ParamLocation[ParamLocation["BODY"] = 1] = "BODY";
+	    ParamLocation[ParamLocation["OPTIONS"] = 2] = "OPTIONS";
+	    ParamLocation[ParamLocation["OTHER"] = 3] = "OTHER";
+	})(exports.ParamLocation || (exports.ParamLocation = {}));
+	var ParamLocation = exports.ParamLocation;
+	var Param = (function (_super) {
+	    __extends(Param, _super);
+	    function Param(p, nm, location, tp, defaultValue) {
+	        if (tp === void 0) { tp = new TSSimpleTypeReference(exports.Universe, "string"); }
+	        _super.call(this, p);
+	        this.name = nm;
+	        this.ptype = tp;
+	        this.location = location;
+	        this.defaultValue = defaultValue;
+	    }
+	    Param.prototype.isEmpty = function () {
+	        return this.ptype.isEmpty();
+	    };
+	    Param.prototype.serializeToString = function (appendDefault) {
+	        if (appendDefault === void 0) { appendDefault = false; }
+	        //return this.name + (this.optional ? "?" : "") + ":" + this.ptype.serializeToString() + (this.ptype.canBeOmmited() ? "?" : "");
+	        return this.name + (this.optional || (this.defaultValue && !appendDefault) ? "?" : "") + (":" + this.ptype.serializeToString() + (this.ptype.canBeOmmited() ? "?" : "")) + (appendDefault && this.defaultValue ? '=' + JSON.stringify(this.defaultValue) : '');
+	    };
+	    Param.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_PARAM;
+	    };
+	    return Param;
+	})(TSModelElement);
+	exports.Param = Param;
+	var StringValue = (function (_super) {
+	    __extends(StringValue, _super);
+	    function StringValue(_value) {
+	        _super.call(this);
+	        this._value = _value;
+	    }
+	    StringValue.prototype.value = function () {
+	        return this._value;
+	    };
+	    StringValue.prototype.serializeToString = function () {
+	        return "\"" + this._value + "\"";
+	    };
+	    StringValue.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_STRING_VALUE;
+	    };
+	    return StringValue;
+	})(TSMember);
+	exports.StringValue = StringValue;
+	var ArrayValue = (function (_super) {
+	    __extends(ArrayValue, _super);
+	    function ArrayValue(_values) {
+	        _super.call(this);
+	        this._values = _values;
+	    }
+	    ArrayValue.prototype.value = function () {
+	        return this.serializeToString();
+	    };
+	    ArrayValue.prototype.serializeToString = function () {
+	        return "[ " + this._values.map(function (x) { return x.value(); }).join(', ') + " ]";
+	    };
+	    ArrayValue.prototype.values = function () {
+	        return this._values;
+	    };
+	    ArrayValue.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_ARRAY_VALUE;
+	    };
+	    return ArrayValue;
+	})(TSMember);
+	exports.ArrayValue = ArrayValue;
+	var TSAPIElementDeclaration = (function (_super) {
+	    __extends(TSAPIElementDeclaration, _super);
+	    function TSAPIElementDeclaration(p, name) {
+	        var _this = this;
+	        _super.call(this, p);
+	        this.rangeType = new AnyType();
+	        this.value = null;
+	        this.paramStr = function (appendDefault) {
+	            if (appendDefault === void 0) { appendDefault = false; }
+	            return '( ' + _this.parameters.filter(function (x) { return !x.isEmpty(); }).map(function (p) { return _this.serializeParam(p, appendDefault); }).join(',') + ' )';
+	        };
+	        this.serializeParam = function (p, appendDefault) { return p.serializeToString(appendDefault); };
+	        this.isFunction = function () { return _this.parameters.length != 0 || _this.isFunc; };
+	        this.isAnonymousFunction = function () { return _this.isFunction() && _this.name === ''; };
+	        this.returnStr = function () { return _this.rangeType ? ':' + _this.rangeType.serializeToString() : ''; };
+	        this.name = name;
+	        this.parameters = [];
+	        this.rangeType = null;
+	        this.optional = false;
+	    }
+	    TSAPIElementDeclaration.prototype.visit = function (v) {
+	        if (v.startVisitElement(this)) {
+	            if (this.rangeType) {
+	                if (this.rangeType instanceof TSStructuralTypeReference && !this.isInterfaceMethodWithBody()) {
+	                    this.rangeType.visitReturnType(v);
+	                }
+	            }
+	            v.endVisitElement(this);
+	        }
+	    };
+	    TSAPIElementDeclaration.prototype.commentCode = function () {
+	        return "\n        /**\n         *\n         **/\n         //" + this.name + "\n         ";
+	    };
+	    TSAPIElementDeclaration.prototype.serializeToString = function () {
+	        var x = (this.isPrivate ? 'private ' : '') + this.escapeDot(this.name) + (this.optional ? "?" : "") + (this.isFunction() ? this.paramStr() : "") + this.returnStr();
+	        if (this.value) {
+	            x += '=' + this.value.value();
+	        }
+	        return this.commentCode() + x + (this.isFunction() && this.isInterfaceMethodWithBody() ? '' : this.body());
+	    };
+	    TSAPIElementDeclaration.prototype.body = function () {
+	        if (this._body == null)
+	            return "";
+	        return "{" + this._body + "}";
+	    };
+	    TSAPIElementDeclaration.prototype.escapeDot = function (name) {
+	        return tsutil.escapeTypescriptPropertyName(name);
+	    };
+	    TSAPIElementDeclaration.prototype.isInterfaceMethodWithBody = function () {
+	        return false;
+	    };
+	    TSAPIElementDeclaration.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_API_ELEMENT_DECLARATION;
+	    };
+	    return TSAPIElementDeclaration;
+	})(TSMember);
+	exports.TSAPIElementDeclaration = TSAPIElementDeclaration;
+	var TSConstructor = (function (_super) {
+	    __extends(TSConstructor, _super);
+	    function TSConstructor(p) {
+	        _super.call(this, p, 'constructor');
+	        this.serializeParam = function (p, appendDefault) { return 'protected ' + p.serializeToString(appendDefault); };
+	    }
+	    TSConstructor.prototype.modelClass = function () {
+	        return exports.MODEL_CLASS_CONSTRUCTOR;
+	    };
+	    return TSConstructor;
+	})(TSAPIElementDeclaration);
+	exports.TSConstructor = TSConstructor;
+	function flattenUnionType(ref) {
+	    var _this = this;
+	    if (!(ref instanceof TSUnionTypeReference)) {
+	        return [ref];
+	    }
+	    var map = {};
+	    var arr = [];
+	    ref.children().forEach(function (x) { return _this.flattenUnionType(x).forEach(function (y) {
+	        if (y instanceof TSSimpleTypeReference) {
+	            var st = y;
+	            var name = st.name;
+	            map[name] = st;
+	        }
+	        else {
+	            arr.push(y);
+	        }
+	    }); });
+	    return arr.concat(_.sortBy(Object.keys(map).map(function (x) { return map[x]; }), 'name'));
+	}
+	//# sourceMappingURL=TSDeclModel.js.map
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var ts = __webpack_require__(42);
+	// https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
+	function escapeTypescriptPropertyName(str) {
+	    return isValidTypescriptIdentifier(str) ? str : JSON.stringify(str);
+	}
+	exports.escapeTypescriptPropertyName = escapeTypescriptPropertyName;
+	// TODO: these are made up lists. check the grammar
+	var tsKeywords = 'type class interface break case catch continue debugger default delete do else finally for function if in instanceof new return switch this throw try typeof var void while with'.split(' ');
+	var digitCodesL = "0".charCodeAt(0);
+	var digitCodesR = "9".charCodeAt(0);
+	var lowerCaseCodesL = "a".charCodeAt(0);
+	var lowerCaseCodesR = "z".charCodeAt(0);
+	var upperCaseCodesL = "A".charCodeAt(0);
+	var upperCaseCodesR = "Z".charCodeAt(0);
+	var digitChars = {}; //:boolean[] = []
+	var validChars = {}; //:boolean[] = []
+	for (var i = digitCodesL, end = digitCodesR; i <= end; i++) {
+	    digitChars[String.fromCharCode(i)] = true;
+	    validChars[String.fromCharCode(i)] = true;
+	}
+	for (var i = lowerCaseCodesL, end = lowerCaseCodesR; i <= end; i++) {
+	    validChars[String.fromCharCode(i)] = true;
+	}
+	for (var i = upperCaseCodesL, end = upperCaseCodesR; i <= end; i++) {
+	    validChars[String.fromCharCode(i)] = true;
+	}
+	"_ $".split(" ").forEach(function (x) { return validChars[x] = true; });
+	function isValidTypescriptIdentifier(str) {
+	    str = str.trim();
+	    if (str.length == 0) {
+	        return false;
+	    }
+	    if (tsKeywords.indexOf(str) >= 0) {
+	        return false;
+	    }
+	    if (digitChars[str.charAt(0)]) {
+	        return false;
+	    }
+	    for (var i = 0; i < str.length; i++) {
+	        if (!validChars[str.charAt(i)]) {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+	exports.isValidTypescriptIdentifier = isValidTypescriptIdentifier;
+	function escapeToIdentifier(str) {
+	    str = str.trim();
+	    var result = '';
+	    if (str.length > 0 && digitChars[str.charAt(0)]) {
+	        result += '_';
+	    }
+	    for (var i = 0; i < str.length; i++) {
+	        var ch = str.charAt(i);
+	        if (validChars[ch]) {
+	            result += ch;
+	        }
+	        else {
+	            result += '_';
+	        }
+	    }
+	    return result;
+	}
+	exports.escapeToIdentifier = escapeToIdentifier;
+	// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently
+	//       exposed in the public typescript.d.ts. The typings should be exposed in the next release.
+	function format(text) {
+	    var options = getDefaultOptions();
+	    // Parse the source text
+	    var sourceFile = ts.createSourceFile("file.ts", text, 2 /* Latest */, "0");
+	    fixupParentReferences(sourceFile);
+	    // Get the formatting edits on the input sources
+	    var edits = ts.formatting.formatDocument(sourceFile, getRuleProvider(options), options);
+	    // Apply the edits on the input code
+	    return applyEdits(text, edits);
+	    function getRuleProvider(options) {
+	        // Share this between multiple formatters using the same options.
+	        // This represents the bulk of the space the formatter uses.
+	        var ruleProvider = new ts.formatting.RulesProvider();
+	        ruleProvider.ensureUpToDate(options);
+	        return ruleProvider;
+	    }
+	    function applyEdits(text, edits) {
+	        // Apply edits in reverse on the existing text
+	        var result = text;
+	        for (var i = edits.length - 1; i >= 0; i--) {
+	            var change = edits[i];
+	            var head = result.slice(0, change.span.start());
+	            var tail = result.slice(change.span.start() + change.span.length());
+	            result = head + change.newText + tail;
+	        }
+	        return result;
+	    }
+	    function getDefaultOptions() {
+	        return {
+	            IndentSize: 4,
+	            TabSize: 4,
+	            NewLineCharacter: '\n',
+	            ConvertTabsToSpaces: true,
+	            InsertSpaceAfterCommaDelimiter: true,
+	            InsertSpaceAfterSemicolonInForStatements: true,
+	            InsertSpaceBeforeAndAfterBinaryOperators: true,
+	            InsertSpaceAfterKeywordsInControlFlowStatements: true,
+	            InsertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
+	            InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
+	            PlaceOpenBraceOnNewLineForFunctions: false,
+	            PlaceOpenBraceOnNewLineForControlBlocks: false
+	        };
+	    }
+	    function fixupParentReferences(sourceFile) {
+	        var parent = sourceFile;
+	        function walk(n) {
+	            n.parent = parent;
+	            var saveParent = parent;
+	            parent = n;
+	            ts.forEachChild(n, walk);
+	            parent = saveParent;
+	        }
+	        ts.forEachChild(sourceFile, walk);
+	    }
+	}
+	exports.format = format;
+	var typeMap = {
+	    'string': 'string',
+	    'integer': 'number',
+	    'number': 'number',
+	    'boolean': 'boolean',
+	    'file': 'string',
+	    'date': 'string',
+	    'NumberType': 'number'
+	};
+	function ramlType2TSType(ramlType) {
+	    var tsType = typeMap[ramlType];
+	    if (!tsType) {
+	        tsType = 'any';
+	    }
+	    return tsType;
+	}
+	exports.ramlType2TSType = ramlType2TSType;
+	function escapeToJavaIdentifier(str) {
+	    str = escapeToIdentifier(str);
+	    return exports.javaReservedWords[str] ? str + '_' : str;
+	}
+	exports.escapeToJavaIdentifier = escapeToJavaIdentifier;
+	exports.tsToJavaTypeMap = {
+	    'number': 'Double',
+	    'string': 'String',
+	    'boolean': 'Boolean',
+	    'any': 'Object'
+	};
+	exports.javaReservedWords = {
+	    "abstract": true,
+	    "continue": true,
+	    "for": true,
+	    "new": true,
+	    "switch": true,
+	    "assert": true,
+	    "default": true,
+	    "goto": true,
+	    "package": true,
+	    "synchronized": true,
+	    "boolean": true,
+	    "do": true,
+	    "if": true,
+	    "private": true,
+	    "this": true,
+	    "break": true,
+	    "double": true,
+	    "implements": true,
+	    "protected": true,
+	    "throw": true,
+	    "byte": true,
+	    "else": true,
+	    "import": true,
+	    "public": true,
+	    "throws": true,
+	    "case": true,
+	    "enum": true,
+	    "instanceof": true,
+	    "return": true,
+	    "transient": true,
+	    "catch": true,
+	    "extends": true,
+	    "int": true,
+	    "short": true,
+	    "try": true,
+	    "char": true,
+	    "final": true,
+	    "interface": true,
+	    "static": true,
+	    "void": true,
+	    "class": true,
+	    "finally": true,
+	    "long": true,
+	    "strictfp": true,
+	    "volatile": true,
+	    "const": true,
+	    "float": true,
+	    "native": true,
+	    "super": true,
+	    "while": true
+	};
+	//# sourceMappingURL=tsutil.js.map
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var def = __webpack_require__(21);
+	var td = __webpack_require__(22);
+	var util = __webpack_require__(20);
+	var parserCoreModuleVar = 'core';
+	var ParserGenerator = (function () {
+	    function ParserGenerator() {
+	        this.mod = new td.TSAPIModule();
+	        this.processed = {};
+	        this.typeMap = {
+	            'StringType': 'string',
+	            'NumberType': 'number',
+	            'BooleanType': 'boolean'
+	        };
+	    }
+	    ParserGenerator.prototype.processType = function (u, generateConstructor) {
+	        var _this = this;
+	        var typeName = u.name();
+	        if (this.processed[typeName]) {
+	            return;
+	        }
+	        this.processed[typeName] = u;
+	        u.superTypes().forEach(function (x) { return _this.processType(x, generateConstructor); });
+	        var idcl = new td.TSInterface(this.mod, typeName);
+	        var dcl = new td.TSClassDecl(this.mod, typeName + "Impl");
+	        if (generateConstructor) {
+	            var _constructor = new td.TSConstructor(dcl);
+	            _constructor.parameters = [
+	                new td.Param(_constructor, 'attr', 3 /* OTHER */, new td.TSSimpleTypeReference(td.Universe, 'hl.IAttribute'))
+	            ];
+	            if (u.isValueType()) {
+	                if (typeName == 'ValueType' || u.superTypes().length == 0) {
+	                    _constructor._body = '';
+	                }
+	                else {
+	                    _constructor._body = 'super(attr);';
+	                }
+	            }
+	            else {
+	                _constructor._body = 'super()';
+	            }
+	        }
+	        else {
+	            if (u instanceof def.NodeClass) {
+	                var _constructor = new td.TSConstructor(dcl);
+	                _constructor.parameters = [
+	                    new td.Param(_constructor, 'nodeOrKey', 3 /* OTHER */, new td.TSSimpleTypeReference(td.Universe, 'hl.IHighLevelNode|string'))
+	                ];
+	                _constructor._body = "super((typeof  nodeOrKey==\"string\")?create" + u.name() + "(<string>nodeOrKey):<hl.IHighLevelNode>nodeOrKey)";
+	            }
+	        }
+	        this.addImplementationMethod(dcl, 'wrapperClassName', 'string', "return \"" + typeName + "Impl\";");
+	        if (typeName == 'ValueType') {
+	            this.addInterfaceMethod(idcl, 'value', 'string');
+	            this.addImplementationMethod(dcl, 'value', 'string', 'return this.attr.value();');
+	            this.addInterfaceMethod(idcl, 'highLevel', 'hl.IAttribute');
+	            this.addImplementationMethod(dcl, 'highLevel', 'hl.IAttribute', 'return this.attr;');
+	        }
+	        else if (typeName == 'Reference') {
+	            this.addImplementationMethod(dcl, 'value', 'string', 'return <any>core.toStructuredValue(this.attr);');
+	        }
+	        dcl.implements.push(new td.TSSimpleTypeReference(td.Universe, idcl.name));
+	        u.superTypes().forEach(function (x) {
+	            idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, x.name()));
+	            dcl.extends.push(new td.TSSimpleTypeReference(td.Universe, x.name() + "Impl"));
+	        });
+	        u.properties().forEach(function (x) {
+	            _this.createMethodDecl(idcl, x);
+	            var z = _this.createMethodDecl(dcl, x);
+	            z._body = _this.generateBody(x);
+	            if (x.isPrimitive()) {
+	                _this.createSetterMethodDecl(dcl, x);
+	            }
+	        });
+	        if (dcl.extends.length == 0) {
+	            if (u.isValueType()) {
+	                idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "core.AbstractWrapperNode"));
+	            }
+	            else {
+	                idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "BasicNode"));
+	                dcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "BasicNodeImpl"));
+	            }
+	        }
+	        u.subTypes().forEach(function (x) { return _this.processType(x); });
+	    };
+	    ParserGenerator.prototype.addInterfaceMethod = function (idcl, methodName, returnTypeName) {
+	        var method = new td.TSAPIElementDeclaration(idcl, methodName);
+	        method.isFunc = true;
+	        method.rangeType = new td.TSSimpleTypeReference(method, returnTypeName);
+	        return method;
+	    };
+	    ParserGenerator.prototype.addImplementationMethod = function (dcl, methodName, returnTypeName, body) {
+	        var method = this.addInterfaceMethod(dcl, methodName, returnTypeName);
+	        method._body = body;
+	        return method;
+	    };
+	    ParserGenerator.prototype.generateBody = function (x) {
+	        var rangeType = x.range().name();
+	        if (x.isValueProperty()) {
+	            var args = [("'" + x.name() + "'")];
+	            if (x.isPrimitive()) {
+	                rangeType = this.typeMap[rangeType];
+	                args.push("this.to" + util.firstToUpper(rangeType));
+	            }
+	            else {
+	                args.push("(attr:hl.IAttribute)=>new " + rangeType + "Impl(attr)");
+	            }
+	            if (x.isMultiValue()) {
+	                return "\n             return <" + rangeType + "[]>super.attributes(" + args.join(', ') + ");\n         ";
+	            }
+	            else {
+	                return "\n             return <" + rangeType + ">super.attribute(" + args.join(', ') + ");\n         ";
+	            }
+	        }
+	        else {
+	            if (x.isMultiValue()) {
+	                return "\n             return <" + rangeType + "[]>super.elements('" + x.name() + "');\n         ";
+	            }
+	            else {
+	                return "\n             return <" + rangeType + ">super.element('" + x.name() + "');\n         ";
+	            }
+	        }
+	        //if (x.isValueProperty()){
+	        //
+	        //    var varInit:any;
+	        //    if(x.isPrimitive()){
+	        //        varInit = function(varStr:string,typeName:string){
+	        //            return varStr + '.value()';
+	        //        }
+	        //    }
+	        //    else{
+	        //        varInit = function(varStr:string,typeName:string){
+	        //            return 'new ' + typeName + 'Impl(' + varStr + ')';
+	        //        }
+	        //    }
+	        //    if(x.isMultiValue()) {
+	        //        return `var attrs = this._node.attributes('${x.name()}');
+	        //        if (attrs) {
+	        //            return attrs.map(x=>${varInit('x', x.range().name())});
+	        //        }
+	        //        return [];`;
+	        //    }
+	        //    else{
+	        //        return `var attr = this._node.attr('${x.name()}');
+	        //        if (attr) {
+	        //            var v = ${varInit('attr', x.range().name())};
+	        //            return v;
+	        //        }
+	        //        else {
+	        //            return null;
+	        //        }`;
+	        //    }
+	        //}
+	        //else{
+	        //    if (x.isMultiValue()){
+	        //        return `
+	        //        var elements = this._node.elementsOfKind('${x.name()}');
+	        //        if(elements) {
+	        //            return elements.map(x=><${x.range().name()}>x.wrapperNode());
+	        //        }
+	        //        else {
+	        //            return null;
+	        //        }
+	        //    `;
+	        //    }
+	        //    else{
+	        //        return `
+	        //        var v = this._node.element('${x.name()}');
+	        //        if(!v){
+	        //            return null;
+	        //        }
+	        //        return <${x.range().name()}>v.wrapperNode();
+	        //    `;
+	        //    }
+	        //}
+	    };
+	    ParserGenerator.prototype.createSetterMethodDecl = function (dcl, x) {
+	        var method = new td.TSAPIElementDeclaration(dcl, "set" + x.name()[0].toUpperCase() + x.name().substr(1));
+	        method.isFunc = true;
+	        var tname = "string";
+	        if (x.isPrimitive()) {
+	            tname = this.typeMap[x.range().name()];
+	        }
+	        else {
+	            tname = x.range().name();
+	            this.processType(x.range(), x.isValueProperty());
+	        }
+	        var ref = new td.TSSimpleTypeReference(td.Universe, tname);
+	        method.parameters = [
+	            new td.Param(method, 'param', 3 /* OTHER */, ref)
+	        ];
+	        method._body = "\n        {\n        this.highLevel().attrOrCreate(\"" + x.name() + "\").setValue(\"\"+param);\n        return this;\n        }\n        ";
+	        return method;
+	    };
+	    ParserGenerator.prototype.createMethodDecl = function (dcl, x) {
+	        var method = new td.TSAPIElementDeclaration(dcl, x.name());
+	        method.isFunc = true;
+	        var tname = "string";
+	        if (x.isPrimitive()) {
+	            tname = this.typeMap[x.range().name()];
+	        }
+	        else {
+	            tname = x.range().name();
+	            this.processType(x.range(), x.isValueProperty());
+	        }
+	        var ref = new td.TSSimpleTypeReference(td.Universe, tname);
+	        if (x.isMultiValue()) {
+	            var aRef = new td.TSArrayReference();
+	            aRef.componentType = ref;
+	            method.rangeType = aRef;
+	        }
+	        else {
+	            method.rangeType = ref;
+	        }
+	        return method;
+	    };
+	    ParserGenerator.prototype.serializeToString = function () {
+	        return "import hl=require(\"../highLevelAST\");\nimport hlImpl=require(\"../highLevelImpl\");\nimport jsyaml=require(\"../jsyaml/jsyaml2lowLevel\");\nimport def=require(\"../definitionSystem\");\nimport core=require(\"../parserCore\");\n\n\nexport interface BasicNode extends core.BasicSuperNode{\n\n    parent():BasicNode\n\n    highLevel():hl.IHighLevelNode\n}\n\nexport class BasicNodeImpl extends core.BasicSuperNodeImpl implements BasicNode{\n\n    constructor(node:hl.IHighLevelNode){\n        super(node);\n    }\n\n    wrapperClassName():string{\n        return 'BasicNodeImpl';\n    }\n\n    parent():BasicNode{\n        return <BasicNode>super.parent();\n    }\n}\n\n        " + this.mod.serializeToString() + this.createFunctions();
+	    };
+	    ParserGenerator.prototype.createFunctions = function () {
+	        var res = "";
+	        for (var p in this.processed) {
+	            var q = this.processed[p];
+	            if (q instanceof def.NodeClass) {
+	                res += "\nfunction create" + p + "(key:string){\n    var universe=hl.universeProvider(\"RAML10\");\n    var nc=<def.NodeClass>universe.getType(\"" + p + "\");\n    var node=nc.createStubNode(null,key);\n    return node;\n}\n";
+	            }
+	            ;
+	        }
+	        return res;
+	    };
+	    ParserGenerator.prototype.nodeFactory = function (highLevelASTLocation, parserLocation) {
+	        return "import RamlWrapper = require(\"" + parserLocation + "\");\nimport hl = require(\"" + highLevelASTLocation + "\")\n\nexport function buildWrapperNode(node:hl.IHighLevelNode){\n\n    var nodeClassName = node.definition().name();\n\n    var wrapperConstructor = classMap[nodeClassName];\n\n    if(!wrapperConstructor){\n        var m=node.definition().allSuperTypes();\n        var wr=null;\n        for (var i=0;i<m.length;i++){\n            var nm=m[i].name();\n            wrapperConstructor = classMap[nm];\n            if (nm==\"DataElement\"){\n                wr=nm;\n                //This is only case of nested hierarchy\n                continue;\n            }\n            if (nm==\"RAMLLanguageElement\"){\n                //depth first\n                continue;\n            }\n            if (wrapperConstructor){\n                break;\n            }\n        }\n        if (!wrapperConstructor){\n            wr=nm;\n        }\n    }\n    if (!wrapperConstructor){\n        wrapperConstructor = classMap[\"RAMLLanguageElement\"]\n\n    }\n    return wrapperConstructor(node);\n}\n\nvar classMap = {\n\n" + Object.keys(this.processed).sort().map(function (x) { return ("    \"" + x + "\": (x)=>{return new RamlWrapper." + x + "Impl(x)}"); }).join(',\n\n') + "\n\n};\n";
+	    };
+	    return ParserGenerator;
+	})();
+	function def2Parser(u) {
+	    var mod = new ParserGenerator();
+	    mod.processType(u);
+	    return mod;
+	}
+	exports.def2Parser = def2Parser;
+	var ImplementationGenerator = (function () {
+	    function ImplementationGenerator() {
+	    }
+	    ImplementationGenerator.prototype.generateASTAccessor = function (p) {
+	        this.generatedCode.push("var val=this.ast.getValue(" + p.name() + "}");
+	        this.generatedCode.push("return new " + p.range().name() + "Impl(val)");
+	    };
+	    return ImplementationGenerator;
+	})();
+	function checkIfReference(u) {
+	    if (u.name() == 'Reference') {
+	        return true;
+	    }
+	    var superTypes = u.superTypes();
+	    for (var i = 0; i < superTypes.length; i++) {
+	        var st = superTypes[i];
+	        if (checkIfReference(st)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	exports.checkIfReference = checkIfReference;
+	/**
+	 * Created by kor on 11/05/15.
+	 */
+	//# sourceMappingURL=wrappedParserGen.js.map
+
+/***/ },
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
@@ -15357,99 +16860,1106 @@
 	//# sourceMappingURL=lowLevelAST.js.map
 
 /***/ },
-/* 21 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	(function (Kind) {
-	    Kind[Kind["SCALAR"] = 0] = "SCALAR";
-	    Kind[Kind["MAPPING"] = 1] = "MAPPING";
-	    Kind[Kind["MAP"] = 2] = "MAP";
-	    Kind[Kind["SEQ"] = 3] = "SEQ";
-	    Kind[Kind["ANCHOR_REF"] = 4] = "ANCHOR_REF";
-	    Kind[Kind["INCLUDE_REF"] = 5] = "INCLUDE_REF";
-	})(exports.Kind || (exports.Kind = {}));
-	var Kind = exports.Kind;
-	function newMapping(key, value) {
-	    var end = (value ? value.endPosition : key.endPosition + 1); //FIXME.workaround, end should be defied by position of ':'
-	    //console.log('key: ' + key.value + ' ' + key.startPosition + '..' + key.endPosition + ' ' + value + ' end: ' + end);
-	    var node = {
-	        key: key,
-	        value: value,
-	        startPosition: key.startPosition,
-	        endPosition: end,
-	        kind: 1 /* MAPPING */,
-	        parent: null,
-	        errors: []
-	    };
-	    return node;
-	}
-	exports.newMapping = newMapping;
-	function newAnchorRef(key, start, end, value) {
-	    return {
-	        errors: [],
-	        referencesAnchor: key,
-	        value: value,
-	        startPosition: start,
-	        endPosition: end,
-	        kind: 4 /* ANCHOR_REF */,
-	        parent: null
+	'use strict';
+	var loader = __webpack_require__(57);
+	var dumper = __webpack_require__(27);
+	function deprecated(name) {
+	    return function () {
+	        throw new Error('Function ' + name + ' is deprecated and cannot be used.');
 	    };
 	}
-	exports.newAnchorRef = newAnchorRef;
-	function newScalar(v) {
-	    if (v === void 0) { v = ""; }
-	    return {
-	        errors: [],
-	        startPosition: -1,
-	        endPosition: -1,
-	        value: v,
-	        kind: 0 /* SCALAR */,
-	        parent: null,
-	        doubleQuoted: false
-	    };
-	}
-	exports.newScalar = newScalar;
-	function newItems() {
-	    return {
-	        errors: [],
-	        startPosition: -1,
-	        endPosition: -1,
-	        items: [],
-	        kind: 3 /* SEQ */,
-	        parent: null
-	    };
-	}
-	exports.newItems = newItems;
-	function newSeq() {
-	    return newItems();
-	}
-	exports.newSeq = newSeq;
-	function newMap(mappings) {
-	    return {
-	        errors: [],
-	        startPosition: -1,
-	        endPosition: -1,
-	        mappings: mappings ? mappings : [],
-	        kind: 2 /* MAP */,
-	        parent: null
-	    };
-	}
-	exports.newMap = newMap;
-	//# sourceMappingURL=yamlAST.js.map
+	exports.Type = __webpack_require__(58);
+	exports.Schema = __webpack_require__(59);
+	exports.FAILSAFE_SCHEMA = __webpack_require__(60);
+	exports.JSON_SCHEMA = __webpack_require__(61);
+	exports.CORE_SCHEMA = __webpack_require__(62);
+	exports.DEFAULT_SAFE_SCHEMA = __webpack_require__(63);
+	exports.DEFAULT_FULL_SCHEMA = __webpack_require__(64);
+	exports.load = loader.load;
+	exports.loadAll = loader.loadAll;
+	exports.safeLoad = loader.safeLoad;
+	exports.safeLoadAll = loader.safeLoadAll;
+	exports.dump = dumper.dump;
+	exports.safeDump = dumper.safeDump;
+	exports.YAMLException = __webpack_require__(28);
+	// Deprecared schema names from JS-YAML 2.0.x
+	exports.MINIMAL_SCHEMA = __webpack_require__(60);
+	exports.SAFE_SCHEMA = __webpack_require__(63);
+	exports.DEFAULT_SCHEMA = __webpack_require__(64);
+	// Deprecated functions from JS-YAML 1.x.x
+	exports.scan = deprecated('scan');
+	exports.parse = deprecated('parse');
+	exports.compose = deprecated('compose');
+	exports.addConstructor = deprecated('addConstructor');
+	//# sourceMappingURL=js-yaml.js.map
 
 /***/ },
-/* 22 */
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../typings/tsd.d.ts" />
+	'use strict';
+	/*eslint-disable no-use-before-define*/
+	var common = __webpack_require__(65);
+	var YAMLException = __webpack_require__(28);
+	var DEFAULT_FULL_SCHEMA = __webpack_require__(64);
+	var DEFAULT_SAFE_SCHEMA = __webpack_require__(63);
+	var _toString = Object.prototype.toString;
+	var _hasOwnProperty = Object.prototype.hasOwnProperty;
+	var CHAR_TAB = 0x09; /* Tab */
+	var CHAR_LINE_FEED = 0x0A; /* LF */
+	var CHAR_CARRIAGE_RETURN = 0x0D; /* CR */
+	var CHAR_SPACE = 0x20; /* Space */
+	var CHAR_EXCLAMATION = 0x21; /* ! */
+	var CHAR_DOUBLE_QUOTE = 0x22; /* " */
+	var CHAR_SHARP = 0x23; /* # */
+	var CHAR_PERCENT = 0x25; /* % */
+	var CHAR_AMPERSAND = 0x26; /* & */
+	var CHAR_SINGLE_QUOTE = 0x27; /* ' */
+	var CHAR_ASTERISK = 0x2A; /* * */
+	var CHAR_COMMA = 0x2C; /* , */
+	var CHAR_MINUS = 0x2D; /* - */
+	var CHAR_COLON = 0x3A; /* : */
+	var CHAR_GREATER_THAN = 0x3E; /* > */
+	var CHAR_QUESTION = 0x3F; /* ? */
+	var CHAR_COMMERCIAL_AT = 0x40; /* @ */
+	var CHAR_LEFT_SQUARE_BRACKET = 0x5B; /* [ */
+	var CHAR_RIGHT_SQUARE_BRACKET = 0x5D; /* ] */
+	var CHAR_GRAVE_ACCENT = 0x60; /* ` */
+	var CHAR_LEFT_CURLY_BRACKET = 0x7B; /* { */
+	var CHAR_VERTICAL_LINE = 0x7C; /* | */
+	var CHAR_RIGHT_CURLY_BRACKET = 0x7D; /* } */
+	var ESCAPE_SEQUENCES = {};
+	ESCAPE_SEQUENCES[0x00] = '\\0';
+	ESCAPE_SEQUENCES[0x07] = '\\a';
+	ESCAPE_SEQUENCES[0x08] = '\\b';
+	ESCAPE_SEQUENCES[0x09] = '\\t';
+	ESCAPE_SEQUENCES[0x0A] = '\\n';
+	ESCAPE_SEQUENCES[0x0B] = '\\v';
+	ESCAPE_SEQUENCES[0x0C] = '\\f';
+	ESCAPE_SEQUENCES[0x0D] = '\\r';
+	ESCAPE_SEQUENCES[0x1B] = '\\e';
+	ESCAPE_SEQUENCES[0x22] = '\\"';
+	ESCAPE_SEQUENCES[0x5C] = '\\\\';
+	ESCAPE_SEQUENCES[0x85] = '\\N';
+	ESCAPE_SEQUENCES[0xA0] = '\\_';
+	ESCAPE_SEQUENCES[0x2028] = '\\L';
+	ESCAPE_SEQUENCES[0x2029] = '\\P';
+	var DEPRECATED_BOOLEANS_SYNTAX = [
+	    'y',
+	    'Y',
+	    'yes',
+	    'Yes',
+	    'YES',
+	    'on',
+	    'On',
+	    'ON',
+	    'n',
+	    'N',
+	    'no',
+	    'No',
+	    'NO',
+	    'off',
+	    'Off',
+	    'OFF'
+	];
+	function compileStyleMap(schema, map) {
+	    var result, keys, index, length, tag, style, type;
+	    if (null === map) {
+	        return {};
+	    }
+	    result = {};
+	    keys = Object.keys(map);
+	    for (index = 0, length = keys.length; index < length; index += 1) {
+	        tag = keys[index];
+	        style = String(map[tag]);
+	        if ('!!' === tag.slice(0, 2)) {
+	            tag = 'tag:yaml.org,2002:' + tag.slice(2);
+	        }
+	        type = schema.compiledTypeMap[tag];
+	        if (type && _hasOwnProperty.call(type.styleAliases, style)) {
+	            style = type.styleAliases[style];
+	        }
+	        result[tag] = style;
+	    }
+	    return result;
+	}
+	function encodeHex(character) {
+	    var string, handle, length;
+	    string = character.toString(16).toUpperCase();
+	    if (character <= 0xFF) {
+	        handle = 'x';
+	        length = 2;
+	    }
+	    else if (character <= 0xFFFF) {
+	        handle = 'u';
+	        length = 4;
+	    }
+	    else if (character <= 0xFFFFFFFF) {
+	        handle = 'U';
+	        length = 8;
+	    }
+	    else {
+	        throw new YAMLException('code point within a string may not be greater than 0xFFFFFFFF');
+	    }
+	    return '\\' + handle + common.repeat('0', length - string.length) + string;
+	}
+	function State(options) {
+	    this.schema = options['schema'] || DEFAULT_FULL_SCHEMA;
+	    this.indent = Math.max(1, (options['indent'] || 2));
+	    this.skipInvalid = options['skipInvalid'] || false;
+	    this.flowLevel = (common.isNothing(options['flowLevel']) ? -1 : options['flowLevel']);
+	    this.styleMap = compileStyleMap(this.schema, options['styles'] || null);
+	    this.implicitTypes = this.schema.compiledImplicit;
+	    this.explicitTypes = this.schema.compiledExplicit;
+	    this.tag = null;
+	    this.result = '';
+	    this.duplicates = [];
+	    this.usedDuplicates = null;
+	}
+	function indentString(string, spaces) {
+	    var ind = common.repeat(' ', spaces), position = 0, next = -1, result = '', line, length = string.length;
+	    while (position < length) {
+	        next = string.indexOf('\n', position);
+	        if (next === -1) {
+	            line = string.slice(position);
+	            position = length;
+	        }
+	        else {
+	            line = string.slice(position, next + 1);
+	            position = next + 1;
+	        }
+	        if (line.length && line !== '\n') {
+	            result += ind;
+	        }
+	        result += line;
+	    }
+	    return result;
+	}
+	function generateNextLine(state, level) {
+	    return '\n' + common.repeat(' ', state.indent * level);
+	}
+	function testImplicitResolving(state, str) {
+	    var index, length, type;
+	    for (index = 0, length = state.implicitTypes.length; index < length; index += 1) {
+	        type = state.implicitTypes[index];
+	        if (type.resolve(str)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	function StringBuilder(source) {
+	    this.source = source;
+	    this.result = '';
+	    this.checkpoint = 0;
+	}
+	StringBuilder.prototype.takeUpTo = function (position) {
+	    var er;
+	    if (position < this.checkpoint) {
+	        er = new Error('position should be > checkpoint');
+	        er.position = position;
+	        er.checkpoint = this.checkpoint;
+	        throw er;
+	    }
+	    this.result += this.source.slice(this.checkpoint, position);
+	    this.checkpoint = position;
+	    return this;
+	};
+	StringBuilder.prototype.escapeChar = function () {
+	    var character, esc;
+	    character = this.source.charCodeAt(this.checkpoint);
+	    esc = ESCAPE_SEQUENCES[character] || encodeHex(character);
+	    this.result += esc;
+	    this.checkpoint += 1;
+	    return this;
+	};
+	StringBuilder.prototype.finish = function () {
+	    if (this.source.length > this.checkpoint) {
+	        this.takeUpTo(this.source.length);
+	    }
+	};
+	function writeScalar(state, object, level) {
+	    var simple, first, spaceWrap, folded, literal, single, double, sawLineFeed, linePosition, longestLine, indent, max, character, position, escapeSeq, hexEsc, previous, lineLength, modifier, trailingLineBreaks, result;
+	    if (0 === object.length) {
+	        state.dump = "''";
+	        return;
+	    }
+	    if (object.indexOf("!include") == 0) {
+	        state.dump = "" + object; //FIXME
+	        return;
+	    }
+	    if (object.indexOf("!$$$novalue") == 0) {
+	        state.dump = ""; //FIXME
+	        return;
+	    }
+	    if (-1 !== DEPRECATED_BOOLEANS_SYNTAX.indexOf(object)) {
+	        state.dump = "'" + object + "'";
+	        return;
+	    }
+	    simple = true;
+	    first = object.length ? object.charCodeAt(0) : 0;
+	    spaceWrap = (CHAR_SPACE === first || CHAR_SPACE === object.charCodeAt(object.length - 1));
+	    // Simplified check for restricted first characters
+	    // http://www.yaml.org/spec/1.2/spec.html#ns-plain-first%28c%29
+	    if (CHAR_MINUS === first || CHAR_QUESTION === first || CHAR_COMMERCIAL_AT === first || CHAR_GRAVE_ACCENT === first) {
+	        simple = false;
+	    }
+	    // can only use > and | if not wrapped in spaces.
+	    if (spaceWrap) {
+	        simple = false;
+	        folded = false;
+	        literal = false;
+	    }
+	    else {
+	        folded = true;
+	        literal = true;
+	    }
+	    single = true;
+	    double = new StringBuilder(object);
+	    sawLineFeed = false;
+	    linePosition = 0;
+	    longestLine = 0;
+	    indent = state.indent * level;
+	    max = 80;
+	    if (indent < 40) {
+	        max -= indent;
+	    }
+	    else {
+	        max = 40;
+	    }
+	    for (position = 0; position < object.length; position++) {
+	        character = object.charCodeAt(position);
+	        if (simple) {
+	            // Characters that can never appear in the simple scalar
+	            if (!simpleChar(character)) {
+	                simple = false;
+	            }
+	            else {
+	                continue;
+	            }
+	        }
+	        if (single && character === CHAR_SINGLE_QUOTE) {
+	            single = false;
+	        }
+	        escapeSeq = ESCAPE_SEQUENCES[character];
+	        hexEsc = needsHexEscape(character);
+	        if (!escapeSeq && !hexEsc) {
+	            continue;
+	        }
+	        if (character !== CHAR_LINE_FEED && character !== CHAR_DOUBLE_QUOTE && character !== CHAR_SINGLE_QUOTE) {
+	            folded = false;
+	            literal = false;
+	        }
+	        else if (character === CHAR_LINE_FEED) {
+	            sawLineFeed = true;
+	            single = false;
+	            if (position > 0) {
+	                previous = object.charCodeAt(position - 1);
+	                if (previous === CHAR_SPACE) {
+	                    literal = false;
+	                    folded = false;
+	                }
+	            }
+	            if (folded) {
+	                lineLength = position - linePosition;
+	                linePosition = position;
+	                if (lineLength > longestLine) {
+	                    longestLine = lineLength;
+	                }
+	            }
+	        }
+	        if (character !== CHAR_DOUBLE_QUOTE) {
+	            single = false;
+	        }
+	        double.takeUpTo(position);
+	        double.escapeChar();
+	    }
+	    if (simple && testImplicitResolving(state, object)) {
+	        simple = false;
+	    }
+	    modifier = '';
+	    if (folded || literal) {
+	        trailingLineBreaks = 0;
+	        if (object.charCodeAt(object.length - 1) === CHAR_LINE_FEED) {
+	            trailingLineBreaks += 1;
+	            if (object.charCodeAt(object.length - 2) === CHAR_LINE_FEED) {
+	                trailingLineBreaks += 1;
+	            }
+	        }
+	        if (trailingLineBreaks === 0) {
+	            modifier = '-';
+	        }
+	        else if (trailingLineBreaks === 2) {
+	            modifier = '+';
+	        }
+	    }
+	    if (literal && longestLine < max) {
+	        folded = false;
+	    }
+	    // If it's literally one line, then don't bother with the literal.
+	    // We may still want to do a fold, though, if it's a super long line.
+	    if (!sawLineFeed) {
+	        literal = false;
+	    }
+	    if (simple) {
+	        state.dump = object;
+	    }
+	    else if (single) {
+	        state.dump = '\'' + object + '\'';
+	    }
+	    else if (folded) {
+	        result = fold(object, max);
+	        state.dump = '>' + modifier + '\n' + indentString(result, indent);
+	    }
+	    else if (literal) {
+	        if (!modifier) {
+	            object = object.replace(/\n$/, '');
+	        }
+	        state.dump = '|' + modifier + '\n' + indentString(object, indent);
+	    }
+	    else if (double) {
+	        double.finish();
+	        state.dump = '"' + double.result + '"';
+	    }
+	    else {
+	        throw new Error('Failed to dump scalar value');
+	    }
+	    return;
+	}
+	// The `trailing` var is a regexp match of any trailing `\n` characters.
+	//
+	// There are three cases we care about:
+	//
+	// 1. One trailing `\n` on the string.  Just use `|` or `>`.
+	//    This is the assumed default. (trailing = null)
+	// 2. No trailing `\n` on the string.  Use `|-` or `>-` to "chomp" the end.
+	// 3. More than one trailing `\n` on the string.  Use `|+` or `>+`.
+	//
+	// In the case of `>+`, these line breaks are *not* doubled (like the line
+	// breaks within the string), so it's important to only end with the exact
+	// same number as we started.
+	function fold(object, max) {
+	    var result = '', position = 0, length = object.length, trailing = /\n+$/.exec(object), newLine;
+	    if (trailing) {
+	        length = trailing.index + 1;
+	    }
+	    while (position < length) {
+	        newLine = object.indexOf('\n', position);
+	        if (newLine > length || newLine === -1) {
+	            if (result) {
+	                result += '\n\n';
+	            }
+	            result += foldLine(object.slice(position, length), max);
+	            position = length;
+	        }
+	        else {
+	            if (result) {
+	                result += '\n\n';
+	            }
+	            result += foldLine(object.slice(position, newLine), max);
+	            position = newLine + 1;
+	        }
+	    }
+	    if (trailing && trailing[0] !== '\n') {
+	        result += trailing[0];
+	    }
+	    return result;
+	}
+	function foldLine(line, max) {
+	    if (line === '') {
+	        return line;
+	    }
+	    var foldRe = /[^\s] [^\s]/g, result = '', prevMatch = 0, foldStart = 0, match = foldRe.exec(line), index, foldEnd, folded;
+	    while (match) {
+	        index = match.index;
+	        // when we cross the max len, if the previous match would've
+	        // been ok, use that one, and carry on.  If there was no previous
+	        // match on this fold section, then just have a long line.
+	        if (index - foldStart > max) {
+	            if (prevMatch !== foldStart) {
+	                foldEnd = prevMatch;
+	            }
+	            else {
+	                foldEnd = index;
+	            }
+	            if (result) {
+	                result += '\n';
+	            }
+	            folded = line.slice(foldStart, foldEnd);
+	            result += folded;
+	            foldStart = foldEnd + 1;
+	        }
+	        prevMatch = index + 1;
+	        match = foldRe.exec(line);
+	    }
+	    if (result) {
+	        result += '\n';
+	    }
+	    // if we end up with one last word at the end, then the last bit might
+	    // be slightly bigger than we wanted, because we exited out of the loop.
+	    if (foldStart !== prevMatch && line.length - foldStart > max) {
+	        result += line.slice(foldStart, prevMatch) + '\n' + line.slice(prevMatch + 1);
+	    }
+	    else {
+	        result += line.slice(foldStart);
+	    }
+	    return result;
+	}
+	// Returns true if character can be found in a simple scalar
+	function simpleChar(character) {
+	    return CHAR_TAB !== character && CHAR_LINE_FEED !== character && CHAR_CARRIAGE_RETURN !== character && CHAR_COMMA !== character && CHAR_LEFT_SQUARE_BRACKET !== character && CHAR_RIGHT_SQUARE_BRACKET !== character && CHAR_LEFT_CURLY_BRACKET !== character && CHAR_RIGHT_CURLY_BRACKET !== character && CHAR_SHARP !== character && CHAR_AMPERSAND !== character && CHAR_ASTERISK !== character && CHAR_EXCLAMATION !== character && CHAR_VERTICAL_LINE !== character && CHAR_GREATER_THAN !== character && CHAR_SINGLE_QUOTE !== character && CHAR_DOUBLE_QUOTE !== character && CHAR_PERCENT !== character && CHAR_COLON !== character && !ESCAPE_SEQUENCES[character] && !needsHexEscape(character);
+	}
+	// Returns true if the character code needs to be escaped.
+	function needsHexEscape(character) {
+	    return !((0x00020 <= character && character <= 0x00007E) || (0x00085 === character) || (0x000A0 <= character && character <= 0x00D7FF) || (0x0E000 <= character && character <= 0x00FFFD) || (0x10000 <= character && character <= 0x10FFFF));
+	}
+	function writeFlowSequence(state, level, object) {
+	    var _result = '', _tag = state.tag, index, length;
+	    for (index = 0, length = object.length; index < length; index += 1) {
+	        // Write only valid elements.
+	        if (writeNode(state, level, object[index], false, false)) {
+	            if (0 !== index) {
+	                _result += ', ';
+	            }
+	            _result += state.dump;
+	        }
+	    }
+	    state.tag = _tag;
+	    state.dump = '[' + _result + ']';
+	}
+	function writeBlockSequence(state, level, object, compact) {
+	    var _result = '', _tag = state.tag, index, length;
+	    for (index = 0, length = object.length; index < length; index += 1) {
+	        // Write only valid elements.
+	        if (writeNode(state, level + 1, object[index], true, true)) {
+	            if (!compact || 0 !== index) {
+	                _result += generateNextLine(state, level);
+	            }
+	            _result += '- ' + state.dump;
+	        }
+	    }
+	    state.tag = _tag;
+	    state.dump = _result || '[]'; // Empty sequence if no valid values.
+	}
+	function writeFlowMapping(state, level, object) {
+	    var _result = '', _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, pairBuffer;
+	    for (index = 0, length = objectKeyList.length; index < length; index += 1) {
+	        pairBuffer = '';
+	        if (0 !== index) {
+	            pairBuffer += ', ';
+	        }
+	        objectKey = objectKeyList[index];
+	        objectValue = object[objectKey];
+	        if (!writeNode(state, level, objectKey, false, false)) {
+	            continue;
+	        }
+	        if (state.dump.length > 1024) {
+	            pairBuffer += '? ';
+	        }
+	        pairBuffer += state.dump + ': ';
+	        if (!writeNode(state, level, objectValue, false, false)) {
+	            continue;
+	        }
+	        pairBuffer += state.dump;
+	        // Both key and value are valid.
+	        _result += pairBuffer;
+	    }
+	    state.tag = _tag;
+	    state.dump = '{' + _result + '}';
+	}
+	function writeBlockMapping(state, level, object, compact) {
+	    var _result = '', _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, explicitPair, pairBuffer;
+	    for (index = 0, length = objectKeyList.length; index < length; index += 1) {
+	        pairBuffer = '';
+	        if (!compact || 0 !== index) {
+	            pairBuffer += generateNextLine(state, level);
+	        }
+	        objectKey = objectKeyList[index];
+	        objectValue = object[objectKey];
+	        if (!writeNode(state, level + 1, objectKey, true, true)) {
+	            continue;
+	        }
+	        explicitPair = (null !== state.tag && '?' !== state.tag) || (state.dump && state.dump.length > 1024);
+	        if (explicitPair) {
+	            if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
+	                pairBuffer += '?';
+	            }
+	            else {
+	                pairBuffer += '? ';
+	            }
+	        }
+	        pairBuffer += state.dump;
+	        if (explicitPair) {
+	            pairBuffer += generateNextLine(state, level);
+	        }
+	        if (!writeNode(state, level + 1, objectValue, true, explicitPair)) {
+	            continue;
+	        }
+	        if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
+	            pairBuffer += ':';
+	        }
+	        else {
+	            pairBuffer += ': ';
+	        }
+	        pairBuffer += state.dump;
+	        // Both key and value are valid.
+	        _result += pairBuffer;
+	    }
+	    state.tag = _tag;
+	    state.dump = _result || '{}'; // Empty mapping if no valid pairs.
+	}
+	function detectType(state, object, explicit) {
+	    var _result, typeList, index, length, type, style;
+	    typeList = explicit ? state.explicitTypes : state.implicitTypes;
+	    for (index = 0, length = typeList.length; index < length; index += 1) {
+	        type = typeList[index];
+	        if ((type.instanceOf || type.predicate) && (!type.instanceOf || (('object' === typeof object) && (object instanceof type.instanceOf))) && (!type.predicate || type.predicate(object))) {
+	            state.tag = explicit ? type.tag : '?';
+	            if (type.represent) {
+	                style = state.styleMap[type.tag] || type.defaultStyle;
+	                if ('[object Function]' === _toString.call(type.represent)) {
+	                    _result = type.represent(object, style);
+	                }
+	                else if (_hasOwnProperty.call(type.represent, style)) {
+	                    _result = type.represent[style](object, style);
+	                }
+	                else {
+	                    throw new YAMLException('!<' + type.tag + '> tag resolver accepts not "' + style + '" style');
+	                }
+	                state.dump = _result;
+	            }
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	// Serializes `object` and writes it to global `result`.
+	// Returns true on success, or false on invalid object.
+	//
+	function writeNode(state, level, object, block, compact) {
+	    state.tag = null;
+	    state.dump = object;
+	    if (!detectType(state, object, false)) {
+	        detectType(state, object, true);
+	    }
+	    var type = _toString.call(state.dump);
+	    if (block) {
+	        block = (0 > state.flowLevel || state.flowLevel > level);
+	    }
+	    if ((null !== state.tag && '?' !== state.tag) || (2 !== state.indent && level > 0)) {
+	        compact = false;
+	    }
+	    var objectOrArray = '[object Object]' === type || '[object Array]' === type, duplicateIndex, duplicate;
+	    if (objectOrArray) {
+	        duplicateIndex = state.duplicates.indexOf(object);
+	        duplicate = duplicateIndex !== -1;
+	    }
+	    if (duplicate && state.usedDuplicates[duplicateIndex]) {
+	        state.dump = '*ref_' + duplicateIndex;
+	    }
+	    else {
+	        if (objectOrArray && duplicate && !state.usedDuplicates[duplicateIndex]) {
+	            state.usedDuplicates[duplicateIndex] = true;
+	        }
+	        if ('[object Object]' === type) {
+	            if (block && (0 !== Object.keys(state.dump).length)) {
+	                writeBlockMapping(state, level, state.dump, compact);
+	                if (duplicate) {
+	                    state.dump = '&ref_' + duplicateIndex + (0 === level ? '\n' : '') + state.dump;
+	                }
+	            }
+	            else {
+	                writeFlowMapping(state, level, state.dump);
+	                if (duplicate) {
+	                    state.dump = '&ref_' + duplicateIndex + ' ' + state.dump;
+	                }
+	            }
+	        }
+	        else if ('[object Array]' === type) {
+	            if (block && (0 !== state.dump.length)) {
+	                writeBlockSequence(state, level, state.dump, compact);
+	                if (duplicate) {
+	                    state.dump = '&ref_' + duplicateIndex + (0 === level ? '\n' : '') + state.dump;
+	                }
+	            }
+	            else {
+	                writeFlowSequence(state, level, state.dump);
+	                if (duplicate) {
+	                    state.dump = '&ref_' + duplicateIndex + ' ' + state.dump;
+	                }
+	            }
+	        }
+	        else if ('[object String]' === type) {
+	            if ('?' !== state.tag) {
+	                writeScalar(state, state.dump, level);
+	            }
+	        }
+	        else {
+	            if (state.skipInvalid) {
+	                return false;
+	            }
+	            throw new YAMLException('unacceptable kind of an object to dump ' + type);
+	        }
+	        if (null !== state.tag && '?' !== state.tag) {
+	            state.dump = '!<' + state.tag + '> ' + state.dump;
+	        }
+	    }
+	    return true;
+	}
+	function getDuplicateReferences(object, state) {
+	    var objects = [], duplicatesIndexes = [], index, length;
+	    inspectNode(object, objects, duplicatesIndexes);
+	    for (index = 0, length = duplicatesIndexes.length; index < length; index += 1) {
+	        state.duplicates.push(objects[duplicatesIndexes[index]]);
+	    }
+	    state.usedDuplicates = new Array(length);
+	}
+	function inspectNode(object, objects, duplicatesIndexes) {
+	    var type = _toString.call(object), objectKeyList, index, length;
+	    if (null !== object && 'object' === typeof object) {
+	        index = objects.indexOf(object);
+	        if (-1 !== index) {
+	            if (-1 === duplicatesIndexes.indexOf(index)) {
+	                duplicatesIndexes.push(index);
+	            }
+	        }
+	        else {
+	            objects.push(object);
+	            if (Array.isArray(object)) {
+	                for (index = 0, length = object.length; index < length; index += 1) {
+	                    inspectNode(object[index], objects, duplicatesIndexes);
+	                }
+	            }
+	            else {
+	                objectKeyList = Object.keys(object);
+	                for (index = 0, length = objectKeyList.length; index < length; index += 1) {
+	                    inspectNode(object[objectKeyList[index]], objects, duplicatesIndexes);
+	                }
+	            }
+	        }
+	    }
+	}
+	function dump(input, options) {
+	    options = options || {};
+	    var state = new State(options);
+	    getDuplicateReferences(input, state);
+	    if (writeNode(state, 0, input, true, true)) {
+	        return state.dump + '\n';
+	    }
+	    return '';
+	}
+	exports.dump = dump;
+	function safeDump(input, options) {
+	    return dump(input, common.extend({ schema: DEFAULT_SAFE_SCHEMA }, options));
+	}
+	exports.safeDump = safeDump;
+	//# sourceMappingURL=dumper.js.map
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var YAMLException = (function () {
+	    function YAMLException(reason, mark) {
+	        if (mark === void 0) { mark = null; }
+	        this.name = 'YAMLException';
+	        this.reason = reason;
+	        this.mark = mark;
+	        this.message = this.toString(false);
+	    }
+	    YAMLException.prototype.toString = function (compact) {
+	        if (compact === void 0) { compact = false; }
+	        var result;
+	        result = 'JS-YAML: ' + (this.reason || '(unknown reason)');
+	        if (!compact && this.mark) {
+	            result += ' ' + this.mark.toString();
+	        }
+	        return result;
+	    };
+	    return YAMLException;
+	})();
+	module.exports = YAMLException;
+	//# sourceMappingURL=exception.js.map
+
+/***/ },
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
-	var defs = __webpack_require__(19);
+	function isMultiLine(s) {
+	    return s && s.indexOf('\n') >= 0;
+	}
+	exports.isMultiLine = isMultiLine;
+	function isMultiLineValue(s) {
+	    return isMultiLine(s) && s.length > 2 && s[0] == '|' && (s[1] == '\n' || s[1] == '\r' || s[2] == '\n');
+	}
+	exports.isMultiLineValue = isMultiLineValue;
+	function makeMutiLine(s, lev) {
+	    var xbuf = '';
+	    if (isMultiLine(s)) {
+	        xbuf += '|\n';
+	        var lines = splitOnLines(s);
+	        for (var i = 0; i < lines.length; i++) {
+	            xbuf += indent(lev, lines[i]);
+	        }
+	    }
+	    else {
+	        xbuf += s;
+	    }
+	    return xbuf;
+	}
+	exports.makeMutiLine = makeMutiLine;
+	function fromMutiLine(s) {
+	    if (!isMultiLineValue(s))
+	        return s;
+	    var res = null;
+	    var lines = splitOnLines(s);
+	    for (var i = 1; i < lines.length; i++) {
+	        var line = lines[i];
+	        var str = line.substring(2);
+	        if (!res)
+	            res = str;
+	        else
+	            res += str;
+	    }
+	    return res;
+	}
+	exports.fromMutiLine = fromMutiLine;
+	function trimStart(s) {
+	    if (!s)
+	        return s;
+	    var pos = 0;
+	    while (pos < s.length) {
+	        var ch = s[pos];
+	        if (ch != '\r' && ch != '\n' && ch != ' ' && ch != '\t')
+	            break;
+	        pos++;
+	    }
+	    return s.substring(pos, s.length);
+	}
+	exports.trimStart = trimStart;
+	function indent(lev, str) {
+	    if (str === void 0) { str = ''; }
+	    var leading = '';
+	    for (var i = 0; i < lev; i++)
+	        leading += '  ';
+	    return leading + str;
+	}
+	exports.indent = indent;
+	function print(lev, str) {
+	    if (str === void 0) { str = ''; }
+	    console.log(indent(lev, str));
+	}
+	exports.print = print;
+	function replaceNewlines(s, rep) {
+	    if (rep === void 0) { rep = null; }
+	    var res = '';
+	    for (var i = 0; i < s.length; i++) {
+	        var ch = s[i];
+	        if (ch == '\r')
+	            ch = rep == null ? '\\r' : rep;
+	        if (ch == '\n')
+	            ch = rep == null ? '\\n' : rep;
+	        res += ch;
+	    }
+	    return res;
+	}
+	exports.replaceNewlines = replaceNewlines;
+	function trimEnd(s) {
+	    var pos = s.length;
+	    while (pos > 0) {
+	        var ch = s[pos - 1];
+	        if (ch != ' ' && ch != '\t' && ch != '\r' && ch != '\n')
+	            break;
+	        pos--;
+	    }
+	    return s.substring(0, pos);
+	}
+	exports.trimEnd = trimEnd;
+	function splitOnLines(text) {
+	    var lines = text.match(/^.*((\r\n|\n|\r)|$)/gm);
+	    return lines;
+	}
+	exports.splitOnLines = splitOnLines;
+	function startsWith(s, suffix) {
+	    if (!s || !suffix || s.length < suffix.length)
+	        return false;
+	    for (var i = 0; i < suffix.length; i++) {
+	        if (s[i] != suffix[i])
+	            return false;
+	    }
+	    return true;
+	}
+	exports.startsWith = startsWith;
+	function endsWith(s, suffix) {
+	    if (!s || !suffix || s.length < suffix.length)
+	        return false;
+	    for (var i = 0; i < suffix.length; i++) {
+	        if (s[s.length - 1 - i] != suffix[suffix.length - 1 - i])
+	            return false;
+	    }
+	    return true;
+	}
+	exports.endsWith = endsWith;
+	var TextRange = (function () {
+	    function TextRange(contents, start, end) {
+	        this.contents = contents;
+	        this.start = start;
+	        this.end = end;
+	    }
+	    TextRange.prototype.text = function () {
+	        return this.contents.substring(this.start, this.end);
+	    };
+	    TextRange.prototype.startpos = function () {
+	        return this.start;
+	    };
+	    TextRange.prototype.endpos = function () {
+	        return this.end;
+	    };
+	    TextRange.prototype.len = function () {
+	        return this.end - this.start;
+	    };
+	    TextRange.prototype.unitText = function () {
+	        return this.contents;
+	    };
+	    TextRange.prototype.withStart = function (start) {
+	        return new TextRange(this.contents, start, this.end);
+	    };
+	    TextRange.prototype.withEnd = function (end) {
+	        return new TextRange(this.contents, this.start, end);
+	    };
+	    TextRange.prototype.sub = function (start, end) {
+	        return this.contents.substring(start, end);
+	    };
+	    TextRange.prototype.trimStart = function () {
+	        var pos = this.start;
+	        while (pos < this.contents.length - 1) {
+	            var ch = this.contents[pos];
+	            if (ch != ' ' && ch != '\t')
+	                break;
+	            pos++;
+	        }
+	        return new TextRange(this.contents, pos, this.end);
+	    };
+	    TextRange.prototype.trimEnd = function () {
+	        var pos = this.end;
+	        while (pos > 0) {
+	            var ch = this.contents[pos - 1];
+	            if (ch != ' ' && ch != '\t')
+	                break;
+	            pos--;
+	        }
+	        return new TextRange(this.contents, this.start, pos);
+	    };
+	    TextRange.prototype.extendToStartOfLine = function () {
+	        var pos = this.start;
+	        while (pos > 0) {
+	            var prevchar = this.contents[pos - 1];
+	            if (prevchar == '\r' || prevchar == '\n')
+	                break;
+	            pos--;
+	        }
+	        return new TextRange(this.contents, pos, this.end);
+	    };
+	    TextRange.prototype.extendAnyUntilNewLines = function () {
+	        var pos = this.end;
+	        if (pos > 0) {
+	            var last = this.contents[pos - 1];
+	            if (last == '\n')
+	                return this;
+	        }
+	        while (pos < this.contents.length - 1) {
+	            var nextchar = this.contents[pos];
+	            if (nextchar == '\r' || nextchar == '\n')
+	                break;
+	            pos++;
+	        }
+	        return new TextRange(this.contents, this.start, pos);
+	    };
+	    TextRange.prototype.extendSpacesUntilNewLines = function () {
+	        var pos = this.end;
+	        if (pos > 0) {
+	            var last = this.contents[pos - 1];
+	            if (last == '\n')
+	                return this;
+	        }
+	        while (pos < this.contents.length - 1) {
+	            var nextchar = this.contents[pos];
+	            if (nextchar != ' ' || nextchar == '\r' || nextchar == '\n')
+	                break;
+	            pos++;
+	        }
+	        return new TextRange(this.contents, this.start, pos);
+	    };
+	    TextRange.prototype.extendSpaces = function () {
+	        var pos = this.end;
+	        while (pos < this.contents.length - 1) {
+	            var nextchar = this.contents[pos];
+	            if (nextchar != ' ')
+	                break;
+	            pos++;
+	        }
+	        return new TextRange(this.contents, this.start, pos);
+	    };
+	    TextRange.prototype.extendSpacesBack = function () {
+	        var pos = this.start;
+	        while (pos > 0) {
+	            var nextchar = this.contents[pos - 1];
+	            if (nextchar != ' ')
+	                break;
+	            pos--;
+	        }
+	        return new TextRange(this.contents, pos, this.end);
+	    };
+	    TextRange.prototype.extendCharIfAny = function (ch) {
+	        var pos = this.end;
+	        if (pos < this.contents.length - 1 && this.contents[pos] == ch) {
+	            pos++;
+	        }
+	        return new TextRange(this.contents, this.start, pos);
+	    };
+	    TextRange.prototype.extendCharIfAnyBack = function (ch) {
+	        var pos = this.start;
+	        if (pos > 0 && this.contents[pos - 1] == ch) {
+	            pos--;
+	        }
+	        return new TextRange(this.contents, pos, this.end);
+	    };
+	    TextRange.prototype.extendToNewlines = function () {
+	        var pos = this.end;
+	        if (pos > 0) {
+	            var last = this.contents[pos - 1];
+	            if (last == '\n')
+	                return this;
+	        }
+	        while (pos < this.contents.length - 1) {
+	            var nextchar = this.contents[pos];
+	            if (nextchar != '\r' && nextchar != '\n')
+	                break;
+	            pos++;
+	        }
+	        return new TextRange(this.contents, this.start, pos);
+	    };
+	    TextRange.prototype.extendUntilNewlinesBack = function () {
+	        var pos = this.start;
+	        while (pos > 0) {
+	            var nextchar = this.contents[pos - 1];
+	            if (nextchar == '\r' || nextchar == '\n')
+	                break;
+	            pos--;
+	        }
+	        return new TextRange(this.contents, pos, this.end);
+	    };
+	    TextRange.prototype.reduceNewlinesEnd = function () {
+	        var pos = this.end;
+	        while (pos > this.start) {
+	            var last = this.contents[pos - 1];
+	            if (last != '\r' && last != '\n')
+	                break;
+	            pos--;
+	        }
+	        return new TextRange(this.contents, this.start, pos);
+	    };
+	    TextRange.prototype.reduceSpaces = function () {
+	        var pos = this.end;
+	        while (pos > this.start) {
+	            var last = this.contents[pos - 1];
+	            if (last != ' ')
+	                break;
+	            pos--;
+	        }
+	        return new TextRange(this.contents, this.start, pos);
+	    };
+	    TextRange.prototype.replace = function (text) {
+	        return this.sub(0, this.start) + text + this.sub(this.end, this.unitText().length);
+	    };
+	    TextRange.prototype.remove = function () {
+	        return this.sub(0, this.start) + this.sub(this.end, this.unitText().length);
+	    };
+	    return TextRange;
+	})();
+	exports.TextRange = TextRange;
+	//# sourceMappingURL=textutil.js.map
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(Buffer) {/// <reference path="../../../typings/tsd.d.ts" />
+	var spawnSync = __webpack_require__(43).spawnSync || __webpack_require__(44);
+	var HttpResponse = __webpack_require__(75);
+	__webpack_require__(76);
+	__webpack_require__(80);
+	var lru = __webpack_require__(79);
+	var globalCache = lru(50);
+	//Function('', fs.readFileSync(require.resolve('./lib/worker.js'), 'utf8'));
+	function doRequest(method, url, options) {
+	    var req = JSON.stringify({
+	        method: method,
+	        url: url,
+	        options: options
+	    });
+	    var res = spawnSync('/usr/local/bin/node', [/*require.resolve*/(66)], { input: req });
+	    if (!res) {
+	        return null;
+	    }
+	    if (res.status !== 0) {
+	        throw new Error(res.stderr.toString());
+	    }
+	    if (res.error) {
+	        if (typeof res.error === 'string')
+	            res.error = new Error(res.error);
+	        throw res.error;
+	    }
+	    var response = JSON.parse(res.stdout);
+	    if (response.success) {
+	        return new HttpResponse(response.response.statusCode, response.response.headers, response.response.body);
+	    }
+	    else {
+	        throw new Error(response.error.message || response.error || response);
+	    }
+	}
+	function readFromCacheOrGet(url) {
+	    var res = globalCache.get(url);
+	    if (res) {
+	        if (res == readFromCacheOrGet) {
+	            return null;
+	        }
+	        return res;
+	    }
+	    try {
+	        var res = doRequest("GET", url, { timeout: 3000, socketTimeout: 5000, retry: true });
+	        res = new Buffer(res.body.data).toString();
+	        globalCache.set(url, res);
+	        return res;
+	    }
+	    catch (e) {
+	        globalCache.set(url, readFromCacheOrGet);
+	        return null;
+	    }
+	}
+	exports.readFromCacheOrGet = readFromCacheOrGet;
+	//# sourceMappingURL=resourceRegistry.js.map
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(77).Buffer))
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var defs = __webpack_require__(21);
 	var hl = __webpack_require__(17);
 	var _ = __webpack_require__(47);
-	var typeExpression = __webpack_require__(54);
-	var search = __webpack_require__(26);
-	var linter = __webpack_require__(24);
-	var schema = __webpack_require__(51);
+	var typeExpression = __webpack_require__(67);
+	var search = __webpack_require__(35);
+	var linter = __webpack_require__(33);
+	var schema = __webpack_require__(54);
 	function validate(str, node, cb) {
 	    var x = str.trim();
 	    if (x.length > 0) {
@@ -15786,17 +18296,17 @@
 	//# sourceMappingURL=typeExpressions.js.map
 
 /***/ },
-/* 23 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var defs = __webpack_require__(19);
+	var defs = __webpack_require__(21);
 	var _ = __webpack_require__(47);
-	var yaml = __webpack_require__(21);
-	var typeExpression = __webpack_require__(22);
-	var def = __webpack_require__(19);
+	var yaml = __webpack_require__(19);
+	var typeExpression = __webpack_require__(31);
+	var def = __webpack_require__(21);
 	var hlimpl = __webpack_require__(7);
-	var search = __webpack_require__(26);
+	var search = __webpack_require__(35);
 	var KeyMatcher = (function () {
 	    function KeyMatcher(_props) {
 	        this._props = _props;
@@ -16273,23 +18783,23 @@
 	//# sourceMappingURL=builder.js.map
 
 /***/ },
-/* 24 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
 	var jsyaml = __webpack_require__(6);
-	var defs = __webpack_require__(19);
+	var defs = __webpack_require__(21);
 	var hl = __webpack_require__(17);
 	var _ = __webpack_require__(47);
-	var typeExpression = __webpack_require__(22);
-	var def = __webpack_require__(19);
+	var typeExpression = __webpack_require__(31);
+	var def = __webpack_require__(21);
 	var ramlSignature = __webpack_require__(16);
 	var hlimpl = __webpack_require__(7);
-	var su = __webpack_require__(51);
+	var su = __webpack_require__(54);
 	var path = __webpack_require__(11);
 	var fs = __webpack_require__(12);
-	var mediaTypeParser = __webpack_require__(42);
-	var xmlutil = __webpack_require__(55);
+	var mediaTypeParser = __webpack_require__(41);
+	var xmlutil = __webpack_require__(70);
 	var LinterSettings = (function () {
 	    function LinterSettings() {
 	        this.validateNotStrictExamples = true;
@@ -17403,17 +19913,17 @@
 	//# sourceMappingURL=linter.js.map
 
 /***/ },
-/* 25 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var defs = __webpack_require__(19);
+	var defs = __webpack_require__(21);
 	var ts2Def = __webpack_require__(39);
 	var _ = __webpack_require__(47);
-	var selector = __webpack_require__(52);
-	var typeExpression = __webpack_require__(22);
+	var selector = __webpack_require__(55);
+	var typeExpression = __webpack_require__(31);
 	var hlimpl = __webpack_require__(7);
-	var linter = __webpack_require__(24);
+	var linter = __webpack_require__(33);
 	function templateFields(node, d) {
 	    var u = node.root().definition().universe();
 	    node.children().forEach(function (x) { return templateFields(x, d); });
@@ -17926,17 +20436,17 @@
 	//# sourceMappingURL=typeBuilder.js.map
 
 /***/ },
-/* 26 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
-	var defs = __webpack_require__(19);
+	var defs = __webpack_require__(21);
 	var hl = __webpack_require__(17);
 	var _ = __webpack_require__(47);
-	var typeExpression = __webpack_require__(22);
+	var typeExpression = __webpack_require__(31);
 	var ramlSignature = __webpack_require__(16);
 	var hlimpl = __webpack_require__(7);
-	var typeBuilder = __webpack_require__(25);
+	var typeBuilder = __webpack_require__(34);
 	//FIXME CORRECTLY STRUCTURE IT
 	function resolveRamlPointer(point, path) {
 	    var components = path.split(".");
@@ -18709,311 +21219,11 @@
 	//# sourceMappingURL=search.js.map
 
 /***/ },
-/* 27 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/// <reference path="../../typings/tsd.d.ts" />
-	function isMultiLine(s) {
-	    return s && s.indexOf('\n') >= 0;
-	}
-	exports.isMultiLine = isMultiLine;
-	function isMultiLineValue(s) {
-	    return isMultiLine(s) && s.length > 2 && s[0] == '|' && (s[1] == '\n' || s[1] == '\r' || s[2] == '\n');
-	}
-	exports.isMultiLineValue = isMultiLineValue;
-	function makeMutiLine(s, lev) {
-	    var xbuf = '';
-	    if (isMultiLine(s)) {
-	        xbuf += '|\n';
-	        var lines = splitOnLines(s);
-	        for (var i = 0; i < lines.length; i++) {
-	            xbuf += indent(lev, lines[i]);
-	        }
-	    }
-	    else {
-	        xbuf += s;
-	    }
-	    return xbuf;
-	}
-	exports.makeMutiLine = makeMutiLine;
-	function fromMutiLine(s) {
-	    if (!isMultiLineValue(s))
-	        return s;
-	    var res = null;
-	    var lines = splitOnLines(s);
-	    for (var i = 1; i < lines.length; i++) {
-	        var line = lines[i];
-	        var str = line.substring(2);
-	        if (!res)
-	            res = str;
-	        else
-	            res += str;
-	    }
-	    return res;
-	}
-	exports.fromMutiLine = fromMutiLine;
-	function trimStart(s) {
-	    if (!s)
-	        return s;
-	    var pos = 0;
-	    while (pos < s.length) {
-	        var ch = s[pos];
-	        if (ch != '\r' && ch != '\n' && ch != ' ' && ch != '\t')
-	            break;
-	        pos++;
-	    }
-	    return s.substring(pos, s.length);
-	}
-	exports.trimStart = trimStart;
-	function indent(lev, str) {
-	    if (str === void 0) { str = ''; }
-	    var leading = '';
-	    for (var i = 0; i < lev; i++)
-	        leading += '  ';
-	    return leading + str;
-	}
-	exports.indent = indent;
-	function print(lev, str) {
-	    if (str === void 0) { str = ''; }
-	    console.log(indent(lev, str));
-	}
-	exports.print = print;
-	function replaceNewlines(s, rep) {
-	    if (rep === void 0) { rep = null; }
-	    var res = '';
-	    for (var i = 0; i < s.length; i++) {
-	        var ch = s[i];
-	        if (ch == '\r')
-	            ch = rep == null ? '\\r' : rep;
-	        if (ch == '\n')
-	            ch = rep == null ? '\\n' : rep;
-	        res += ch;
-	    }
-	    return res;
-	}
-	exports.replaceNewlines = replaceNewlines;
-	function trimEnd(s) {
-	    var pos = s.length;
-	    while (pos > 0) {
-	        var ch = s[pos - 1];
-	        if (ch != ' ' && ch != '\t' && ch != '\r' && ch != '\n')
-	            break;
-	        pos--;
-	    }
-	    return s.substring(0, pos);
-	}
-	exports.trimEnd = trimEnd;
-	function splitOnLines(text) {
-	    var lines = text.match(/^.*((\r\n|\n|\r)|$)/gm);
-	    return lines;
-	}
-	exports.splitOnLines = splitOnLines;
-	function startsWith(s, suffix) {
-	    if (!s || !suffix || s.length < suffix.length)
-	        return false;
-	    for (var i = 0; i < suffix.length; i++) {
-	        if (s[i] != suffix[i])
-	            return false;
-	    }
-	    return true;
-	}
-	exports.startsWith = startsWith;
-	function endsWith(s, suffix) {
-	    if (!s || !suffix || s.length < suffix.length)
-	        return false;
-	    for (var i = 0; i < suffix.length; i++) {
-	        if (s[s.length - 1 - i] != suffix[suffix.length - 1 - i])
-	            return false;
-	    }
-	    return true;
-	}
-	exports.endsWith = endsWith;
-	var TextRange = (function () {
-	    function TextRange(contents, start, end) {
-	        this.contents = contents;
-	        this.start = start;
-	        this.end = end;
-	    }
-	    TextRange.prototype.text = function () {
-	        return this.contents.substring(this.start, this.end);
-	    };
-	    TextRange.prototype.startpos = function () {
-	        return this.start;
-	    };
-	    TextRange.prototype.endpos = function () {
-	        return this.end;
-	    };
-	    TextRange.prototype.len = function () {
-	        return this.end - this.start;
-	    };
-	    TextRange.prototype.unitText = function () {
-	        return this.contents;
-	    };
-	    TextRange.prototype.withStart = function (start) {
-	        return new TextRange(this.contents, start, this.end);
-	    };
-	    TextRange.prototype.withEnd = function (end) {
-	        return new TextRange(this.contents, this.start, end);
-	    };
-	    TextRange.prototype.sub = function (start, end) {
-	        return this.contents.substring(start, end);
-	    };
-	    TextRange.prototype.trimStart = function () {
-	        var pos = this.start;
-	        while (pos < this.contents.length - 1) {
-	            var ch = this.contents[pos];
-	            if (ch != ' ' && ch != '\t')
-	                break;
-	            pos++;
-	        }
-	        return new TextRange(this.contents, pos, this.end);
-	    };
-	    TextRange.prototype.trimEnd = function () {
-	        var pos = this.end;
-	        while (pos > 0) {
-	            var ch = this.contents[pos - 1];
-	            if (ch != ' ' && ch != '\t')
-	                break;
-	            pos--;
-	        }
-	        return new TextRange(this.contents, this.start, pos);
-	    };
-	    TextRange.prototype.extendToStartOfLine = function () {
-	        var pos = this.start;
-	        while (pos > 0) {
-	            var prevchar = this.contents[pos - 1];
-	            if (prevchar == '\r' || prevchar == '\n')
-	                break;
-	            pos--;
-	        }
-	        return new TextRange(this.contents, pos, this.end);
-	    };
-	    TextRange.prototype.extendAnyUntilNewLines = function () {
-	        var pos = this.end;
-	        if (pos > 0) {
-	            var last = this.contents[pos - 1];
-	            if (last == '\n')
-	                return this;
-	        }
-	        while (pos < this.contents.length - 1) {
-	            var nextchar = this.contents[pos];
-	            if (nextchar == '\r' || nextchar == '\n')
-	                break;
-	            pos++;
-	        }
-	        return new TextRange(this.contents, this.start, pos);
-	    };
-	    TextRange.prototype.extendSpacesUntilNewLines = function () {
-	        var pos = this.end;
-	        if (pos > 0) {
-	            var last = this.contents[pos - 1];
-	            if (last == '\n')
-	                return this;
-	        }
-	        while (pos < this.contents.length - 1) {
-	            var nextchar = this.contents[pos];
-	            if (nextchar != ' ' || nextchar == '\r' || nextchar == '\n')
-	                break;
-	            pos++;
-	        }
-	        return new TextRange(this.contents, this.start, pos);
-	    };
-	    TextRange.prototype.extendSpaces = function () {
-	        var pos = this.end;
-	        while (pos < this.contents.length - 1) {
-	            var nextchar = this.contents[pos];
-	            if (nextchar != ' ')
-	                break;
-	            pos++;
-	        }
-	        return new TextRange(this.contents, this.start, pos);
-	    };
-	    TextRange.prototype.extendSpacesBack = function () {
-	        var pos = this.start;
-	        while (pos > 0) {
-	            var nextchar = this.contents[pos - 1];
-	            if (nextchar != ' ')
-	                break;
-	            pos--;
-	        }
-	        return new TextRange(this.contents, pos, this.end);
-	    };
-	    TextRange.prototype.extendCharIfAny = function (ch) {
-	        var pos = this.end;
-	        if (pos < this.contents.length - 1 && this.contents[pos] == ch) {
-	            pos++;
-	        }
-	        return new TextRange(this.contents, this.start, pos);
-	    };
-	    TextRange.prototype.extendCharIfAnyBack = function (ch) {
-	        var pos = this.start;
-	        if (pos > 0 && this.contents[pos - 1] == ch) {
-	            pos--;
-	        }
-	        return new TextRange(this.contents, pos, this.end);
-	    };
-	    TextRange.prototype.extendToNewlines = function () {
-	        var pos = this.end;
-	        if (pos > 0) {
-	            var last = this.contents[pos - 1];
-	            if (last == '\n')
-	                return this;
-	        }
-	        while (pos < this.contents.length - 1) {
-	            var nextchar = this.contents[pos];
-	            if (nextchar != '\r' && nextchar != '\n')
-	                break;
-	            pos++;
-	        }
-	        return new TextRange(this.contents, this.start, pos);
-	    };
-	    TextRange.prototype.extendUntilNewlinesBack = function () {
-	        var pos = this.start;
-	        while (pos > 0) {
-	            var nextchar = this.contents[pos - 1];
-	            if (nextchar == '\r' || nextchar == '\n')
-	                break;
-	            pos--;
-	        }
-	        return new TextRange(this.contents, pos, this.end);
-	    };
-	    TextRange.prototype.reduceNewlinesEnd = function () {
-	        var pos = this.end;
-	        while (pos > this.start) {
-	            var last = this.contents[pos - 1];
-	            if (last != '\r' && last != '\n')
-	                break;
-	            pos--;
-	        }
-	        return new TextRange(this.contents, this.start, pos);
-	    };
-	    TextRange.prototype.reduceSpaces = function () {
-	        var pos = this.end;
-	        while (pos > this.start) {
-	            var last = this.contents[pos - 1];
-	            if (last != ' ')
-	                break;
-	            pos--;
-	        }
-	        return new TextRange(this.contents, this.start, pos);
-	    };
-	    TextRange.prototype.replace = function (text) {
-	        return this.sub(0, this.start) + text + this.sub(this.end, this.unitText().length);
-	    };
-	    TextRange.prototype.remove = function () {
-	        return this.sub(0, this.start) + this.sub(this.end, this.unitText().length);
-	    };
-	    return TextRange;
-	})();
-	exports.TextRange = TextRange;
-	//# sourceMappingURL=textutil.js.map
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var factory10 = __webpack_require__(56);
-	var factory08 = __webpack_require__(57);
+	var factory10 = __webpack_require__(68);
+	var factory08 = __webpack_require__(69);
 	function buildWrapperNode(node) {
 	    var ramlVersion = node.definition().universe().version();
 	    if (ramlVersion == 'RAML10') {
@@ -19028,13 +21238,13 @@
 	//# sourceMappingURL=modelFactory.js.map
 
 /***/ },
-/* 29 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../typings/tsd.d.ts" />
 	var hl = __webpack_require__(17);
 	var _ = __webpack_require__(47);
-	var linter = __webpack_require__(24);
+	var linter = __webpack_require__(33);
 	var wrapperHelper = __webpack_require__(15);
 	function escapeUri(u) {
 	    var ss = "";
@@ -19167,2216 +21377,6 @@
 	//# sourceMappingURL=overloadingValidator.js.map
 
 /***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var __extends = this.__extends || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    __.prototype = b.prototype;
-	    d.prototype = new __();
-	};
-	var tsutil = __webpack_require__(31);
-	var _ = __webpack_require__(47);
-	var assert = __webpack_require__(74);
-	var Opt = __webpack_require__(5);
-	exports.MODEL_CLASS_MODEL_ELEMENT = '$resource-model-element';
-	exports.MODEL_CLASS_TYPE_DECLARATION = '$type-declaration';
-	exports.MODEL_CLASS_INTERFACE = '$interface-declaration';
-	exports.MODEL_CLASS_CLASS_DECLARATION = '$class-declaration';
-	exports.MODEL_CLASS_ANNOTATION_DECLARATION = '$annotation-declaration';
-	exports.MODEL_CLASS_ENUM_DECLARATION = '$enum-declaration';
-	exports.MODEL_CLASS_TYPE_ASSERTION = '$type-assertion';
-	exports.MODEL_CLASS_API_MODULE = '$api-module';
-	exports.MODEL_CLASS_UNIVERSE = '$universe';
-	exports.MODEL_CLASS_MEMBER = '$member';
-	exports.MODEL_CLASS_UNION_TYPE_REFERENCE = '$union-type-reference';
-	exports.MODEL_CLASS_SIMPLE_TYPE_REFERENCE = '$simple-type-reference';
-	exports.MODEL_CLASS_FUNCTION_REFERENCE = '$function-reference';
-	exports.MODEL_CLASS_ARRAY_REFERENCE = '$array-reference';
-	exports.MODEL_CLASS_DECLARED_INTERFACE_REFERENCE = '$declared-interface-reference';
-	exports.MODEL_CLASS_ANY_TYPE_REFERENCE = '$any-type-reference';
-	exports.MODEL_CLASS_STRUCTURAL_TYPE_REFERENCE = '$structural-type-reference';
-	exports.MODEL_CLASS_PARAM = '$param';
-	exports.MODEL_CLASS_STRING_VALUE = '$string-value';
-	exports.MODEL_CLASS_ARRAY_VALUE = '$array-value';
-	exports.MODEL_CLASS_API_ELEMENT_DECLARATION = '$api-element-declaration';
-	exports.MODEL_CLASS_CONSTRUCTOR = '$constructor';
-	//TODO HIDE Fields from unmanagable modification
-	//TODO Refine type decl type ref hieararchy a bit more
-	//TODO add classes, generics, metadata
-	var TSModelElement = (function () {
-	    function TSModelElement(parent, config) {
-	        if (parent === void 0) { parent = exports.Universe; }
-	        this.meta = {};
-	        this._annotations = [];
-	        this._parent = parent;
-	        this._config = config ? config : parent._config;
-	        this._children = [];
-	        assert(parent, "Should never be null");
-	        this._parent.addChild(this);
-	    }
-	    TSModelElement.prototype.annotations = function () {
-	        return this._annotations;
-	    };
-	    TSModelElement.prototype.patchParent = function (parent) {
-	        this._parent = parent; //FIXME
-	    };
-	    TSModelElement.prototype.isEmpty = function () {
-	        return this._children.length == 0;
-	    };
-	    TSModelElement.prototype.parent = function () {
-	        return this._parent;
-	    };
-	    TSModelElement.prototype.children = function () {
-	        return this._children;
-	    };
-	    TSModelElement.prototype.root = function () {
-	        if (this._parent == exports.Universe) {
-	            return this;
-	        }
-	        return this._parent.root();
-	    };
-	    TSModelElement.prototype.removeChild = function (child) {
-	        if (child._parent == this) {
-	            this._children = this._children.filter(function (x) { return x != child; });
-	        }
-	        child._parent = exports.Universe;
-	    };
-	    TSModelElement.prototype.addChild = function (child) {
-	        if (child._parent) {
-	            child._parent.removeChild(child);
-	        }
-	        child._parent = this;
-	        this._children.push(child);
-	    };
-	    TSModelElement.prototype.serializeToString = function () {
-	        throw new Error("You should override serialize to string always");
-	    };
-	    TSModelElement.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_MODEL_ELEMENT;
-	    };
-	    return TSModelElement;
-	})();
-	exports.TSModelElement = TSModelElement;
-	//TODO It should become an interface
-	var TSTypeDeclaration = (function (_super) {
-	    __extends(TSTypeDeclaration, _super);
-	    function TSTypeDeclaration(parent) {
-	        var _this = this;
-	        if (parent === void 0) { parent = null; }
-	        _super.call(this, parent);
-	        this.canBeOmmited = function () { return _this.locked ? false : _this.children().every(function (x) { return x.optional; }); };
-	        this.locked = false;
-	        this.extras = [""];
-	    }
-	    TSTypeDeclaration.prototype.addCode = function (code) {
-	        this.extras.push(code);
-	    };
-	    TSTypeDeclaration.prototype.toReference = function () {
-	        throw new Error("Implement in subclasses");
-	    };
-	    TSTypeDeclaration.prototype.hash = function () {
-	        return this.serializeToString();
-	    };
-	    TSTypeDeclaration.prototype.isFunctor = function () {
-	        return this.children().some(function (x) { return x.isAnonymousFunction(); });
-	    };
-	    TSTypeDeclaration.prototype.getFunctor = function () {
-	        return _.find(this.children(), function (x) { return x.isAnonymousFunction(); });
-	    };
-	    TSTypeDeclaration.prototype.visit = function (v) {
-	        if (v.startTypeDeclaration(this)) {
-	            this.children().forEach(function (x, i, arr) {
-	                x.visit(v);
-	                if (i != arr.length - 1)
-	                    v.betweenElements();
-	            });
-	            v.endTypeDeclaration(this);
-	        }
-	    };
-	    TSTypeDeclaration.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_TYPE_DECLARATION;
-	    };
-	    return TSTypeDeclaration;
-	})(TSModelElement);
-	exports.TSTypeDeclaration = TSTypeDeclaration;
-	var TSInterface = (function (_super) {
-	    __extends(TSInterface, _super);
-	    function TSInterface(p, name) {
-	        _super.call(this, p);
-	        this.extends = [];
-	        this.implements = [];
-	        this.name = name;
-	    }
-	    TSInterface.prototype.hash = function () {
-	        return this.children().filter(function (x) { return !x.isPrivate; }).map(function (x) { return "\n" + x.serializeToString() + "\n"; }).join('');
-	    };
-	    TSInterface.prototype.toReference = function () {
-	        return new TSDeclaredInterfaceReference(exports.Universe, this.name, this);
-	    };
-	    TSInterface.prototype.decl = function () {
-	        return "interface";
-	    };
-	    TSInterface.prototype.serializeToString = function () {
-	        var body = this.hash();
-	        return "export " + this.decl() + " " + this.name.concat(this.extendsString() + this.implementsString()) + "{" + this.extras.join("\n") + body + "}\n";
-	    };
-	    TSInterface.prototype.extendsString = function () {
-	        if (this.extends.length > 0) {
-	            return " extends " + this.extends.map(function (x) { return x.serializeToString(); }).join(",");
-	        }
-	        return "";
-	    };
-	    TSInterface.prototype.implementsString = function () {
-	        if (this.implements.length > 0) {
-	            return " implements " + this.implements.map(function (x) { return x.serializeToString(); }).join(",");
-	        }
-	        return "";
-	    };
-	    TSInterface.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_INTERFACE;
-	    };
-	    return TSInterface;
-	})(TSTypeDeclaration);
-	exports.TSInterface = TSInterface;
-	//TODO INCORRECT INHERITANCE CHAIN
-	var TSClassDecl = (function (_super) {
-	    __extends(TSClassDecl, _super);
-	    function TSClassDecl() {
-	        _super.apply(this, arguments);
-	    }
-	    TSClassDecl.prototype.decl = function () {
-	        return "class";
-	    };
-	    TSClassDecl.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_CLASS_DECLARATION;
-	    };
-	    return TSClassDecl;
-	})(TSInterface);
-	exports.TSClassDecl = TSClassDecl;
-	var TSAnnotationDecl = (function (_super) {
-	    __extends(TSAnnotationDecl, _super);
-	    function TSAnnotationDecl() {
-	        _super.apply(this, arguments);
-	    }
-	    TSAnnotationDecl.prototype.decl = function () {
-	        return "annotation";
-	    };
-	    TSAnnotationDecl.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ANNOTATION_DECLARATION;
-	    };
-	    TSAnnotationDecl.prototype.toReference = function () {
-	        return new TSDeclaredAnnotationReference(exports.Universe, this.name, this);
-	    };
-	    return TSAnnotationDecl;
-	})(TSInterface);
-	exports.TSAnnotationDecl = TSAnnotationDecl;
-	var TSEnumDecl = (function (_super) {
-	    __extends(TSEnumDecl, _super);
-	    function TSEnumDecl() {
-	        _super.apply(this, arguments);
-	    }
-	    TSEnumDecl.prototype.decl = function () {
-	        return "enum";
-	    };
-	    TSEnumDecl.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ENUM_DECLARATION;
-	    };
-	    return TSEnumDecl;
-	})(TSInterface);
-	exports.TSEnumDecl = TSEnumDecl;
-	var TSTypeAssertion = (function (_super) {
-	    __extends(TSTypeAssertion, _super);
-	    function TSTypeAssertion(p, _name, _ref) {
-	        _super.call(this, p);
-	        this._name = _name;
-	        this._ref = _ref;
-	    }
-	    TSTypeAssertion.prototype.toReference = function () {
-	        return new TSSimpleTypeReference(exports.Universe, this._name);
-	    };
-	    TSTypeAssertion.prototype.serializeToString = function () {
-	        return "export type " + this._name + "=" + this._ref.serializeToString() + "\n";
-	    };
-	    TSTypeAssertion.prototype.ref = function () {
-	        return this._ref;
-	    };
-	    TSTypeAssertion.prototype.name = function () {
-	        return this._name;
-	    };
-	    TSTypeAssertion.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_TYPE_ASSERTION;
-	    };
-	    return TSTypeAssertion;
-	})(TSTypeDeclaration);
-	exports.TSTypeAssertion = TSTypeAssertion;
-	var TSUniverse = (function (_super) {
-	    __extends(TSUniverse, _super);
-	    function TSUniverse() {
-	        _super.call(this, this);
-	    }
-	    TSUniverse.prototype.addChild = function (child) {
-	    };
-	    TSUniverse.prototype.setConfig = function (cfg) {
-	        this._config = cfg;
-	    };
-	    TSUniverse.prototype.getConfig = function () {
-	        return this._config;
-	    };
-	    TSUniverse.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_UNIVERSE;
-	    };
-	    return TSUniverse;
-	})(TSModelElement);
-	exports.TSUniverse = TSUniverse;
-	exports.Universe = new TSUniverse();
-	var TSAPIModule = (function (_super) {
-	    __extends(TSAPIModule, _super);
-	    function TSAPIModule() {
-	        _super.apply(this, arguments);
-	    }
-	    TSAPIModule.prototype.getInterface = function (nm) {
-	        return new Opt(_.find(this.children(), function (x) { return x.name == nm; }));
-	    };
-	    TSAPIModule.prototype.serializeToString = function () {
-	        var typeMap = {};
-	        this.children().forEach(function (x) { return typeMap[x.name] = x; });
-	        var covered = {};
-	        var sorted = [];
-	        var append = function (t) {
-	            if (covered[t.name]) {
-	                return;
-	            }
-	            covered[t.name] = true;
-	            var refs = t.extends;
-	            refs.forEach(function (ref) {
-	                if (ref instanceof TSSimpleTypeReference) {
-	                    var name = ref.name;
-	                    var st = typeMap[name];
-	                    if (st) {
-	                        append(st);
-	                    }
-	                }
-	            });
-	            sorted.push(t);
-	        };
-	        this.children().forEach(function (x) { return append(x); });
-	        return sorted.map(function (x) { return x.serializeToString(); }).join("\n");
-	    };
-	    TSAPIModule.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_API_MODULE;
-	    };
-	    return TSAPIModule;
-	})(TSModelElement);
-	exports.TSAPIModule = TSAPIModule;
-	var TSMember = (function (_super) {
-	    __extends(TSMember, _super);
-	    function TSMember() {
-	        _super.apply(this, arguments);
-	    }
-	    TSMember.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_MEMBER;
-	    };
-	    return TSMember;
-	})(TSModelElement);
-	exports.TSMember = TSMember;
-	var TSUnionTypeReference = (function (_super) {
-	    __extends(TSUnionTypeReference, _super);
-	    function TSUnionTypeReference() {
-	        _super.apply(this, arguments);
-	        this.array = function () { return false; };
-	    }
-	    TSUnionTypeReference.prototype.getFunctor = function () {
-	        return null;
-	    };
-	    //TODO FIXIT FIX IT WITH MIX IN
-	    TSUnionTypeReference.prototype.union = function (q) {
-	        var map = {};
-	        this.children().filter(function (x) { return x instanceof TSSimpleTypeReference; }).forEach(function (x) { return map[x.name] = true; });
-	        var gotNew = false;
-	        var flat = flattenUnionType(q);
-	        flat.forEach(function (x) {
-	            if (x instanceof TSSimpleTypeReference) {
-	                gotNew = gotNew || !map[q.name];
-	            }
-	            else {
-	                gotNew = true;
-	            }
-	        });
-	        if (!gotNew) {
-	            return this;
-	        }
-	        var r = new TSUnionTypeReference();
-	        this.children().forEach(function (x) { return r.addChild(x); });
-	        flat.forEach(function (x) { return r.addChild(x); });
-	        return r;
-	    };
-	    TSUnionTypeReference.prototype.isFunctor = function () {
-	        return false;
-	    };
-	    TSUnionTypeReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSUnionTypeReference.prototype.serializeToString = function () {
-	        return this.children().map(function (x) { return x.serializeToString(); }).join(" | ");
-	    };
-	    TSUnionTypeReference.prototype.removeChild = function (child) {
-	    };
-	    TSUnionTypeReference.prototype.addChild = function (child) {
-	        this.children().push(child);
-	    };
-	    TSUnionTypeReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_UNION_TYPE_REFERENCE;
-	    };
-	    return TSUnionTypeReference;
-	})(TSModelElement);
-	exports.TSUnionTypeReference = TSUnionTypeReference;
-	var TSSimpleTypeReference = (function (_super) {
-	    __extends(TSSimpleTypeReference, _super);
-	    function TSSimpleTypeReference(p, tn) {
-	        var _this = this;
-	        _super.call(this, p);
-	        this.array = function () { return false; };
-	        this.genericStr = function () { return _this.typeParameters && _this.typeParameters.length > 0 ? '<' + _this.typeParameters.map(function (p) { return p.serializeToString(); }).join(',') + '>' : ''; };
-	        this.name = tn;
-	    }
-	    TSSimpleTypeReference.prototype.isEmpty = function () {
-	        return false;
-	    };
-	    TSSimpleTypeReference.prototype.getFunctor = function () {
-	        return null;
-	    };
-	    TSSimpleTypeReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSSimpleTypeReference.prototype.isFunctor = function () {
-	        return false;
-	    };
-	    TSSimpleTypeReference.prototype.union = function (q) {
-	        var _this = this;
-	        var flat = flattenUnionType(q);
-	        var gotThis = false;
-	        flat.filter(function (x) { return x instanceof TSSimpleTypeReference; }).map(function (x) { return x; }).forEach(function (x) { return gotThis = gotThis || (x.name == _this.name); });
-	        if (gotThis) {
-	            return q;
-	        }
-	        var r = new TSUnionTypeReference();
-	        r.addChild(this);
-	        flat.forEach(function (x) { return r.addChild(x); });
-	        return r;
-	    };
-	    TSSimpleTypeReference.prototype.serializeToString = function () {
-	        return this.name + this.genericStr();
-	    };
-	    TSSimpleTypeReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_SIMPLE_TYPE_REFERENCE;
-	    };
-	    return TSSimpleTypeReference;
-	})(TSModelElement);
-	exports.TSSimpleTypeReference = TSSimpleTypeReference;
-	var TSFunctionReference = (function (_super) {
-	    __extends(TSFunctionReference, _super);
-	    function TSFunctionReference(p) {
-	        var _this = this;
-	        _super.call(this, p);
-	        this.rangeType = new AnyType();
-	        this.parameters = [];
-	        this.array = function () { return false; };
-	        this.paramStr = function (appendDefault) {
-	            if (appendDefault === void 0) { appendDefault = false; }
-	            return '(' + _this.parameters.filter(function (x) { return !x.isEmpty(); }).map(function (p) { return p.serializeToString(appendDefault); }).join(', ') + ')';
-	        };
-	    }
-	    TSFunctionReference.prototype.isEmpty = function () {
-	        return false;
-	    };
-	    TSFunctionReference.prototype.getFunctor = function () {
-	        return null;
-	    };
-	    TSFunctionReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSFunctionReference.prototype.isFunctor = function () {
-	        return true;
-	    };
-	    TSFunctionReference.prototype.union = function (q) {
-	        var r = new TSUnionTypeReference();
-	        r.addChild(this);
-	        r.addChild(q);
-	        return r;
-	    };
-	    TSFunctionReference.prototype.serializeToString = function () {
-	        return this.paramStr() + '=>' + this.rangeType.serializeToString();
-	    };
-	    TSFunctionReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_FUNCTION_REFERENCE;
-	    };
-	    return TSFunctionReference;
-	})(TSModelElement);
-	exports.TSFunctionReference = TSFunctionReference;
-	var TSArrayReference = (function (_super) {
-	    __extends(TSArrayReference, _super);
-	    function TSArrayReference(componentType) {
-	        if (componentType === void 0) { componentType = new AnyType(); }
-	        _super.call(this, exports.Universe);
-	        this.array = function () { return true; };
-	        this.componentType = componentType;
-	    }
-	    TSArrayReference.prototype.isEmpty = function () {
-	        return this.componentType ? true : false;
-	    };
-	    TSArrayReference.prototype.getFunctor = function () {
-	        return this.componentType.getFunctor();
-	    };
-	    TSArrayReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSArrayReference.prototype.isFunctor = function () {
-	        return this.componentType.isFunctor();
-	    };
-	    TSArrayReference.prototype.union = function (q) {
-	        var r = new TSUnionTypeReference();
-	        r.addChild(this);
-	        r.addChild(q);
-	        return r;
-	    };
-	    TSArrayReference.prototype.serializeToString = function () {
-	        return this.componentType.serializeToString() + '[]';
-	    };
-	    TSArrayReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ARRAY_REFERENCE;
-	    };
-	    return TSArrayReference;
-	})(TSModelElement);
-	exports.TSArrayReference = TSArrayReference;
-	var TSDeclaredInterfaceReference = (function (_super) {
-	    __extends(TSDeclaredInterfaceReference, _super);
-	    function TSDeclaredInterfaceReference(p, tn, _data) {
-	        _super.call(this, p, tn);
-	        this._data = _data;
-	    }
-	    TSDeclaredInterfaceReference.prototype.isEmpty = function () {
-	        return false;
-	    };
-	    TSDeclaredInterfaceReference.prototype.getFunctor = function () {
-	        return null;
-	    };
-	    TSDeclaredInterfaceReference.prototype.canBeOmmited = function () {
-	        return false;
-	    };
-	    TSDeclaredInterfaceReference.prototype.getOriginal = function () {
-	        return this._data;
-	    };
-	    TSDeclaredInterfaceReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_DECLARED_INTERFACE_REFERENCE;
-	    };
-	    return TSDeclaredInterfaceReference;
-	})(TSSimpleTypeReference);
-	exports.TSDeclaredInterfaceReference = TSDeclaredInterfaceReference;
-	var TSAnnotationReference = (function (_super) {
-	    __extends(TSAnnotationReference, _super);
-	    function TSAnnotationReference(p, tn, values) {
-	        if (values === void 0) { values = {}; }
-	        _super.call(this, p, tn);
-	        this.values = values;
-	    }
-	    TSAnnotationReference.prototype.value = function (key) {
-	        if (key === void 0) { key = 'value'; }
-	        return this.values[key];
-	    };
-	    return TSAnnotationReference;
-	})(TSSimpleTypeReference);
-	exports.TSAnnotationReference = TSAnnotationReference;
-	var TSDeclaredAnnotationReference = (function (_super) {
-	    __extends(TSDeclaredAnnotationReference, _super);
-	    function TSDeclaredAnnotationReference() {
-	        _super.apply(this, arguments);
-	        this.values = {};
-	    }
-	    TSDeclaredAnnotationReference.prototype.value = function (key) {
-	        if (key === void 0) { key = 'value'; }
-	        return this.values[key];
-	    };
-	    return TSDeclaredAnnotationReference;
-	})(TSDeclaredInterfaceReference);
-	exports.TSDeclaredAnnotationReference = TSDeclaredAnnotationReference;
-	var AnyType = (function (_super) {
-	    __extends(AnyType, _super);
-	    function AnyType(nm) {
-	        if (nm === void 0) { nm = "any"; }
-	        _super.call(this, exports.Universe, nm);
-	    }
-	    AnyType.prototype.union = function (q) {
-	        return q;
-	    };
-	    AnyType.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ANY_TYPE_REFERENCE;
-	    };
-	    return AnyType;
-	})(TSSimpleTypeReference);
-	exports.AnyType = AnyType;
-	var TSStructuralTypeReference = (function (_super) {
-	    __extends(TSStructuralTypeReference, _super);
-	    function TSStructuralTypeReference(parent) {
-	        var _this = this;
-	        if (parent === void 0) { parent = exports.Universe; }
-	        _super.call(this, parent);
-	        this.array = function () { return false; };
-	        this.canBeOmmited = function () { return _this.locked ? false : _this.children().every(function (x) { return x.optional; }); };
-	    }
-	    TSStructuralTypeReference.prototype.visitReturnType = function (v) {
-	        //v.visitStructuralReturn(this);
-	        this.visit(v);
-	    };
-	    TSStructuralTypeReference.prototype.toReference = function () {
-	        return this;
-	    };
-	    TSStructuralTypeReference.prototype.union = function (q) {
-	        var r = new TSUnionTypeReference();
-	        r.addChild(this);
-	        r.addChild(q);
-	        return r;
-	    };
-	    TSStructuralTypeReference.prototype.serializeToString = function () {
-	        var body = this.children().map(function (x) { return ("\n" + x.serializeToString() + "\n"); }).join('');
-	        return "{" + body + "}";
-	    };
-	    TSStructuralTypeReference.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_STRUCTURAL_TYPE_REFERENCE;
-	    };
-	    return TSStructuralTypeReference;
-	})(TSTypeDeclaration);
-	exports.TSStructuralTypeReference = TSStructuralTypeReference;
-	(function (ParamLocation) {
-	    ParamLocation[ParamLocation["URI"] = 0] = "URI";
-	    ParamLocation[ParamLocation["BODY"] = 1] = "BODY";
-	    ParamLocation[ParamLocation["OPTIONS"] = 2] = "OPTIONS";
-	    ParamLocation[ParamLocation["OTHER"] = 3] = "OTHER";
-	})(exports.ParamLocation || (exports.ParamLocation = {}));
-	var ParamLocation = exports.ParamLocation;
-	var Param = (function (_super) {
-	    __extends(Param, _super);
-	    function Param(p, nm, location, tp, defaultValue) {
-	        if (tp === void 0) { tp = new TSSimpleTypeReference(exports.Universe, "string"); }
-	        _super.call(this, p);
-	        this.name = nm;
-	        this.ptype = tp;
-	        this.location = location;
-	        this.defaultValue = defaultValue;
-	    }
-	    Param.prototype.isEmpty = function () {
-	        return this.ptype.isEmpty();
-	    };
-	    Param.prototype.serializeToString = function (appendDefault) {
-	        if (appendDefault === void 0) { appendDefault = false; }
-	        //return this.name + (this.optional ? "?" : "") + ":" + this.ptype.serializeToString() + (this.ptype.canBeOmmited() ? "?" : "");
-	        return this.name + (this.optional || (this.defaultValue && !appendDefault) ? "?" : "") + (":" + this.ptype.serializeToString() + (this.ptype.canBeOmmited() ? "?" : "")) + (appendDefault && this.defaultValue ? '=' + JSON.stringify(this.defaultValue) : '');
-	    };
-	    Param.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_PARAM;
-	    };
-	    return Param;
-	})(TSModelElement);
-	exports.Param = Param;
-	var StringValue = (function (_super) {
-	    __extends(StringValue, _super);
-	    function StringValue(_value) {
-	        _super.call(this);
-	        this._value = _value;
-	    }
-	    StringValue.prototype.value = function () {
-	        return this._value;
-	    };
-	    StringValue.prototype.serializeToString = function () {
-	        return "\"" + this._value + "\"";
-	    };
-	    StringValue.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_STRING_VALUE;
-	    };
-	    return StringValue;
-	})(TSMember);
-	exports.StringValue = StringValue;
-	var ArrayValue = (function (_super) {
-	    __extends(ArrayValue, _super);
-	    function ArrayValue(_values) {
-	        _super.call(this);
-	        this._values = _values;
-	    }
-	    ArrayValue.prototype.value = function () {
-	        return this.serializeToString();
-	    };
-	    ArrayValue.prototype.serializeToString = function () {
-	        return "[ " + this._values.map(function (x) { return x.value(); }).join(', ') + " ]";
-	    };
-	    ArrayValue.prototype.values = function () {
-	        return this._values;
-	    };
-	    ArrayValue.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_ARRAY_VALUE;
-	    };
-	    return ArrayValue;
-	})(TSMember);
-	exports.ArrayValue = ArrayValue;
-	var TSAPIElementDeclaration = (function (_super) {
-	    __extends(TSAPIElementDeclaration, _super);
-	    function TSAPIElementDeclaration(p, name) {
-	        var _this = this;
-	        _super.call(this, p);
-	        this.rangeType = new AnyType();
-	        this.value = null;
-	        this.paramStr = function (appendDefault) {
-	            if (appendDefault === void 0) { appendDefault = false; }
-	            return '( ' + _this.parameters.filter(function (x) { return !x.isEmpty(); }).map(function (p) { return _this.serializeParam(p, appendDefault); }).join(',') + ' )';
-	        };
-	        this.serializeParam = function (p, appendDefault) { return p.serializeToString(appendDefault); };
-	        this.isFunction = function () { return _this.parameters.length != 0 || _this.isFunc; };
-	        this.isAnonymousFunction = function () { return _this.isFunction() && _this.name === ''; };
-	        this.returnStr = function () { return _this.rangeType ? ':' + _this.rangeType.serializeToString() : ''; };
-	        this.name = name;
-	        this.parameters = [];
-	        this.rangeType = null;
-	        this.optional = false;
-	    }
-	    TSAPIElementDeclaration.prototype.visit = function (v) {
-	        if (v.startVisitElement(this)) {
-	            if (this.rangeType) {
-	                if (this.rangeType instanceof TSStructuralTypeReference && !this.isInterfaceMethodWithBody()) {
-	                    this.rangeType.visitReturnType(v);
-	                }
-	            }
-	            v.endVisitElement(this);
-	        }
-	    };
-	    TSAPIElementDeclaration.prototype.commentCode = function () {
-	        return "\n        /**\n         *\n         **/\n         //" + this.name + "\n         ";
-	    };
-	    TSAPIElementDeclaration.prototype.serializeToString = function () {
-	        var x = (this.isPrivate ? 'private ' : '') + this.escapeDot(this.name) + (this.optional ? "?" : "") + (this.isFunction() ? this.paramStr() : "") + this.returnStr();
-	        if (this.value) {
-	            x += '=' + this.value.value();
-	        }
-	        return this.commentCode() + x + (this.isFunction() && this.isInterfaceMethodWithBody() ? '' : this.body());
-	    };
-	    TSAPIElementDeclaration.prototype.body = function () {
-	        if (this._body == null)
-	            return "";
-	        return "{" + this._body + "}";
-	    };
-	    TSAPIElementDeclaration.prototype.escapeDot = function (name) {
-	        return tsutil.escapeTypescriptPropertyName(name);
-	    };
-	    TSAPIElementDeclaration.prototype.isInterfaceMethodWithBody = function () {
-	        return false;
-	    };
-	    TSAPIElementDeclaration.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_API_ELEMENT_DECLARATION;
-	    };
-	    return TSAPIElementDeclaration;
-	})(TSMember);
-	exports.TSAPIElementDeclaration = TSAPIElementDeclaration;
-	var TSConstructor = (function (_super) {
-	    __extends(TSConstructor, _super);
-	    function TSConstructor(p) {
-	        _super.call(this, p, 'constructor');
-	        this.serializeParam = function (p, appendDefault) { return 'protected ' + p.serializeToString(appendDefault); };
-	    }
-	    TSConstructor.prototype.modelClass = function () {
-	        return exports.MODEL_CLASS_CONSTRUCTOR;
-	    };
-	    return TSConstructor;
-	})(TSAPIElementDeclaration);
-	exports.TSConstructor = TSConstructor;
-	function flattenUnionType(ref) {
-	    var _this = this;
-	    if (!(ref instanceof TSUnionTypeReference)) {
-	        return [ref];
-	    }
-	    var map = {};
-	    var arr = [];
-	    ref.children().forEach(function (x) { return _this.flattenUnionType(x).forEach(function (y) {
-	        if (y instanceof TSSimpleTypeReference) {
-	            var st = y;
-	            var name = st.name;
-	            map[name] = st;
-	        }
-	        else {
-	            arr.push(y);
-	        }
-	    }); });
-	    return arr.concat(_.sortBy(Object.keys(map).map(function (x) { return map[x]; }), 'name'));
-	}
-	//# sourceMappingURL=TSDeclModel.js.map
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var ts = __webpack_require__(41);
-	// https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
-	function escapeTypescriptPropertyName(str) {
-	    return isValidTypescriptIdentifier(str) ? str : JSON.stringify(str);
-	}
-	exports.escapeTypescriptPropertyName = escapeTypescriptPropertyName;
-	// TODO: these are made up lists. check the grammar
-	var tsKeywords = 'type class interface break case catch continue debugger default delete do else finally for function if in instanceof new return switch this throw try typeof var void while with'.split(' ');
-	var digitCodesL = "0".charCodeAt(0);
-	var digitCodesR = "9".charCodeAt(0);
-	var lowerCaseCodesL = "a".charCodeAt(0);
-	var lowerCaseCodesR = "z".charCodeAt(0);
-	var upperCaseCodesL = "A".charCodeAt(0);
-	var upperCaseCodesR = "Z".charCodeAt(0);
-	var digitChars = {}; //:boolean[] = []
-	var validChars = {}; //:boolean[] = []
-	for (var i = digitCodesL, end = digitCodesR; i <= end; i++) {
-	    digitChars[String.fromCharCode(i)] = true;
-	    validChars[String.fromCharCode(i)] = true;
-	}
-	for (var i = lowerCaseCodesL, end = lowerCaseCodesR; i <= end; i++) {
-	    validChars[String.fromCharCode(i)] = true;
-	}
-	for (var i = upperCaseCodesL, end = upperCaseCodesR; i <= end; i++) {
-	    validChars[String.fromCharCode(i)] = true;
-	}
-	"_ $".split(" ").forEach(function (x) { return validChars[x] = true; });
-	function isValidTypescriptIdentifier(str) {
-	    str = str.trim();
-	    if (str.length == 0) {
-	        return false;
-	    }
-	    if (tsKeywords.indexOf(str) >= 0) {
-	        return false;
-	    }
-	    if (digitChars[str.charAt(0)]) {
-	        return false;
-	    }
-	    for (var i = 0; i < str.length; i++) {
-	        if (!validChars[str.charAt(i)]) {
-	            return false;
-	        }
-	    }
-	    return true;
-	}
-	exports.isValidTypescriptIdentifier = isValidTypescriptIdentifier;
-	function escapeToIdentifier(str) {
-	    str = str.trim();
-	    var result = '';
-	    if (str.length > 0 && digitChars[str.charAt(0)]) {
-	        result += '_';
-	    }
-	    for (var i = 0; i < str.length; i++) {
-	        var ch = str.charAt(i);
-	        if (validChars[ch]) {
-	            result += ch;
-	        }
-	        else {
-	            result += '_';
-	        }
-	    }
-	    return result;
-	}
-	exports.escapeToIdentifier = escapeToIdentifier;
-	// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently
-	//       exposed in the public typescript.d.ts. The typings should be exposed in the next release.
-	function format(text) {
-	    var options = getDefaultOptions();
-	    // Parse the source text
-	    var sourceFile = ts.createSourceFile("file.ts", text, 2 /* Latest */, "0");
-	    fixupParentReferences(sourceFile);
-	    // Get the formatting edits on the input sources
-	    var edits = ts.formatting.formatDocument(sourceFile, getRuleProvider(options), options);
-	    // Apply the edits on the input code
-	    return applyEdits(text, edits);
-	    function getRuleProvider(options) {
-	        // Share this between multiple formatters using the same options.
-	        // This represents the bulk of the space the formatter uses.
-	        var ruleProvider = new ts.formatting.RulesProvider();
-	        ruleProvider.ensureUpToDate(options);
-	        return ruleProvider;
-	    }
-	    function applyEdits(text, edits) {
-	        // Apply edits in reverse on the existing text
-	        var result = text;
-	        for (var i = edits.length - 1; i >= 0; i--) {
-	            var change = edits[i];
-	            var head = result.slice(0, change.span.start());
-	            var tail = result.slice(change.span.start() + change.span.length());
-	            result = head + change.newText + tail;
-	        }
-	        return result;
-	    }
-	    function getDefaultOptions() {
-	        return {
-	            IndentSize: 4,
-	            TabSize: 4,
-	            NewLineCharacter: '\n',
-	            ConvertTabsToSpaces: true,
-	            InsertSpaceAfterCommaDelimiter: true,
-	            InsertSpaceAfterSemicolonInForStatements: true,
-	            InsertSpaceBeforeAndAfterBinaryOperators: true,
-	            InsertSpaceAfterKeywordsInControlFlowStatements: true,
-	            InsertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
-	            InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
-	            PlaceOpenBraceOnNewLineForFunctions: false,
-	            PlaceOpenBraceOnNewLineForControlBlocks: false
-	        };
-	    }
-	    function fixupParentReferences(sourceFile) {
-	        var parent = sourceFile;
-	        function walk(n) {
-	            n.parent = parent;
-	            var saveParent = parent;
-	            parent = n;
-	            ts.forEachChild(n, walk);
-	            parent = saveParent;
-	        }
-	        ts.forEachChild(sourceFile, walk);
-	    }
-	}
-	exports.format = format;
-	var typeMap = {
-	    'string': 'string',
-	    'integer': 'number',
-	    'number': 'number',
-	    'boolean': 'boolean',
-	    'file': 'string',
-	    'date': 'string',
-	    'NumberType': 'number'
-	};
-	function ramlType2TSType(ramlType) {
-	    var tsType = typeMap[ramlType];
-	    if (!tsType) {
-	        tsType = 'any';
-	    }
-	    return tsType;
-	}
-	exports.ramlType2TSType = ramlType2TSType;
-	function escapeToJavaIdentifier(str) {
-	    str = escapeToIdentifier(str);
-	    return exports.javaReservedWords[str] ? str + '_' : str;
-	}
-	exports.escapeToJavaIdentifier = escapeToJavaIdentifier;
-	exports.tsToJavaTypeMap = {
-	    'number': 'Double',
-	    'string': 'String',
-	    'boolean': 'Boolean',
-	    'any': 'Object'
-	};
-	exports.javaReservedWords = {
-	    "abstract": true,
-	    "continue": true,
-	    "for": true,
-	    "new": true,
-	    "switch": true,
-	    "assert": true,
-	    "default": true,
-	    "goto": true,
-	    "package": true,
-	    "synchronized": true,
-	    "boolean": true,
-	    "do": true,
-	    "if": true,
-	    "private": true,
-	    "this": true,
-	    "break": true,
-	    "double": true,
-	    "implements": true,
-	    "protected": true,
-	    "throw": true,
-	    "byte": true,
-	    "else": true,
-	    "import": true,
-	    "public": true,
-	    "throws": true,
-	    "case": true,
-	    "enum": true,
-	    "instanceof": true,
-	    "return": true,
-	    "transient": true,
-	    "catch": true,
-	    "extends": true,
-	    "int": true,
-	    "short": true,
-	    "try": true,
-	    "char": true,
-	    "final": true,
-	    "interface": true,
-	    "static": true,
-	    "void": true,
-	    "class": true,
-	    "finally": true,
-	    "long": true,
-	    "strictfp": true,
-	    "volatile": true,
-	    "const": true,
-	    "float": true,
-	    "native": true,
-	    "super": true,
-	    "while": true
-	};
-	//# sourceMappingURL=tsutil.js.map
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var def = __webpack_require__(19);
-	var td = __webpack_require__(30);
-	var util = __webpack_require__(33);
-	var parserCoreModuleVar = 'core';
-	var ParserGenerator = (function () {
-	    function ParserGenerator() {
-	        this.mod = new td.TSAPIModule();
-	        this.processed = {};
-	        this.typeMap = {
-	            'StringType': 'string',
-	            'NumberType': 'number',
-	            'BooleanType': 'boolean'
-	        };
-	    }
-	    ParserGenerator.prototype.processType = function (u, generateConstructor) {
-	        var _this = this;
-	        var typeName = u.name();
-	        if (this.processed[typeName]) {
-	            return;
-	        }
-	        this.processed[typeName] = u;
-	        u.superTypes().forEach(function (x) { return _this.processType(x, generateConstructor); });
-	        var idcl = new td.TSInterface(this.mod, typeName);
-	        var dcl = new td.TSClassDecl(this.mod, typeName + "Impl");
-	        if (generateConstructor) {
-	            var _constructor = new td.TSConstructor(dcl);
-	            _constructor.parameters = [
-	                new td.Param(_constructor, 'attr', 3 /* OTHER */, new td.TSSimpleTypeReference(td.Universe, 'hl.IAttribute'))
-	            ];
-	            if (u.isValueType()) {
-	                if (typeName == 'ValueType' || u.superTypes().length == 0) {
-	                    _constructor._body = '';
-	                }
-	                else {
-	                    _constructor._body = 'super(attr);';
-	                }
-	            }
-	            else {
-	                _constructor._body = 'super()';
-	            }
-	        }
-	        else {
-	            if (u instanceof def.NodeClass) {
-	                var _constructor = new td.TSConstructor(dcl);
-	                _constructor.parameters = [
-	                    new td.Param(_constructor, 'nodeOrKey', 3 /* OTHER */, new td.TSSimpleTypeReference(td.Universe, 'hl.IHighLevelNode|string'))
-	                ];
-	                _constructor._body = "super((typeof  nodeOrKey==\"string\")?create" + u.name() + "(<string>nodeOrKey):<hl.IHighLevelNode>nodeOrKey)";
-	            }
-	        }
-	        this.addImplementationMethod(dcl, 'wrapperClassName', 'string', "return \"" + typeName + "Impl\";");
-	        if (typeName == 'ValueType') {
-	            this.addInterfaceMethod(idcl, 'value', 'string');
-	            this.addImplementationMethod(dcl, 'value', 'string', 'return this.attr.value();');
-	            this.addInterfaceMethod(idcl, 'highLevel', 'hl.IAttribute');
-	            this.addImplementationMethod(dcl, 'highLevel', 'hl.IAttribute', 'return this.attr;');
-	        }
-	        else if (typeName == 'Reference') {
-	            this.addImplementationMethod(dcl, 'value', 'string', 'return <any>core.toStructuredValue(this.attr);');
-	        }
-	        dcl.implements.push(new td.TSSimpleTypeReference(td.Universe, idcl.name));
-	        u.superTypes().forEach(function (x) {
-	            idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, x.name()));
-	            dcl.extends.push(new td.TSSimpleTypeReference(td.Universe, x.name() + "Impl"));
-	        });
-	        u.properties().forEach(function (x) {
-	            _this.createMethodDecl(idcl, x);
-	            var z = _this.createMethodDecl(dcl, x);
-	            z._body = _this.generateBody(x);
-	            if (x.isPrimitive()) {
-	                _this.createSetterMethodDecl(dcl, x);
-	            }
-	        });
-	        if (dcl.extends.length == 0) {
-	            if (u.isValueType()) {
-	                idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "core.AbstractWrapperNode"));
-	            }
-	            else {
-	                idcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "BasicNode"));
-	                dcl.extends.push(new td.TSSimpleTypeReference(td.Universe, "BasicNodeImpl"));
-	            }
-	        }
-	        u.subTypes().forEach(function (x) { return _this.processType(x); });
-	    };
-	    ParserGenerator.prototype.addInterfaceMethod = function (idcl, methodName, returnTypeName) {
-	        var method = new td.TSAPIElementDeclaration(idcl, methodName);
-	        method.isFunc = true;
-	        method.rangeType = new td.TSSimpleTypeReference(method, returnTypeName);
-	        return method;
-	    };
-	    ParserGenerator.prototype.addImplementationMethod = function (dcl, methodName, returnTypeName, body) {
-	        var method = this.addInterfaceMethod(dcl, methodName, returnTypeName);
-	        method._body = body;
-	        return method;
-	    };
-	    ParserGenerator.prototype.generateBody = function (x) {
-	        var rangeType = x.range().name();
-	        if (x.isValueProperty()) {
-	            var args = [("'" + x.name() + "'")];
-	            if (x.isPrimitive()) {
-	                rangeType = this.typeMap[rangeType];
-	                args.push("this.to" + util.firstToUpper(rangeType));
-	            }
-	            else {
-	                args.push("(attr:hl.IAttribute)=>new " + rangeType + "Impl(attr)");
-	            }
-	            if (x.isMultiValue()) {
-	                return "\n             return <" + rangeType + "[]>super.attributes(" + args.join(', ') + ");\n         ";
-	            }
-	            else {
-	                return "\n             return <" + rangeType + ">super.attribute(" + args.join(', ') + ");\n         ";
-	            }
-	        }
-	        else {
-	            if (x.isMultiValue()) {
-	                return "\n             return <" + rangeType + "[]>super.elements('" + x.name() + "');\n         ";
-	            }
-	            else {
-	                return "\n             return <" + rangeType + ">super.element('" + x.name() + "');\n         ";
-	            }
-	        }
-	        //if (x.isValueProperty()){
-	        //
-	        //    var varInit:any;
-	        //    if(x.isPrimitive()){
-	        //        varInit = function(varStr:string,typeName:string){
-	        //            return varStr + '.value()';
-	        //        }
-	        //    }
-	        //    else{
-	        //        varInit = function(varStr:string,typeName:string){
-	        //            return 'new ' + typeName + 'Impl(' + varStr + ')';
-	        //        }
-	        //    }
-	        //    if(x.isMultiValue()) {
-	        //        return `var attrs = this._node.attributes('${x.name()}');
-	        //        if (attrs) {
-	        //            return attrs.map(x=>${varInit('x', x.range().name())});
-	        //        }
-	        //        return [];`;
-	        //    }
-	        //    else{
-	        //        return `var attr = this._node.attr('${x.name()}');
-	        //        if (attr) {
-	        //            var v = ${varInit('attr', x.range().name())};
-	        //            return v;
-	        //        }
-	        //        else {
-	        //            return null;
-	        //        }`;
-	        //    }
-	        //}
-	        //else{
-	        //    if (x.isMultiValue()){
-	        //        return `
-	        //        var elements = this._node.elementsOfKind('${x.name()}');
-	        //        if(elements) {
-	        //            return elements.map(x=><${x.range().name()}>x.wrapperNode());
-	        //        }
-	        //        else {
-	        //            return null;
-	        //        }
-	        //    `;
-	        //    }
-	        //    else{
-	        //        return `
-	        //        var v = this._node.element('${x.name()}');
-	        //        if(!v){
-	        //            return null;
-	        //        }
-	        //        return <${x.range().name()}>v.wrapperNode();
-	        //    `;
-	        //    }
-	        //}
-	    };
-	    ParserGenerator.prototype.createSetterMethodDecl = function (dcl, x) {
-	        var method = new td.TSAPIElementDeclaration(dcl, "set" + x.name()[0].toUpperCase() + x.name().substr(1));
-	        method.isFunc = true;
-	        var tname = "string";
-	        if (x.isPrimitive()) {
-	            tname = this.typeMap[x.range().name()];
-	        }
-	        else {
-	            tname = x.range().name();
-	            this.processType(x.range(), x.isValueProperty());
-	        }
-	        var ref = new td.TSSimpleTypeReference(td.Universe, tname);
-	        method.parameters = [
-	            new td.Param(method, 'param', 3 /* OTHER */, ref)
-	        ];
-	        method._body = "\n        {\n        this.highLevel().attrOrCreate(\"" + x.name() + "\").setValue(\"\"+param);\n        return this;\n        }\n        ";
-	        return method;
-	    };
-	    ParserGenerator.prototype.createMethodDecl = function (dcl, x) {
-	        var method = new td.TSAPIElementDeclaration(dcl, x.name());
-	        method.isFunc = true;
-	        var tname = "string";
-	        if (x.isPrimitive()) {
-	            tname = this.typeMap[x.range().name()];
-	        }
-	        else {
-	            tname = x.range().name();
-	            this.processType(x.range(), x.isValueProperty());
-	        }
-	        var ref = new td.TSSimpleTypeReference(td.Universe, tname);
-	        if (x.isMultiValue()) {
-	            var aRef = new td.TSArrayReference();
-	            aRef.componentType = ref;
-	            method.rangeType = aRef;
-	        }
-	        else {
-	            method.rangeType = ref;
-	        }
-	        return method;
-	    };
-	    ParserGenerator.prototype.serializeToString = function () {
-	        return "import hl=require(\"../highLevelAST\");\nimport hlImpl=require(\"../highLevelImpl\");\nimport jsyaml=require(\"../jsyaml/jsyaml2lowLevel\");\nimport def=require(\"../definitionSystem\");\nimport core=require(\"../parserCore\");\n\n\nexport interface BasicNode extends core.BasicSuperNode{\n\n    parent():BasicNode\n\n    highLevel():hl.IHighLevelNode\n}\n\nexport class BasicNodeImpl extends core.BasicSuperNodeImpl implements BasicNode{\n\n    constructor(node:hl.IHighLevelNode){\n        super(node);\n    }\n\n    wrapperClassName():string{\n        return 'BasicNodeImpl';\n    }\n\n    parent():BasicNode{\n        return <BasicNode>super.parent();\n    }\n}\n\n        " + this.mod.serializeToString() + this.createFunctions();
-	    };
-	    ParserGenerator.prototype.createFunctions = function () {
-	        var res = "";
-	        for (var p in this.processed) {
-	            var q = this.processed[p];
-	            if (q instanceof def.NodeClass) {
-	                res += "\nfunction create" + p + "(key:string){\n    var universe=hl.universeProvider(\"RAML10\");\n    var nc=<def.NodeClass>universe.getType(\"" + p + "\");\n    var node=nc.createStubNode(null,key);\n    return node;\n}\n";
-	            }
-	            ;
-	        }
-	        return res;
-	    };
-	    ParserGenerator.prototype.nodeFactory = function (highLevelASTLocation, parserLocation) {
-	        return "import RamlWrapper = require(\"" + parserLocation + "\");\nimport hl = require(\"" + highLevelASTLocation + "\")\n\nexport function buildWrapperNode(node:hl.IHighLevelNode){\n\n    var nodeClassName = node.definition().name();\n\n    var wrapperConstructor = classMap[nodeClassName];\n\n    if(!wrapperConstructor){\n        var m=node.definition().allSuperTypes();\n        var wr=null;\n        for (var i=0;i<m.length;i++){\n            var nm=m[i].name();\n            wrapperConstructor = classMap[nm];\n            if (nm==\"DataElement\"){\n                wr=nm;\n                //This is only case of nested hierarchy\n                continue;\n            }\n            if (nm==\"RAMLLanguageElement\"){\n                //depth first\n                continue;\n            }\n            if (wrapperConstructor){\n                break;\n            }\n        }\n        if (!wrapperConstructor){\n            wr=nm;\n        }\n    }\n    if (!wrapperConstructor){\n        wrapperConstructor = classMap[\"RAMLLanguageElement\"]\n\n    }\n    return wrapperConstructor(node);\n}\n\nvar classMap = {\n\n" + Object.keys(this.processed).sort().map(function (x) { return ("    \"" + x + "\": (x)=>{return new RamlWrapper." + x + "Impl(x)}"); }).join(',\n\n') + "\n\n};\n";
-	    };
-	    return ParserGenerator;
-	})();
-	function def2Parser(u) {
-	    var mod = new ParserGenerator();
-	    mod.processType(u);
-	    return mod;
-	}
-	exports.def2Parser = def2Parser;
-	var ImplementationGenerator = (function () {
-	    function ImplementationGenerator() {
-	    }
-	    ImplementationGenerator.prototype.generateASTAccessor = function (p) {
-	        this.generatedCode.push("var val=this.ast.getValue(" + p.name() + "}");
-	        this.generatedCode.push("return new " + p.range().name() + "Impl(val)");
-	    };
-	    return ImplementationGenerator;
-	})();
-	function checkIfReference(u) {
-	    if (u.name() == 'Reference') {
-	        return true;
-	    }
-	    var superTypes = u.superTypes();
-	    for (var i = 0; i < superTypes.length; i++) {
-	        var st = superTypes[i];
-	        if (checkIfReference(st)) {
-	            return true;
-	        }
-	    }
-	    return false;
-	}
-	exports.checkIfReference = checkIfReference;
-	/**
-	 * Created by kor on 11/05/15.
-	 */
-	//# sourceMappingURL=wrappedParserGen.js.map
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var _ = __webpack_require__(47);
-	var Opt = __webpack_require__(5);
-	exports.defined = function (x) { return (x !== null) && (x !== undefined); };
-	/**
-	 * Arrays of Objects are common in RAML08.
-	 * @param x
-	 * @returns {{}}
-	 */
-	function flattenArrayOfObjects(x) {
-	    var res = {};
-	    x.forEach(function (v) { return Object.keys(v).forEach(function (k) { return res[k] = v[k]; }); });
-	    return res;
-	}
-	exports.flattenArrayOfObjects = flattenArrayOfObjects;
-	function find(xs, f) {
-	    return new Opt(_.find(xs || [], f));
-	}
-	exports.find = find;
-	exports.isInstance = function (v, C) { return (v instanceof C) ? [v] : []; };
-	exports.ifInstanceOf = function (v, C, f) { return (v instanceof C) ? f(v) : null; };
-	function toTuples(map) {
-	    return Object.keys(map).map(function (k) { return [k, map[k]]; });
-	}
-	exports.toTuples = toTuples;
-	function fromTuples(tuples) {
-	    var obj = {};
-	    tuples.forEach(function (x) { return obj[x[0]] = x[1]; });
-	    return obj;
-	}
-	exports.fromTuples = fromTuples;
-	exports.collectInstancesOf = function (xs, C) { return tap([], function (res) { return xs.forEach(function (v) { return exports.ifInstanceOf(v, C, function (x) { return res.push(x); }); }); }); };
-	exports.collectInstancesOfInMap = function (map, C) {
-	    return Object.keys(map).map(function (k) { return [k, map[k]]; }).filter(function (x) { return x[1] instanceof C; }).map(function (x) { return x; });
-	};
-	exports.asArray = function (v) { return exports.defined(v) ? ((v instanceof Array) ? v : [v]) : []; };
-	exports.shallowCopy = function (obj) { return tap({}, function (copy) { return Object.keys(obj).forEach(function (k) { return copy[k] = obj[k]; }); }); };
-	exports.flatMap = function (xs, f) { return exports.flatten(xs.map(f)); };
-	exports.flatten = function (xss) { return Array.prototype.concat.apply([], xss); };
-	exports.takeWhile = function (xs, f) { return tap([], function (res) {
-	    for (var i = 0; i < xs.length; i++) {
-	        if (!f(xs[i]))
-	            break;
-	        res.push(xs[i]);
-	    }
-	}); };
-	function tap(v, f) {
-	    f(v);
-	    return v;
-	}
-	exports.tap = tap;
-	function kv(obj, iter) {
-	    if (typeof obj === 'object')
-	        Object.keys(obj).forEach(function (k) { return iter(k, obj[k]); });
-	}
-	exports.kv = kv;
-	function indexed(objects, key, delKey) {
-	    if (delKey === void 0) { delKey = false; }
-	    var obj = {};
-	    objects.forEach(function (original) {
-	        var copy = exports.shallowCopy(original);
-	        if (delKey)
-	            delete copy[key];
-	        obj[original[key]] = copy;
-	    });
-	    return obj;
-	}
-	exports.indexed = indexed;
-	function stringEndsWith(str, search) {
-	    var dif = str.length - search.length;
-	    return dif >= 0 && str.lastIndexOf(search) === dif;
-	}
-	exports.stringEndsWith = stringEndsWith;
-	function stringStartsWith(str, search) {
-	    return str.length - search.length >= 0 && str.substring(0, search.length) === search;
-	}
-	exports.stringStartsWith = stringStartsWith;
-	function lazypropkeyfilter(k) {
-	    return k[k.length - 1] == "_"; // ends with underscore
-	}
-	exports.lazypropkeyfilter = lazypropkeyfilter;
-	function lazyprop(obj, key, func) {
-	    var result, ready = false;
-	    obj[key] = function () {
-	        if (!ready) {
-	            ready = true;
-	            result = func.apply(obj);
-	        }
-	        return result;
-	    };
-	}
-	function lazyprops(obj, keyfilter) {
-	    if (keyfilter === void 0) { keyfilter = lazypropkeyfilter; }
-	    for (var k in obj) {
-	        if (keyfilter(k)) {
-	            exports.ifInstanceOf(obj[k], Function, function (vf) { return (vf.length === 0) ? lazyprop(obj, k, vf) : null; });
-	        }
-	    }
-	}
-	exports.lazyprops = lazyprops;
-	function iff(v, f) {
-	    if (v !== undefined)
-	        f(v);
-	}
-	exports.iff = iff;
-	function isRAMLUrl(str) {
-	    if (typeof str !== 'string' || str == '')
-	        return false;
-	    return stringEndsWith(str, ".raml");
-	}
-	exports.isRAMLUrl = isRAMLUrl;
-	function getAllRequiredExternalModulesFromCode(code) {
-	    var match;
-	    var mods = [];
-	    // both quoting styles
-	    var r1 = new RegExp("require\\('([^']+)'\\)", "gi");
-	    while (match = r1.exec(code)) {
-	        mods.push(match[1]);
-	    }
-	    var r2 = new RegExp('require\\("([^"]+)"\\)', "gi");
-	    while (match = r2.exec(code)) {
-	        mods.push(match[1]);
-	    }
-	    mods = _.unique(mods).filter(function (x) { return x != ""; });
-	    mods.sort();
-	    return mods;
-	}
-	exports.getAllRequiredExternalModulesFromCode = getAllRequiredExternalModulesFromCode;
-	exports.serial = (function () {
-	    var i = 0;
-	    return function () { return i++; };
-	})();
-	function isEssential(arg) {
-	    return typeof arg !== 'undefined' && arg != null;
-	}
-	exports.isEssential = isEssential;
-	function firstToUpper(q) {
-	    if (q.length == 0) {
-	        return q;
-	    }
-	    return q.charAt(0).toUpperCase() + q.substr(1);
-	}
-	exports.firstToUpper = firstToUpper;
-	function updateObject(source, target, addNewFields) {
-	    if (addNewFields === void 0) { addNewFields = false; }
-	    var keySet = Object.keys(target);
-	    if (addNewFields) {
-	        var map = {};
-	        keySet.forEach(function (x) { return map[x] = true; });
-	        Object.keys(source).forEach(function (x) { return map[x] = true; });
-	        keySet = Object.keys(map);
-	    }
-	    keySet.forEach(function (x) {
-	        var value = source[x];
-	        if (value instanceof Object) {
-	            if (!target[x]) {
-	                target[x] = {};
-	            }
-	            updateObject(value, target[x], true);
-	        }
-	        else if (value != undefined) {
-	            target[x] = source[x];
-	        }
-	    });
-	}
-	exports.updateObject = updateObject;
-	;
-	/**
-	 * In 'str' replace all occurences of 'map' keys to their values.
-	 */
-	function replaceMap(str, map) {
-	    Object.keys(map).forEach(function (x) { return str = replace(str, x, map[x]); });
-	    return str;
-	}
-	exports.replaceMap = replaceMap;
-	/**
-	 * Replace all occurences of 'x' in 'str' to 'r' without thinking if 'x' can be passed without
-	 * escaping as argument to RegExp constructor
-	 */
-	function replace(str, x, r) {
-	    var result = '';
-	    var prev = 0;
-	    for (var i = str.indexOf(x); i < str.length && i >= 0; i = str.indexOf(x, prev)) {
-	        result += str.substring(prev, i);
-	        result += r;
-	        prev = i + x.length;
-	    }
-	    result += str.substring(prev, str.length);
-	    return result;
-	}
-	exports.replace = replace;
-	//# sourceMappingURL=index.js.map
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../typings/tsd.d.ts" />
-	'use strict';
-	var loader = __webpack_require__(61);
-	var dumper = __webpack_require__(35);
-	function deprecated(name) {
-	    return function () {
-	        throw new Error('Function ' + name + ' is deprecated and cannot be used.');
-	    };
-	}
-	exports.Type = __webpack_require__(62);
-	exports.Schema = __webpack_require__(63);
-	exports.FAILSAFE_SCHEMA = __webpack_require__(64);
-	exports.JSON_SCHEMA = __webpack_require__(65);
-	exports.CORE_SCHEMA = __webpack_require__(66);
-	exports.DEFAULT_SAFE_SCHEMA = __webpack_require__(67);
-	exports.DEFAULT_FULL_SCHEMA = __webpack_require__(68);
-	exports.load = loader.load;
-	exports.loadAll = loader.loadAll;
-	exports.safeLoad = loader.safeLoad;
-	exports.safeLoadAll = loader.safeLoadAll;
-	exports.dump = dumper.dump;
-	exports.safeDump = dumper.safeDump;
-	exports.YAMLException = __webpack_require__(36);
-	// Deprecared schema names from JS-YAML 2.0.x
-	exports.MINIMAL_SCHEMA = __webpack_require__(64);
-	exports.SAFE_SCHEMA = __webpack_require__(67);
-	exports.DEFAULT_SCHEMA = __webpack_require__(68);
-	// Deprecated functions from JS-YAML 1.x.x
-	exports.scan = deprecated('scan');
-	exports.parse = deprecated('parse');
-	exports.compose = deprecated('compose');
-	exports.addConstructor = deprecated('addConstructor');
-	//# sourceMappingURL=js-yaml.js.map
-
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../typings/tsd.d.ts" />
-	'use strict';
-	/*eslint-disable no-use-before-define*/
-	var common = __webpack_require__(69);
-	var YAMLException = __webpack_require__(36);
-	var DEFAULT_FULL_SCHEMA = __webpack_require__(68);
-	var DEFAULT_SAFE_SCHEMA = __webpack_require__(67);
-	var _toString = Object.prototype.toString;
-	var _hasOwnProperty = Object.prototype.hasOwnProperty;
-	var CHAR_TAB = 0x09; /* Tab */
-	var CHAR_LINE_FEED = 0x0A; /* LF */
-	var CHAR_CARRIAGE_RETURN = 0x0D; /* CR */
-	var CHAR_SPACE = 0x20; /* Space */
-	var CHAR_EXCLAMATION = 0x21; /* ! */
-	var CHAR_DOUBLE_QUOTE = 0x22; /* " */
-	var CHAR_SHARP = 0x23; /* # */
-	var CHAR_PERCENT = 0x25; /* % */
-	var CHAR_AMPERSAND = 0x26; /* & */
-	var CHAR_SINGLE_QUOTE = 0x27; /* ' */
-	var CHAR_ASTERISK = 0x2A; /* * */
-	var CHAR_COMMA = 0x2C; /* , */
-	var CHAR_MINUS = 0x2D; /* - */
-	var CHAR_COLON = 0x3A; /* : */
-	var CHAR_GREATER_THAN = 0x3E; /* > */
-	var CHAR_QUESTION = 0x3F; /* ? */
-	var CHAR_COMMERCIAL_AT = 0x40; /* @ */
-	var CHAR_LEFT_SQUARE_BRACKET = 0x5B; /* [ */
-	var CHAR_RIGHT_SQUARE_BRACKET = 0x5D; /* ] */
-	var CHAR_GRAVE_ACCENT = 0x60; /* ` */
-	var CHAR_LEFT_CURLY_BRACKET = 0x7B; /* { */
-	var CHAR_VERTICAL_LINE = 0x7C; /* | */
-	var CHAR_RIGHT_CURLY_BRACKET = 0x7D; /* } */
-	var ESCAPE_SEQUENCES = {};
-	ESCAPE_SEQUENCES[0x00] = '\\0';
-	ESCAPE_SEQUENCES[0x07] = '\\a';
-	ESCAPE_SEQUENCES[0x08] = '\\b';
-	ESCAPE_SEQUENCES[0x09] = '\\t';
-	ESCAPE_SEQUENCES[0x0A] = '\\n';
-	ESCAPE_SEQUENCES[0x0B] = '\\v';
-	ESCAPE_SEQUENCES[0x0C] = '\\f';
-	ESCAPE_SEQUENCES[0x0D] = '\\r';
-	ESCAPE_SEQUENCES[0x1B] = '\\e';
-	ESCAPE_SEQUENCES[0x22] = '\\"';
-	ESCAPE_SEQUENCES[0x5C] = '\\\\';
-	ESCAPE_SEQUENCES[0x85] = '\\N';
-	ESCAPE_SEQUENCES[0xA0] = '\\_';
-	ESCAPE_SEQUENCES[0x2028] = '\\L';
-	ESCAPE_SEQUENCES[0x2029] = '\\P';
-	var DEPRECATED_BOOLEANS_SYNTAX = [
-	    'y',
-	    'Y',
-	    'yes',
-	    'Yes',
-	    'YES',
-	    'on',
-	    'On',
-	    'ON',
-	    'n',
-	    'N',
-	    'no',
-	    'No',
-	    'NO',
-	    'off',
-	    'Off',
-	    'OFF'
-	];
-	function compileStyleMap(schema, map) {
-	    var result, keys, index, length, tag, style, type;
-	    if (null === map) {
-	        return {};
-	    }
-	    result = {};
-	    keys = Object.keys(map);
-	    for (index = 0, length = keys.length; index < length; index += 1) {
-	        tag = keys[index];
-	        style = String(map[tag]);
-	        if ('!!' === tag.slice(0, 2)) {
-	            tag = 'tag:yaml.org,2002:' + tag.slice(2);
-	        }
-	        type = schema.compiledTypeMap[tag];
-	        if (type && _hasOwnProperty.call(type.styleAliases, style)) {
-	            style = type.styleAliases[style];
-	        }
-	        result[tag] = style;
-	    }
-	    return result;
-	}
-	function encodeHex(character) {
-	    var string, handle, length;
-	    string = character.toString(16).toUpperCase();
-	    if (character <= 0xFF) {
-	        handle = 'x';
-	        length = 2;
-	    }
-	    else if (character <= 0xFFFF) {
-	        handle = 'u';
-	        length = 4;
-	    }
-	    else if (character <= 0xFFFFFFFF) {
-	        handle = 'U';
-	        length = 8;
-	    }
-	    else {
-	        throw new YAMLException('code point within a string may not be greater than 0xFFFFFFFF');
-	    }
-	    return '\\' + handle + common.repeat('0', length - string.length) + string;
-	}
-	function State(options) {
-	    this.schema = options['schema'] || DEFAULT_FULL_SCHEMA;
-	    this.indent = Math.max(1, (options['indent'] || 2));
-	    this.skipInvalid = options['skipInvalid'] || false;
-	    this.flowLevel = (common.isNothing(options['flowLevel']) ? -1 : options['flowLevel']);
-	    this.styleMap = compileStyleMap(this.schema, options['styles'] || null);
-	    this.implicitTypes = this.schema.compiledImplicit;
-	    this.explicitTypes = this.schema.compiledExplicit;
-	    this.tag = null;
-	    this.result = '';
-	    this.duplicates = [];
-	    this.usedDuplicates = null;
-	}
-	function indentString(string, spaces) {
-	    var ind = common.repeat(' ', spaces), position = 0, next = -1, result = '', line, length = string.length;
-	    while (position < length) {
-	        next = string.indexOf('\n', position);
-	        if (next === -1) {
-	            line = string.slice(position);
-	            position = length;
-	        }
-	        else {
-	            line = string.slice(position, next + 1);
-	            position = next + 1;
-	        }
-	        if (line.length && line !== '\n') {
-	            result += ind;
-	        }
-	        result += line;
-	    }
-	    return result;
-	}
-	function generateNextLine(state, level) {
-	    return '\n' + common.repeat(' ', state.indent * level);
-	}
-	function testImplicitResolving(state, str) {
-	    var index, length, type;
-	    for (index = 0, length = state.implicitTypes.length; index < length; index += 1) {
-	        type = state.implicitTypes[index];
-	        if (type.resolve(str)) {
-	            return true;
-	        }
-	    }
-	    return false;
-	}
-	function StringBuilder(source) {
-	    this.source = source;
-	    this.result = '';
-	    this.checkpoint = 0;
-	}
-	StringBuilder.prototype.takeUpTo = function (position) {
-	    var er;
-	    if (position < this.checkpoint) {
-	        er = new Error('position should be > checkpoint');
-	        er.position = position;
-	        er.checkpoint = this.checkpoint;
-	        throw er;
-	    }
-	    this.result += this.source.slice(this.checkpoint, position);
-	    this.checkpoint = position;
-	    return this;
-	};
-	StringBuilder.prototype.escapeChar = function () {
-	    var character, esc;
-	    character = this.source.charCodeAt(this.checkpoint);
-	    esc = ESCAPE_SEQUENCES[character] || encodeHex(character);
-	    this.result += esc;
-	    this.checkpoint += 1;
-	    return this;
-	};
-	StringBuilder.prototype.finish = function () {
-	    if (this.source.length > this.checkpoint) {
-	        this.takeUpTo(this.source.length);
-	    }
-	};
-	function writeScalar(state, object, level) {
-	    var simple, first, spaceWrap, folded, literal, single, double, sawLineFeed, linePosition, longestLine, indent, max, character, position, escapeSeq, hexEsc, previous, lineLength, modifier, trailingLineBreaks, result;
-	    if (0 === object.length) {
-	        state.dump = "''";
-	        return;
-	    }
-	    if (object.indexOf("!include") == 0) {
-	        state.dump = "" + object; //FIXME
-	        return;
-	    }
-	    if (object.indexOf("!$$$novalue") == 0) {
-	        state.dump = ""; //FIXME
-	        return;
-	    }
-	    if (-1 !== DEPRECATED_BOOLEANS_SYNTAX.indexOf(object)) {
-	        state.dump = "'" + object + "'";
-	        return;
-	    }
-	    simple = true;
-	    first = object.length ? object.charCodeAt(0) : 0;
-	    spaceWrap = (CHAR_SPACE === first || CHAR_SPACE === object.charCodeAt(object.length - 1));
-	    // Simplified check for restricted first characters
-	    // http://www.yaml.org/spec/1.2/spec.html#ns-plain-first%28c%29
-	    if (CHAR_MINUS === first || CHAR_QUESTION === first || CHAR_COMMERCIAL_AT === first || CHAR_GRAVE_ACCENT === first) {
-	        simple = false;
-	    }
-	    // can only use > and | if not wrapped in spaces.
-	    if (spaceWrap) {
-	        simple = false;
-	        folded = false;
-	        literal = false;
-	    }
-	    else {
-	        folded = true;
-	        literal = true;
-	    }
-	    single = true;
-	    double = new StringBuilder(object);
-	    sawLineFeed = false;
-	    linePosition = 0;
-	    longestLine = 0;
-	    indent = state.indent * level;
-	    max = 80;
-	    if (indent < 40) {
-	        max -= indent;
-	    }
-	    else {
-	        max = 40;
-	    }
-	    for (position = 0; position < object.length; position++) {
-	        character = object.charCodeAt(position);
-	        if (simple) {
-	            // Characters that can never appear in the simple scalar
-	            if (!simpleChar(character)) {
-	                simple = false;
-	            }
-	            else {
-	                continue;
-	            }
-	        }
-	        if (single && character === CHAR_SINGLE_QUOTE) {
-	            single = false;
-	        }
-	        escapeSeq = ESCAPE_SEQUENCES[character];
-	        hexEsc = needsHexEscape(character);
-	        if (!escapeSeq && !hexEsc) {
-	            continue;
-	        }
-	        if (character !== CHAR_LINE_FEED && character !== CHAR_DOUBLE_QUOTE && character !== CHAR_SINGLE_QUOTE) {
-	            folded = false;
-	            literal = false;
-	        }
-	        else if (character === CHAR_LINE_FEED) {
-	            sawLineFeed = true;
-	            single = false;
-	            if (position > 0) {
-	                previous = object.charCodeAt(position - 1);
-	                if (previous === CHAR_SPACE) {
-	                    literal = false;
-	                    folded = false;
-	                }
-	            }
-	            if (folded) {
-	                lineLength = position - linePosition;
-	                linePosition = position;
-	                if (lineLength > longestLine) {
-	                    longestLine = lineLength;
-	                }
-	            }
-	        }
-	        if (character !== CHAR_DOUBLE_QUOTE) {
-	            single = false;
-	        }
-	        double.takeUpTo(position);
-	        double.escapeChar();
-	    }
-	    if (simple && testImplicitResolving(state, object)) {
-	        simple = false;
-	    }
-	    modifier = '';
-	    if (folded || literal) {
-	        trailingLineBreaks = 0;
-	        if (object.charCodeAt(object.length - 1) === CHAR_LINE_FEED) {
-	            trailingLineBreaks += 1;
-	            if (object.charCodeAt(object.length - 2) === CHAR_LINE_FEED) {
-	                trailingLineBreaks += 1;
-	            }
-	        }
-	        if (trailingLineBreaks === 0) {
-	            modifier = '-';
-	        }
-	        else if (trailingLineBreaks === 2) {
-	            modifier = '+';
-	        }
-	    }
-	    if (literal && longestLine < max) {
-	        folded = false;
-	    }
-	    // If it's literally one line, then don't bother with the literal.
-	    // We may still want to do a fold, though, if it's a super long line.
-	    if (!sawLineFeed) {
-	        literal = false;
-	    }
-	    if (simple) {
-	        state.dump = object;
-	    }
-	    else if (single) {
-	        state.dump = '\'' + object + '\'';
-	    }
-	    else if (folded) {
-	        result = fold(object, max);
-	        state.dump = '>' + modifier + '\n' + indentString(result, indent);
-	    }
-	    else if (literal) {
-	        if (!modifier) {
-	            object = object.replace(/\n$/, '');
-	        }
-	        state.dump = '|' + modifier + '\n' + indentString(object, indent);
-	    }
-	    else if (double) {
-	        double.finish();
-	        state.dump = '"' + double.result + '"';
-	    }
-	    else {
-	        throw new Error('Failed to dump scalar value');
-	    }
-	    return;
-	}
-	// The `trailing` var is a regexp match of any trailing `\n` characters.
-	//
-	// There are three cases we care about:
-	//
-	// 1. One trailing `\n` on the string.  Just use `|` or `>`.
-	//    This is the assumed default. (trailing = null)
-	// 2. No trailing `\n` on the string.  Use `|-` or `>-` to "chomp" the end.
-	// 3. More than one trailing `\n` on the string.  Use `|+` or `>+`.
-	//
-	// In the case of `>+`, these line breaks are *not* doubled (like the line
-	// breaks within the string), so it's important to only end with the exact
-	// same number as we started.
-	function fold(object, max) {
-	    var result = '', position = 0, length = object.length, trailing = /\n+$/.exec(object), newLine;
-	    if (trailing) {
-	        length = trailing.index + 1;
-	    }
-	    while (position < length) {
-	        newLine = object.indexOf('\n', position);
-	        if (newLine > length || newLine === -1) {
-	            if (result) {
-	                result += '\n\n';
-	            }
-	            result += foldLine(object.slice(position, length), max);
-	            position = length;
-	        }
-	        else {
-	            if (result) {
-	                result += '\n\n';
-	            }
-	            result += foldLine(object.slice(position, newLine), max);
-	            position = newLine + 1;
-	        }
-	    }
-	    if (trailing && trailing[0] !== '\n') {
-	        result += trailing[0];
-	    }
-	    return result;
-	}
-	function foldLine(line, max) {
-	    if (line === '') {
-	        return line;
-	    }
-	    var foldRe = /[^\s] [^\s]/g, result = '', prevMatch = 0, foldStart = 0, match = foldRe.exec(line), index, foldEnd, folded;
-	    while (match) {
-	        index = match.index;
-	        // when we cross the max len, if the previous match would've
-	        // been ok, use that one, and carry on.  If there was no previous
-	        // match on this fold section, then just have a long line.
-	        if (index - foldStart > max) {
-	            if (prevMatch !== foldStart) {
-	                foldEnd = prevMatch;
-	            }
-	            else {
-	                foldEnd = index;
-	            }
-	            if (result) {
-	                result += '\n';
-	            }
-	            folded = line.slice(foldStart, foldEnd);
-	            result += folded;
-	            foldStart = foldEnd + 1;
-	        }
-	        prevMatch = index + 1;
-	        match = foldRe.exec(line);
-	    }
-	    if (result) {
-	        result += '\n';
-	    }
-	    // if we end up with one last word at the end, then the last bit might
-	    // be slightly bigger than we wanted, because we exited out of the loop.
-	    if (foldStart !== prevMatch && line.length - foldStart > max) {
-	        result += line.slice(foldStart, prevMatch) + '\n' + line.slice(prevMatch + 1);
-	    }
-	    else {
-	        result += line.slice(foldStart);
-	    }
-	    return result;
-	}
-	// Returns true if character can be found in a simple scalar
-	function simpleChar(character) {
-	    return CHAR_TAB !== character && CHAR_LINE_FEED !== character && CHAR_CARRIAGE_RETURN !== character && CHAR_COMMA !== character && CHAR_LEFT_SQUARE_BRACKET !== character && CHAR_RIGHT_SQUARE_BRACKET !== character && CHAR_LEFT_CURLY_BRACKET !== character && CHAR_RIGHT_CURLY_BRACKET !== character && CHAR_SHARP !== character && CHAR_AMPERSAND !== character && CHAR_ASTERISK !== character && CHAR_EXCLAMATION !== character && CHAR_VERTICAL_LINE !== character && CHAR_GREATER_THAN !== character && CHAR_SINGLE_QUOTE !== character && CHAR_DOUBLE_QUOTE !== character && CHAR_PERCENT !== character && CHAR_COLON !== character && !ESCAPE_SEQUENCES[character] && !needsHexEscape(character);
-	}
-	// Returns true if the character code needs to be escaped.
-	function needsHexEscape(character) {
-	    return !((0x00020 <= character && character <= 0x00007E) || (0x00085 === character) || (0x000A0 <= character && character <= 0x00D7FF) || (0x0E000 <= character && character <= 0x00FFFD) || (0x10000 <= character && character <= 0x10FFFF));
-	}
-	function writeFlowSequence(state, level, object) {
-	    var _result = '', _tag = state.tag, index, length;
-	    for (index = 0, length = object.length; index < length; index += 1) {
-	        // Write only valid elements.
-	        if (writeNode(state, level, object[index], false, false)) {
-	            if (0 !== index) {
-	                _result += ', ';
-	            }
-	            _result += state.dump;
-	        }
-	    }
-	    state.tag = _tag;
-	    state.dump = '[' + _result + ']';
-	}
-	function writeBlockSequence(state, level, object, compact) {
-	    var _result = '', _tag = state.tag, index, length;
-	    for (index = 0, length = object.length; index < length; index += 1) {
-	        // Write only valid elements.
-	        if (writeNode(state, level + 1, object[index], true, true)) {
-	            if (!compact || 0 !== index) {
-	                _result += generateNextLine(state, level);
-	            }
-	            _result += '- ' + state.dump;
-	        }
-	    }
-	    state.tag = _tag;
-	    state.dump = _result || '[]'; // Empty sequence if no valid values.
-	}
-	function writeFlowMapping(state, level, object) {
-	    var _result = '', _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, pairBuffer;
-	    for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-	        pairBuffer = '';
-	        if (0 !== index) {
-	            pairBuffer += ', ';
-	        }
-	        objectKey = objectKeyList[index];
-	        objectValue = object[objectKey];
-	        if (!writeNode(state, level, objectKey, false, false)) {
-	            continue;
-	        }
-	        if (state.dump.length > 1024) {
-	            pairBuffer += '? ';
-	        }
-	        pairBuffer += state.dump + ': ';
-	        if (!writeNode(state, level, objectValue, false, false)) {
-	            continue;
-	        }
-	        pairBuffer += state.dump;
-	        // Both key and value are valid.
-	        _result += pairBuffer;
-	    }
-	    state.tag = _tag;
-	    state.dump = '{' + _result + '}';
-	}
-	function writeBlockMapping(state, level, object, compact) {
-	    var _result = '', _tag = state.tag, objectKeyList = Object.keys(object), index, length, objectKey, objectValue, explicitPair, pairBuffer;
-	    for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-	        pairBuffer = '';
-	        if (!compact || 0 !== index) {
-	            pairBuffer += generateNextLine(state, level);
-	        }
-	        objectKey = objectKeyList[index];
-	        objectValue = object[objectKey];
-	        if (!writeNode(state, level + 1, objectKey, true, true)) {
-	            continue;
-	        }
-	        explicitPair = (null !== state.tag && '?' !== state.tag) || (state.dump && state.dump.length > 1024);
-	        if (explicitPair) {
-	            if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
-	                pairBuffer += '?';
-	            }
-	            else {
-	                pairBuffer += '? ';
-	            }
-	        }
-	        pairBuffer += state.dump;
-	        if (explicitPair) {
-	            pairBuffer += generateNextLine(state, level);
-	        }
-	        if (!writeNode(state, level + 1, objectValue, true, explicitPair)) {
-	            continue;
-	        }
-	        if (state.dump && CHAR_LINE_FEED === state.dump.charCodeAt(0)) {
-	            pairBuffer += ':';
-	        }
-	        else {
-	            pairBuffer += ': ';
-	        }
-	        pairBuffer += state.dump;
-	        // Both key and value are valid.
-	        _result += pairBuffer;
-	    }
-	    state.tag = _tag;
-	    state.dump = _result || '{}'; // Empty mapping if no valid pairs.
-	}
-	function detectType(state, object, explicit) {
-	    var _result, typeList, index, length, type, style;
-	    typeList = explicit ? state.explicitTypes : state.implicitTypes;
-	    for (index = 0, length = typeList.length; index < length; index += 1) {
-	        type = typeList[index];
-	        if ((type.instanceOf || type.predicate) && (!type.instanceOf || (('object' === typeof object) && (object instanceof type.instanceOf))) && (!type.predicate || type.predicate(object))) {
-	            state.tag = explicit ? type.tag : '?';
-	            if (type.represent) {
-	                style = state.styleMap[type.tag] || type.defaultStyle;
-	                if ('[object Function]' === _toString.call(type.represent)) {
-	                    _result = type.represent(object, style);
-	                }
-	                else if (_hasOwnProperty.call(type.represent, style)) {
-	                    _result = type.represent[style](object, style);
-	                }
-	                else {
-	                    throw new YAMLException('!<' + type.tag + '> tag resolver accepts not "' + style + '" style');
-	                }
-	                state.dump = _result;
-	            }
-	            return true;
-	        }
-	    }
-	    return false;
-	}
-	// Serializes `object` and writes it to global `result`.
-	// Returns true on success, or false on invalid object.
-	//
-	function writeNode(state, level, object, block, compact) {
-	    state.tag = null;
-	    state.dump = object;
-	    if (!detectType(state, object, false)) {
-	        detectType(state, object, true);
-	    }
-	    var type = _toString.call(state.dump);
-	    if (block) {
-	        block = (0 > state.flowLevel || state.flowLevel > level);
-	    }
-	    if ((null !== state.tag && '?' !== state.tag) || (2 !== state.indent && level > 0)) {
-	        compact = false;
-	    }
-	    var objectOrArray = '[object Object]' === type || '[object Array]' === type, duplicateIndex, duplicate;
-	    if (objectOrArray) {
-	        duplicateIndex = state.duplicates.indexOf(object);
-	        duplicate = duplicateIndex !== -1;
-	    }
-	    if (duplicate && state.usedDuplicates[duplicateIndex]) {
-	        state.dump = '*ref_' + duplicateIndex;
-	    }
-	    else {
-	        if (objectOrArray && duplicate && !state.usedDuplicates[duplicateIndex]) {
-	            state.usedDuplicates[duplicateIndex] = true;
-	        }
-	        if ('[object Object]' === type) {
-	            if (block && (0 !== Object.keys(state.dump).length)) {
-	                writeBlockMapping(state, level, state.dump, compact);
-	                if (duplicate) {
-	                    state.dump = '&ref_' + duplicateIndex + (0 === level ? '\n' : '') + state.dump;
-	                }
-	            }
-	            else {
-	                writeFlowMapping(state, level, state.dump);
-	                if (duplicate) {
-	                    state.dump = '&ref_' + duplicateIndex + ' ' + state.dump;
-	                }
-	            }
-	        }
-	        else if ('[object Array]' === type) {
-	            if (block && (0 !== state.dump.length)) {
-	                writeBlockSequence(state, level, state.dump, compact);
-	                if (duplicate) {
-	                    state.dump = '&ref_' + duplicateIndex + (0 === level ? '\n' : '') + state.dump;
-	                }
-	            }
-	            else {
-	                writeFlowSequence(state, level, state.dump);
-	                if (duplicate) {
-	                    state.dump = '&ref_' + duplicateIndex + ' ' + state.dump;
-	                }
-	            }
-	        }
-	        else if ('[object String]' === type) {
-	            if ('?' !== state.tag) {
-	                writeScalar(state, state.dump, level);
-	            }
-	        }
-	        else {
-	            if (state.skipInvalid) {
-	                return false;
-	            }
-	            throw new YAMLException('unacceptable kind of an object to dump ' + type);
-	        }
-	        if (null !== state.tag && '?' !== state.tag) {
-	            state.dump = '!<' + state.tag + '> ' + state.dump;
-	        }
-	    }
-	    return true;
-	}
-	function getDuplicateReferences(object, state) {
-	    var objects = [], duplicatesIndexes = [], index, length;
-	    inspectNode(object, objects, duplicatesIndexes);
-	    for (index = 0, length = duplicatesIndexes.length; index < length; index += 1) {
-	        state.duplicates.push(objects[duplicatesIndexes[index]]);
-	    }
-	    state.usedDuplicates = new Array(length);
-	}
-	function inspectNode(object, objects, duplicatesIndexes) {
-	    var type = _toString.call(object), objectKeyList, index, length;
-	    if (null !== object && 'object' === typeof object) {
-	        index = objects.indexOf(object);
-	        if (-1 !== index) {
-	            if (-1 === duplicatesIndexes.indexOf(index)) {
-	                duplicatesIndexes.push(index);
-	            }
-	        }
-	        else {
-	            objects.push(object);
-	            if (Array.isArray(object)) {
-	                for (index = 0, length = object.length; index < length; index += 1) {
-	                    inspectNode(object[index], objects, duplicatesIndexes);
-	                }
-	            }
-	            else {
-	                objectKeyList = Object.keys(object);
-	                for (index = 0, length = objectKeyList.length; index < length; index += 1) {
-	                    inspectNode(object[objectKeyList[index]], objects, duplicatesIndexes);
-	                }
-	            }
-	        }
-	    }
-	}
-	function dump(input, options) {
-	    options = options || {};
-	    var state = new State(options);
-	    getDuplicateReferences(input, state);
-	    if (writeNode(state, 0, input, true, true)) {
-	        return state.dump + '\n';
-	    }
-	    return '';
-	}
-	exports.dump = dump;
-	function safeDump(input, options) {
-	    return dump(input, common.extend({ schema: DEFAULT_SAFE_SCHEMA }, options));
-	}
-	exports.safeDump = safeDump;
-	//# sourceMappingURL=dumper.js.map
-
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var YAMLException = (function () {
-	    function YAMLException(reason, mark) {
-	        if (mark === void 0) { mark = null; }
-	        this.name = 'YAMLException';
-	        this.reason = reason;
-	        this.mark = mark;
-	        this.message = this.toString(false);
-	    }
-	    YAMLException.prototype.toString = function (compact) {
-	        if (compact === void 0) { compact = false; }
-	        var result;
-	        result = 'JS-YAML: ' + (this.reason || '(unknown reason)');
-	        if (!compact && this.mark) {
-	            result += ' ' + this.mark.toString();
-	        }
-	        return result;
-	    };
-	    return YAMLException;
-	})();
-	module.exports = YAMLException;
-	//# sourceMappingURL=exception.js.map
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(Buffer) {/// <reference path="../../../typings/tsd.d.ts" />
-	var spawnSync = __webpack_require__(43).spawnSync || __webpack_require__(44);
-	var HttpResponse = __webpack_require__(76);
-	__webpack_require__(75);
-	__webpack_require__(79);
-	var lru = __webpack_require__(80);
-	var globalCache = lru(50);
-	//Function('', fs.readFileSync(require.resolve('./lib/worker.js'), 'utf8'));
-	function doRequest(method, url, options) {
-	    var req = JSON.stringify({
-	        method: method,
-	        url: url,
-	        options: options
-	    });
-	    var res = spawnSync('/usr/local/bin/node', [/*require.resolve*/(71)], { input: req });
-	    if (!res) {
-	        return null;
-	    }
-	    if (res.status !== 0) {
-	        throw new Error(res.stderr.toString());
-	    }
-	    if (res.error) {
-	        if (typeof res.error === 'string')
-	            res.error = new Error(res.error);
-	        throw res.error;
-	    }
-	    var response = JSON.parse(res.stdout);
-	    if (response.success) {
-	        return new HttpResponse(response.response.statusCode, response.response.headers, response.response.body);
-	    }
-	    else {
-	        throw new Error(response.error.message || response.error || response);
-	    }
-	}
-	function readFromCacheOrGet(url) {
-	    var res = globalCache.get(url);
-	    if (res) {
-	        if (res == readFromCacheOrGet) {
-	            return null;
-	        }
-	        return res;
-	    }
-	    try {
-	        var res = doRequest("GET", url, { timeout: 3000, socketTimeout: 5000, retry: true });
-	        res = new Buffer(res.body.data).toString();
-	        globalCache.set(url, res);
-	        return res;
-	    }
-	    catch (e) {
-	        globalCache.set(url, readFromCacheOrGet);
-	        return null;
-	    }
-	}
-	exports.readFromCacheOrGet = readFromCacheOrGet;
-	//# sourceMappingURL=resourceRegistry.js.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(77).Buffer))
-
-/***/ },
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -21384,8 +21384,8 @@
 	 * Created by kor on 08/05/15.
 	 */
 	/// <reference path="../../typings/tsd.d.ts" />
-	var ts = __webpack_require__(41);
-	var tsm = __webpack_require__(72);
+	var ts = __webpack_require__(42);
+	var tsm = __webpack_require__(71);
 	var pth = __webpack_require__(11);
 	var fs = __webpack_require__(12);
 	function parse(content) {
@@ -21732,9 +21732,9 @@
 	};
 	/// <reference path="../../typings/tsd.d.ts" />
 	var tsStruct = __webpack_require__(38);
-	var def = __webpack_require__(19);
+	var def = __webpack_require__(21);
 	var _ = __webpack_require__(47);
-	var khttp = __webpack_require__(85);
+	var khttp = __webpack_require__(81);
 	var FieldWrapper = (function () {
 	    function FieldWrapper(_field, _clazz) {
 	        this._field = _field;
@@ -22785,16 +22785,10 @@
 	    return made;
 	};
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
 /* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = typescript;
-
-/***/ },
-/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -23068,6 +23062,12 @@
 	  return obj
 	}
 
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = typescript;
 
 /***/ },
 /* 43 */
@@ -23578,7 +23578,7 @@
 
 	module.exports = invariant;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
 /* 47 */
@@ -25188,2893 +25188,6 @@
 
 /***/ },
 /* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var ramlSanitize = __webpack_require__(81);
-	var ramlValidate = __webpack_require__(82);
-	var REGEXP_MATCH = {
-	    number: '[-+]?\\d+(?:\\.\\d+)?',
-	    integer: '[-+]?\\d+',
-	    date: '(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \\d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \\d{4} (?:[0-1]\\d|2[0-3]):[0-5]\\d:[0-5]\\d GMT',
-	    boolean: '(?:true|false)'
-	};
-	var ESCAPE_CHARACTERS = /([.*+?=^!:${}()|[\]\/\\])/g;
-	var REGEXP_REPLACE = new RegExp([
-	    '([.\\/])?\\{([^}]+)\\}',
-	    ESCAPE_CHARACTERS.source
-	].join('|'), 'g');
-	function toRegExp(path, parameters, keys, options) {
-	    var end = options.end !== false;
-	    var strict = options.strict;
-	    var flags = '';
-	    if (!options.sensitive) {
-	        flags += 'i';
-	    }
-	    var route = path.replace(REGEXP_REPLACE, function (match, prefix, key, escape) {
-	        if (escape) {
-	            return '\\' + escape;
-	        }
-	        // Push the current key into the keys array.
-	        keys.push({
-	            name: key,
-	            prefix: prefix || '/'
-	        });
-	        prefix = prefix ? '\\' + prefix : '';
-	        // TODO: Support an array of parameters.
-	        var param = parameters[key];
-	        var capture = param && REGEXP_MATCH[param.type] || '[^' + (prefix || '\\/') + ']+';
-	        var optional = param && param.required === false;
-	        if (Array.isArray(param.enum) && param.enum.length) {
-	            capture = '(?:' + param.enum.map(function (value) {
-	                return String(value).replace(ESCAPE_CHARACTERS, '\\$1');
-	            }).join('|') + ')';
-	        }
-	        return prefix + '(' + capture + ')' + (optional ? '?' : '');
-	    });
-	    var endsWithSlash = path.charAt(path.length - 1) === '/';
-	    // In non-strict mode we allow a slash at the end of match. If the path to
-	    // match already ends with a slash, we remove it for consistency. The slash
-	    // is valid at the end of a path match, not in the middle. This is important
-	    // in non-ending mode, where "/test/" shouldn't match "/test//route".
-	    if (!strict) {
-	        route = (endsWithSlash ? route.slice(0, -2) : route) + '(?:\\/(?=$))?';
-	    }
-	    if (end) {
-	        route += '$';
-	    }
-	    else {
-	        // In non-ending mode, we need the capturing groups to match as much as
-	        // possible by using a positive lookahead to the end or next path segment.
-	        route += strict && endsWithSlash ? '' : '(?=\\/|$)';
-	    }
-	    return new RegExp('^' + route + (end ? '$' : ''), flags);
-	}
-	function decodeParam(param) {
-	    try {
-	        return decodeURIComponent(param);
-	    }
-	    catch (_) {
-	        var err = new Error('Failed to decode param "' + param + '"');
-	        err.status = 400;
-	        throw err;
-	    }
-	}
-	function ramlPathMatch(path, parameters, options) {
-	    options = options || {};
-	    if (path === '/' && options.end === false) {
-	        return truth;
-	    }
-	    parameters = parameters || {};
-	    var keys = [];
-	    var re = toRegExp(path, parameters, keys, options);
-	    var sanitize = ramlSanitize()(parameters);
-	    var validate = ramlValidate()(parameters);
-	    return function (pathname) {
-	        var m = re.exec(pathname);
-	        if (!m) {
-	            return false;
-	        }
-	        if (parameters['mediaTypeExtension']) {
-	            if (m.length > 1 && !m[m.length - 1]) {
-	                var beforeLast = m[m.length - 2];
-	                var ind = beforeLast.lastIndexOf('.');
-	                if (ind >= 0) {
-	                    m[m.length - 2] = beforeLast.substring(0, ind);
-	                    m[m.length - 1] = beforeLast.substring(ind);
-	                }
-	            }
-	        }
-	        var path = m[0];
-	        var params = {};
-	        for (var i = 1; i < m.length; i++) {
-	            var key = keys[i - 1];
-	            var param = m[i];
-	            params[key.name] = param == null ? param : decodeParam(param);
-	        }
-	        params = sanitize(params);
-	        if (!validate(params).valid) {
-	            return false;
-	        }
-	        return {
-	            path: path,
-	            params: params
-	        };
-	    };
-	}
-	function truth(path) {
-	    return { path: '', params: {} };
-	}
-	module.exports = ramlPathMatch;
-	//# sourceMappingURL=raml-path-match.js.map
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var parser = (function () {
-	    "use strict";
-	    /*
-	     * Generated by PEG.js 0.9.0.
-	     *
-	     * http://pegjs.org/
-	     */
-	    function peg$subclass(child, parent) {
-	        function ctor() {
-	            this.constructor = child;
-	        }
-	        ctor.prototype = parent.prototype;
-	        child.prototype = new ctor();
-	    }
-	    function peg$SyntaxError(message, expected, found, location) {
-	        this.message = message;
-	        this.expected = expected;
-	        this.found = found;
-	        this.location = location;
-	        this.name = "SyntaxError";
-	        if (typeof Error.captureStackTrace === "function") {
-	            Error.captureStackTrace(this, peg$SyntaxError);
-	        }
-	    }
-	    peg$subclass(peg$SyntaxError, Error);
-	    function peg$parse(input) {
-	        var options = arguments.length > 1 ? arguments[1] : {}, parser = this, peg$FAILED = {}, peg$startRuleFunctions = { Signature: peg$parseSignature }, peg$startRuleFunction = peg$parseSignature, peg$c0 = "(", peg$c1 = { type: "literal", value: "(", description: "\"(\"" }, peg$c2 = ")", peg$c3 = { type: "literal", value: ")", description: "\")\"" }, peg$c4 = "=>", peg$c5 = { type: "literal", value: "=>", description: "\"=>\"" }, peg$c6 = function (args, returnType) {
-	            return { "args": args, "returnType": returnType ? returnType[1] : null };
-	        }, peg$c7 = function (farg, other) {
-	            return [farg].concat(other);
-	        }, peg$c8 = ",", peg$c9 = { type: "literal", value: ",", description: "\",\"" }, peg$c10 = function (r) {
-	            return r;
-	        }, peg$c11 = "?", peg$c12 = { type: "literal", value: "?", description: "\"?\"" }, peg$c13 = ":", peg$c14 = { type: "literal", value: ":", description: "\":\"" }, peg$c15 = function (lit, opt, t) {
-	            return { "name": lit.join(''), "type": t, "opt": opt ? true : false };
-	        }, peg$c16 = "{", peg$c17 = { type: "literal", value: "{", description: "\"{\"" }, peg$c18 = "}", peg$c19 = { type: "literal", value: "}", description: "\"}\"" }, peg$c20 = function (r, other) {
-	            return { "type": "responses", "codes": [r].concat(other) };
-	        }, peg$c21 = function (v) {
-	            return v;
-	        }, peg$c22 = function (c0, c1, c2, t) {
-	            return { "type": "codeAndType", "expr": t, "code": c0 + c1 + c2 };
-	        }, peg$c23 = "|", peg$c24 = { type: "literal", value: "|", description: "\"|\"" }, peg$c25 = function (first, rest) {
-	            return rest ? { "type": "union", "first": first, "rest": rest[3] } : first;
-	        }, peg$c26 = "[]", peg$c27 = { type: "literal", value: "[]", description: "\"[]\"" }, peg$c28 = function (expr, arr) {
-	            return { "type": "parens", "expr": expr, "arr": arr.length };
-	        }, peg$c29 = "<", peg$c30 = { type: "literal", value: "<", description: "\"<\"" }, peg$c31 = ">", peg$c32 = { type: "literal", value: ">", description: "\">\"" }, peg$c33 = function (first, other) {
-	            return [first].concat(other);
-	        }, peg$c34 = { type: "other", description: "name" }, peg$c35 = function (r, tp, c) {
-	            return { "type": "name", "params": tp, "value": r.join(""), "arr": (c.length) };
-	        }, peg$c36 = { type: "other", description: "whitespace" }, peg$c37 = /^[ \t\n\r]/, peg$c38 = { type: "class", value: "[ \\t\\n\\r]", description: "[ \\t\\n\\r]" }, peg$c39 = /^[A-Z]/, peg$c40 = { type: "class", value: "[A-Z]", description: "[A-Z]" }, peg$c41 = "_", peg$c42 = { type: "literal", value: "_", description: "\"_\"" }, peg$c43 = "-", peg$c44 = { type: "literal", value: "-", description: "\"-\"" }, peg$c45 = ".", peg$c46 = { type: "literal", value: ".", description: "\".\"" }, peg$c47 = /^[a-z]/, peg$c48 = { type: "class", value: "[a-z]", description: "[a-z]" }, peg$c49 = /^[0-9]/, peg$c50 = { type: "class", value: "[0-9]", description: "[0-9]" }, peg$currPos = 0, peg$savedPos = 0, peg$posDetailsCache = [{ line: 1, column: 1, seenCR: false }], peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
-	        if ("startRule" in options) {
-	            if (!(options.startRule in peg$startRuleFunctions)) {
-	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
-	            }
-	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
-	        }
-	        function text() {
-	            return input.substring(peg$savedPos, peg$currPos);
-	        }
-	        function location() {
-	            return peg$computeLocation(peg$savedPos, peg$currPos);
-	        }
-	        function expected(description) {
-	            throw peg$buildException(null, [{ type: "other", description: description }], input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
-	        }
-	        function error(message) {
-	            throw peg$buildException(message, null, input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
-	        }
-	        function peg$computePosDetails(pos) {
-	            var details = peg$posDetailsCache[pos], p, ch;
-	            if (details) {
-	                return details;
-	            }
-	            else {
-	                p = pos - 1;
-	                while (!peg$posDetailsCache[p]) {
-	                    p--;
-	                }
-	                details = peg$posDetailsCache[p];
-	                details = {
-	                    line: details.line,
-	                    column: details.column,
-	                    seenCR: details.seenCR
-	                };
-	                while (p < pos) {
-	                    ch = input.charAt(p);
-	                    if (ch === "\n") {
-	                        if (!details.seenCR) {
-	                            details.line++;
-	                        }
-	                        details.column = 1;
-	                        details.seenCR = false;
-	                    }
-	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
-	                        details.line++;
-	                        details.column = 1;
-	                        details.seenCR = true;
-	                    }
-	                    else {
-	                        details.column++;
-	                        details.seenCR = false;
-	                    }
-	                    p++;
-	                }
-	                peg$posDetailsCache[pos] = details;
-	                return details;
-	            }
-	        }
-	        function peg$computeLocation(startPos, endPos) {
-	            var startPosDetails = peg$computePosDetails(startPos), endPosDetails = peg$computePosDetails(endPos);
-	            return {
-	                start: {
-	                    offset: startPos,
-	                    line: startPosDetails.line,
-	                    column: startPosDetails.column
-	                },
-	                end: {
-	                    offset: endPos,
-	                    line: endPosDetails.line,
-	                    column: endPosDetails.column
-	                }
-	            };
-	        }
-	        function peg$fail(expected) {
-	            if (peg$currPos < peg$maxFailPos) {
-	                return;
-	            }
-	            if (peg$currPos > peg$maxFailPos) {
-	                peg$maxFailPos = peg$currPos;
-	                peg$maxFailExpected = [];
-	            }
-	            peg$maxFailExpected.push(expected);
-	        }
-	        function peg$buildException(message, expected, found, location) {
-	            function cleanupExpected(expected) {
-	                var i = 1;
-	                expected.sort(function (a, b) {
-	                    if (a.description < b.description) {
-	                        return -1;
-	                    }
-	                    else if (a.description > b.description) {
-	                        return 1;
-	                    }
-	                    else {
-	                        return 0;
-	                    }
-	                });
-	                while (i < expected.length) {
-	                    if (expected[i - 1] === expected[i]) {
-	                        expected.splice(i, 1);
-	                    }
-	                    else {
-	                        i++;
-	                    }
-	                }
-	            }
-	            function buildMessage(expected, found) {
-	                function stringEscape(s) {
-	                    function hex(ch) {
-	                        return ch.charCodeAt(0).toString(16).toUpperCase();
-	                    }
-	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
-	                        return '\\x0' + hex(ch);
-	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
-	                        return '\\x' + hex(ch);
-	                    }).replace(/[\u0100-\u0FFF]/g, function (ch) {
-	                        return '\\u0' + hex(ch);
-	                    }).replace(/[\u1000-\uFFFF]/g, function (ch) {
-	                        return '\\u' + hex(ch);
-	                    });
-	                }
-	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
-	                for (i = 0; i < expected.length; i++) {
-	                    expectedDescs[i] = expected[i].description;
-	                }
-	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
-	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
-	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
-	            }
-	            if (expected !== null) {
-	                cleanupExpected(expected);
-	            }
-	            return new peg$SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, location);
-	        }
-	        function peg$parseSignature() {
-	            var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
-	            s0 = peg$currPos;
-	            s1 = peg$parse_();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 40) {
-	                    s2 = peg$c0;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c1);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parseargs();
-	                    if (s3 === peg$FAILED) {
-	                        s3 = null;
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        s4 = peg$parse_();
-	                        if (s4 !== peg$FAILED) {
-	                            if (input.charCodeAt(peg$currPos) === 41) {
-	                                s5 = peg$c2;
-	                                peg$currPos++;
-	                            }
-	                            else {
-	                                s5 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c3);
-	                                }
-	                            }
-	                            if (s5 !== peg$FAILED) {
-	                                s6 = peg$parse_();
-	                                if (s6 !== peg$FAILED) {
-	                                    s7 = peg$currPos;
-	                                    if (input.substr(peg$currPos, 2) === peg$c4) {
-	                                        s8 = peg$c4;
-	                                        peg$currPos += 2;
-	                                    }
-	                                    else {
-	                                        s8 = peg$FAILED;
-	                                        if (peg$silentFails === 0) {
-	                                            peg$fail(peg$c5);
-	                                        }
-	                                    }
-	                                    if (s8 !== peg$FAILED) {
-	                                        s9 = peg$parseReturn();
-	                                        if (s9 !== peg$FAILED) {
-	                                            s8 = [s8, s9];
-	                                            s7 = s8;
-	                                        }
-	                                        else {
-	                                            peg$currPos = s7;
-	                                            s7 = peg$FAILED;
-	                                        }
-	                                    }
-	                                    else {
-	                                        peg$currPos = s7;
-	                                        s7 = peg$FAILED;
-	                                    }
-	                                    if (s7 === peg$FAILED) {
-	                                        s7 = null;
-	                                    }
-	                                    if (s7 !== peg$FAILED) {
-	                                        s8 = peg$parse_();
-	                                        if (s8 !== peg$FAILED) {
-	                                            peg$savedPos = s0;
-	                                            s1 = peg$c6(s3, s7);
-	                                            s0 = s1;
-	                                        }
-	                                        else {
-	                                            peg$currPos = s0;
-	                                            s0 = peg$FAILED;
-	                                        }
-	                                    }
-	                                    else {
-	                                        peg$currPos = s0;
-	                                        s0 = peg$FAILED;
-	                                    }
-	                                }
-	                                else {
-	                                    peg$currPos = s0;
-	                                    s0 = peg$FAILED;
-	                                }
-	                            }
-	                            else {
-	                                peg$currPos = s0;
-	                                s0 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseargs() {
-	            var s0, s1, s2, s3;
-	            s0 = peg$currPos;
-	            s1 = peg$parsearg();
-	            if (s1 !== peg$FAILED) {
-	                s2 = [];
-	                s3 = peg$parseextraArg();
-	                while (s3 !== peg$FAILED) {
-	                    s2.push(s3);
-	                    s3 = peg$parseextraArg();
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    peg$savedPos = s0;
-	                    s1 = peg$c7(s1, s2);
-	                    s0 = s1;
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseextraArg() {
-	            var s0, s1, s2, s3, s4;
-	            s0 = peg$currPos;
-	            s1 = peg$parse_();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 44) {
-	                    s2 = peg$c8;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c9);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parse_();
-	                    if (s3 !== peg$FAILED) {
-	                        s4 = peg$parsearg();
-	                        if (s4 !== peg$FAILED) {
-	                            peg$savedPos = s0;
-	                            s1 = peg$c10(s4);
-	                            s0 = s1;
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parsearg() {
-	            var s0, s1, s2, s3, s4;
-	            s0 = peg$currPos;
-	            s1 = [];
-	            s2 = peg$parsechar();
-	            while (s2 !== peg$FAILED) {
-	                s1.push(s2);
-	                s2 = peg$parsechar();
-	            }
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 63) {
-	                    s2 = peg$c11;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c12);
-	                    }
-	                }
-	                if (s2 === peg$FAILED) {
-	                    s2 = null;
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    if (input.charCodeAt(peg$currPos) === 58) {
-	                        s3 = peg$c13;
-	                        peg$currPos++;
-	                    }
-	                    else {
-	                        s3 = peg$FAILED;
-	                        if (peg$silentFails === 0) {
-	                            peg$fail(peg$c14);
-	                        }
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        s4 = peg$parseTerm();
-	                        if (s4 !== peg$FAILED) {
-	                            peg$savedPos = s0;
-	                            s1 = peg$c15(s1, s2, s4);
-	                            s0 = s1;
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseReturn() {
-	            var s0;
-	            s0 = peg$parseCode();
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parseTerm();
-	            }
-	            return s0;
-	        }
-	        function peg$parseCode() {
-	            var s0, s1, s2, s3, s4, s5;
-	            s0 = peg$currPos;
-	            s1 = peg$parse_();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 123) {
-	                    s2 = peg$c16;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c17);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parseResponseAndType();
-	                    if (s3 !== peg$FAILED) {
-	                        s4 = [];
-	                        s5 = peg$parseCommaAndResponse();
-	                        while (s5 !== peg$FAILED) {
-	                            s4.push(s5);
-	                            s5 = peg$parseCommaAndResponse();
-	                        }
-	                        if (s4 !== peg$FAILED) {
-	                            if (input.charCodeAt(peg$currPos) === 125) {
-	                                s5 = peg$c18;
-	                                peg$currPos++;
-	                            }
-	                            else {
-	                                s5 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c19);
-	                                }
-	                            }
-	                            if (s5 !== peg$FAILED) {
-	                                peg$savedPos = s0;
-	                                s1 = peg$c20(s3, s4);
-	                                s0 = s1;
-	                            }
-	                            else {
-	                                peg$currPos = s0;
-	                                s0 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseCommaAndResponse() {
-	            var s0, s1, s2;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 44) {
-	                s1 = peg$c8;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c9);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseResponseAndType();
-	                if (s2 !== peg$FAILED) {
-	                    peg$savedPos = s0;
-	                    s1 = peg$c21(s2);
-	                    s0 = s1;
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseResponseAndType() {
-	            var s0, s1, s2, s3, s4, s5;
-	            s0 = peg$currPos;
-	            s1 = peg$parsechar();
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parsechar();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parsechar();
-	                    if (s3 !== peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 58) {
-	                            s4 = peg$c13;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s4 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c14);
-	                            }
-	                        }
-	                        if (s4 !== peg$FAILED) {
-	                            s5 = peg$parseTerm();
-	                            if (s5 !== peg$FAILED) {
-	                                peg$savedPos = s0;
-	                                s1 = peg$c22(s1, s2, s3, s5);
-	                                s0 = s1;
-	                            }
-	                            else {
-	                                peg$currPos = s0;
-	                                s0 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseTerm() {
-	            var s0, s1, s2, s3, s4, s5, s6, s7;
-	            s0 = peg$currPos;
-	            s1 = peg$parse_();
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseFactor();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$currPos;
-	                    s4 = peg$parse_();
-	                    if (s4 !== peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 124) {
-	                            s5 = peg$c23;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s5 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c24);
-	                            }
-	                        }
-	                        if (s5 !== peg$FAILED) {
-	                            s6 = peg$parse_();
-	                            if (s6 !== peg$FAILED) {
-	                                s7 = peg$parseTerm();
-	                                if (s7 !== peg$FAILED) {
-	                                    s4 = [s4, s5, s6, s7];
-	                                    s3 = s4;
-	                                }
-	                                else {
-	                                    peg$currPos = s3;
-	                                    s3 = peg$FAILED;
-	                                }
-	                            }
-	                            else {
-	                                peg$currPos = s3;
-	                                s3 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s3;
-	                            s3 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s3;
-	                        s3 = peg$FAILED;
-	                    }
-	                    if (s3 === peg$FAILED) {
-	                        s3 = null;
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        peg$savedPos = s0;
-	                        s1 = peg$c25(s2, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseFactor() {
-	            var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 40) {
-	                s1 = peg$c0;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c1);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parse_();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parseTerm();
-	                    if (s3 !== peg$FAILED) {
-	                        s4 = peg$parse_();
-	                        if (s4 !== peg$FAILED) {
-	                            if (input.charCodeAt(peg$currPos) === 41) {
-	                                s5 = peg$c2;
-	                                peg$currPos++;
-	                            }
-	                            else {
-	                                s5 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c3);
-	                                }
-	                            }
-	                            if (s5 !== peg$FAILED) {
-	                                s6 = [];
-	                                s7 = peg$currPos;
-	                                s8 = peg$parse_();
-	                                if (s8 !== peg$FAILED) {
-	                                    if (input.substr(peg$currPos, 2) === peg$c26) {
-	                                        s9 = peg$c26;
-	                                        peg$currPos += 2;
-	                                    }
-	                                    else {
-	                                        s9 = peg$FAILED;
-	                                        if (peg$silentFails === 0) {
-	                                            peg$fail(peg$c27);
-	                                        }
-	                                    }
-	                                    if (s9 !== peg$FAILED) {
-	                                        s8 = [s8, s9];
-	                                        s7 = s8;
-	                                    }
-	                                    else {
-	                                        peg$currPos = s7;
-	                                        s7 = peg$FAILED;
-	                                    }
-	                                }
-	                                else {
-	                                    peg$currPos = s7;
-	                                    s7 = peg$FAILED;
-	                                }
-	                                while (s7 !== peg$FAILED) {
-	                                    s6.push(s7);
-	                                    s7 = peg$currPos;
-	                                    s8 = peg$parse_();
-	                                    if (s8 !== peg$FAILED) {
-	                                        if (input.substr(peg$currPos, 2) === peg$c26) {
-	                                            s9 = peg$c26;
-	                                            peg$currPos += 2;
-	                                        }
-	                                        else {
-	                                            s9 = peg$FAILED;
-	                                            if (peg$silentFails === 0) {
-	                                                peg$fail(peg$c27);
-	                                            }
-	                                        }
-	                                        if (s9 !== peg$FAILED) {
-	                                            s8 = [s8, s9];
-	                                            s7 = s8;
-	                                        }
-	                                        else {
-	                                            peg$currPos = s7;
-	                                            s7 = peg$FAILED;
-	                                        }
-	                                    }
-	                                    else {
-	                                        peg$currPos = s7;
-	                                        s7 = peg$FAILED;
-	                                    }
-	                                }
-	                                if (s6 !== peg$FAILED) {
-	                                    peg$savedPos = s0;
-	                                    s1 = peg$c28(s3, s6);
-	                                    s0 = s1;
-	                                }
-	                                else {
-	                                    peg$currPos = s0;
-	                                    s0 = peg$FAILED;
-	                                }
-	                            }
-	                            else {
-	                                peg$currPos = s0;
-	                                s0 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parseLiteral();
-	            }
-	            return s0;
-	        }
-	        function peg$parseTypeParams() {
-	            var s0, s1, s2, s3, s4;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 60) {
-	                s1 = peg$c29;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c30);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTerm();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = [];
-	                    s4 = peg$parseExtraParam();
-	                    while (s4 !== peg$FAILED) {
-	                        s3.push(s4);
-	                        s4 = peg$parseExtraParam();
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 62) {
-	                            s4 = peg$c31;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s4 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c32);
-	                            }
-	                        }
-	                        if (s4 !== peg$FAILED) {
-	                            peg$savedPos = s0;
-	                            s1 = peg$c33(s2, s3);
-	                            s0 = s1;
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseExtraParam() {
-	            var s0, s1, s2;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 44) {
-	                s1 = peg$c8;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c9);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTerm();
-	                if (s2 !== peg$FAILED) {
-	                    peg$savedPos = s0;
-	                    s1 = peg$c10(s2);
-	                    s0 = s1;
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseLiteral() {
-	            var s0, s1, s2, s3, s4, s5, s6;
-	            peg$silentFails++;
-	            s0 = peg$currPos;
-	            s1 = [];
-	            s2 = peg$parsechar();
-	            if (s2 !== peg$FAILED) {
-	                while (s2 !== peg$FAILED) {
-	                    s1.push(s2);
-	                    s2 = peg$parsechar();
-	                }
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTypeParams();
-	                if (s2 === peg$FAILED) {
-	                    s2 = null;
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = [];
-	                    s4 = peg$currPos;
-	                    s5 = peg$parse_();
-	                    if (s5 !== peg$FAILED) {
-	                        if (input.substr(peg$currPos, 2) === peg$c26) {
-	                            s6 = peg$c26;
-	                            peg$currPos += 2;
-	                        }
-	                        else {
-	                            s6 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c27);
-	                            }
-	                        }
-	                        if (s6 !== peg$FAILED) {
-	                            s5 = [s5, s6];
-	                            s4 = s5;
-	                        }
-	                        else {
-	                            peg$currPos = s4;
-	                            s4 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s4;
-	                        s4 = peg$FAILED;
-	                    }
-	                    while (s4 !== peg$FAILED) {
-	                        s3.push(s4);
-	                        s4 = peg$currPos;
-	                        s5 = peg$parse_();
-	                        if (s5 !== peg$FAILED) {
-	                            if (input.substr(peg$currPos, 2) === peg$c26) {
-	                                s6 = peg$c26;
-	                                peg$currPos += 2;
-	                            }
-	                            else {
-	                                s6 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c27);
-	                                }
-	                            }
-	                            if (s6 !== peg$FAILED) {
-	                                s5 = [s5, s6];
-	                                s4 = s5;
-	                            }
-	                            else {
-	                                peg$currPos = s4;
-	                                s4 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s4;
-	                            s4 = peg$FAILED;
-	                        }
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        peg$savedPos = s0;
-	                        s1 = peg$c35(s1, s2, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            peg$silentFails--;
-	            if (s0 === peg$FAILED) {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c34);
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parse_() {
-	            var s0, s1;
-	            peg$silentFails++;
-	            s0 = [];
-	            if (peg$c37.test(input.charAt(peg$currPos))) {
-	                s1 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c38);
-	                }
-	            }
-	            while (s1 !== peg$FAILED) {
-	                s0.push(s1);
-	                if (peg$c37.test(input.charAt(peg$currPos))) {
-	                    s1 = input.charAt(peg$currPos);
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s1 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c38);
-	                    }
-	                }
-	            }
-	            peg$silentFails--;
-	            if (s0 === peg$FAILED) {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c36);
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parsechar() {
-	            var s0;
-	            if (peg$c39.test(input.charAt(peg$currPos))) {
-	                s0 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s0 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c40);
-	                }
-	            }
-	            if (s0 === peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 95) {
-	                    s0 = peg$c41;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s0 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c42);
-	                    }
-	                }
-	                if (s0 === peg$FAILED) {
-	                    if (input.charCodeAt(peg$currPos) === 45) {
-	                        s0 = peg$c43;
-	                        peg$currPos++;
-	                    }
-	                    else {
-	                        s0 = peg$FAILED;
-	                        if (peg$silentFails === 0) {
-	                            peg$fail(peg$c44);
-	                        }
-	                    }
-	                    if (s0 === peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 46) {
-	                            s0 = peg$c45;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s0 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c46);
-	                            }
-	                        }
-	                        if (s0 === peg$FAILED) {
-	                            if (peg$c47.test(input.charAt(peg$currPos))) {
-	                                s0 = input.charAt(peg$currPos);
-	                                peg$currPos++;
-	                            }
-	                            else {
-	                                s0 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c48);
-	                                }
-	                            }
-	                            if (s0 === peg$FAILED) {
-	                                if (peg$c49.test(input.charAt(peg$currPos))) {
-	                                    s0 = input.charAt(peg$currPos);
-	                                    peg$currPos++;
-	                                }
-	                                else {
-	                                    s0 = peg$FAILED;
-	                                    if (peg$silentFails === 0) {
-	                                        peg$fail(peg$c50);
-	                                    }
-	                                }
-	                            }
-	                        }
-	                    }
-	                }
-	            }
-	            return s0;
-	        }
-	        peg$result = peg$startRuleFunction();
-	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
-	            return peg$result;
-	        }
-	        else {
-	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
-	                peg$fail({ type: "end", description: "end of input" });
-	            }
-	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null, peg$maxFailPos < input.length ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1) : peg$computeLocation(peg$maxFailPos, peg$maxFailPos));
-	        }
-	    }
-	    return {
-	        SyntaxError: peg$SyntaxError,
-	        parse: peg$parse
-	    };
-	})();
-	module.exports = parser;
-	//# sourceMappingURL=ramlSignatureParser.js.map
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var xmlutil = __webpack_require__(55);
-	var lru = __webpack_require__(80);
-	var ZSchema = __webpack_require__(78);
-	var ValidationResult = (function () {
-	    function ValidationResult() {
-	    }
-	    return ValidationResult;
-	})();
-	exports.ValidationResult = ValidationResult;
-	var globalCache = lru(400);
-	var useLint = true;
-	var JSONSchemaObject = (function () {
-	    function JSONSchemaObject(schema) {
-	        this.schema = schema;
-	        if (!schema || schema.trim().length == 0 || schema.trim().charAt(0) != '{') {
-	            throw new Error("Invalid JSON schema content");
-	        }
-	        var jsonSchemaObject;
-	        try {
-	            var jsonSchemaObject = JSON.parse(schema);
-	        }
-	        catch (err) {
-	            throw new Error("It is not JSON schema");
-	        }
-	        if (!jsonSchemaObject) {
-	            return;
-	        }
-	        try {
-	            var api = __webpack_require__(104);
-	            jsonSchemaObject = api.v4(jsonSchemaObject);
-	        }
-	        catch (e) {
-	            throw new Error('Can not parse schema' + schema);
-	        }
-	        delete jsonSchemaObject['$schema'];
-	        delete jsonSchemaObject['required'];
-	        this.jsonSchema = jsonSchemaObject;
-	    }
-	    JSONSchemaObject.prototype.getType = function () {
-	        return "source.json";
-	    };
-	    JSONSchemaObject.prototype.validateObject = function (object) {
-	        //TODO Validation of objects
-	        //xmlutil(content);
-	        this.validate(JSON.stringify(object));
-	    };
-	    JSONSchemaObject.prototype.validate = function (content) {
-	        var key = content + this.schema;
-	        var c = globalCache.get(key);
-	        if (c) {
-	            if (c instanceof Error) {
-	                throw c;
-	            }
-	            return;
-	        }
-	        var validator = new ZSchema();
-	        var valid = validator.validate(JSON.parse(content), this.jsonSchema);
-	        var errors = validator.getLastErrors();
-	        if (errors && errors.length > 0) {
-	            var res = new Error("Content is not valid according to schema:" + errors.map(function (x) { return x.message + " " + x.params; }).join(", "));
-	            res.errors = errors;
-	            globalCache.set(key, res);
-	            throw res;
-	        }
-	        globalCache.set(key, 1);
-	    };
-	    return JSONSchemaObject;
-	})();
-	exports.JSONSchemaObject = JSONSchemaObject;
-	var XMLSchemaObject = (function () {
-	    function XMLSchemaObject(schema) {
-	        this.schema = schema;
-	        if (schema.charAt(0) != '<') {
-	            throw new Error("Invalid JSON schema");
-	        }
-	        xmlutil(schema);
-	    }
-	    XMLSchemaObject.prototype.getType = function () {
-	        return "text.xml";
-	    };
-	    XMLSchemaObject.prototype.validate = function (content) {
-	        xmlutil(content);
-	    };
-	    XMLSchemaObject.prototype.validateObject = function (object) {
-	        //TODO Validation of objects
-	        //xmlutil(content);
-	    };
-	    return XMLSchemaObject;
-	})();
-	exports.XMLSchemaObject = XMLSchemaObject;
-	function getJSONSchema(content) {
-	    var rs = useLint ? globalCache.get(content) : false;
-	    if (rs) {
-	        return rs;
-	    }
-	    var res = new JSONSchemaObject(content);
-	    globalCache.set(content, res);
-	    return res;
-	}
-	exports.getJSONSchema = getJSONSchema;
-	function getXMLSchema(content) {
-	    var rs = useLint ? globalCache.get(content) : false;
-	    if (rs) {
-	        return rs;
-	    }
-	    var res = new XMLSchemaObject(content);
-	    if (useLint) {
-	        globalCache.set(content, res);
-	    }
-	}
-	exports.getXMLSchema = getXMLSchema;
-	function createSchema(content) {
-	    var rs = useLint ? globalCache.get(content) : false;
-	    if (rs) {
-	        return rs;
-	    }
-	    try {
-	        var res = new JSONSchemaObject(content);
-	        if (useLint) {
-	            globalCache.set(content, res);
-	        }
-	        return res;
-	    }
-	    catch (e) {
-	        try {
-	            var res = new XMLSchemaObject(content);
-	            if (useLint) {
-	                globalCache.set(content, res);
-	            }
-	            return res;
-	        }
-	        catch (e) {
-	            if (useLint) {
-	                globalCache.set(content, new Error("Can not parse schema"));
-	            }
-	            return null;
-	        }
-	    }
-	}
-	exports.createSchema = createSchema;
-	//# sourceMappingURL=schemaUtil.js.map
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var __extends = this.__extends || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    __.prototype = b.prototype;
-	    d.prototype = new __();
-	};
-	var _ = __webpack_require__(47);
-	var sel = __webpack_require__(84);
-	var Selector = (function () {
-	    function Selector() {
-	    }
-	    Selector.prototype.candidates = function (context) {
-	        return context;
-	    };
-	    Selector.prototype.apply = function (h) {
-	        return this.candidates([h]);
-	    };
-	    return Selector;
-	})();
-	exports.Selector = Selector;
-	var OrMatch = (function (_super) {
-	    __extends(OrMatch, _super);
-	    function OrMatch(left, right) {
-	        _super.call(this);
-	        this.left = left;
-	        this.right = right;
-	    }
-	    OrMatch.prototype.candidates = function (context) {
-	        var l = this.left.candidates(context);
-	        l = l.concat(this.right.candidates(context));
-	        return _.unique(l);
-	    };
-	    return OrMatch;
-	})(Selector);
-	exports.OrMatch = OrMatch;
-	var DotMatch = (function (_super) {
-	    __extends(DotMatch, _super);
-	    function DotMatch(left, right) {
-	        _super.call(this);
-	        this.left = left;
-	        this.right = right;
-	    }
-	    DotMatch.prototype.candidates = function (context) {
-	        var l = this.left.candidates(context);
-	        if (this.left instanceof AnyParentMatch) {
-	            l = this.right.candidates(new AnyChildMatch().candidates(l));
-	            return _.unique(l);
-	        }
-	        if (this.left instanceof ParentMatch) {
-	            l = this.right.candidates(new AnyChildMatch().candidates(l));
-	            return _.unique(l);
-	        }
-	        l = this.right.candidates(l);
-	        return _.unique(l);
-	    };
-	    return DotMatch;
-	})(Selector);
-	exports.DotMatch = DotMatch;
-	function resolveSelector(s, n) {
-	    if (s.type == "or") {
-	        var b = s;
-	        var l = resolveSelector(b.left, n);
-	        var r = resolveSelector(b.right, n);
-	        return new OrMatch(l, r);
-	    }
-	    if (s.type == "dot") {
-	        var b = s;
-	        var l = resolveSelector(b.left, n);
-	        var r = resolveSelector(b.right, n);
-	        return new DotMatch(l, r);
-	    }
-	    if (s.type == 'classLiteral') {
-	        var literal = s;
-	        var tp = n.definition().universe().getType(literal.name);
-	        if (tp == null || tp.isValueType()) {
-	            throw new Error("Referencing unknown type:" + literal.name);
-	        }
-	        return new IdMatch(literal.name);
-	    }
-	    if (s.type == 'parent') {
-	        return new ParentMatch();
-	    }
-	    if (s.type == 'ancestor') {
-	        return new AnyParentMatch();
-	    }
-	    if (s.type == 'descendant') {
-	        return new AnyChildMatch();
-	    }
-	    if (s.type == 'child') {
-	        return new ChildMatch();
-	    }
-	}
-	exports.resolveSelector = resolveSelector;
-	var IdMatch = (function (_super) {
-	    __extends(IdMatch, _super);
-	    function IdMatch(name) {
-	        _super.call(this);
-	        this.name = name;
-	    }
-	    IdMatch.prototype.candidates = function (context) {
-	        var _this = this;
-	        return context.filter(function (x) {
-	            if (!x) {
-	                return false;
-	            }
-	            if (x.definition().name() == _this.name) {
-	                return true;
-	            }
-	            var superTypes = x.definition().allSuperTypes();
-	            if (_.find(superTypes, function (x) { return x.name() == _this.name; })) {
-	                return true;
-	            }
-	            return false;
-	        });
-	    };
-	    return IdMatch;
-	})(Selector);
-	exports.IdMatch = IdMatch;
-	var AnyParentMatch = (function (_super) {
-	    __extends(AnyParentMatch, _super);
-	    function AnyParentMatch() {
-	        _super.apply(this, arguments);
-	    }
-	    AnyParentMatch.prototype.candidates = function (context) {
-	        var res = [];
-	        context.forEach(function (x) {
-	            if (x) {
-	                var z = x.parent();
-	                while (z) {
-	                    res.push(z);
-	                    z = z.parent();
-	                }
-	            }
-	        });
-	        return _.unique(res);
-	    };
-	    return AnyParentMatch;
-	})(Selector);
-	exports.AnyParentMatch = AnyParentMatch;
-	function addChildren(x, r) {
-	    r.push(x);
-	    x.elements().forEach(function (y) { return addChildren(y, r); });
-	}
-	var AnyChildMatch = (function (_super) {
-	    __extends(AnyChildMatch, _super);
-	    function AnyChildMatch() {
-	        _super.apply(this, arguments);
-	    }
-	    AnyChildMatch.prototype.candidates = function (context) {
-	        var res = [];
-	        context.forEach(function (x) {
-	            if (x) {
-	                addChildren(x, res);
-	            }
-	        });
-	        return _.unique(res);
-	    };
-	    return AnyChildMatch;
-	})(Selector);
-	exports.AnyChildMatch = AnyChildMatch;
-	var ParentMatch = (function (_super) {
-	    __extends(ParentMatch, _super);
-	    function ParentMatch() {
-	        _super.apply(this, arguments);
-	    }
-	    ParentMatch.prototype.candidates = function (context) {
-	        return context.map(function (x) { return x.parent(); });
-	    };
-	    return ParentMatch;
-	})(Selector);
-	exports.ParentMatch = ParentMatch;
-	var ChildMatch = (function (_super) {
-	    __extends(ChildMatch, _super);
-	    function ChildMatch() {
-	        _super.apply(this, arguments);
-	    }
-	    ChildMatch.prototype.candidates = function (context) {
-	        var res = [];
-	        context.forEach(function (x) {
-	            if (x) {
-	                res = res.concat(x.elements());
-	            }
-	        });
-	        return res;
-	    };
-	    return ChildMatch;
-	})(Selector);
-	exports.ChildMatch = ChildMatch;
-	function parse(h, path) {
-	    return resolveSelector(sel.parse(path), h);
-	}
-	exports.parse = parse;
-	//# sourceMappingURL=selectorMatch.js.map
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var ramlExpression = __webpack_require__(83);
-	var search = __webpack_require__(26);
-	function validate(str, node) {
-	    var result = ramlExpression.parse(str);
-	    validateNode(result, node);
-	}
-	exports.validate = validate;
-	function validateNode(r, node) {
-	    if (r.type == "unary") {
-	        var u = r;
-	        validateNode(u.exp, node);
-	    }
-	    else if (r.type == 'paren') {
-	        var ex = r;
-	        validateNode(ex.exp, node);
-	    }
-	    else if (r.type == 'string' || r.type == 'number') {
-	    }
-	    else if (r.type == 'ident') {
-	        var ident = r;
-	        var p = search.resolveRamlPointer(node, ident.value);
-	        if (!p) {
-	            throw new Error("Unable to resolve " + ident.value);
-	        }
-	    }
-	    else {
-	        var be = r;
-	        validateNode(be.l, node);
-	        validateNode(be.r, node);
-	    }
-	}
-	//# sourceMappingURL=ramlExpressions.js.map
-
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var parser = (function () {
-	    "use strict";
-	    /*
-	     * Generated by PEG.js 0.9.0.
-	     *
-	     * http://pegjs.org/
-	     */
-	    function peg$subclass(child, parent) {
-	        function ctor() {
-	            this.constructor = child;
-	        }
-	        ctor.prototype = parent.prototype;
-	        child.prototype = new ctor();
-	    }
-	    function peg$SyntaxError(message, expected, found, location) {
-	        this.message = message;
-	        this.expected = expected;
-	        this.found = found;
-	        this.location = location;
-	        this.name = "SyntaxError";
-	        if (typeof Error.captureStackTrace === "function") {
-	            Error.captureStackTrace(this, peg$SyntaxError);
-	        }
-	    }
-	    peg$subclass(peg$SyntaxError, Error);
-	    function peg$parse(input) {
-	        var options = arguments.length > 1 ? arguments[1] : {}, parser = this, peg$FAILED = {}, peg$startRuleFunctions = { Term: peg$parseTerm }, peg$startRuleFunction = peg$parseTerm, peg$c0 = "|", peg$c1 = { type: "literal", value: "|", description: "\"|\"" }, peg$c2 = function (first, rest) {
-	            return rest ? { "type": "union", "first": first, "rest": rest[3] } : first;
-	        }, peg$c3 = "(", peg$c4 = { type: "literal", value: "(", description: "\"(\"" }, peg$c5 = ")", peg$c6 = { type: "literal", value: ")", description: "\")\"" }, peg$c7 = "[]", peg$c8 = { type: "literal", value: "[]", description: "\"[]\"" }, peg$c9 = function (expr, arr) {
-	            return { "type": "parens", "expr": expr, "arr": arr.length };
-	        }, peg$c10 = "<", peg$c11 = { type: "literal", value: "<", description: "\"<\"" }, peg$c12 = ">", peg$c13 = { type: "literal", value: ">", description: "\">\"" }, peg$c14 = function (first, other) {
-	            return [first].concat(other);
-	        }, peg$c15 = ",", peg$c16 = { type: "literal", value: ",", description: "\",\"" }, peg$c17 = function (r) {
-	            return r;
-	        }, peg$c18 = { type: "other", description: "name" }, peg$c19 = function (r, tp, c) {
-	            return { "type": "name", "params": tp, "value": r.join(""), "arr": (c.length) };
-	        }, peg$c20 = { type: "other", description: "whitespace" }, peg$c21 = /^[ \t\n\r]/, peg$c22 = { type: "class", value: "[ \\t\\n\\r]", description: "[ \\t\\n\\r]" }, peg$c23 = /^[A-Z]/, peg$c24 = { type: "class", value: "[A-Z]", description: "[A-Z]" }, peg$c25 = "_", peg$c26 = { type: "literal", value: "_", description: "\"_\"" }, peg$c27 = "-", peg$c28 = { type: "literal", value: "-", description: "\"-\"" }, peg$c29 = ".", peg$c30 = { type: "literal", value: ".", description: "\".\"" }, peg$c31 = /^[a-z]/, peg$c32 = { type: "class", value: "[a-z]", description: "[a-z]" }, peg$c33 = /^[0-9]/, peg$c34 = { type: "class", value: "[0-9]", description: "[0-9]" }, peg$currPos = 0, peg$savedPos = 0, peg$posDetailsCache = [{ line: 1, column: 1, seenCR: false }], peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
-	        if ("startRule" in options) {
-	            if (!(options.startRule in peg$startRuleFunctions)) {
-	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
-	            }
-	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
-	        }
-	        function text() {
-	            return input.substring(peg$savedPos, peg$currPos);
-	        }
-	        function location() {
-	            return peg$computeLocation(peg$savedPos, peg$currPos);
-	        }
-	        function expected(description) {
-	            throw peg$buildException(null, [{ type: "other", description: description }], input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
-	        }
-	        function error(message) {
-	            throw peg$buildException(message, null, input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
-	        }
-	        function peg$computePosDetails(pos) {
-	            var details = peg$posDetailsCache[pos], p, ch;
-	            if (details) {
-	                return details;
-	            }
-	            else {
-	                p = pos - 1;
-	                while (!peg$posDetailsCache[p]) {
-	                    p--;
-	                }
-	                details = peg$posDetailsCache[p];
-	                details = {
-	                    line: details.line,
-	                    column: details.column,
-	                    seenCR: details.seenCR
-	                };
-	                while (p < pos) {
-	                    ch = input.charAt(p);
-	                    if (ch === "\n") {
-	                        if (!details.seenCR) {
-	                            details.line++;
-	                        }
-	                        details.column = 1;
-	                        details.seenCR = false;
-	                    }
-	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
-	                        details.line++;
-	                        details.column = 1;
-	                        details.seenCR = true;
-	                    }
-	                    else {
-	                        details.column++;
-	                        details.seenCR = false;
-	                    }
-	                    p++;
-	                }
-	                peg$posDetailsCache[pos] = details;
-	                return details;
-	            }
-	        }
-	        function peg$computeLocation(startPos, endPos) {
-	            var startPosDetails = peg$computePosDetails(startPos), endPosDetails = peg$computePosDetails(endPos);
-	            return {
-	                start: {
-	                    offset: startPos,
-	                    line: startPosDetails.line,
-	                    column: startPosDetails.column
-	                },
-	                end: {
-	                    offset: endPos,
-	                    line: endPosDetails.line,
-	                    column: endPosDetails.column
-	                }
-	            };
-	        }
-	        function peg$fail(expected) {
-	            if (peg$currPos < peg$maxFailPos) {
-	                return;
-	            }
-	            if (peg$currPos > peg$maxFailPos) {
-	                peg$maxFailPos = peg$currPos;
-	                peg$maxFailExpected = [];
-	            }
-	            peg$maxFailExpected.push(expected);
-	        }
-	        function peg$buildException(message, expected, found, location) {
-	            function cleanupExpected(expected) {
-	                var i = 1;
-	                expected.sort(function (a, b) {
-	                    if (a.description < b.description) {
-	                        return -1;
-	                    }
-	                    else if (a.description > b.description) {
-	                        return 1;
-	                    }
-	                    else {
-	                        return 0;
-	                    }
-	                });
-	                while (i < expected.length) {
-	                    if (expected[i - 1] === expected[i]) {
-	                        expected.splice(i, 1);
-	                    }
-	                    else {
-	                        i++;
-	                    }
-	                }
-	            }
-	            function buildMessage(expected, found) {
-	                function stringEscape(s) {
-	                    function hex(ch) {
-	                        return ch.charCodeAt(0).toString(16).toUpperCase();
-	                    }
-	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
-	                        return '\\x0' + hex(ch);
-	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
-	                        return '\\x' + hex(ch);
-	                    }).replace(/[\u0100-\u0FFF]/g, function (ch) {
-	                        return '\\u0' + hex(ch);
-	                    }).replace(/[\u1000-\uFFFF]/g, function (ch) {
-	                        return '\\u' + hex(ch);
-	                    });
-	                }
-	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
-	                for (i = 0; i < expected.length; i++) {
-	                    expectedDescs[i] = expected[i].description;
-	                }
-	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
-	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
-	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
-	            }
-	            if (expected !== null) {
-	                cleanupExpected(expected);
-	            }
-	            return new peg$SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, location);
-	        }
-	        function peg$parseTerm() {
-	            var s0, s1, s2, s3, s4, s5, s6, s7;
-	            s0 = peg$currPos;
-	            s1 = peg$parse_();
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseFactor();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$currPos;
-	                    s4 = peg$parse_();
-	                    if (s4 !== peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 124) {
-	                            s5 = peg$c0;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s5 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c1);
-	                            }
-	                        }
-	                        if (s5 !== peg$FAILED) {
-	                            s6 = peg$parse_();
-	                            if (s6 !== peg$FAILED) {
-	                                s7 = peg$parseTerm();
-	                                if (s7 !== peg$FAILED) {
-	                                    s4 = [s4, s5, s6, s7];
-	                                    s3 = s4;
-	                                }
-	                                else {
-	                                    peg$currPos = s3;
-	                                    s3 = peg$FAILED;
-	                                }
-	                            }
-	                            else {
-	                                peg$currPos = s3;
-	                                s3 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s3;
-	                            s3 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s3;
-	                        s3 = peg$FAILED;
-	                    }
-	                    if (s3 === peg$FAILED) {
-	                        s3 = null;
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        peg$savedPos = s0;
-	                        s1 = peg$c2(s2, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseFactor() {
-	            var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 40) {
-	                s1 = peg$c3;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c4);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parse_();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parseTerm();
-	                    if (s3 !== peg$FAILED) {
-	                        s4 = peg$parse_();
-	                        if (s4 !== peg$FAILED) {
-	                            if (input.charCodeAt(peg$currPos) === 41) {
-	                                s5 = peg$c5;
-	                                peg$currPos++;
-	                            }
-	                            else {
-	                                s5 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c6);
-	                                }
-	                            }
-	                            if (s5 !== peg$FAILED) {
-	                                s6 = [];
-	                                s7 = peg$currPos;
-	                                s8 = peg$parse_();
-	                                if (s8 !== peg$FAILED) {
-	                                    if (input.substr(peg$currPos, 2) === peg$c7) {
-	                                        s9 = peg$c7;
-	                                        peg$currPos += 2;
-	                                    }
-	                                    else {
-	                                        s9 = peg$FAILED;
-	                                        if (peg$silentFails === 0) {
-	                                            peg$fail(peg$c8);
-	                                        }
-	                                    }
-	                                    if (s9 !== peg$FAILED) {
-	                                        s8 = [s8, s9];
-	                                        s7 = s8;
-	                                    }
-	                                    else {
-	                                        peg$currPos = s7;
-	                                        s7 = peg$FAILED;
-	                                    }
-	                                }
-	                                else {
-	                                    peg$currPos = s7;
-	                                    s7 = peg$FAILED;
-	                                }
-	                                while (s7 !== peg$FAILED) {
-	                                    s6.push(s7);
-	                                    s7 = peg$currPos;
-	                                    s8 = peg$parse_();
-	                                    if (s8 !== peg$FAILED) {
-	                                        if (input.substr(peg$currPos, 2) === peg$c7) {
-	                                            s9 = peg$c7;
-	                                            peg$currPos += 2;
-	                                        }
-	                                        else {
-	                                            s9 = peg$FAILED;
-	                                            if (peg$silentFails === 0) {
-	                                                peg$fail(peg$c8);
-	                                            }
-	                                        }
-	                                        if (s9 !== peg$FAILED) {
-	                                            s8 = [s8, s9];
-	                                            s7 = s8;
-	                                        }
-	                                        else {
-	                                            peg$currPos = s7;
-	                                            s7 = peg$FAILED;
-	                                        }
-	                                    }
-	                                    else {
-	                                        peg$currPos = s7;
-	                                        s7 = peg$FAILED;
-	                                    }
-	                                }
-	                                if (s6 !== peg$FAILED) {
-	                                    peg$savedPos = s0;
-	                                    s1 = peg$c9(s3, s6);
-	                                    s0 = s1;
-	                                }
-	                                else {
-	                                    peg$currPos = s0;
-	                                    s0 = peg$FAILED;
-	                                }
-	                            }
-	                            else {
-	                                peg$currPos = s0;
-	                                s0 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parseLiteral();
-	            }
-	            return s0;
-	        }
-	        function peg$parseTypeParams() {
-	            var s0, s1, s2, s3, s4;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 60) {
-	                s1 = peg$c10;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c11);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTerm();
-	                if (s2 !== peg$FAILED) {
-	                    s3 = [];
-	                    s4 = peg$parseExtraParam();
-	                    while (s4 !== peg$FAILED) {
-	                        s3.push(s4);
-	                        s4 = peg$parseExtraParam();
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 62) {
-	                            s4 = peg$c12;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s4 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c13);
-	                            }
-	                        }
-	                        if (s4 !== peg$FAILED) {
-	                            peg$savedPos = s0;
-	                            s1 = peg$c14(s2, s3);
-	                            s0 = s1;
-	                        }
-	                        else {
-	                            peg$currPos = s0;
-	                            s0 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseExtraParam() {
-	            var s0, s1, s2;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 44) {
-	                s1 = peg$c15;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c16);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTerm();
-	                if (s2 !== peg$FAILED) {
-	                    peg$savedPos = s0;
-	                    s1 = peg$c17(s2);
-	                    s0 = s1;
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            return s0;
-	        }
-	        function peg$parseLiteral() {
-	            var s0, s1, s2, s3, s4, s5, s6;
-	            peg$silentFails++;
-	            s0 = peg$currPos;
-	            s1 = [];
-	            s2 = peg$parsechar();
-	            if (s2 !== peg$FAILED) {
-	                while (s2 !== peg$FAILED) {
-	                    s1.push(s2);
-	                    s2 = peg$parsechar();
-	                }
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	            }
-	            if (s1 !== peg$FAILED) {
-	                s2 = peg$parseTypeParams();
-	                if (s2 === peg$FAILED) {
-	                    s2 = null;
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = [];
-	                    s4 = peg$currPos;
-	                    s5 = peg$parse_();
-	                    if (s5 !== peg$FAILED) {
-	                        if (input.substr(peg$currPos, 2) === peg$c7) {
-	                            s6 = peg$c7;
-	                            peg$currPos += 2;
-	                        }
-	                        else {
-	                            s6 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c8);
-	                            }
-	                        }
-	                        if (s6 !== peg$FAILED) {
-	                            s5 = [s5, s6];
-	                            s4 = s5;
-	                        }
-	                        else {
-	                            peg$currPos = s4;
-	                            s4 = peg$FAILED;
-	                        }
-	                    }
-	                    else {
-	                        peg$currPos = s4;
-	                        s4 = peg$FAILED;
-	                    }
-	                    while (s4 !== peg$FAILED) {
-	                        s3.push(s4);
-	                        s4 = peg$currPos;
-	                        s5 = peg$parse_();
-	                        if (s5 !== peg$FAILED) {
-	                            if (input.substr(peg$currPos, 2) === peg$c7) {
-	                                s6 = peg$c7;
-	                                peg$currPos += 2;
-	                            }
-	                            else {
-	                                s6 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c8);
-	                                }
-	                            }
-	                            if (s6 !== peg$FAILED) {
-	                                s5 = [s5, s6];
-	                                s4 = s5;
-	                            }
-	                            else {
-	                                peg$currPos = s4;
-	                                s4 = peg$FAILED;
-	                            }
-	                        }
-	                        else {
-	                            peg$currPos = s4;
-	                            s4 = peg$FAILED;
-	                        }
-	                    }
-	                    if (s3 !== peg$FAILED) {
-	                        peg$savedPos = s0;
-	                        s1 = peg$c19(s1, s2, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$FAILED;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$FAILED;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$FAILED;
-	            }
-	            peg$silentFails--;
-	            if (s0 === peg$FAILED) {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c18);
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parse_() {
-	            var s0, s1;
-	            peg$silentFails++;
-	            s0 = [];
-	            if (peg$c21.test(input.charAt(peg$currPos))) {
-	                s1 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c22);
-	                }
-	            }
-	            while (s1 !== peg$FAILED) {
-	                s0.push(s1);
-	                if (peg$c21.test(input.charAt(peg$currPos))) {
-	                    s1 = input.charAt(peg$currPos);
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s1 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c22);
-	                    }
-	                }
-	            }
-	            peg$silentFails--;
-	            if (s0 === peg$FAILED) {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c20);
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parsechar() {
-	            var s0;
-	            if (peg$c23.test(input.charAt(peg$currPos))) {
-	                s0 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s0 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c24);
-	                }
-	            }
-	            if (s0 === peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 95) {
-	                    s0 = peg$c25;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s0 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c26);
-	                    }
-	                }
-	                if (s0 === peg$FAILED) {
-	                    if (input.charCodeAt(peg$currPos) === 45) {
-	                        s0 = peg$c27;
-	                        peg$currPos++;
-	                    }
-	                    else {
-	                        s0 = peg$FAILED;
-	                        if (peg$silentFails === 0) {
-	                            peg$fail(peg$c28);
-	                        }
-	                    }
-	                    if (s0 === peg$FAILED) {
-	                        if (input.charCodeAt(peg$currPos) === 46) {
-	                            s0 = peg$c29;
-	                            peg$currPos++;
-	                        }
-	                        else {
-	                            s0 = peg$FAILED;
-	                            if (peg$silentFails === 0) {
-	                                peg$fail(peg$c30);
-	                            }
-	                        }
-	                        if (s0 === peg$FAILED) {
-	                            if (peg$c31.test(input.charAt(peg$currPos))) {
-	                                s0 = input.charAt(peg$currPos);
-	                                peg$currPos++;
-	                            }
-	                            else {
-	                                s0 = peg$FAILED;
-	                                if (peg$silentFails === 0) {
-	                                    peg$fail(peg$c32);
-	                                }
-	                            }
-	                            if (s0 === peg$FAILED) {
-	                                if (peg$c33.test(input.charAt(peg$currPos))) {
-	                                    s0 = input.charAt(peg$currPos);
-	                                    peg$currPos++;
-	                                }
-	                                else {
-	                                    s0 = peg$FAILED;
-	                                    if (peg$silentFails === 0) {
-	                                        peg$fail(peg$c34);
-	                                    }
-	                                }
-	                            }
-	                        }
-	                    }
-	                }
-	            }
-	            return s0;
-	        }
-	        peg$result = peg$startRuleFunction();
-	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
-	            return peg$result;
-	        }
-	        else {
-	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
-	                peg$fail({ type: "end", description: "end of input" });
-	            }
-	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null, peg$maxFailPos < input.length ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1) : peg$computeLocation(peg$maxFailPos, peg$maxFailPos));
-	        }
-	    }
-	    return {
-	        SyntaxError: peg$SyntaxError,
-	        parse: peg$parse
-	    };
-	})();
-	module.exports = parser;
-	//# sourceMappingURL=typeExpressionParser.js.map
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../typings/tsd.d.ts" />
-	var DomParser = __webpack_require__(105);
-	function xmlToJson(xml) {
-	    // Create the return object
-	    var obj = {};
-	    if (xml.nodeType == 1) {
-	        // do attributes
-	        if (xml.attributes.length > 0) {
-	            for (var j = 0; j < xml.attributes.length; j++) {
-	                var attribute = xml.attributes.item(j);
-	                obj["@" + attribute.nodeName] = attribute.nodeValue;
-	            }
-	        }
-	    }
-	    else if (xml.nodeType == 3) {
-	        obj = xml.nodeValue;
-	    }
-	    // do children
-	    if (xml.hasChildNodes()) {
-	        for (var i = 0; i < xml.childNodes.length; i++) {
-	            var item = xml.childNodes.item(i);
-	            var nodeName = item.nodeName;
-	            if (nodeName == undefined) {
-	                continue;
-	            }
-	            if (typeof (obj[nodeName]) == "undefined") {
-	                obj[nodeName] = xmlToJson(item);
-	            }
-	            else {
-	                if (typeof (obj[nodeName].push) == "undefined") {
-	                    var old = obj[nodeName];
-	                    obj[nodeName] = [];
-	                    obj[nodeName].push(old);
-	                }
-	                obj[nodeName].push(xmlToJson(item));
-	            }
-	        }
-	    }
-	    return obj;
-	}
-	;
-	function cleanupText(j) {
-	    for (var p in j) {
-	        if (typeof (j[p]) == "object") {
-	            for (var k in j[p]) {
-	                if (k == '#text') {
-	                    var txt = j[p]['#text'];
-	                    if (typeof (txt) != 'string') {
-	                        txt = txt.join("");
-	                    }
-	                    txt = txt.trim();
-	                    if (txt.length == 0) {
-	                        delete j[p]['#text'];
-	                    }
-	                }
-	            }
-	            cleanupText(j[p]);
-	        }
-	    }
-	    return j;
-	}
-	function cleanupJson(j) {
-	    for (var p in j) {
-	        if (typeof (j[p]) == "object") {
-	            var keys = Object.keys(j[p]);
-	            if (keys.length == 1) {
-	                if (keys[0] == '#text') {
-	                    j[p] = j[p]['#text'];
-	                }
-	            }
-	            cleanupJson(j[p]);
-	        }
-	    }
-	    return j;
-	}
-	function parseXML(value) {
-	    var v = new DomParser.DOMParser();
-	    var parsed = v.parseFromString(value);
-	    return cleanupJson(cleanupText(xmlToJson(parsed)));
-	}
-	module.exports = parseXML;
-	//# sourceMappingURL=xmlutil.js.map
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RamlWrapper = __webpack_require__(3);
-	function buildWrapperNode(node) {
-	    var nodeClassName = node.definition().name();
-	    var wrapperConstructor = classMap[nodeClassName];
-	    if (!wrapperConstructor) {
-	        var m = node.definition().allSuperTypes();
-	        var wr = null;
-	        for (var i = 0; i < m.length; i++) {
-	            var nm = m[i].name();
-	            wrapperConstructor = classMap[nm];
-	            if (nm == "DataElement") {
-	                wr = nm;
-	                continue;
-	            }
-	            if (nm == "RAMLLanguageElement") {
-	                continue;
-	            }
-	            if (wrapperConstructor) {
-	                break;
-	            }
-	        }
-	        if (!wrapperConstructor) {
-	            wr = nm;
-	        }
-	    }
-	    if (!wrapperConstructor) {
-	        wrapperConstructor = classMap["RAMLLanguageElement"];
-	    }
-	    return wrapperConstructor(node);
-	}
-	exports.buildWrapperNode = buildWrapperNode;
-	var classMap = {
-	    "AnnotationRef": function (x) {
-	        return new RamlWrapper.AnnotationRefImpl(x);
-	    },
-	    "AnnotationTarget": function (x) {
-	        return new RamlWrapper.AnnotationTargetImpl(x);
-	    },
-	    "AnnotationType": function (x) {
-	        return new RamlWrapper.AnnotationTypeImpl(x);
-	    },
-	    "Api": function (x) {
-	        return new RamlWrapper.ApiImpl(x);
-	    },
-	    "ApiDescription": function (x) {
-	        return new RamlWrapper.ApiDescriptionImpl(x);
-	    },
-	    "ArrayField": function (x) {
-	        return new RamlWrapper.ArrayFieldImpl(x);
-	    },
-	    "Basic": function (x) {
-	        return new RamlWrapper.BasicImpl(x);
-	    },
-	    "BooleanElement": function (x) {
-	        return new RamlWrapper.BooleanElementImpl(x);
-	    },
-	    "BooleanType": function (x) {
-	        return new RamlWrapper.BooleanTypeImpl(x);
-	    },
-	    "CallbackAPIDescription": function (x) {
-	        return new RamlWrapper.CallbackAPIDescriptionImpl(x);
-	    },
-	    "ContentType": function (x) {
-	        return new RamlWrapper.ContentTypeImpl(x);
-	    },
-	    "Custom": function (x) {
-	        return new RamlWrapper.CustomImpl(x);
-	    },
-	    "DataElement": function (x) {
-	        return new RamlWrapper.DataElementImpl(x);
-	    },
-	    "DataElementRef": function (x) {
-	        return new RamlWrapper.DataElementRefImpl(x);
-	    },
-	    "DateElement": function (x) {
-	        return new RamlWrapper.DateElementImpl(x);
-	    },
-	    "DateFormatSpec": function (x) {
-	        return new RamlWrapper.DateFormatSpecImpl(x);
-	    },
-	    "Digest": function (x) {
-	        return new RamlWrapper.DigestImpl(x);
-	    },
-	    "DocumentationItem": function (x) {
-	        return new RamlWrapper.DocumentationItemImpl(x);
-	    },
-	    "ExampleSpec": function (x) {
-	        return new RamlWrapper.ExampleSpecImpl(x);
-	    },
-	    "ExampleString": function (x) {
-	        return new RamlWrapper.ExampleStringImpl(x);
-	    },
-	    "Extension": function (x) {
-	        return new RamlWrapper.ExtensionImpl(x);
-	    },
-	    "FileParameter": function (x) {
-	        return new RamlWrapper.FileParameterImpl(x);
-	    },
-	    "FixedUri": function (x) {
-	        return new RamlWrapper.FixedUriImpl(x);
-	    },
-	    "FullUriTemplate": function (x) {
-	        return new RamlWrapper.FullUriTemplateImpl(x);
-	    },
-	    "FunctionalInterface": function (x) {
-	        return new RamlWrapper.FunctionalInterfaceImpl(x);
-	    },
-	    "GlobalSchema": function (x) {
-	        return new RamlWrapper.GlobalSchemaImpl(x);
-	    },
-	    "HasNormalParameters": function (x) {
-	        return new RamlWrapper.HasNormalParametersImpl(x);
-	    },
-	    "ImportDeclaration": function (x) {
-	        return new RamlWrapper.ImportDeclarationImpl(x);
-	    },
-	    "IntegerElement": function (x) {
-	        return new RamlWrapper.IntegerElementImpl(x);
-	    },
-	    "JSonSchemaString": function (x) {
-	        return new RamlWrapper.JSonSchemaStringImpl(x);
-	    },
-	    "Library": function (x) {
-	        return new RamlWrapper.LibraryImpl(x);
-	    },
-	    "LocationKind": function (x) {
-	        return new RamlWrapper.LocationKindImpl(x);
-	    },
-	    "MarkdownString": function (x) {
-	        return new RamlWrapper.MarkdownStringImpl(x);
-	    },
-	    "Method": function (x) {
-	        return new RamlWrapper.MethodImpl(x);
-	    },
-	    "MethodBase": function (x) {
-	        return new RamlWrapper.MethodBaseImpl(x);
-	    },
-	    "MimeType": function (x) {
-	        return new RamlWrapper.MimeTypeImpl(x);
-	    },
-	    "ModelLocation": function (x) {
-	        return new RamlWrapper.ModelLocationImpl(x);
-	    },
-	    "NumberElement": function (x) {
-	        return new RamlWrapper.NumberElementImpl(x);
-	    },
-	    "NumberType": function (x) {
-	        return new RamlWrapper.NumberTypeImpl(x);
-	    },
-	    "OAuth1SecuritySchemeSettings": function (x) {
-	        return new RamlWrapper.OAuth1SecuritySchemeSettingsImpl(x);
-	    },
-	    "OAuth2SecuritySchemeSettings": function (x) {
-	        return new RamlWrapper.OAuth2SecuritySchemeSettingsImpl(x);
-	    },
-	    "OLibrary": function (x) {
-	        return new RamlWrapper.OLibraryImpl(x);
-	    },
-	    "Oath1": function (x) {
-	        return new RamlWrapper.Oath1Impl(x);
-	    },
-	    "Oath2": function (x) {
-	        return new RamlWrapper.Oath2Impl(x);
-	    },
-	    "ObjectField": function (x) {
-	        return new RamlWrapper.ObjectFieldImpl(x);
-	    },
-	    "Overlay": function (x) {
-	        return new RamlWrapper.OverlayImpl(x);
-	    },
-	    "PassThrough": function (x) {
-	        return new RamlWrapper.PassThroughImpl(x);
-	    },
-	    "PassThroughSettings": function (x) {
-	        return new RamlWrapper.PassThroughSettingsImpl(x);
-	    },
-	    "RAMLExpression": function (x) {
-	        return new RamlWrapper.RAMLExpressionImpl(x);
-	    },
-	    "RAMLLanguageElement": function (x) {
-	        return new RamlWrapper.RAMLLanguageElementImpl(x);
-	    },
-	    "RAMLPointer": function (x) {
-	        return new RamlWrapper.RAMLPointerImpl(x);
-	    },
-	    "RAMLPointerElement": function (x) {
-	        return new RamlWrapper.RAMLPointerElementImpl(x);
-	    },
-	    "RAMLProject": function (x) {
-	        return new RamlWrapper.RAMLProjectImpl(x);
-	    },
-	    "RAMLSelector": function (x) {
-	        return new RamlWrapper.RAMLSelectorImpl(x);
-	    },
-	    "RAMLSimpleElement": function (x) {
-	        return new RamlWrapper.RAMLSimpleElementImpl(x);
-	    },
-	    "Reference": function (x) {
-	        return new RamlWrapper.ReferenceImpl(x);
-	    },
-	    "RelativeUri": function (x) {
-	        return new RamlWrapper.RelativeUriImpl(x);
-	    },
-	    "Resource": function (x) {
-	        return new RamlWrapper.ResourceImpl(x);
-	    },
-	    "ResourceBase": function (x) {
-	        return new RamlWrapper.ResourceBaseImpl(x);
-	    },
-	    "ResourceType": function (x) {
-	        return new RamlWrapper.ResourceTypeImpl(x);
-	    },
-	    "ResourceTypeRef": function (x) {
-	        return new RamlWrapper.ResourceTypeRefImpl(x);
-	    },
-	    "Response": function (x) {
-	        return new RamlWrapper.ResponseImpl(x);
-	    },
-	    "SchemaElement": function (x) {
-	        return new RamlWrapper.SchemaElementImpl(x);
-	    },
-	    "SchemaString": function (x) {
-	        return new RamlWrapper.SchemaStringImpl(x);
-	    },
-	    "ScriptHookElement": function (x) {
-	        return new RamlWrapper.ScriptHookElementImpl(x);
-	    },
-	    "ScriptSpec": function (x) {
-	        return new RamlWrapper.ScriptSpecImpl(x);
-	    },
-	    "ScriptingHook": function (x) {
-	        return new RamlWrapper.ScriptingHookImpl(x);
-	    },
-	    "SecuritySchema": function (x) {
-	        return new RamlWrapper.SecuritySchemaImpl(x);
-	    },
-	    "SecuritySchemaHookScript": function (x) {
-	        return new RamlWrapper.SecuritySchemaHookScriptImpl(x);
-	    },
-	    "SecuritySchemaPart": function (x) {
-	        return new RamlWrapper.SecuritySchemaPartImpl(x);
-	    },
-	    "SecuritySchemaRef": function (x) {
-	        return new RamlWrapper.SecuritySchemaRefImpl(x);
-	    },
-	    "SecuritySchemaSettings": function (x) {
-	        return new RamlWrapper.SecuritySchemaSettingsImpl(x);
-	    },
-	    "SecuritySchemaType": function (x) {
-	        return new RamlWrapper.SecuritySchemaTypeImpl(x);
-	    },
-	    "StatusCode": function (x) {
-	        return new RamlWrapper.StatusCodeImpl(x);
-	    },
-	    "StrElement": function (x) {
-	        return new RamlWrapper.StrElementImpl(x);
-	    },
-	    "StringType": function (x) {
-	        return new RamlWrapper.StringTypeImpl(x);
-	    },
-	    "Trait": function (x) {
-	        return new RamlWrapper.TraitImpl(x);
-	    },
-	    "TraitRef": function (x) {
-	        return new RamlWrapper.TraitRefImpl(x);
-	    },
-	    "UnionField": function (x) {
-	        return new RamlWrapper.UnionFieldImpl(x);
-	    },
-	    "UriTemplate": function (x) {
-	        return new RamlWrapper.UriTemplateImpl(x);
-	    },
-	    "ValidityExpression": function (x) {
-	        return new RamlWrapper.ValidityExpressionImpl(x);
-	    },
-	    "ValueElement": function (x) {
-	        return new RamlWrapper.ValueElementImpl(x);
-	    },
-	    "ValueType": function (x) {
-	        return new RamlWrapper.ValueTypeImpl(x);
-	    },
-	    "XMLInfo": function (x) {
-	        return new RamlWrapper.XMLInfoImpl(x);
-	    },
-	    "XMLSchemaString": function (x) {
-	        return new RamlWrapper.XMLSchemaStringImpl(x);
-	    },
-	    "pointer": function (x) {
-	        return new RamlWrapper.pointerImpl(x);
-	    },
-	    "ramlexpression": function (x) {
-	        return new RamlWrapper.ramlexpressionImpl(x);
-	    }
-	};
-	//# sourceMappingURL=raml003factory.js.map
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var RamlWrapper = __webpack_require__(14);
-	function buildWrapperNode(node) {
-	    var nodeClassName = node.definition().name();
-	    var wrapperConstructor = classMap[nodeClassName];
-	    if (!wrapperConstructor) {
-	        var m = node.definition().allSuperTypes();
-	        var wr = null;
-	        for (var i = 0; i < m.length; i++) {
-	            var nm = m[i].name();
-	            wrapperConstructor = classMap[nm];
-	            if (nm == "DataElement") {
-	                wr = nm;
-	                continue;
-	            }
-	            if (nm == "RAMLLanguageElement") {
-	                continue;
-	            }
-	            if (wrapperConstructor) {
-	                break;
-	            }
-	        }
-	        if (!wrapperConstructor) {
-	            wr = nm;
-	        }
-	    }
-	    if (!wrapperConstructor) {
-	        wrapperConstructor = classMap["RAMLLanguageElement"];
-	    }
-	    return wrapperConstructor(node);
-	}
-	exports.buildWrapperNode = buildWrapperNode;
-	var classMap = {
-	    "Api": function (x) {
-	        return new RamlWrapper.ApiImpl(x);
-	    },
-	    "BodyLike": function (x) {
-	        return new RamlWrapper.BodyLikeImpl(x);
-	    },
-	    "BooleanElement": function (x) {
-	        return new RamlWrapper.BooleanElementImpl(x);
-	    },
-	    "BooleanType": function (x) {
-	        return new RamlWrapper.BooleanTypeImpl(x);
-	    },
-	    "DateElement": function (x) {
-	        return new RamlWrapper.DateElementImpl(x);
-	    },
-	    "DocumentationItem": function (x) {
-	        return new RamlWrapper.DocumentationItemImpl(x);
-	    },
-	    "ExampleString": function (x) {
-	        return new RamlWrapper.ExampleStringImpl(x);
-	    },
-	    "FileElement": function (x) {
-	        return new RamlWrapper.FileElementImpl(x);
-	    },
-	    "FixedUri": function (x) {
-	        return new RamlWrapper.FixedUriImpl(x);
-	    },
-	    "FullUriTemplate": function (x) {
-	        return new RamlWrapper.FullUriTemplateImpl(x);
-	    },
-	    "GlobalSchema": function (x) {
-	        return new RamlWrapper.GlobalSchemaImpl(x);
-	    },
-	    "HasNormalParameters": function (x) {
-	        return new RamlWrapper.HasNormalParametersImpl(x);
-	    },
-	    "IntegerElement": function (x) {
-	        return new RamlWrapper.IntegerElementImpl(x);
-	    },
-	    "JSONBody": function (x) {
-	        return new RamlWrapper.JSONBodyImpl(x);
-	    },
-	    "JSONExample": function (x) {
-	        return new RamlWrapper.JSONExampleImpl(x);
-	    },
-	    "JSonSchemaString": function (x) {
-	        return new RamlWrapper.JSonSchemaStringImpl(x);
-	    },
-	    "MarkdownString": function (x) {
-	        return new RamlWrapper.MarkdownStringImpl(x);
-	    },
-	    "Method": function (x) {
-	        return new RamlWrapper.MethodImpl(x);
-	    },
-	    "MethodBase": function (x) {
-	        return new RamlWrapper.MethodBaseImpl(x);
-	    },
-	    "MimeType": function (x) {
-	        return new RamlWrapper.MimeTypeImpl(x);
-	    },
-	    "NumberElement": function (x) {
-	        return new RamlWrapper.NumberElementImpl(x);
-	    },
-	    "NumberType": function (x) {
-	        return new RamlWrapper.NumberTypeImpl(x);
-	    },
-	    "OAuth1SecuritySchemeSettings": function (x) {
-	        return new RamlWrapper.OAuth1SecuritySchemeSettingsImpl(x);
-	    },
-	    "OAuth2SecuritySchemeSettings": function (x) {
-	        return new RamlWrapper.OAuth2SecuritySchemeSettingsImpl(x);
-	    },
-	    "Parameter": function (x) {
-	        return new RamlWrapper.ParameterImpl(x);
-	    },
-	    "ParameterLocation": function (x) {
-	        return new RamlWrapper.ParameterLocationImpl(x);
-	    },
-	    "RAMLLanguageElement": function (x) {
-	        return new RamlWrapper.RAMLLanguageElementImpl(x);
-	    },
-	    "RAMLSimpleElement": function (x) {
-	        return new RamlWrapper.RAMLSimpleElementImpl(x);
-	    },
-	    "Reference": function (x) {
-	        return new RamlWrapper.ReferenceImpl(x);
-	    },
-	    "RelativeUri": function (x) {
-	        return new RamlWrapper.RelativeUriImpl(x);
-	    },
-	    "Resource": function (x) {
-	        return new RamlWrapper.ResourceImpl(x);
-	    },
-	    "ResourceType": function (x) {
-	        return new RamlWrapper.ResourceTypeImpl(x);
-	    },
-	    "ResourceTypeRef": function (x) {
-	        return new RamlWrapper.ResourceTypeRefImpl(x);
-	    },
-	    "Response": function (x) {
-	        return new RamlWrapper.ResponseImpl(x);
-	    },
-	    "SchemaString": function (x) {
-	        return new RamlWrapper.SchemaStringImpl(x);
-	    },
-	    "SecuritySchema": function (x) {
-	        return new RamlWrapper.SecuritySchemaImpl(x);
-	    },
-	    "SecuritySchemaPart": function (x) {
-	        return new RamlWrapper.SecuritySchemaPartImpl(x);
-	    },
-	    "SecuritySchemaRef": function (x) {
-	        return new RamlWrapper.SecuritySchemaRefImpl(x);
-	    },
-	    "SecuritySchemaSettings": function (x) {
-	        return new RamlWrapper.SecuritySchemaSettingsImpl(x);
-	    },
-	    "StatusCode": function (x) {
-	        return new RamlWrapper.StatusCodeImpl(x);
-	    },
-	    "StrElement": function (x) {
-	        return new RamlWrapper.StrElementImpl(x);
-	    },
-	    "StringType": function (x) {
-	        return new RamlWrapper.StringTypeImpl(x);
-	    },
-	    "Trait": function (x) {
-	        return new RamlWrapper.TraitImpl(x);
-	    },
-	    "TraitRef": function (x) {
-	        return new RamlWrapper.TraitRefImpl(x);
-	    },
-	    "UriTemplate": function (x) {
-	        return new RamlWrapper.UriTemplateImpl(x);
-	    },
-	    "ValueType": function (x) {
-	        return new RamlWrapper.ValueTypeImpl(x);
-	    },
-	    "XMLBody": function (x) {
-	        return new RamlWrapper.XMLBodyImpl(x);
-	    },
-	    "XMLExample": function (x) {
-	        return new RamlWrapper.XMLExampleImpl(x);
-	    },
-	    "XMLSchemaString": function (x) {
-	        return new RamlWrapper.XMLSchemaStringImpl(x);
-	    }
-	};
-	//# sourceMappingURL=raml08factory.js.map
-
-/***/ },
-/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = [
@@ -37419,7 +34532,7 @@
 	]
 
 /***/ },
-/* 59 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = [
@@ -41831,24 +38944,1642 @@
 	]
 
 /***/ },
-/* 60 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = null
 
 /***/ },
-/* 61 */
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var ramlSanitize = __webpack_require__(82);
+	var ramlValidate = __webpack_require__(83);
+	var REGEXP_MATCH = {
+	    number: '[-+]?\\d+(?:\\.\\d+)?',
+	    integer: '[-+]?\\d+',
+	    date: '(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \\d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \\d{4} (?:[0-1]\\d|2[0-3]):[0-5]\\d:[0-5]\\d GMT',
+	    boolean: '(?:true|false)'
+	};
+	var ESCAPE_CHARACTERS = /([.*+?=^!:${}()|[\]\/\\])/g;
+	var REGEXP_REPLACE = new RegExp([
+	    '([.\\/])?\\{([^}]+)\\}',
+	    ESCAPE_CHARACTERS.source
+	].join('|'), 'g');
+	function toRegExp(path, parameters, keys, options) {
+	    var end = options.end !== false;
+	    var strict = options.strict;
+	    var flags = '';
+	    if (!options.sensitive) {
+	        flags += 'i';
+	    }
+	    var route = path.replace(REGEXP_REPLACE, function (match, prefix, key, escape) {
+	        if (escape) {
+	            return '\\' + escape;
+	        }
+	        // Push the current key into the keys array.
+	        keys.push({
+	            name: key,
+	            prefix: prefix || '/'
+	        });
+	        prefix = prefix ? '\\' + prefix : '';
+	        // TODO: Support an array of parameters.
+	        var param = parameters[key];
+	        var capture = param && REGEXP_MATCH[param.type] || '[^' + (prefix || '\\/') + ']+';
+	        var optional = param && param.required === false;
+	        if (Array.isArray(param.enum) && param.enum.length) {
+	            capture = '(?:' + param.enum.map(function (value) {
+	                return String(value).replace(ESCAPE_CHARACTERS, '\\$1');
+	            }).join('|') + ')';
+	        }
+	        return prefix + '(' + capture + ')' + (optional ? '?' : '');
+	    });
+	    var endsWithSlash = path.charAt(path.length - 1) === '/';
+	    // In non-strict mode we allow a slash at the end of match. If the path to
+	    // match already ends with a slash, we remove it for consistency. The slash
+	    // is valid at the end of a path match, not in the middle. This is important
+	    // in non-ending mode, where "/test/" shouldn't match "/test//route".
+	    if (!strict) {
+	        route = (endsWithSlash ? route.slice(0, -2) : route) + '(?:\\/(?=$))?';
+	    }
+	    if (end) {
+	        route += '$';
+	    }
+	    else {
+	        // In non-ending mode, we need the capturing groups to match as much as
+	        // possible by using a positive lookahead to the end or next path segment.
+	        route += strict && endsWithSlash ? '' : '(?=\\/|$)';
+	    }
+	    return new RegExp('^' + route + (end ? '$' : ''), flags);
+	}
+	function decodeParam(param) {
+	    try {
+	        return decodeURIComponent(param);
+	    }
+	    catch (_) {
+	        var err = new Error('Failed to decode param "' + param + '"');
+	        err.status = 400;
+	        throw err;
+	    }
+	}
+	function ramlPathMatch(path, parameters, options) {
+	    options = options || {};
+	    if (path === '/' && options.end === false) {
+	        return truth;
+	    }
+	    parameters = parameters || {};
+	    var keys = [];
+	    var re = toRegExp(path, parameters, keys, options);
+	    var sanitize = ramlSanitize()(parameters);
+	    var validate = ramlValidate()(parameters);
+	    return function (pathname) {
+	        var m = re.exec(pathname);
+	        if (!m) {
+	            return false;
+	        }
+	        if (parameters['mediaTypeExtension']) {
+	            if (m.length > 1 && !m[m.length - 1]) {
+	                var beforeLast = m[m.length - 2];
+	                var ind = beforeLast.lastIndexOf('.');
+	                if (ind >= 0) {
+	                    m[m.length - 2] = beforeLast.substring(0, ind);
+	                    m[m.length - 1] = beforeLast.substring(ind);
+	                }
+	            }
+	        }
+	        var path = m[0];
+	        var params = {};
+	        for (var i = 1; i < m.length; i++) {
+	            var key = keys[i - 1];
+	            var param = m[i];
+	            params[key.name] = param == null ? param : decodeParam(param);
+	        }
+	        params = sanitize(params);
+	        if (!validate(params).valid) {
+	            return false;
+	        }
+	        return {
+	            path: path,
+	            params: params
+	        };
+	    };
+	}
+	function truth(path) {
+	    return { path: '', params: {} };
+	}
+	module.exports = ramlPathMatch;
+	//# sourceMappingURL=raml-path-match.js.map
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var parser = (function () {
+	    "use strict";
+	    /*
+	     * Generated by PEG.js 0.9.0.
+	     *
+	     * http://pegjs.org/
+	     */
+	    function peg$subclass(child, parent) {
+	        function ctor() {
+	            this.constructor = child;
+	        }
+	        ctor.prototype = parent.prototype;
+	        child.prototype = new ctor();
+	    }
+	    function peg$SyntaxError(message, expected, found, location) {
+	        this.message = message;
+	        this.expected = expected;
+	        this.found = found;
+	        this.location = location;
+	        this.name = "SyntaxError";
+	        if (typeof Error.captureStackTrace === "function") {
+	            Error.captureStackTrace(this, peg$SyntaxError);
+	        }
+	    }
+	    peg$subclass(peg$SyntaxError, Error);
+	    function peg$parse(input) {
+	        var options = arguments.length > 1 ? arguments[1] : {}, parser = this, peg$FAILED = {}, peg$startRuleFunctions = { Signature: peg$parseSignature }, peg$startRuleFunction = peg$parseSignature, peg$c0 = "(", peg$c1 = { type: "literal", value: "(", description: "\"(\"" }, peg$c2 = ")", peg$c3 = { type: "literal", value: ")", description: "\")\"" }, peg$c4 = "=>", peg$c5 = { type: "literal", value: "=>", description: "\"=>\"" }, peg$c6 = function (args, returnType) {
+	            return { "args": args, "returnType": returnType ? returnType[1] : null };
+	        }, peg$c7 = function (farg, other) {
+	            return [farg].concat(other);
+	        }, peg$c8 = ",", peg$c9 = { type: "literal", value: ",", description: "\",\"" }, peg$c10 = function (r) {
+	            return r;
+	        }, peg$c11 = "?", peg$c12 = { type: "literal", value: "?", description: "\"?\"" }, peg$c13 = ":", peg$c14 = { type: "literal", value: ":", description: "\":\"" }, peg$c15 = function (lit, opt, t) {
+	            return { "name": lit.join(''), "type": t, "opt": opt ? true : false };
+	        }, peg$c16 = "{", peg$c17 = { type: "literal", value: "{", description: "\"{\"" }, peg$c18 = "}", peg$c19 = { type: "literal", value: "}", description: "\"}\"" }, peg$c20 = function (r, other) {
+	            return { "type": "responses", "codes": [r].concat(other) };
+	        }, peg$c21 = function (v) {
+	            return v;
+	        }, peg$c22 = function (c0, c1, c2, t) {
+	            return { "type": "codeAndType", "expr": t, "code": c0 + c1 + c2 };
+	        }, peg$c23 = "|", peg$c24 = { type: "literal", value: "|", description: "\"|\"" }, peg$c25 = function (first, rest) {
+	            return rest ? { "type": "union", "first": first, "rest": rest[3] } : first;
+	        }, peg$c26 = "[]", peg$c27 = { type: "literal", value: "[]", description: "\"[]\"" }, peg$c28 = function (expr, arr) {
+	            return { "type": "parens", "expr": expr, "arr": arr.length };
+	        }, peg$c29 = "<", peg$c30 = { type: "literal", value: "<", description: "\"<\"" }, peg$c31 = ">", peg$c32 = { type: "literal", value: ">", description: "\">\"" }, peg$c33 = function (first, other) {
+	            return [first].concat(other);
+	        }, peg$c34 = { type: "other", description: "name" }, peg$c35 = function (r, tp, c) {
+	            return { "type": "name", "params": tp, "value": r.join(""), "arr": (c.length) };
+	        }, peg$c36 = { type: "other", description: "whitespace" }, peg$c37 = /^[ \t\n\r]/, peg$c38 = { type: "class", value: "[ \\t\\n\\r]", description: "[ \\t\\n\\r]" }, peg$c39 = /^[A-Z]/, peg$c40 = { type: "class", value: "[A-Z]", description: "[A-Z]" }, peg$c41 = "_", peg$c42 = { type: "literal", value: "_", description: "\"_\"" }, peg$c43 = "-", peg$c44 = { type: "literal", value: "-", description: "\"-\"" }, peg$c45 = ".", peg$c46 = { type: "literal", value: ".", description: "\".\"" }, peg$c47 = /^[a-z]/, peg$c48 = { type: "class", value: "[a-z]", description: "[a-z]" }, peg$c49 = /^[0-9]/, peg$c50 = { type: "class", value: "[0-9]", description: "[0-9]" }, peg$currPos = 0, peg$savedPos = 0, peg$posDetailsCache = [{ line: 1, column: 1, seenCR: false }], peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
+	        if ("startRule" in options) {
+	            if (!(options.startRule in peg$startRuleFunctions)) {
+	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
+	            }
+	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
+	        }
+	        function text() {
+	            return input.substring(peg$savedPos, peg$currPos);
+	        }
+	        function location() {
+	            return peg$computeLocation(peg$savedPos, peg$currPos);
+	        }
+	        function expected(description) {
+	            throw peg$buildException(null, [{ type: "other", description: description }], input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
+	        }
+	        function error(message) {
+	            throw peg$buildException(message, null, input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
+	        }
+	        function peg$computePosDetails(pos) {
+	            var details = peg$posDetailsCache[pos], p, ch;
+	            if (details) {
+	                return details;
+	            }
+	            else {
+	                p = pos - 1;
+	                while (!peg$posDetailsCache[p]) {
+	                    p--;
+	                }
+	                details = peg$posDetailsCache[p];
+	                details = {
+	                    line: details.line,
+	                    column: details.column,
+	                    seenCR: details.seenCR
+	                };
+	                while (p < pos) {
+	                    ch = input.charAt(p);
+	                    if (ch === "\n") {
+	                        if (!details.seenCR) {
+	                            details.line++;
+	                        }
+	                        details.column = 1;
+	                        details.seenCR = false;
+	                    }
+	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
+	                        details.line++;
+	                        details.column = 1;
+	                        details.seenCR = true;
+	                    }
+	                    else {
+	                        details.column++;
+	                        details.seenCR = false;
+	                    }
+	                    p++;
+	                }
+	                peg$posDetailsCache[pos] = details;
+	                return details;
+	            }
+	        }
+	        function peg$computeLocation(startPos, endPos) {
+	            var startPosDetails = peg$computePosDetails(startPos), endPosDetails = peg$computePosDetails(endPos);
+	            return {
+	                start: {
+	                    offset: startPos,
+	                    line: startPosDetails.line,
+	                    column: startPosDetails.column
+	                },
+	                end: {
+	                    offset: endPos,
+	                    line: endPosDetails.line,
+	                    column: endPosDetails.column
+	                }
+	            };
+	        }
+	        function peg$fail(expected) {
+	            if (peg$currPos < peg$maxFailPos) {
+	                return;
+	            }
+	            if (peg$currPos > peg$maxFailPos) {
+	                peg$maxFailPos = peg$currPos;
+	                peg$maxFailExpected = [];
+	            }
+	            peg$maxFailExpected.push(expected);
+	        }
+	        function peg$buildException(message, expected, found, location) {
+	            function cleanupExpected(expected) {
+	                var i = 1;
+	                expected.sort(function (a, b) {
+	                    if (a.description < b.description) {
+	                        return -1;
+	                    }
+	                    else if (a.description > b.description) {
+	                        return 1;
+	                    }
+	                    else {
+	                        return 0;
+	                    }
+	                });
+	                while (i < expected.length) {
+	                    if (expected[i - 1] === expected[i]) {
+	                        expected.splice(i, 1);
+	                    }
+	                    else {
+	                        i++;
+	                    }
+	                }
+	            }
+	            function buildMessage(expected, found) {
+	                function stringEscape(s) {
+	                    function hex(ch) {
+	                        return ch.charCodeAt(0).toString(16).toUpperCase();
+	                    }
+	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
+	                        return '\\x0' + hex(ch);
+	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
+	                        return '\\x' + hex(ch);
+	                    }).replace(/[\u0100-\u0FFF]/g, function (ch) {
+	                        return '\\u0' + hex(ch);
+	                    }).replace(/[\u1000-\uFFFF]/g, function (ch) {
+	                        return '\\u' + hex(ch);
+	                    });
+	                }
+	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
+	                for (i = 0; i < expected.length; i++) {
+	                    expectedDescs[i] = expected[i].description;
+	                }
+	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
+	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
+	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
+	            }
+	            if (expected !== null) {
+	                cleanupExpected(expected);
+	            }
+	            return new peg$SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, location);
+	        }
+	        function peg$parseSignature() {
+	            var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
+	            s0 = peg$currPos;
+	            s1 = peg$parse_();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 40) {
+	                    s2 = peg$c0;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c1);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parseargs();
+	                    if (s3 === peg$FAILED) {
+	                        s3 = null;
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        s4 = peg$parse_();
+	                        if (s4 !== peg$FAILED) {
+	                            if (input.charCodeAt(peg$currPos) === 41) {
+	                                s5 = peg$c2;
+	                                peg$currPos++;
+	                            }
+	                            else {
+	                                s5 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c3);
+	                                }
+	                            }
+	                            if (s5 !== peg$FAILED) {
+	                                s6 = peg$parse_();
+	                                if (s6 !== peg$FAILED) {
+	                                    s7 = peg$currPos;
+	                                    if (input.substr(peg$currPos, 2) === peg$c4) {
+	                                        s8 = peg$c4;
+	                                        peg$currPos += 2;
+	                                    }
+	                                    else {
+	                                        s8 = peg$FAILED;
+	                                        if (peg$silentFails === 0) {
+	                                            peg$fail(peg$c5);
+	                                        }
+	                                    }
+	                                    if (s8 !== peg$FAILED) {
+	                                        s9 = peg$parseReturn();
+	                                        if (s9 !== peg$FAILED) {
+	                                            s8 = [s8, s9];
+	                                            s7 = s8;
+	                                        }
+	                                        else {
+	                                            peg$currPos = s7;
+	                                            s7 = peg$FAILED;
+	                                        }
+	                                    }
+	                                    else {
+	                                        peg$currPos = s7;
+	                                        s7 = peg$FAILED;
+	                                    }
+	                                    if (s7 === peg$FAILED) {
+	                                        s7 = null;
+	                                    }
+	                                    if (s7 !== peg$FAILED) {
+	                                        s8 = peg$parse_();
+	                                        if (s8 !== peg$FAILED) {
+	                                            peg$savedPos = s0;
+	                                            s1 = peg$c6(s3, s7);
+	                                            s0 = s1;
+	                                        }
+	                                        else {
+	                                            peg$currPos = s0;
+	                                            s0 = peg$FAILED;
+	                                        }
+	                                    }
+	                                    else {
+	                                        peg$currPos = s0;
+	                                        s0 = peg$FAILED;
+	                                    }
+	                                }
+	                                else {
+	                                    peg$currPos = s0;
+	                                    s0 = peg$FAILED;
+	                                }
+	                            }
+	                            else {
+	                                peg$currPos = s0;
+	                                s0 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseargs() {
+	            var s0, s1, s2, s3;
+	            s0 = peg$currPos;
+	            s1 = peg$parsearg();
+	            if (s1 !== peg$FAILED) {
+	                s2 = [];
+	                s3 = peg$parseextraArg();
+	                while (s3 !== peg$FAILED) {
+	                    s2.push(s3);
+	                    s3 = peg$parseextraArg();
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    peg$savedPos = s0;
+	                    s1 = peg$c7(s1, s2);
+	                    s0 = s1;
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseextraArg() {
+	            var s0, s1, s2, s3, s4;
+	            s0 = peg$currPos;
+	            s1 = peg$parse_();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 44) {
+	                    s2 = peg$c8;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c9);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parse_();
+	                    if (s3 !== peg$FAILED) {
+	                        s4 = peg$parsearg();
+	                        if (s4 !== peg$FAILED) {
+	                            peg$savedPos = s0;
+	                            s1 = peg$c10(s4);
+	                            s0 = s1;
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parsearg() {
+	            var s0, s1, s2, s3, s4;
+	            s0 = peg$currPos;
+	            s1 = [];
+	            s2 = peg$parsechar();
+	            while (s2 !== peg$FAILED) {
+	                s1.push(s2);
+	                s2 = peg$parsechar();
+	            }
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 63) {
+	                    s2 = peg$c11;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c12);
+	                    }
+	                }
+	                if (s2 === peg$FAILED) {
+	                    s2 = null;
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    if (input.charCodeAt(peg$currPos) === 58) {
+	                        s3 = peg$c13;
+	                        peg$currPos++;
+	                    }
+	                    else {
+	                        s3 = peg$FAILED;
+	                        if (peg$silentFails === 0) {
+	                            peg$fail(peg$c14);
+	                        }
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        s4 = peg$parseTerm();
+	                        if (s4 !== peg$FAILED) {
+	                            peg$savedPos = s0;
+	                            s1 = peg$c15(s1, s2, s4);
+	                            s0 = s1;
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseReturn() {
+	            var s0;
+	            s0 = peg$parseCode();
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parseTerm();
+	            }
+	            return s0;
+	        }
+	        function peg$parseCode() {
+	            var s0, s1, s2, s3, s4, s5;
+	            s0 = peg$currPos;
+	            s1 = peg$parse_();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 123) {
+	                    s2 = peg$c16;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c17);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parseResponseAndType();
+	                    if (s3 !== peg$FAILED) {
+	                        s4 = [];
+	                        s5 = peg$parseCommaAndResponse();
+	                        while (s5 !== peg$FAILED) {
+	                            s4.push(s5);
+	                            s5 = peg$parseCommaAndResponse();
+	                        }
+	                        if (s4 !== peg$FAILED) {
+	                            if (input.charCodeAt(peg$currPos) === 125) {
+	                                s5 = peg$c18;
+	                                peg$currPos++;
+	                            }
+	                            else {
+	                                s5 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c19);
+	                                }
+	                            }
+	                            if (s5 !== peg$FAILED) {
+	                                peg$savedPos = s0;
+	                                s1 = peg$c20(s3, s4);
+	                                s0 = s1;
+	                            }
+	                            else {
+	                                peg$currPos = s0;
+	                                s0 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseCommaAndResponse() {
+	            var s0, s1, s2;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 44) {
+	                s1 = peg$c8;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c9);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseResponseAndType();
+	                if (s2 !== peg$FAILED) {
+	                    peg$savedPos = s0;
+	                    s1 = peg$c21(s2);
+	                    s0 = s1;
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseResponseAndType() {
+	            var s0, s1, s2, s3, s4, s5;
+	            s0 = peg$currPos;
+	            s1 = peg$parsechar();
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parsechar();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parsechar();
+	                    if (s3 !== peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 58) {
+	                            s4 = peg$c13;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s4 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c14);
+	                            }
+	                        }
+	                        if (s4 !== peg$FAILED) {
+	                            s5 = peg$parseTerm();
+	                            if (s5 !== peg$FAILED) {
+	                                peg$savedPos = s0;
+	                                s1 = peg$c22(s1, s2, s3, s5);
+	                                s0 = s1;
+	                            }
+	                            else {
+	                                peg$currPos = s0;
+	                                s0 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseTerm() {
+	            var s0, s1, s2, s3, s4, s5, s6, s7;
+	            s0 = peg$currPos;
+	            s1 = peg$parse_();
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseFactor();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$currPos;
+	                    s4 = peg$parse_();
+	                    if (s4 !== peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 124) {
+	                            s5 = peg$c23;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s5 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c24);
+	                            }
+	                        }
+	                        if (s5 !== peg$FAILED) {
+	                            s6 = peg$parse_();
+	                            if (s6 !== peg$FAILED) {
+	                                s7 = peg$parseTerm();
+	                                if (s7 !== peg$FAILED) {
+	                                    s4 = [s4, s5, s6, s7];
+	                                    s3 = s4;
+	                                }
+	                                else {
+	                                    peg$currPos = s3;
+	                                    s3 = peg$FAILED;
+	                                }
+	                            }
+	                            else {
+	                                peg$currPos = s3;
+	                                s3 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s3;
+	                            s3 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s3;
+	                        s3 = peg$FAILED;
+	                    }
+	                    if (s3 === peg$FAILED) {
+	                        s3 = null;
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        peg$savedPos = s0;
+	                        s1 = peg$c25(s2, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseFactor() {
+	            var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 40) {
+	                s1 = peg$c0;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c1);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parse_();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parseTerm();
+	                    if (s3 !== peg$FAILED) {
+	                        s4 = peg$parse_();
+	                        if (s4 !== peg$FAILED) {
+	                            if (input.charCodeAt(peg$currPos) === 41) {
+	                                s5 = peg$c2;
+	                                peg$currPos++;
+	                            }
+	                            else {
+	                                s5 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c3);
+	                                }
+	                            }
+	                            if (s5 !== peg$FAILED) {
+	                                s6 = [];
+	                                s7 = peg$currPos;
+	                                s8 = peg$parse_();
+	                                if (s8 !== peg$FAILED) {
+	                                    if (input.substr(peg$currPos, 2) === peg$c26) {
+	                                        s9 = peg$c26;
+	                                        peg$currPos += 2;
+	                                    }
+	                                    else {
+	                                        s9 = peg$FAILED;
+	                                        if (peg$silentFails === 0) {
+	                                            peg$fail(peg$c27);
+	                                        }
+	                                    }
+	                                    if (s9 !== peg$FAILED) {
+	                                        s8 = [s8, s9];
+	                                        s7 = s8;
+	                                    }
+	                                    else {
+	                                        peg$currPos = s7;
+	                                        s7 = peg$FAILED;
+	                                    }
+	                                }
+	                                else {
+	                                    peg$currPos = s7;
+	                                    s7 = peg$FAILED;
+	                                }
+	                                while (s7 !== peg$FAILED) {
+	                                    s6.push(s7);
+	                                    s7 = peg$currPos;
+	                                    s8 = peg$parse_();
+	                                    if (s8 !== peg$FAILED) {
+	                                        if (input.substr(peg$currPos, 2) === peg$c26) {
+	                                            s9 = peg$c26;
+	                                            peg$currPos += 2;
+	                                        }
+	                                        else {
+	                                            s9 = peg$FAILED;
+	                                            if (peg$silentFails === 0) {
+	                                                peg$fail(peg$c27);
+	                                            }
+	                                        }
+	                                        if (s9 !== peg$FAILED) {
+	                                            s8 = [s8, s9];
+	                                            s7 = s8;
+	                                        }
+	                                        else {
+	                                            peg$currPos = s7;
+	                                            s7 = peg$FAILED;
+	                                        }
+	                                    }
+	                                    else {
+	                                        peg$currPos = s7;
+	                                        s7 = peg$FAILED;
+	                                    }
+	                                }
+	                                if (s6 !== peg$FAILED) {
+	                                    peg$savedPos = s0;
+	                                    s1 = peg$c28(s3, s6);
+	                                    s0 = s1;
+	                                }
+	                                else {
+	                                    peg$currPos = s0;
+	                                    s0 = peg$FAILED;
+	                                }
+	                            }
+	                            else {
+	                                peg$currPos = s0;
+	                                s0 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parseLiteral();
+	            }
+	            return s0;
+	        }
+	        function peg$parseTypeParams() {
+	            var s0, s1, s2, s3, s4;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 60) {
+	                s1 = peg$c29;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c30);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTerm();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = [];
+	                    s4 = peg$parseExtraParam();
+	                    while (s4 !== peg$FAILED) {
+	                        s3.push(s4);
+	                        s4 = peg$parseExtraParam();
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 62) {
+	                            s4 = peg$c31;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s4 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c32);
+	                            }
+	                        }
+	                        if (s4 !== peg$FAILED) {
+	                            peg$savedPos = s0;
+	                            s1 = peg$c33(s2, s3);
+	                            s0 = s1;
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseExtraParam() {
+	            var s0, s1, s2;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 44) {
+	                s1 = peg$c8;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c9);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTerm();
+	                if (s2 !== peg$FAILED) {
+	                    peg$savedPos = s0;
+	                    s1 = peg$c10(s2);
+	                    s0 = s1;
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseLiteral() {
+	            var s0, s1, s2, s3, s4, s5, s6;
+	            peg$silentFails++;
+	            s0 = peg$currPos;
+	            s1 = [];
+	            s2 = peg$parsechar();
+	            if (s2 !== peg$FAILED) {
+	                while (s2 !== peg$FAILED) {
+	                    s1.push(s2);
+	                    s2 = peg$parsechar();
+	                }
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTypeParams();
+	                if (s2 === peg$FAILED) {
+	                    s2 = null;
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = [];
+	                    s4 = peg$currPos;
+	                    s5 = peg$parse_();
+	                    if (s5 !== peg$FAILED) {
+	                        if (input.substr(peg$currPos, 2) === peg$c26) {
+	                            s6 = peg$c26;
+	                            peg$currPos += 2;
+	                        }
+	                        else {
+	                            s6 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c27);
+	                            }
+	                        }
+	                        if (s6 !== peg$FAILED) {
+	                            s5 = [s5, s6];
+	                            s4 = s5;
+	                        }
+	                        else {
+	                            peg$currPos = s4;
+	                            s4 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s4;
+	                        s4 = peg$FAILED;
+	                    }
+	                    while (s4 !== peg$FAILED) {
+	                        s3.push(s4);
+	                        s4 = peg$currPos;
+	                        s5 = peg$parse_();
+	                        if (s5 !== peg$FAILED) {
+	                            if (input.substr(peg$currPos, 2) === peg$c26) {
+	                                s6 = peg$c26;
+	                                peg$currPos += 2;
+	                            }
+	                            else {
+	                                s6 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c27);
+	                                }
+	                            }
+	                            if (s6 !== peg$FAILED) {
+	                                s5 = [s5, s6];
+	                                s4 = s5;
+	                            }
+	                            else {
+	                                peg$currPos = s4;
+	                                s4 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s4;
+	                            s4 = peg$FAILED;
+	                        }
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        peg$savedPos = s0;
+	                        s1 = peg$c35(s1, s2, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            peg$silentFails--;
+	            if (s0 === peg$FAILED) {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c34);
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parse_() {
+	            var s0, s1;
+	            peg$silentFails++;
+	            s0 = [];
+	            if (peg$c37.test(input.charAt(peg$currPos))) {
+	                s1 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c38);
+	                }
+	            }
+	            while (s1 !== peg$FAILED) {
+	                s0.push(s1);
+	                if (peg$c37.test(input.charAt(peg$currPos))) {
+	                    s1 = input.charAt(peg$currPos);
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s1 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c38);
+	                    }
+	                }
+	            }
+	            peg$silentFails--;
+	            if (s0 === peg$FAILED) {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c36);
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parsechar() {
+	            var s0;
+	            if (peg$c39.test(input.charAt(peg$currPos))) {
+	                s0 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s0 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c40);
+	                }
+	            }
+	            if (s0 === peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 95) {
+	                    s0 = peg$c41;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s0 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c42);
+	                    }
+	                }
+	                if (s0 === peg$FAILED) {
+	                    if (input.charCodeAt(peg$currPos) === 45) {
+	                        s0 = peg$c43;
+	                        peg$currPos++;
+	                    }
+	                    else {
+	                        s0 = peg$FAILED;
+	                        if (peg$silentFails === 0) {
+	                            peg$fail(peg$c44);
+	                        }
+	                    }
+	                    if (s0 === peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 46) {
+	                            s0 = peg$c45;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s0 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c46);
+	                            }
+	                        }
+	                        if (s0 === peg$FAILED) {
+	                            if (peg$c47.test(input.charAt(peg$currPos))) {
+	                                s0 = input.charAt(peg$currPos);
+	                                peg$currPos++;
+	                            }
+	                            else {
+	                                s0 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c48);
+	                                }
+	                            }
+	                            if (s0 === peg$FAILED) {
+	                                if (peg$c49.test(input.charAt(peg$currPos))) {
+	                                    s0 = input.charAt(peg$currPos);
+	                                    peg$currPos++;
+	                                }
+	                                else {
+	                                    s0 = peg$FAILED;
+	                                    if (peg$silentFails === 0) {
+	                                        peg$fail(peg$c50);
+	                                    }
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	            return s0;
+	        }
+	        peg$result = peg$startRuleFunction();
+	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
+	            return peg$result;
+	        }
+	        else {
+	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+	                peg$fail({ type: "end", description: "end of input" });
+	            }
+	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null, peg$maxFailPos < input.length ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1) : peg$computeLocation(peg$maxFailPos, peg$maxFailPos));
+	        }
+	    }
+	    return {
+	        SyntaxError: peg$SyntaxError,
+	        parse: peg$parse
+	    };
+	})();
+	module.exports = parser;
+	//# sourceMappingURL=ramlSignatureParser.js.map
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var xmlutil = __webpack_require__(70);
+	var lru = __webpack_require__(79);
+	var ZSchema = __webpack_require__(78);
+	var ValidationResult = (function () {
+	    function ValidationResult() {
+	    }
+	    return ValidationResult;
+	})();
+	exports.ValidationResult = ValidationResult;
+	var globalCache = lru(400);
+	var useLint = true;
+	var JSONSchemaObject = (function () {
+	    function JSONSchemaObject(schema) {
+	        this.schema = schema;
+	        if (!schema || schema.trim().length == 0 || schema.trim().charAt(0) != '{') {
+	            throw new Error("Invalid JSON schema content");
+	        }
+	        var jsonSchemaObject;
+	        try {
+	            var jsonSchemaObject = JSON.parse(schema);
+	        }
+	        catch (err) {
+	            throw new Error("It is not JSON schema");
+	        }
+	        if (!jsonSchemaObject) {
+	            return;
+	        }
+	        try {
+	            var api = __webpack_require__(104);
+	            jsonSchemaObject = api.v4(jsonSchemaObject);
+	        }
+	        catch (e) {
+	            throw new Error('Can not parse schema' + schema);
+	        }
+	        delete jsonSchemaObject['$schema'];
+	        delete jsonSchemaObject['required'];
+	        this.jsonSchema = jsonSchemaObject;
+	    }
+	    JSONSchemaObject.prototype.getType = function () {
+	        return "source.json";
+	    };
+	    JSONSchemaObject.prototype.validateObject = function (object) {
+	        //TODO Validation of objects
+	        //xmlutil(content);
+	        this.validate(JSON.stringify(object));
+	    };
+	    JSONSchemaObject.prototype.validate = function (content) {
+	        var key = content + this.schema;
+	        var c = globalCache.get(key);
+	        if (c) {
+	            if (c instanceof Error) {
+	                throw c;
+	            }
+	            return;
+	        }
+	        var validator = new ZSchema();
+	        var valid = validator.validate(JSON.parse(content), this.jsonSchema);
+	        var errors = validator.getLastErrors();
+	        if (errors && errors.length > 0) {
+	            var res = new Error("Content is not valid according to schema:" + errors.map(function (x) { return x.message + " " + x.params; }).join(", "));
+	            res.errors = errors;
+	            globalCache.set(key, res);
+	            throw res;
+	        }
+	        globalCache.set(key, 1);
+	    };
+	    return JSONSchemaObject;
+	})();
+	exports.JSONSchemaObject = JSONSchemaObject;
+	var XMLSchemaObject = (function () {
+	    function XMLSchemaObject(schema) {
+	        this.schema = schema;
+	        if (schema.charAt(0) != '<') {
+	            throw new Error("Invalid JSON schema");
+	        }
+	        xmlutil(schema);
+	    }
+	    XMLSchemaObject.prototype.getType = function () {
+	        return "text.xml";
+	    };
+	    XMLSchemaObject.prototype.validate = function (content) {
+	        xmlutil(content);
+	    };
+	    XMLSchemaObject.prototype.validateObject = function (object) {
+	        //TODO Validation of objects
+	        //xmlutil(content);
+	    };
+	    return XMLSchemaObject;
+	})();
+	exports.XMLSchemaObject = XMLSchemaObject;
+	function getJSONSchema(content) {
+	    var rs = useLint ? globalCache.get(content) : false;
+	    if (rs) {
+	        return rs;
+	    }
+	    var res = new JSONSchemaObject(content);
+	    globalCache.set(content, res);
+	    return res;
+	}
+	exports.getJSONSchema = getJSONSchema;
+	function getXMLSchema(content) {
+	    var rs = useLint ? globalCache.get(content) : false;
+	    if (rs) {
+	        return rs;
+	    }
+	    var res = new XMLSchemaObject(content);
+	    if (useLint) {
+	        globalCache.set(content, res);
+	    }
+	}
+	exports.getXMLSchema = getXMLSchema;
+	function createSchema(content) {
+	    var rs = useLint ? globalCache.get(content) : false;
+	    if (rs) {
+	        return rs;
+	    }
+	    try {
+	        var res = new JSONSchemaObject(content);
+	        if (useLint) {
+	            globalCache.set(content, res);
+	        }
+	        return res;
+	    }
+	    catch (e) {
+	        try {
+	            var res = new XMLSchemaObject(content);
+	            if (useLint) {
+	                globalCache.set(content, res);
+	            }
+	            return res;
+	        }
+	        catch (e) {
+	            if (useLint) {
+	                globalCache.set(content, new Error("Can not parse schema"));
+	            }
+	            return null;
+	        }
+	    }
+	}
+	exports.createSchema = createSchema;
+	//# sourceMappingURL=schemaUtil.js.map
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var __extends = this.__extends || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    __.prototype = b.prototype;
+	    d.prototype = new __();
+	};
+	var _ = __webpack_require__(47);
+	var sel = __webpack_require__(84);
+	var Selector = (function () {
+	    function Selector() {
+	    }
+	    Selector.prototype.candidates = function (context) {
+	        return context;
+	    };
+	    Selector.prototype.apply = function (h) {
+	        return this.candidates([h]);
+	    };
+	    return Selector;
+	})();
+	exports.Selector = Selector;
+	var OrMatch = (function (_super) {
+	    __extends(OrMatch, _super);
+	    function OrMatch(left, right) {
+	        _super.call(this);
+	        this.left = left;
+	        this.right = right;
+	    }
+	    OrMatch.prototype.candidates = function (context) {
+	        var l = this.left.candidates(context);
+	        l = l.concat(this.right.candidates(context));
+	        return _.unique(l);
+	    };
+	    return OrMatch;
+	})(Selector);
+	exports.OrMatch = OrMatch;
+	var DotMatch = (function (_super) {
+	    __extends(DotMatch, _super);
+	    function DotMatch(left, right) {
+	        _super.call(this);
+	        this.left = left;
+	        this.right = right;
+	    }
+	    DotMatch.prototype.candidates = function (context) {
+	        var l = this.left.candidates(context);
+	        if (this.left instanceof AnyParentMatch) {
+	            l = this.right.candidates(new AnyChildMatch().candidates(l));
+	            return _.unique(l);
+	        }
+	        if (this.left instanceof ParentMatch) {
+	            l = this.right.candidates(new AnyChildMatch().candidates(l));
+	            return _.unique(l);
+	        }
+	        l = this.right.candidates(l);
+	        return _.unique(l);
+	    };
+	    return DotMatch;
+	})(Selector);
+	exports.DotMatch = DotMatch;
+	function resolveSelector(s, n) {
+	    if (s.type == "or") {
+	        var b = s;
+	        var l = resolveSelector(b.left, n);
+	        var r = resolveSelector(b.right, n);
+	        return new OrMatch(l, r);
+	    }
+	    if (s.type == "dot") {
+	        var b = s;
+	        var l = resolveSelector(b.left, n);
+	        var r = resolveSelector(b.right, n);
+	        return new DotMatch(l, r);
+	    }
+	    if (s.type == 'classLiteral') {
+	        var literal = s;
+	        var tp = n.definition().universe().getType(literal.name);
+	        if (tp == null || tp.isValueType()) {
+	            throw new Error("Referencing unknown type:" + literal.name);
+	        }
+	        return new IdMatch(literal.name);
+	    }
+	    if (s.type == 'parent') {
+	        return new ParentMatch();
+	    }
+	    if (s.type == 'ancestor') {
+	        return new AnyParentMatch();
+	    }
+	    if (s.type == 'descendant') {
+	        return new AnyChildMatch();
+	    }
+	    if (s.type == 'child') {
+	        return new ChildMatch();
+	    }
+	}
+	exports.resolveSelector = resolveSelector;
+	var IdMatch = (function (_super) {
+	    __extends(IdMatch, _super);
+	    function IdMatch(name) {
+	        _super.call(this);
+	        this.name = name;
+	    }
+	    IdMatch.prototype.candidates = function (context) {
+	        var _this = this;
+	        return context.filter(function (x) {
+	            if (!x) {
+	                return false;
+	            }
+	            if (x.definition().name() == _this.name) {
+	                return true;
+	            }
+	            var superTypes = x.definition().allSuperTypes();
+	            if (_.find(superTypes, function (x) { return x.name() == _this.name; })) {
+	                return true;
+	            }
+	            return false;
+	        });
+	    };
+	    return IdMatch;
+	})(Selector);
+	exports.IdMatch = IdMatch;
+	var AnyParentMatch = (function (_super) {
+	    __extends(AnyParentMatch, _super);
+	    function AnyParentMatch() {
+	        _super.apply(this, arguments);
+	    }
+	    AnyParentMatch.prototype.candidates = function (context) {
+	        var res = [];
+	        context.forEach(function (x) {
+	            if (x) {
+	                var z = x.parent();
+	                while (z) {
+	                    res.push(z);
+	                    z = z.parent();
+	                }
+	            }
+	        });
+	        return _.unique(res);
+	    };
+	    return AnyParentMatch;
+	})(Selector);
+	exports.AnyParentMatch = AnyParentMatch;
+	function addChildren(x, r) {
+	    r.push(x);
+	    x.elements().forEach(function (y) { return addChildren(y, r); });
+	}
+	var AnyChildMatch = (function (_super) {
+	    __extends(AnyChildMatch, _super);
+	    function AnyChildMatch() {
+	        _super.apply(this, arguments);
+	    }
+	    AnyChildMatch.prototype.candidates = function (context) {
+	        var res = [];
+	        context.forEach(function (x) {
+	            if (x) {
+	                addChildren(x, res);
+	            }
+	        });
+	        return _.unique(res);
+	    };
+	    return AnyChildMatch;
+	})(Selector);
+	exports.AnyChildMatch = AnyChildMatch;
+	var ParentMatch = (function (_super) {
+	    __extends(ParentMatch, _super);
+	    function ParentMatch() {
+	        _super.apply(this, arguments);
+	    }
+	    ParentMatch.prototype.candidates = function (context) {
+	        return context.map(function (x) { return x.parent(); });
+	    };
+	    return ParentMatch;
+	})(Selector);
+	exports.ParentMatch = ParentMatch;
+	var ChildMatch = (function (_super) {
+	    __extends(ChildMatch, _super);
+	    function ChildMatch() {
+	        _super.apply(this, arguments);
+	    }
+	    ChildMatch.prototype.candidates = function (context) {
+	        var res = [];
+	        context.forEach(function (x) {
+	            if (x) {
+	                res = res.concat(x.elements());
+	            }
+	        });
+	        return res;
+	    };
+	    return ChildMatch;
+	})(Selector);
+	exports.ChildMatch = ChildMatch;
+	function parse(h, path) {
+	    return resolveSelector(sel.parse(path), h);
+	}
+	exports.parse = parse;
+	//# sourceMappingURL=selectorMatch.js.map
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var ramlExpression = __webpack_require__(85);
+	var search = __webpack_require__(35);
+	function validate(str, node) {
+	    var result = ramlExpression.parse(str);
+	    validateNode(result, node);
+	}
+	exports.validate = validate;
+	function validateNode(r, node) {
+	    if (r.type == "unary") {
+	        var u = r;
+	        validateNode(u.exp, node);
+	    }
+	    else if (r.type == 'paren') {
+	        var ex = r;
+	        validateNode(ex.exp, node);
+	    }
+	    else if (r.type == 'string' || r.type == 'number') {
+	    }
+	    else if (r.type == 'ident') {
+	        var ident = r;
+	        var p = search.resolveRamlPointer(node, ident.value);
+	        if (!p) {
+	            throw new Error("Unable to resolve " + ident.value);
+	        }
+	    }
+	    else {
+	        var be = r;
+	        validateNode(be.l, node);
+	        validateNode(be.r, node);
+	    }
+	}
+	//# sourceMappingURL=ramlExpressions.js.map
+
+/***/ },
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../typings/tsd.d.ts" />
-	var ast = __webpack_require__(21);
+	var ast = __webpack_require__(19);
 	'use strict';
 	/*eslint-disable max-len,no-use-before-define*/
-	var common = __webpack_require__(69);
-	var YAMLException = __webpack_require__(36);
-	var Mark = __webpack_require__(86);
-	var DEFAULT_SAFE_SCHEMA = __webpack_require__(67);
-	var DEFAULT_FULL_SCHEMA = __webpack_require__(68);
+	var common = __webpack_require__(65);
+	var YAMLException = __webpack_require__(28);
+	var Mark = __webpack_require__(89);
+	var DEFAULT_SAFE_SCHEMA = __webpack_require__(63);
+	var DEFAULT_FULL_SCHEMA = __webpack_require__(64);
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	var CONTEXT_FLOW_IN = 1;
 	var CONTEXT_FLOW_OUT = 2;
@@ -43157,11 +41888,11 @@
 	//# sourceMappingURL=loader.js.map
 
 /***/ },
-/* 62 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var YAMLException = __webpack_require__(36);
+	var YAMLException = __webpack_require__(28);
 	var TYPE_CONSTRUCTOR_OPTIONS = [
 	    'kind',
 	    'resolve',
@@ -43217,15 +41948,15 @@
 	//# sourceMappingURL=type.js.map
 
 /***/ },
-/* 63 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../typings/tsd.d.ts" />
 	'use strict';
 	/*eslint-disable max-len*/
-	var common = __webpack_require__(69);
-	var YAMLException = __webpack_require__(36);
-	var Type = __webpack_require__(62);
+	var common = __webpack_require__(65);
+	var YAMLException = __webpack_require__(28);
+	var Type = __webpack_require__(58);
 	function compileList(schema, name, result) {
 	    var exclude = [];
 	    schema.include.forEach(function (includedSchema) {
@@ -43305,25 +42036,25 @@
 	//# sourceMappingURL=schema.js.map
 
 /***/ },
-/* 64 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	// Standard YAML's Failsafe schema.
 	// http://www.yaml.org/spec/1.2/spec.html#id2802346
 	'use strict';
-	var Schema = __webpack_require__(63);
+	var Schema = __webpack_require__(59);
 	module.exports = new Schema({
 	    explicit: [
+	        __webpack_require__(86),
 	        __webpack_require__(87),
-	        __webpack_require__(88),
-	        __webpack_require__(89)
+	        __webpack_require__(88)
 	    ]
 	});
 	//# sourceMappingURL=failsafe.js.map
 
 /***/ },
-/* 65 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -43334,10 +42065,10 @@
 	// So, this schema is not such strict as defined in the YAML specification.
 	// It allows numbers in binary notaion, use `Null` and `NULL` as `null`, etc.
 	'use strict';
-	var Schema = __webpack_require__(63);
+	var Schema = __webpack_require__(59);
 	module.exports = new Schema({
 	    include: [
-	        __webpack_require__(64)
+	        __webpack_require__(60)
 	    ],
 	    implicit: [
 	        __webpack_require__(90),
@@ -43349,7 +42080,7 @@
 	//# sourceMappingURL=json.js.map
 
 /***/ },
-/* 66 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -43359,16 +42090,16 @@
 	// NOTE: JS-YAML does not support schema-specific tag resolution restrictions.
 	// So, Core schema has no distinctions from JSON schema is JS-YAML.
 	'use strict';
-	var Schema = __webpack_require__(63);
+	var Schema = __webpack_require__(59);
 	module.exports = new Schema({
 	    include: [
-	        __webpack_require__(65)
+	        __webpack_require__(61)
 	    ]
 	});
 	//# sourceMappingURL=core.js.map
 
 /***/ },
-/* 67 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -43378,10 +42109,10 @@
 	// This schema is based on standard YAML's Core schema and includes most of
 	// extra types described at YAML tag repository. (http://yaml.org/type/)
 	'use strict';
-	var Schema = __webpack_require__(63);
+	var Schema = __webpack_require__(59);
 	var schema = new Schema({
 	    include: [
-	        __webpack_require__(66)
+	        __webpack_require__(62)
 	    ],
 	    implicit: [
 	        __webpack_require__(94),
@@ -43398,7 +42129,7 @@
 	//# sourceMappingURL=default_safe.js.map
 
 /***/ },
-/* 68 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -43410,10 +42141,10 @@
 	//
 	// Also this schema is used as default base schema at `Schema.create` function.
 	'use strict';
-	var Schema = __webpack_require__(63);
+	var Schema = __webpack_require__(59);
 	var schema = new Schema({
 	    include: [
-	        __webpack_require__(67)
+	        __webpack_require__(63)
 	    ],
 	    explicit: [
 	        __webpack_require__(100),
@@ -43426,7 +42157,7 @@
 	//# sourceMappingURL=default_full.js.map
 
 /***/ },
-/* 69 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../typings/tsd.d.ts" />
@@ -43476,77 +42207,13 @@
 	//# sourceMappingURL=common.js.map
 
 /***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// shim for using process in browser
-
-	var process = module.exports = {};
-	var queue = [];
-	var draining = false;
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    draining = true;
-	    var currentQueue;
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        var i = -1;
-	        while (++i < len) {
-	            currentQueue[i]();
-	        }
-	        len = queue.length;
-	    }
-	    draining = false;
-	}
-	process.nextTick = function (fun) {
-	    queue.push(fun);
-	    if (!draining) {
-	        setTimeout(drainQueue, 0);
-	    }
-	};
-
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	// TODO(shtylman)
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 71 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/// <reference path="../../../typings/tsd.d.ts" />
 	'use strict';
-	var concat = __webpack_require__(75);
-	var request = __webpack_require__(79);
+	var concat = __webpack_require__(76);
+	var request = __webpack_require__(80);
 	function respond(data) {
 	    process.stdout.write(JSON.stringify(data), function () {
 	        process.exit(0);
@@ -43561,10 +42228,1279 @@
 	    });
 	}));
 	//# sourceMappingURL=worker.js.map
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
-/* 72 */
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var parser = (function () {
+	    "use strict";
+	    /*
+	     * Generated by PEG.js 0.9.0.
+	     *
+	     * http://pegjs.org/
+	     */
+	    function peg$subclass(child, parent) {
+	        function ctor() {
+	            this.constructor = child;
+	        }
+	        ctor.prototype = parent.prototype;
+	        child.prototype = new ctor();
+	    }
+	    function peg$SyntaxError(message, expected, found, location) {
+	        this.message = message;
+	        this.expected = expected;
+	        this.found = found;
+	        this.location = location;
+	        this.name = "SyntaxError";
+	        if (typeof Error.captureStackTrace === "function") {
+	            Error.captureStackTrace(this, peg$SyntaxError);
+	        }
+	    }
+	    peg$subclass(peg$SyntaxError, Error);
+	    function peg$parse(input) {
+	        var options = arguments.length > 1 ? arguments[1] : {}, parser = this, peg$FAILED = {}, peg$startRuleFunctions = { Term: peg$parseTerm }, peg$startRuleFunction = peg$parseTerm, peg$c0 = "|", peg$c1 = { type: "literal", value: "|", description: "\"|\"" }, peg$c2 = function (first, rest) {
+	            return rest ? { "type": "union", "first": first, "rest": rest[3] } : first;
+	        }, peg$c3 = "(", peg$c4 = { type: "literal", value: "(", description: "\"(\"" }, peg$c5 = ")", peg$c6 = { type: "literal", value: ")", description: "\")\"" }, peg$c7 = "[]", peg$c8 = { type: "literal", value: "[]", description: "\"[]\"" }, peg$c9 = function (expr, arr) {
+	            return { "type": "parens", "expr": expr, "arr": arr.length };
+	        }, peg$c10 = "<", peg$c11 = { type: "literal", value: "<", description: "\"<\"" }, peg$c12 = ">", peg$c13 = { type: "literal", value: ">", description: "\">\"" }, peg$c14 = function (first, other) {
+	            return [first].concat(other);
+	        }, peg$c15 = ",", peg$c16 = { type: "literal", value: ",", description: "\",\"" }, peg$c17 = function (r) {
+	            return r;
+	        }, peg$c18 = { type: "other", description: "name" }, peg$c19 = function (r, tp, c) {
+	            return { "type": "name", "params": tp, "value": r.join(""), "arr": (c.length) };
+	        }, peg$c20 = { type: "other", description: "whitespace" }, peg$c21 = /^[ \t\n\r]/, peg$c22 = { type: "class", value: "[ \\t\\n\\r]", description: "[ \\t\\n\\r]" }, peg$c23 = /^[A-Z]/, peg$c24 = { type: "class", value: "[A-Z]", description: "[A-Z]" }, peg$c25 = "_", peg$c26 = { type: "literal", value: "_", description: "\"_\"" }, peg$c27 = "-", peg$c28 = { type: "literal", value: "-", description: "\"-\"" }, peg$c29 = ".", peg$c30 = { type: "literal", value: ".", description: "\".\"" }, peg$c31 = /^[a-z]/, peg$c32 = { type: "class", value: "[a-z]", description: "[a-z]" }, peg$c33 = /^[0-9]/, peg$c34 = { type: "class", value: "[0-9]", description: "[0-9]" }, peg$currPos = 0, peg$savedPos = 0, peg$posDetailsCache = [{ line: 1, column: 1, seenCR: false }], peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
+	        if ("startRule" in options) {
+	            if (!(options.startRule in peg$startRuleFunctions)) {
+	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
+	            }
+	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
+	        }
+	        function text() {
+	            return input.substring(peg$savedPos, peg$currPos);
+	        }
+	        function location() {
+	            return peg$computeLocation(peg$savedPos, peg$currPos);
+	        }
+	        function expected(description) {
+	            throw peg$buildException(null, [{ type: "other", description: description }], input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
+	        }
+	        function error(message) {
+	            throw peg$buildException(message, null, input.substring(peg$savedPos, peg$currPos), peg$computeLocation(peg$savedPos, peg$currPos));
+	        }
+	        function peg$computePosDetails(pos) {
+	            var details = peg$posDetailsCache[pos], p, ch;
+	            if (details) {
+	                return details;
+	            }
+	            else {
+	                p = pos - 1;
+	                while (!peg$posDetailsCache[p]) {
+	                    p--;
+	                }
+	                details = peg$posDetailsCache[p];
+	                details = {
+	                    line: details.line,
+	                    column: details.column,
+	                    seenCR: details.seenCR
+	                };
+	                while (p < pos) {
+	                    ch = input.charAt(p);
+	                    if (ch === "\n") {
+	                        if (!details.seenCR) {
+	                            details.line++;
+	                        }
+	                        details.column = 1;
+	                        details.seenCR = false;
+	                    }
+	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
+	                        details.line++;
+	                        details.column = 1;
+	                        details.seenCR = true;
+	                    }
+	                    else {
+	                        details.column++;
+	                        details.seenCR = false;
+	                    }
+	                    p++;
+	                }
+	                peg$posDetailsCache[pos] = details;
+	                return details;
+	            }
+	        }
+	        function peg$computeLocation(startPos, endPos) {
+	            var startPosDetails = peg$computePosDetails(startPos), endPosDetails = peg$computePosDetails(endPos);
+	            return {
+	                start: {
+	                    offset: startPos,
+	                    line: startPosDetails.line,
+	                    column: startPosDetails.column
+	                },
+	                end: {
+	                    offset: endPos,
+	                    line: endPosDetails.line,
+	                    column: endPosDetails.column
+	                }
+	            };
+	        }
+	        function peg$fail(expected) {
+	            if (peg$currPos < peg$maxFailPos) {
+	                return;
+	            }
+	            if (peg$currPos > peg$maxFailPos) {
+	                peg$maxFailPos = peg$currPos;
+	                peg$maxFailExpected = [];
+	            }
+	            peg$maxFailExpected.push(expected);
+	        }
+	        function peg$buildException(message, expected, found, location) {
+	            function cleanupExpected(expected) {
+	                var i = 1;
+	                expected.sort(function (a, b) {
+	                    if (a.description < b.description) {
+	                        return -1;
+	                    }
+	                    else if (a.description > b.description) {
+	                        return 1;
+	                    }
+	                    else {
+	                        return 0;
+	                    }
+	                });
+	                while (i < expected.length) {
+	                    if (expected[i - 1] === expected[i]) {
+	                        expected.splice(i, 1);
+	                    }
+	                    else {
+	                        i++;
+	                    }
+	                }
+	            }
+	            function buildMessage(expected, found) {
+	                function stringEscape(s) {
+	                    function hex(ch) {
+	                        return ch.charCodeAt(0).toString(16).toUpperCase();
+	                    }
+	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
+	                        return '\\x0' + hex(ch);
+	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
+	                        return '\\x' + hex(ch);
+	                    }).replace(/[\u0100-\u0FFF]/g, function (ch) {
+	                        return '\\u0' + hex(ch);
+	                    }).replace(/[\u1000-\uFFFF]/g, function (ch) {
+	                        return '\\u' + hex(ch);
+	                    });
+	                }
+	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
+	                for (i = 0; i < expected.length; i++) {
+	                    expectedDescs[i] = expected[i].description;
+	                }
+	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
+	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
+	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
+	            }
+	            if (expected !== null) {
+	                cleanupExpected(expected);
+	            }
+	            return new peg$SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, location);
+	        }
+	        function peg$parseTerm() {
+	            var s0, s1, s2, s3, s4, s5, s6, s7;
+	            s0 = peg$currPos;
+	            s1 = peg$parse_();
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseFactor();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$currPos;
+	                    s4 = peg$parse_();
+	                    if (s4 !== peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 124) {
+	                            s5 = peg$c0;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s5 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c1);
+	                            }
+	                        }
+	                        if (s5 !== peg$FAILED) {
+	                            s6 = peg$parse_();
+	                            if (s6 !== peg$FAILED) {
+	                                s7 = peg$parseTerm();
+	                                if (s7 !== peg$FAILED) {
+	                                    s4 = [s4, s5, s6, s7];
+	                                    s3 = s4;
+	                                }
+	                                else {
+	                                    peg$currPos = s3;
+	                                    s3 = peg$FAILED;
+	                                }
+	                            }
+	                            else {
+	                                peg$currPos = s3;
+	                                s3 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s3;
+	                            s3 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s3;
+	                        s3 = peg$FAILED;
+	                    }
+	                    if (s3 === peg$FAILED) {
+	                        s3 = null;
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        peg$savedPos = s0;
+	                        s1 = peg$c2(s2, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseFactor() {
+	            var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 40) {
+	                s1 = peg$c3;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c4);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parse_();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parseTerm();
+	                    if (s3 !== peg$FAILED) {
+	                        s4 = peg$parse_();
+	                        if (s4 !== peg$FAILED) {
+	                            if (input.charCodeAt(peg$currPos) === 41) {
+	                                s5 = peg$c5;
+	                                peg$currPos++;
+	                            }
+	                            else {
+	                                s5 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c6);
+	                                }
+	                            }
+	                            if (s5 !== peg$FAILED) {
+	                                s6 = [];
+	                                s7 = peg$currPos;
+	                                s8 = peg$parse_();
+	                                if (s8 !== peg$FAILED) {
+	                                    if (input.substr(peg$currPos, 2) === peg$c7) {
+	                                        s9 = peg$c7;
+	                                        peg$currPos += 2;
+	                                    }
+	                                    else {
+	                                        s9 = peg$FAILED;
+	                                        if (peg$silentFails === 0) {
+	                                            peg$fail(peg$c8);
+	                                        }
+	                                    }
+	                                    if (s9 !== peg$FAILED) {
+	                                        s8 = [s8, s9];
+	                                        s7 = s8;
+	                                    }
+	                                    else {
+	                                        peg$currPos = s7;
+	                                        s7 = peg$FAILED;
+	                                    }
+	                                }
+	                                else {
+	                                    peg$currPos = s7;
+	                                    s7 = peg$FAILED;
+	                                }
+	                                while (s7 !== peg$FAILED) {
+	                                    s6.push(s7);
+	                                    s7 = peg$currPos;
+	                                    s8 = peg$parse_();
+	                                    if (s8 !== peg$FAILED) {
+	                                        if (input.substr(peg$currPos, 2) === peg$c7) {
+	                                            s9 = peg$c7;
+	                                            peg$currPos += 2;
+	                                        }
+	                                        else {
+	                                            s9 = peg$FAILED;
+	                                            if (peg$silentFails === 0) {
+	                                                peg$fail(peg$c8);
+	                                            }
+	                                        }
+	                                        if (s9 !== peg$FAILED) {
+	                                            s8 = [s8, s9];
+	                                            s7 = s8;
+	                                        }
+	                                        else {
+	                                            peg$currPos = s7;
+	                                            s7 = peg$FAILED;
+	                                        }
+	                                    }
+	                                    else {
+	                                        peg$currPos = s7;
+	                                        s7 = peg$FAILED;
+	                                    }
+	                                }
+	                                if (s6 !== peg$FAILED) {
+	                                    peg$savedPos = s0;
+	                                    s1 = peg$c9(s3, s6);
+	                                    s0 = s1;
+	                                }
+	                                else {
+	                                    peg$currPos = s0;
+	                                    s0 = peg$FAILED;
+	                                }
+	                            }
+	                            else {
+	                                peg$currPos = s0;
+	                                s0 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parseLiteral();
+	            }
+	            return s0;
+	        }
+	        function peg$parseTypeParams() {
+	            var s0, s1, s2, s3, s4;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 60) {
+	                s1 = peg$c10;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c11);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTerm();
+	                if (s2 !== peg$FAILED) {
+	                    s3 = [];
+	                    s4 = peg$parseExtraParam();
+	                    while (s4 !== peg$FAILED) {
+	                        s3.push(s4);
+	                        s4 = peg$parseExtraParam();
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 62) {
+	                            s4 = peg$c12;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s4 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c13);
+	                            }
+	                        }
+	                        if (s4 !== peg$FAILED) {
+	                            peg$savedPos = s0;
+	                            s1 = peg$c14(s2, s3);
+	                            s0 = s1;
+	                        }
+	                        else {
+	                            peg$currPos = s0;
+	                            s0 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseExtraParam() {
+	            var s0, s1, s2;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 44) {
+	                s1 = peg$c15;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c16);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTerm();
+	                if (s2 !== peg$FAILED) {
+	                    peg$savedPos = s0;
+	                    s1 = peg$c17(s2);
+	                    s0 = s1;
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            return s0;
+	        }
+	        function peg$parseLiteral() {
+	            var s0, s1, s2, s3, s4, s5, s6;
+	            peg$silentFails++;
+	            s0 = peg$currPos;
+	            s1 = [];
+	            s2 = peg$parsechar();
+	            if (s2 !== peg$FAILED) {
+	                while (s2 !== peg$FAILED) {
+	                    s1.push(s2);
+	                    s2 = peg$parsechar();
+	                }
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	            }
+	            if (s1 !== peg$FAILED) {
+	                s2 = peg$parseTypeParams();
+	                if (s2 === peg$FAILED) {
+	                    s2 = null;
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = [];
+	                    s4 = peg$currPos;
+	                    s5 = peg$parse_();
+	                    if (s5 !== peg$FAILED) {
+	                        if (input.substr(peg$currPos, 2) === peg$c7) {
+	                            s6 = peg$c7;
+	                            peg$currPos += 2;
+	                        }
+	                        else {
+	                            s6 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c8);
+	                            }
+	                        }
+	                        if (s6 !== peg$FAILED) {
+	                            s5 = [s5, s6];
+	                            s4 = s5;
+	                        }
+	                        else {
+	                            peg$currPos = s4;
+	                            s4 = peg$FAILED;
+	                        }
+	                    }
+	                    else {
+	                        peg$currPos = s4;
+	                        s4 = peg$FAILED;
+	                    }
+	                    while (s4 !== peg$FAILED) {
+	                        s3.push(s4);
+	                        s4 = peg$currPos;
+	                        s5 = peg$parse_();
+	                        if (s5 !== peg$FAILED) {
+	                            if (input.substr(peg$currPos, 2) === peg$c7) {
+	                                s6 = peg$c7;
+	                                peg$currPos += 2;
+	                            }
+	                            else {
+	                                s6 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c8);
+	                                }
+	                            }
+	                            if (s6 !== peg$FAILED) {
+	                                s5 = [s5, s6];
+	                                s4 = s5;
+	                            }
+	                            else {
+	                                peg$currPos = s4;
+	                                s4 = peg$FAILED;
+	                            }
+	                        }
+	                        else {
+	                            peg$currPos = s4;
+	                            s4 = peg$FAILED;
+	                        }
+	                    }
+	                    if (s3 !== peg$FAILED) {
+	                        peg$savedPos = s0;
+	                        s1 = peg$c19(s1, s2, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$FAILED;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$FAILED;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$FAILED;
+	            }
+	            peg$silentFails--;
+	            if (s0 === peg$FAILED) {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c18);
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parse_() {
+	            var s0, s1;
+	            peg$silentFails++;
+	            s0 = [];
+	            if (peg$c21.test(input.charAt(peg$currPos))) {
+	                s1 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c22);
+	                }
+	            }
+	            while (s1 !== peg$FAILED) {
+	                s0.push(s1);
+	                if (peg$c21.test(input.charAt(peg$currPos))) {
+	                    s1 = input.charAt(peg$currPos);
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s1 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c22);
+	                    }
+	                }
+	            }
+	            peg$silentFails--;
+	            if (s0 === peg$FAILED) {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c20);
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parsechar() {
+	            var s0;
+	            if (peg$c23.test(input.charAt(peg$currPos))) {
+	                s0 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s0 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c24);
+	                }
+	            }
+	            if (s0 === peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 95) {
+	                    s0 = peg$c25;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s0 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c26);
+	                    }
+	                }
+	                if (s0 === peg$FAILED) {
+	                    if (input.charCodeAt(peg$currPos) === 45) {
+	                        s0 = peg$c27;
+	                        peg$currPos++;
+	                    }
+	                    else {
+	                        s0 = peg$FAILED;
+	                        if (peg$silentFails === 0) {
+	                            peg$fail(peg$c28);
+	                        }
+	                    }
+	                    if (s0 === peg$FAILED) {
+	                        if (input.charCodeAt(peg$currPos) === 46) {
+	                            s0 = peg$c29;
+	                            peg$currPos++;
+	                        }
+	                        else {
+	                            s0 = peg$FAILED;
+	                            if (peg$silentFails === 0) {
+	                                peg$fail(peg$c30);
+	                            }
+	                        }
+	                        if (s0 === peg$FAILED) {
+	                            if (peg$c31.test(input.charAt(peg$currPos))) {
+	                                s0 = input.charAt(peg$currPos);
+	                                peg$currPos++;
+	                            }
+	                            else {
+	                                s0 = peg$FAILED;
+	                                if (peg$silentFails === 0) {
+	                                    peg$fail(peg$c32);
+	                                }
+	                            }
+	                            if (s0 === peg$FAILED) {
+	                                if (peg$c33.test(input.charAt(peg$currPos))) {
+	                                    s0 = input.charAt(peg$currPos);
+	                                    peg$currPos++;
+	                                }
+	                                else {
+	                                    s0 = peg$FAILED;
+	                                    if (peg$silentFails === 0) {
+	                                        peg$fail(peg$c34);
+	                                    }
+	                                }
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	            return s0;
+	        }
+	        peg$result = peg$startRuleFunction();
+	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
+	            return peg$result;
+	        }
+	        else {
+	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+	                peg$fail({ type: "end", description: "end of input" });
+	            }
+	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null, peg$maxFailPos < input.length ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1) : peg$computeLocation(peg$maxFailPos, peg$maxFailPos));
+	        }
+	    }
+	    return {
+	        SyntaxError: peg$SyntaxError,
+	        parse: peg$parse
+	    };
+	})();
+	module.exports = parser;
+	//# sourceMappingURL=typeExpressionParser.js.map
+
+/***/ },
+/* 68 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var RamlWrapper = __webpack_require__(3);
+	function buildWrapperNode(node) {
+	    var nodeClassName = node.definition().name();
+	    var wrapperConstructor = classMap[nodeClassName];
+	    if (!wrapperConstructor) {
+	        var m = node.definition().allSuperTypes();
+	        var wr = null;
+	        for (var i = 0; i < m.length; i++) {
+	            var nm = m[i].name();
+	            wrapperConstructor = classMap[nm];
+	            if (nm == "DataElement") {
+	                wr = nm;
+	                continue;
+	            }
+	            if (nm == "RAMLLanguageElement") {
+	                continue;
+	            }
+	            if (wrapperConstructor) {
+	                break;
+	            }
+	        }
+	        if (!wrapperConstructor) {
+	            wr = nm;
+	        }
+	    }
+	    if (!wrapperConstructor) {
+	        wrapperConstructor = classMap["RAMLLanguageElement"];
+	    }
+	    return wrapperConstructor(node);
+	}
+	exports.buildWrapperNode = buildWrapperNode;
+	var classMap = {
+	    "AnnotationRef": function (x) {
+	        return new RamlWrapper.AnnotationRefImpl(x);
+	    },
+	    "AnnotationTarget": function (x) {
+	        return new RamlWrapper.AnnotationTargetImpl(x);
+	    },
+	    "AnnotationType": function (x) {
+	        return new RamlWrapper.AnnotationTypeImpl(x);
+	    },
+	    "Api": function (x) {
+	        return new RamlWrapper.ApiImpl(x);
+	    },
+	    "ApiDescription": function (x) {
+	        return new RamlWrapper.ApiDescriptionImpl(x);
+	    },
+	    "ArrayField": function (x) {
+	        return new RamlWrapper.ArrayFieldImpl(x);
+	    },
+	    "Basic": function (x) {
+	        return new RamlWrapper.BasicImpl(x);
+	    },
+	    "BooleanElement": function (x) {
+	        return new RamlWrapper.BooleanElementImpl(x);
+	    },
+	    "BooleanType": function (x) {
+	        return new RamlWrapper.BooleanTypeImpl(x);
+	    },
+	    "CallbackAPIDescription": function (x) {
+	        return new RamlWrapper.CallbackAPIDescriptionImpl(x);
+	    },
+	    "ContentType": function (x) {
+	        return new RamlWrapper.ContentTypeImpl(x);
+	    },
+	    "Custom": function (x) {
+	        return new RamlWrapper.CustomImpl(x);
+	    },
+	    "DataElement": function (x) {
+	        return new RamlWrapper.DataElementImpl(x);
+	    },
+	    "DataElementRef": function (x) {
+	        return new RamlWrapper.DataElementRefImpl(x);
+	    },
+	    "DateElement": function (x) {
+	        return new RamlWrapper.DateElementImpl(x);
+	    },
+	    "DateFormatSpec": function (x) {
+	        return new RamlWrapper.DateFormatSpecImpl(x);
+	    },
+	    "Digest": function (x) {
+	        return new RamlWrapper.DigestImpl(x);
+	    },
+	    "DocumentationItem": function (x) {
+	        return new RamlWrapper.DocumentationItemImpl(x);
+	    },
+	    "ExampleSpec": function (x) {
+	        return new RamlWrapper.ExampleSpecImpl(x);
+	    },
+	    "ExampleString": function (x) {
+	        return new RamlWrapper.ExampleStringImpl(x);
+	    },
+	    "Extension": function (x) {
+	        return new RamlWrapper.ExtensionImpl(x);
+	    },
+	    "FileParameter": function (x) {
+	        return new RamlWrapper.FileParameterImpl(x);
+	    },
+	    "FixedUri": function (x) {
+	        return new RamlWrapper.FixedUriImpl(x);
+	    },
+	    "FullUriTemplate": function (x) {
+	        return new RamlWrapper.FullUriTemplateImpl(x);
+	    },
+	    "FunctionalInterface": function (x) {
+	        return new RamlWrapper.FunctionalInterfaceImpl(x);
+	    },
+	    "GlobalSchema": function (x) {
+	        return new RamlWrapper.GlobalSchemaImpl(x);
+	    },
+	    "HasNormalParameters": function (x) {
+	        return new RamlWrapper.HasNormalParametersImpl(x);
+	    },
+	    "ImportDeclaration": function (x) {
+	        return new RamlWrapper.ImportDeclarationImpl(x);
+	    },
+	    "IntegerElement": function (x) {
+	        return new RamlWrapper.IntegerElementImpl(x);
+	    },
+	    "JSonSchemaString": function (x) {
+	        return new RamlWrapper.JSonSchemaStringImpl(x);
+	    },
+	    "Library": function (x) {
+	        return new RamlWrapper.LibraryImpl(x);
+	    },
+	    "LocationKind": function (x) {
+	        return new RamlWrapper.LocationKindImpl(x);
+	    },
+	    "MarkdownString": function (x) {
+	        return new RamlWrapper.MarkdownStringImpl(x);
+	    },
+	    "Method": function (x) {
+	        return new RamlWrapper.MethodImpl(x);
+	    },
+	    "MethodBase": function (x) {
+	        return new RamlWrapper.MethodBaseImpl(x);
+	    },
+	    "MimeType": function (x) {
+	        return new RamlWrapper.MimeTypeImpl(x);
+	    },
+	    "ModelLocation": function (x) {
+	        return new RamlWrapper.ModelLocationImpl(x);
+	    },
+	    "NumberElement": function (x) {
+	        return new RamlWrapper.NumberElementImpl(x);
+	    },
+	    "NumberType": function (x) {
+	        return new RamlWrapper.NumberTypeImpl(x);
+	    },
+	    "OAuth1SecuritySchemeSettings": function (x) {
+	        return new RamlWrapper.OAuth1SecuritySchemeSettingsImpl(x);
+	    },
+	    "OAuth2SecuritySchemeSettings": function (x) {
+	        return new RamlWrapper.OAuth2SecuritySchemeSettingsImpl(x);
+	    },
+	    "OLibrary": function (x) {
+	        return new RamlWrapper.OLibraryImpl(x);
+	    },
+	    "Oath1": function (x) {
+	        return new RamlWrapper.Oath1Impl(x);
+	    },
+	    "Oath2": function (x) {
+	        return new RamlWrapper.Oath2Impl(x);
+	    },
+	    "ObjectField": function (x) {
+	        return new RamlWrapper.ObjectFieldImpl(x);
+	    },
+	    "Overlay": function (x) {
+	        return new RamlWrapper.OverlayImpl(x);
+	    },
+	    "PassThrough": function (x) {
+	        return new RamlWrapper.PassThroughImpl(x);
+	    },
+	    "PassThroughSettings": function (x) {
+	        return new RamlWrapper.PassThroughSettingsImpl(x);
+	    },
+	    "RAMLExpression": function (x) {
+	        return new RamlWrapper.RAMLExpressionImpl(x);
+	    },
+	    "RAMLLanguageElement": function (x) {
+	        return new RamlWrapper.RAMLLanguageElementImpl(x);
+	    },
+	    "RAMLPointer": function (x) {
+	        return new RamlWrapper.RAMLPointerImpl(x);
+	    },
+	    "RAMLPointerElement": function (x) {
+	        return new RamlWrapper.RAMLPointerElementImpl(x);
+	    },
+	    "RAMLProject": function (x) {
+	        return new RamlWrapper.RAMLProjectImpl(x);
+	    },
+	    "RAMLSelector": function (x) {
+	        return new RamlWrapper.RAMLSelectorImpl(x);
+	    },
+	    "RAMLSimpleElement": function (x) {
+	        return new RamlWrapper.RAMLSimpleElementImpl(x);
+	    },
+	    "Reference": function (x) {
+	        return new RamlWrapper.ReferenceImpl(x);
+	    },
+	    "RelativeUri": function (x) {
+	        return new RamlWrapper.RelativeUriImpl(x);
+	    },
+	    "Resource": function (x) {
+	        return new RamlWrapper.ResourceImpl(x);
+	    },
+	    "ResourceBase": function (x) {
+	        return new RamlWrapper.ResourceBaseImpl(x);
+	    },
+	    "ResourceType": function (x) {
+	        return new RamlWrapper.ResourceTypeImpl(x);
+	    },
+	    "ResourceTypeRef": function (x) {
+	        return new RamlWrapper.ResourceTypeRefImpl(x);
+	    },
+	    "Response": function (x) {
+	        return new RamlWrapper.ResponseImpl(x);
+	    },
+	    "SchemaElement": function (x) {
+	        return new RamlWrapper.SchemaElementImpl(x);
+	    },
+	    "SchemaString": function (x) {
+	        return new RamlWrapper.SchemaStringImpl(x);
+	    },
+	    "ScriptHookElement": function (x) {
+	        return new RamlWrapper.ScriptHookElementImpl(x);
+	    },
+	    "ScriptSpec": function (x) {
+	        return new RamlWrapper.ScriptSpecImpl(x);
+	    },
+	    "ScriptingHook": function (x) {
+	        return new RamlWrapper.ScriptingHookImpl(x);
+	    },
+	    "SecuritySchema": function (x) {
+	        return new RamlWrapper.SecuritySchemaImpl(x);
+	    },
+	    "SecuritySchemaHookScript": function (x) {
+	        return new RamlWrapper.SecuritySchemaHookScriptImpl(x);
+	    },
+	    "SecuritySchemaPart": function (x) {
+	        return new RamlWrapper.SecuritySchemaPartImpl(x);
+	    },
+	    "SecuritySchemaRef": function (x) {
+	        return new RamlWrapper.SecuritySchemaRefImpl(x);
+	    },
+	    "SecuritySchemaSettings": function (x) {
+	        return new RamlWrapper.SecuritySchemaSettingsImpl(x);
+	    },
+	    "SecuritySchemaType": function (x) {
+	        return new RamlWrapper.SecuritySchemaTypeImpl(x);
+	    },
+	    "StatusCode": function (x) {
+	        return new RamlWrapper.StatusCodeImpl(x);
+	    },
+	    "StrElement": function (x) {
+	        return new RamlWrapper.StrElementImpl(x);
+	    },
+	    "StringType": function (x) {
+	        return new RamlWrapper.StringTypeImpl(x);
+	    },
+	    "Trait": function (x) {
+	        return new RamlWrapper.TraitImpl(x);
+	    },
+	    "TraitRef": function (x) {
+	        return new RamlWrapper.TraitRefImpl(x);
+	    },
+	    "UnionField": function (x) {
+	        return new RamlWrapper.UnionFieldImpl(x);
+	    },
+	    "UriTemplate": function (x) {
+	        return new RamlWrapper.UriTemplateImpl(x);
+	    },
+	    "ValidityExpression": function (x) {
+	        return new RamlWrapper.ValidityExpressionImpl(x);
+	    },
+	    "ValueElement": function (x) {
+	        return new RamlWrapper.ValueElementImpl(x);
+	    },
+	    "ValueType": function (x) {
+	        return new RamlWrapper.ValueTypeImpl(x);
+	    },
+	    "XMLInfo": function (x) {
+	        return new RamlWrapper.XMLInfoImpl(x);
+	    },
+	    "XMLSchemaString": function (x) {
+	        return new RamlWrapper.XMLSchemaStringImpl(x);
+	    },
+	    "pointer": function (x) {
+	        return new RamlWrapper.pointerImpl(x);
+	    },
+	    "ramlexpression": function (x) {
+	        return new RamlWrapper.ramlexpressionImpl(x);
+	    }
+	};
+	//# sourceMappingURL=raml003factory.js.map
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var RamlWrapper = __webpack_require__(14);
+	function buildWrapperNode(node) {
+	    var nodeClassName = node.definition().name();
+	    var wrapperConstructor = classMap[nodeClassName];
+	    if (!wrapperConstructor) {
+	        var m = node.definition().allSuperTypes();
+	        var wr = null;
+	        for (var i = 0; i < m.length; i++) {
+	            var nm = m[i].name();
+	            wrapperConstructor = classMap[nm];
+	            if (nm == "DataElement") {
+	                wr = nm;
+	                continue;
+	            }
+	            if (nm == "RAMLLanguageElement") {
+	                continue;
+	            }
+	            if (wrapperConstructor) {
+	                break;
+	            }
+	        }
+	        if (!wrapperConstructor) {
+	            wr = nm;
+	        }
+	    }
+	    if (!wrapperConstructor) {
+	        wrapperConstructor = classMap["RAMLLanguageElement"];
+	    }
+	    return wrapperConstructor(node);
+	}
+	exports.buildWrapperNode = buildWrapperNode;
+	var classMap = {
+	    "Api": function (x) {
+	        return new RamlWrapper.ApiImpl(x);
+	    },
+	    "BodyLike": function (x) {
+	        return new RamlWrapper.BodyLikeImpl(x);
+	    },
+	    "BooleanElement": function (x) {
+	        return new RamlWrapper.BooleanElementImpl(x);
+	    },
+	    "BooleanType": function (x) {
+	        return new RamlWrapper.BooleanTypeImpl(x);
+	    },
+	    "DateElement": function (x) {
+	        return new RamlWrapper.DateElementImpl(x);
+	    },
+	    "DocumentationItem": function (x) {
+	        return new RamlWrapper.DocumentationItemImpl(x);
+	    },
+	    "ExampleString": function (x) {
+	        return new RamlWrapper.ExampleStringImpl(x);
+	    },
+	    "FileElement": function (x) {
+	        return new RamlWrapper.FileElementImpl(x);
+	    },
+	    "FixedUri": function (x) {
+	        return new RamlWrapper.FixedUriImpl(x);
+	    },
+	    "FullUriTemplate": function (x) {
+	        return new RamlWrapper.FullUriTemplateImpl(x);
+	    },
+	    "GlobalSchema": function (x) {
+	        return new RamlWrapper.GlobalSchemaImpl(x);
+	    },
+	    "HasNormalParameters": function (x) {
+	        return new RamlWrapper.HasNormalParametersImpl(x);
+	    },
+	    "IntegerElement": function (x) {
+	        return new RamlWrapper.IntegerElementImpl(x);
+	    },
+	    "JSONBody": function (x) {
+	        return new RamlWrapper.JSONBodyImpl(x);
+	    },
+	    "JSONExample": function (x) {
+	        return new RamlWrapper.JSONExampleImpl(x);
+	    },
+	    "JSonSchemaString": function (x) {
+	        return new RamlWrapper.JSonSchemaStringImpl(x);
+	    },
+	    "MarkdownString": function (x) {
+	        return new RamlWrapper.MarkdownStringImpl(x);
+	    },
+	    "Method": function (x) {
+	        return new RamlWrapper.MethodImpl(x);
+	    },
+	    "MethodBase": function (x) {
+	        return new RamlWrapper.MethodBaseImpl(x);
+	    },
+	    "MimeType": function (x) {
+	        return new RamlWrapper.MimeTypeImpl(x);
+	    },
+	    "NumberElement": function (x) {
+	        return new RamlWrapper.NumberElementImpl(x);
+	    },
+	    "NumberType": function (x) {
+	        return new RamlWrapper.NumberTypeImpl(x);
+	    },
+	    "OAuth1SecuritySchemeSettings": function (x) {
+	        return new RamlWrapper.OAuth1SecuritySchemeSettingsImpl(x);
+	    },
+	    "OAuth2SecuritySchemeSettings": function (x) {
+	        return new RamlWrapper.OAuth2SecuritySchemeSettingsImpl(x);
+	    },
+	    "Parameter": function (x) {
+	        return new RamlWrapper.ParameterImpl(x);
+	    },
+	    "ParameterLocation": function (x) {
+	        return new RamlWrapper.ParameterLocationImpl(x);
+	    },
+	    "RAMLLanguageElement": function (x) {
+	        return new RamlWrapper.RAMLLanguageElementImpl(x);
+	    },
+	    "RAMLSimpleElement": function (x) {
+	        return new RamlWrapper.RAMLSimpleElementImpl(x);
+	    },
+	    "Reference": function (x) {
+	        return new RamlWrapper.ReferenceImpl(x);
+	    },
+	    "RelativeUri": function (x) {
+	        return new RamlWrapper.RelativeUriImpl(x);
+	    },
+	    "Resource": function (x) {
+	        return new RamlWrapper.ResourceImpl(x);
+	    },
+	    "ResourceType": function (x) {
+	        return new RamlWrapper.ResourceTypeImpl(x);
+	    },
+	    "ResourceTypeRef": function (x) {
+	        return new RamlWrapper.ResourceTypeRefImpl(x);
+	    },
+	    "Response": function (x) {
+	        return new RamlWrapper.ResponseImpl(x);
+	    },
+	    "SchemaString": function (x) {
+	        return new RamlWrapper.SchemaStringImpl(x);
+	    },
+	    "SecuritySchema": function (x) {
+	        return new RamlWrapper.SecuritySchemaImpl(x);
+	    },
+	    "SecuritySchemaPart": function (x) {
+	        return new RamlWrapper.SecuritySchemaPartImpl(x);
+	    },
+	    "SecuritySchemaRef": function (x) {
+	        return new RamlWrapper.SecuritySchemaRefImpl(x);
+	    },
+	    "SecuritySchemaSettings": function (x) {
+	        return new RamlWrapper.SecuritySchemaSettingsImpl(x);
+	    },
+	    "StatusCode": function (x) {
+	        return new RamlWrapper.StatusCodeImpl(x);
+	    },
+	    "StrElement": function (x) {
+	        return new RamlWrapper.StrElementImpl(x);
+	    },
+	    "StringType": function (x) {
+	        return new RamlWrapper.StringTypeImpl(x);
+	    },
+	    "Trait": function (x) {
+	        return new RamlWrapper.TraitImpl(x);
+	    },
+	    "TraitRef": function (x) {
+	        return new RamlWrapper.TraitRefImpl(x);
+	    },
+	    "UriTemplate": function (x) {
+	        return new RamlWrapper.UriTemplateImpl(x);
+	    },
+	    "ValueType": function (x) {
+	        return new RamlWrapper.ValueTypeImpl(x);
+	    },
+	    "XMLBody": function (x) {
+	        return new RamlWrapper.XMLBodyImpl(x);
+	    },
+	    "XMLExample": function (x) {
+	        return new RamlWrapper.XMLExampleImpl(x);
+	    },
+	    "XMLSchemaString": function (x) {
+	        return new RamlWrapper.XMLSchemaStringImpl(x);
+	    }
+	};
+	//# sourceMappingURL=raml08factory.js.map
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var DomParser = __webpack_require__(106);
+	function xmlToJson(xml) {
+	    // Create the return object
+	    var obj = {};
+	    if (xml.nodeType == 1) {
+	        // do attributes
+	        if (xml.attributes.length > 0) {
+	            for (var j = 0; j < xml.attributes.length; j++) {
+	                var attribute = xml.attributes.item(j);
+	                obj["@" + attribute.nodeName] = attribute.nodeValue;
+	            }
+	        }
+	    }
+	    else if (xml.nodeType == 3) {
+	        obj = xml.nodeValue;
+	    }
+	    // do children
+	    if (xml.hasChildNodes()) {
+	        for (var i = 0; i < xml.childNodes.length; i++) {
+	            var item = xml.childNodes.item(i);
+	            var nodeName = item.nodeName;
+	            if (nodeName == undefined) {
+	                continue;
+	            }
+	            if (typeof (obj[nodeName]) == "undefined") {
+	                obj[nodeName] = xmlToJson(item);
+	            }
+	            else {
+	                if (typeof (obj[nodeName].push) == "undefined") {
+	                    var old = obj[nodeName];
+	                    obj[nodeName] = [];
+	                    obj[nodeName].push(old);
+	                }
+	                obj[nodeName].push(xmlToJson(item));
+	            }
+	        }
+	    }
+	    return obj;
+	}
+	;
+	function cleanupText(j) {
+	    for (var p in j) {
+	        if (typeof (j[p]) == "object") {
+	            for (var k in j[p]) {
+	                if (k == '#text') {
+	                    var txt = j[p]['#text'];
+	                    if (typeof (txt) != 'string') {
+	                        txt = txt.join("");
+	                    }
+	                    txt = txt.trim();
+	                    if (txt.length == 0) {
+	                        delete j[p]['#text'];
+	                    }
+	                }
+	            }
+	            cleanupText(j[p]);
+	        }
+	    }
+	    return j;
+	}
+	function cleanupJson(j) {
+	    for (var p in j) {
+	        if (typeof (j[p]) == "object") {
+	            var keys = Object.keys(j[p]);
+	            if (keys.length == 1) {
+	                if (keys[0] == '#text') {
+	                    j[p] = j[p]['#text'];
+	                }
+	            }
+	            cleanupJson(j[p]);
+	        }
+	    }
+	    return j;
+	}
+	function parseXML(value) {
+	    var v = new DomParser.DOMParser();
+	    var parsed = v.parseFromString(value);
+	    return cleanupJson(cleanupText(xmlToJson(parsed)));
+	}
+	module.exports = parseXML;
+	//# sourceMappingURL=xmlutil.js.map
+
+/***/ },
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __extends = this.__extends || function (d, b) {
@@ -43574,7 +43510,7 @@
 	    d.prototype = new __();
 	};
 	/// <reference path="../../typings/tsd.d.ts" />
-	var ts = __webpack_require__(41);
+	var ts = __webpack_require__(42);
 	/***
 	 * This module is designed to match simple patterns on Typescript AST Tree
 	 * it functionality mirrors jsASTMatchers which allows you to match on jsAST
@@ -43933,6 +43869,70 @@
 	    Matching.classDeclaration = classDeclaration;
 	})(Matching = exports.Matching || (exports.Matching = {}));
 	//# sourceMappingURL=tsASTMatchers.js.map
+
+/***/ },
+/* 72 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+	var queue = [];
+	var draining = false;
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    draining = true;
+	    var currentQueue;
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        var i = -1;
+	        while (++i < len) {
+	            currentQueue[i]();
+	        }
+	        len = queue.length;
+	    }
+	    draining = false;
+	}
+	process.nextTick = function (fun) {
+	    queue.push(fun);
+	    if (!draining) {
+	        setTimeout(drainQueue, 0);
+	    }
+	};
+
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	// TODO(shtylman)
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
 
 /***/ },
 /* 73 */
@@ -44392,8 +44392,57 @@
 /* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	module.exports = Response;
+
+	/**
+	 * A response from a web request
+	 *
+	 * @param {Number} statusCode
+	 * @param {Object} headers
+	 * @param {Buffer} body
+	 * @param {String} url
+	 */
+	function Response(statusCode, headers, body, url) {
+	  if (typeof statusCode !== 'number') {
+	    throw new TypeError('statusCode must be a number but was ' + (typeof statusCode));
+	  }
+	  if (headers === null) {
+	    throw new TypeError('headers cannot be null');
+	  }
+	  if (typeof headers !== 'object') {
+	    throw new TypeError('headers must be an object but was ' + (typeof headers));
+	  }
+	  this.statusCode = statusCode;
+	  this.headers = {};
+	  for (var key in headers) {
+	    this.headers[key.toLowerCase()] = headers[key];
+	  }
+	  this.body = body;
+	  this.url = url;
+	}
+
+	Response.prototype.getBody = function (encoding) {
+	  if (this.statusCode >= 300) {
+	    var err = new Error('Server responded with status code '
+	                    + this.statusCode + ':\n' + this.body.toString());
+	    err.statusCode = this.statusCode;
+	    err.headers = this.headers;
+	    err.body = this.body;
+	    err.url = this.url;
+	    throw err;
+	  }
+	  return encoding ? this.body.toString(encoding) : this.body;
+	};
+
+
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(Buffer) {var Writable = __webpack_require__(116).Writable
-	var inherits = __webpack_require__(118)
+	var inherits = __webpack_require__(117)
 
 	if (typeof Uint8Array === 'undefined') {
 	  var U8 = __webpack_require__(109).Uint8Array
@@ -44532,55 +44581,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(77).Buffer))
 
 /***/ },
-/* 76 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = Response;
-
-	/**
-	 * A response from a web request
-	 *
-	 * @param {Number} statusCode
-	 * @param {Object} headers
-	 * @param {Buffer} body
-	 * @param {String} url
-	 */
-	function Response(statusCode, headers, body, url) {
-	  if (typeof statusCode !== 'number') {
-	    throw new TypeError('statusCode must be a number but was ' + (typeof statusCode));
-	  }
-	  if (headers === null) {
-	    throw new TypeError('headers cannot be null');
-	  }
-	  if (typeof headers !== 'object') {
-	    throw new TypeError('headers must be an object but was ' + (typeof headers));
-	  }
-	  this.statusCode = statusCode;
-	  this.headers = {};
-	  for (var key in headers) {
-	    this.headers[key.toLowerCase()] = headers[key];
-	  }
-	  this.body = body;
-	  this.url = url;
-	}
-
-	Response.prototype.getBody = function (encoding) {
-	  if (this.statusCode >= 300) {
-	    var err = new Error('Server responded with status code '
-	                    + this.statusCode + ':\n' + this.body.toString());
-	    err.statusCode = this.statusCode;
-	    err.headers = this.headers;
-	    err.body = this.body;
-	    err.url = this.url;
-	    throw err;
-	  }
-	  return encoding ? this.body.toString(encoding) : this.body;
-	};
-
-
-/***/ },
 /* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -44592,8 +44592,8 @@
 	 */
 
 	var base64 = __webpack_require__(119)
-	var ieee754 = __webpack_require__(110)
-	var isArray = __webpack_require__(111)
+	var ieee754 = __webpack_require__(111)
+	var isArray = __webpack_require__(110)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -46011,139 +46011,6 @@
 /* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var Promise = __webpack_require__(117);
-	var Response = __webpack_require__(76);
-	var handleQs = __webpack_require__(106);
-
-	module.exports = doRequest;
-	function doRequest(method, url, options, callback) {
-	  var result = new Promise(function (resolve, reject) {
-	    var xhr = new window.XMLHttpRequest();
-
-	    // check types of arguments
-
-	    if (typeof method !== 'string') {
-	      throw new TypeError('The method must be a string.');
-	    }
-	    if (typeof url !== 'string') {
-	      throw new TypeError('The URL/path must be a string.');
-	    }
-	    if (typeof options === 'function') {
-	      callback = options;
-	      options = {};
-	    }
-	    if (options === null || options === undefined) {
-	      options = {};
-	    }
-	    if (typeof options !== 'object') {
-	      throw new TypeError('Options must be an object (or null).');
-	    }
-	    if (typeof callback !== 'function') {
-	      callback = undefined;
-	    }
-
-	    method = method.toUpperCase();
-	    options.headers = options.headers || {};
-
-
-	    function attempt(n) {
-	      doRequest(method, url, {
-	        qs: options.qs,
-	        headers: options.headers,
-	        timeout: options.timeout
-	      }).nodeify(function (err, res) {
-	        var retry = err || res.statusCode >= 400;
-	        if (typeof options.retry === 'function') {
-	          retry = options.retry(err, res, n + 1);
-	        }
-	        if (n >= (options.maxRetries | 5)) {
-	          retry = false;
-	        }
-	        if (retry) {
-	          var delay = options.retryDelay;
-	          if (typeof options.retryDelay === 'function') {
-	            delay = options.retryDelay(err, res, n + 1);
-	          }
-	          delay = delay || 200;
-	          setTimeout(function () {
-	            attempt(n + 1);
-	          }, delay);
-	        } else {
-	          if (err) reject(err);
-	          else resolve(res);
-	        }
-	      });
-	    }
-	    if (options.retry && method === 'GET') {
-	      return attempt(0);
-	    }
-
-	    // handle cross domain
-
-	    var match;
-	    var crossDomain = !!((match = /^([\w-]+:)?\/\/([^\/]+)/.exec(options.uri)) && (match[2] != window.location.host));
-	    if (!crossDomain) options.headers['X-Requested-With'] = 'XMLHttpRequest';
-
-	    // handle query string
-	    if (options.qs) {
-	      url = handleQs(url, options.qs);
-	    }
-
-	    // handle json body
-	    if (options.json) {
-	      options.body = JSON.stringify(options.json);
-	      options.headers['Content-Type'] = 'application/json';
-	    }
-
-	    if (options.timeout) {
-	      xhr.timeout = options.timeout;
-	      var start = Date.now();
-	      xhr.ontimeout = function () {
-	        var duration = Date.now() - start;
-	        var err = new Error('Request timed out after ' + duration + 'ms');
-	        err.timeout = true;
-	        err.duration = duration;
-	        reject(err);
-	      };
-	    }
-	    xhr.onreadystatechange = function () {
-	      if (xhr.readyState === 4) {
-	        var headers = {};
-	        xhr.getAllResponseHeaders().split('\r\n').forEach(function (header) {
-	          var h = header.split(':');
-	          if (h.length > 1) {
-	            headers[h[0].toLowerCase()] = h.slice(1).join(':').trim();
-	          }
-	        });
-	        var res = new Response(xhr.status, headers, xhr.responseText);
-	        res.url = url;
-	        resolve(res);
-	      }
-	    };
-
-	    // method, url, async
-	    xhr.open(method, url, true);
-
-	    for (var name in options.headers) {
-	      xhr.setRequestHeader(name, options.headers[name]);
-	    }
-
-	    // avoid sending empty string (#319)
-	    xhr.send(options.body ? options.body : null);
-	  });
-	  result.getBody = function () {
-	    return result.then(function (res) { return res.getBody(); });
-	  };
-	  return result.nodeify(callback);
-	}
-
-
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// **Github:** https://github.com/zensh/lrucache
 	//
 	// **License:** MIT
@@ -46293,7 +46160,186 @@
 
 
 /***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Promise = __webpack_require__(118);
+	var Response = __webpack_require__(75);
+	var handleQs = __webpack_require__(105);
+
+	module.exports = doRequest;
+	function doRequest(method, url, options, callback) {
+	  var result = new Promise(function (resolve, reject) {
+	    var xhr = new window.XMLHttpRequest();
+
+	    // check types of arguments
+
+	    if (typeof method !== 'string') {
+	      throw new TypeError('The method must be a string.');
+	    }
+	    if (typeof url !== 'string') {
+	      throw new TypeError('The URL/path must be a string.');
+	    }
+	    if (typeof options === 'function') {
+	      callback = options;
+	      options = {};
+	    }
+	    if (options === null || options === undefined) {
+	      options = {};
+	    }
+	    if (typeof options !== 'object') {
+	      throw new TypeError('Options must be an object (or null).');
+	    }
+	    if (typeof callback !== 'function') {
+	      callback = undefined;
+	    }
+
+	    method = method.toUpperCase();
+	    options.headers = options.headers || {};
+
+
+	    function attempt(n) {
+	      doRequest(method, url, {
+	        qs: options.qs,
+	        headers: options.headers,
+	        timeout: options.timeout
+	      }).nodeify(function (err, res) {
+	        var retry = err || res.statusCode >= 400;
+	        if (typeof options.retry === 'function') {
+	          retry = options.retry(err, res, n + 1);
+	        }
+	        if (n >= (options.maxRetries | 5)) {
+	          retry = false;
+	        }
+	        if (retry) {
+	          var delay = options.retryDelay;
+	          if (typeof options.retryDelay === 'function') {
+	            delay = options.retryDelay(err, res, n + 1);
+	          }
+	          delay = delay || 200;
+	          setTimeout(function () {
+	            attempt(n + 1);
+	          }, delay);
+	        } else {
+	          if (err) reject(err);
+	          else resolve(res);
+	        }
+	      });
+	    }
+	    if (options.retry && method === 'GET') {
+	      return attempt(0);
+	    }
+
+	    // handle cross domain
+
+	    var match;
+	    var crossDomain = !!((match = /^([\w-]+:)?\/\/([^\/]+)/.exec(options.uri)) && (match[2] != window.location.host));
+	    if (!crossDomain) options.headers['X-Requested-With'] = 'XMLHttpRequest';
+
+	    // handle query string
+	    if (options.qs) {
+	      url = handleQs(url, options.qs);
+	    }
+
+	    // handle json body
+	    if (options.json) {
+	      options.body = JSON.stringify(options.json);
+	      options.headers['Content-Type'] = 'application/json';
+	    }
+
+	    if (options.timeout) {
+	      xhr.timeout = options.timeout;
+	      var start = Date.now();
+	      xhr.ontimeout = function () {
+	        var duration = Date.now() - start;
+	        var err = new Error('Request timed out after ' + duration + 'ms');
+	        err.timeout = true;
+	        err.duration = duration;
+	        reject(err);
+	      };
+	    }
+	    xhr.onreadystatechange = function () {
+	      if (xhr.readyState === 4) {
+	        var headers = {};
+	        xhr.getAllResponseHeaders().split('\r\n').forEach(function (header) {
+	          var h = header.split(':');
+	          if (h.length > 1) {
+	            headers[h[0].toLowerCase()] = h.slice(1).join(':').trim();
+	          }
+	        });
+	        var res = new Response(xhr.status, headers, xhr.responseText);
+	        res.url = url;
+	        resolve(res);
+	      }
+	    };
+
+	    // method, url, async
+	    xhr.open(method, url, true);
+
+	    for (var name in options.headers) {
+	      xhr.setRequestHeader(name, options.headers[name]);
+	    }
+
+	    // avoid sending empty string (#319)
+	    xhr.send(options.body ? options.body : null);
+	  });
+	  result.getBody = function () {
+	    return result.then(function (res) { return res.getBody(); });
+	  };
+	  return result.nodeify(callback);
+	}
+
+
+/***/ },
 /* 81 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*jshint node:true*/
+
+	if (false) {
+	    var define = require('amdefine')(module);
+	}
+
+	!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	    "use strict";
+
+	    var statusCodes = __webpack_require__(112),
+	        statusCodesToPhrases = {},
+	        statusPhrasesToCodes = {},
+	        methods = __webpack_require__(113),
+	        headers = __webpack_require__(114),
+	        relations = __webpack_require__(115);
+
+	    statusCodes.forEach(function(item) {
+	        var code = parseInt(item.code, 10),
+	            phrase;
+
+	        // Ignore codes for classes
+	        if (code.toString() !== item.code) {
+	            return;
+	        }
+
+	        phrase = item.phrase.toUpperCase().replace(/[^A-Z]/g, '_');
+
+	        statusCodesToPhrases[code] = item.phrase;
+	        statusPhrasesToCodes[phrase] = item.code;
+	    });
+
+	    return {
+	        statusCodes: statusCodes,
+	        statusCodesToPhrases: statusCodesToPhrases,
+	        statusPhrasesToCodes: statusPhrasesToCodes,
+	        methods: methods,
+	        headers: headers,
+	        relations: relations
+	    };
+	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
@@ -46422,7 +46468,7 @@
 	//# sourceMappingURL=raml-sanitize.js.map
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/// <reference path="../../typings/tsd.d.ts" />
@@ -46618,7 +46664,411 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(77).Buffer))
 
 /***/ },
-/* 83 */
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var mod = (function () {
+	    /*
+	     * Generated by PEG.js 0.8.0.
+	     *
+	     * http://pegjs.majda.cz/
+	     */
+	    function peg$subclass(child, parent) {
+	        function ctor() {
+	            this.constructor = child;
+	        }
+	        ctor.prototype = parent.prototype;
+	        child.prototype = new ctor();
+	    }
+	    function SyntaxError(message, expected, found, offset, line, column) {
+	        this.message = message;
+	        this.expected = expected;
+	        this.found = found;
+	        this.offset = offset;
+	        this.line = line;
+	        this.column = column;
+	        this.name = "SyntaxError";
+	    }
+	    peg$subclass(SyntaxError, Error);
+	    function parse(input) {
+	        var options = arguments.length > 1 ? arguments[1] : {}, peg$FAILED = {}, peg$startRuleFunctions = { start: peg$parsestart }, peg$startRuleFunction = peg$parsestart, peg$c0 = peg$FAILED, peg$c1 = "|", peg$c2 = { type: "literal", value: "|", description: "\"|\"" }, peg$c3 = function (left, r) {
+	            return { 'type': 'or', 'left': left, 'right': r ? r : null };
+	        }, peg$c4 = ".", peg$c5 = { type: "literal", value: ".", description: "\".\"" }, peg$c6 = function (left, r) {
+	            return { 'type': 'dot', 'left': left, 'right': r };
+	        }, peg$c7 = "$", peg$c8 = { type: "literal", value: "$", description: "\"$\"" }, peg$c9 = function () {
+	            return { 'type': 'parent' };
+	        }, peg$c10 = "$$", peg$c11 = { type: "literal", value: "$$", description: "\"$$\"" }, peg$c12 = function () {
+	            return { 'type': 'ancestor' };
+	        }, peg$c13 = "**", peg$c14 = { type: "literal", value: "**", description: "\"**\"" }, peg$c15 = function () {
+	            return { 'type': 'descendant' };
+	        }, peg$c16 = "*", peg$c17 = { type: "literal", value: "*", description: "\"*\"" }, peg$c18 = function () {
+	            return { 'type': 'child' };
+	        }, peg$c19 = [], peg$c20 = /^[A-z]/, peg$c21 = { type: "class", value: "[A-z]", description: "[A-z]" }, peg$c22 = function (chars) {
+	            return { 'type': 'classLiteral', "name": chars.join("") };
+	        }, peg$currPos = 0, peg$reportedPos = 0, peg$cachedPos = 0, peg$cachedPosDetails = { line: 1, column: 1, seenCR: false }, peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
+	        if ("startRule" in options) {
+	            if (!(options.startRule in peg$startRuleFunctions)) {
+	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
+	            }
+	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
+	        }
+	        function text() {
+	            return input.substring(peg$reportedPos, peg$currPos);
+	        }
+	        function offset() {
+	            return peg$reportedPos;
+	        }
+	        function line() {
+	            return peg$computePosDetails(peg$reportedPos).line;
+	        }
+	        function column() {
+	            return peg$computePosDetails(peg$reportedPos).column;
+	        }
+	        function expected(description) {
+	            throw peg$buildException(null, [{ type: "other", description: description }], peg$reportedPos);
+	        }
+	        function error(message) {
+	            throw peg$buildException(message, null, peg$reportedPos);
+	        }
+	        function peg$computePosDetails(pos) {
+	            function advance(details, startPos, endPos) {
+	                var p, ch;
+	                for (p = startPos; p < endPos; p++) {
+	                    ch = input.charAt(p);
+	                    if (ch === "\n") {
+	                        if (!details.seenCR) {
+	                            details.line++;
+	                        }
+	                        details.column = 1;
+	                        details.seenCR = false;
+	                    }
+	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
+	                        details.line++;
+	                        details.column = 1;
+	                        details.seenCR = true;
+	                    }
+	                    else {
+	                        details.column++;
+	                        details.seenCR = false;
+	                    }
+	                }
+	            }
+	            if (peg$cachedPos !== pos) {
+	                if (peg$cachedPos > pos) {
+	                    peg$cachedPos = 0;
+	                    peg$cachedPosDetails = { line: 1, column: 1, seenCR: false };
+	                }
+	                advance(peg$cachedPosDetails, peg$cachedPos, pos);
+	                peg$cachedPos = pos;
+	            }
+	            return peg$cachedPosDetails;
+	        }
+	        function peg$fail(expected) {
+	            if (peg$currPos < peg$maxFailPos) {
+	                return;
+	            }
+	            if (peg$currPos > peg$maxFailPos) {
+	                peg$maxFailPos = peg$currPos;
+	                peg$maxFailExpected = [];
+	            }
+	            peg$maxFailExpected.push(expected);
+	        }
+	        function peg$buildException(message, expected, pos) {
+	            function cleanupExpected(expected) {
+	                var i = 1;
+	                expected.sort(function (a, b) {
+	                    if (a.description < b.description) {
+	                        return -1;
+	                    }
+	                    else if (a.description > b.description) {
+	                        return 1;
+	                    }
+	                    else {
+	                        return 0;
+	                    }
+	                });
+	                while (i < expected.length) {
+	                    if (expected[i - 1] === expected[i]) {
+	                        expected.splice(i, 1);
+	                    }
+	                    else {
+	                        i++;
+	                    }
+	                }
+	            }
+	            function buildMessage(expected, found) {
+	                function stringEscape(s) {
+	                    function hex(ch) {
+	                        return ch.charCodeAt(0).toString(16).toUpperCase();
+	                    }
+	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
+	                        return '\\x0' + hex(ch);
+	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
+	                        return '\\x' + hex(ch);
+	                    }).replace(/[\u0180-\u0FFF]/g, function (ch) {
+	                        return '\\u0' + hex(ch);
+	                    }).replace(/[\u1080-\uFFFF]/g, function (ch) {
+	                        return '\\u' + hex(ch);
+	                    });
+	                }
+	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
+	                for (i = 0; i < expected.length; i++) {
+	                    expectedDescs[i] = expected[i].description;
+	                }
+	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
+	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
+	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
+	            }
+	            var posDetails = peg$computePosDetails(pos), found = pos < input.length ? input.charAt(pos) : null;
+	            if (expected !== null) {
+	                cleanupExpected(expected);
+	            }
+	            return new SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, pos, posDetails.line, posDetails.column);
+	        }
+	        function peg$parsestart() {
+	            var s0;
+	            s0 = peg$parseor();
+	            return s0;
+	        }
+	        function peg$parseor() {
+	            var s0, s1, s2, s3;
+	            s0 = peg$currPos;
+	            s1 = peg$parsesequence();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 124) {
+	                    s2 = peg$c1;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c2);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parseor();
+	                    if (s3 !== peg$FAILED) {
+	                        peg$reportedPos = s0;
+	                        s1 = peg$c3(s1, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$c0;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$c0;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$c0;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parsesequence();
+	            }
+	            return s0;
+	        }
+	        function peg$parsesequence() {
+	            var s0, s1, s2, s3;
+	            s0 = peg$currPos;
+	            s1 = peg$parseprimary();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 46) {
+	                    s2 = peg$c4;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c5);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parsesequence();
+	                    if (s3 !== peg$FAILED) {
+	                        peg$reportedPos = s0;
+	                        s1 = peg$c6(s1, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$c0;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$c0;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$c0;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parseprimary();
+	            }
+	            return s0;
+	        }
+	        function peg$parseprimary() {
+	            var s0;
+	            s0 = peg$parsechildRef();
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parsedoubleStar();
+	                if (s0 === peg$FAILED) {
+	                    s0 = peg$parsestar();
+	                    if (s0 === peg$FAILED) {
+	                        s0 = peg$parsedoubleDollar();
+	                        if (s0 === peg$FAILED) {
+	                            s0 = peg$parsedollar();
+	                        }
+	                    }
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parsedollar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 36) {
+	                s1 = peg$c7;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c8);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c9();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsedoubleDollar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.substr(peg$currPos, 2) === peg$c10) {
+	                s1 = peg$c10;
+	                peg$currPos += 2;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c11);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c12();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsedoubleStar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.substr(peg$currPos, 2) === peg$c13) {
+	                s1 = peg$c13;
+	                peg$currPos += 2;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c14);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c15();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsestar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 42) {
+	                s1 = peg$c16;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c17);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c18();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsechildRef() {
+	            var s0, s1, s2;
+	            s0 = peg$currPos;
+	            s1 = [];
+	            if (peg$c20.test(input.charAt(peg$currPos))) {
+	                s2 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s2 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c21);
+	                }
+	            }
+	            if (s2 !== peg$FAILED) {
+	                while (s2 !== peg$FAILED) {
+	                    s1.push(s2);
+	                    if (peg$c20.test(input.charAt(peg$currPos))) {
+	                        s2 = input.charAt(peg$currPos);
+	                        peg$currPos++;
+	                    }
+	                    else {
+	                        s2 = peg$FAILED;
+	                        if (peg$silentFails === 0) {
+	                            peg$fail(peg$c21);
+	                        }
+	                    }
+	                }
+	            }
+	            else {
+	                s1 = peg$c0;
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c22(s1);
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        peg$result = peg$startRuleFunction();
+	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
+	            return peg$result;
+	        }
+	        else {
+	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+	                peg$fail({ type: "end", description: "end of input" });
+	            }
+	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos);
+	        }
+	    }
+	    return {
+	        SyntaxError: SyntaxError,
+	        parse: parse
+	    };
+	})();
+	module.exports = mod;
+	//# sourceMappingURL=ramlselector.js.map
+
+/***/ },
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parser = (function () {
@@ -47970,462 +48420,57 @@
 	//# sourceMappingURL=ramlExpressionParser.js.map
 
 /***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var mod = (function () {
-	    /*
-	     * Generated by PEG.js 0.8.0.
-	     *
-	     * http://pegjs.majda.cz/
-	     */
-	    function peg$subclass(child, parent) {
-	        function ctor() {
-	            this.constructor = child;
-	        }
-	        ctor.prototype = parent.prototype;
-	        child.prototype = new ctor();
-	    }
-	    function SyntaxError(message, expected, found, offset, line, column) {
-	        this.message = message;
-	        this.expected = expected;
-	        this.found = found;
-	        this.offset = offset;
-	        this.line = line;
-	        this.column = column;
-	        this.name = "SyntaxError";
-	    }
-	    peg$subclass(SyntaxError, Error);
-	    function parse(input) {
-	        var options = arguments.length > 1 ? arguments[1] : {}, peg$FAILED = {}, peg$startRuleFunctions = { start: peg$parsestart }, peg$startRuleFunction = peg$parsestart, peg$c0 = peg$FAILED, peg$c1 = "|", peg$c2 = { type: "literal", value: "|", description: "\"|\"" }, peg$c3 = function (left, r) {
-	            return { 'type': 'or', 'left': left, 'right': r ? r : null };
-	        }, peg$c4 = ".", peg$c5 = { type: "literal", value: ".", description: "\".\"" }, peg$c6 = function (left, r) {
-	            return { 'type': 'dot', 'left': left, 'right': r };
-	        }, peg$c7 = "$", peg$c8 = { type: "literal", value: "$", description: "\"$\"" }, peg$c9 = function () {
-	            return { 'type': 'parent' };
-	        }, peg$c10 = "$$", peg$c11 = { type: "literal", value: "$$", description: "\"$$\"" }, peg$c12 = function () {
-	            return { 'type': 'ancestor' };
-	        }, peg$c13 = "**", peg$c14 = { type: "literal", value: "**", description: "\"**\"" }, peg$c15 = function () {
-	            return { 'type': 'descendant' };
-	        }, peg$c16 = "*", peg$c17 = { type: "literal", value: "*", description: "\"*\"" }, peg$c18 = function () {
-	            return { 'type': 'child' };
-	        }, peg$c19 = [], peg$c20 = /^[A-z]/, peg$c21 = { type: "class", value: "[A-z]", description: "[A-z]" }, peg$c22 = function (chars) {
-	            return { 'type': 'classLiteral', "name": chars.join("") };
-	        }, peg$currPos = 0, peg$reportedPos = 0, peg$cachedPos = 0, peg$cachedPosDetails = { line: 1, column: 1, seenCR: false }, peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
-	        if ("startRule" in options) {
-	            if (!(options.startRule in peg$startRuleFunctions)) {
-	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
-	            }
-	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
-	        }
-	        function text() {
-	            return input.substring(peg$reportedPos, peg$currPos);
-	        }
-	        function offset() {
-	            return peg$reportedPos;
-	        }
-	        function line() {
-	            return peg$computePosDetails(peg$reportedPos).line;
-	        }
-	        function column() {
-	            return peg$computePosDetails(peg$reportedPos).column;
-	        }
-	        function expected(description) {
-	            throw peg$buildException(null, [{ type: "other", description: description }], peg$reportedPos);
-	        }
-	        function error(message) {
-	            throw peg$buildException(message, null, peg$reportedPos);
-	        }
-	        function peg$computePosDetails(pos) {
-	            function advance(details, startPos, endPos) {
-	                var p, ch;
-	                for (p = startPos; p < endPos; p++) {
-	                    ch = input.charAt(p);
-	                    if (ch === "\n") {
-	                        if (!details.seenCR) {
-	                            details.line++;
-	                        }
-	                        details.column = 1;
-	                        details.seenCR = false;
-	                    }
-	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
-	                        details.line++;
-	                        details.column = 1;
-	                        details.seenCR = true;
-	                    }
-	                    else {
-	                        details.column++;
-	                        details.seenCR = false;
-	                    }
-	                }
-	            }
-	            if (peg$cachedPos !== pos) {
-	                if (peg$cachedPos > pos) {
-	                    peg$cachedPos = 0;
-	                    peg$cachedPosDetails = { line: 1, column: 1, seenCR: false };
-	                }
-	                advance(peg$cachedPosDetails, peg$cachedPos, pos);
-	                peg$cachedPos = pos;
-	            }
-	            return peg$cachedPosDetails;
-	        }
-	        function peg$fail(expected) {
-	            if (peg$currPos < peg$maxFailPos) {
-	                return;
-	            }
-	            if (peg$currPos > peg$maxFailPos) {
-	                peg$maxFailPos = peg$currPos;
-	                peg$maxFailExpected = [];
-	            }
-	            peg$maxFailExpected.push(expected);
-	        }
-	        function peg$buildException(message, expected, pos) {
-	            function cleanupExpected(expected) {
-	                var i = 1;
-	                expected.sort(function (a, b) {
-	                    if (a.description < b.description) {
-	                        return -1;
-	                    }
-	                    else if (a.description > b.description) {
-	                        return 1;
-	                    }
-	                    else {
-	                        return 0;
-	                    }
-	                });
-	                while (i < expected.length) {
-	                    if (expected[i - 1] === expected[i]) {
-	                        expected.splice(i, 1);
-	                    }
-	                    else {
-	                        i++;
-	                    }
-	                }
-	            }
-	            function buildMessage(expected, found) {
-	                function stringEscape(s) {
-	                    function hex(ch) {
-	                        return ch.charCodeAt(0).toString(16).toUpperCase();
-	                    }
-	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
-	                        return '\\x0' + hex(ch);
-	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
-	                        return '\\x' + hex(ch);
-	                    }).replace(/[\u0180-\u0FFF]/g, function (ch) {
-	                        return '\\u0' + hex(ch);
-	                    }).replace(/[\u1080-\uFFFF]/g, function (ch) {
-	                        return '\\u' + hex(ch);
-	                    });
-	                }
-	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
-	                for (i = 0; i < expected.length; i++) {
-	                    expectedDescs[i] = expected[i].description;
-	                }
-	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
-	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
-	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
-	            }
-	            var posDetails = peg$computePosDetails(pos), found = pos < input.length ? input.charAt(pos) : null;
-	            if (expected !== null) {
-	                cleanupExpected(expected);
-	            }
-	            return new SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, pos, posDetails.line, posDetails.column);
-	        }
-	        function peg$parsestart() {
-	            var s0;
-	            s0 = peg$parseor();
-	            return s0;
-	        }
-	        function peg$parseor() {
-	            var s0, s1, s2, s3;
-	            s0 = peg$currPos;
-	            s1 = peg$parsesequence();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 124) {
-	                    s2 = peg$c1;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c2);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parseor();
-	                    if (s3 !== peg$FAILED) {
-	                        peg$reportedPos = s0;
-	                        s1 = peg$c3(s1, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$c0;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$c0;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$c0;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parsesequence();
-	            }
-	            return s0;
-	        }
-	        function peg$parsesequence() {
-	            var s0, s1, s2, s3;
-	            s0 = peg$currPos;
-	            s1 = peg$parseprimary();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 46) {
-	                    s2 = peg$c4;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c5);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parsesequence();
-	                    if (s3 !== peg$FAILED) {
-	                        peg$reportedPos = s0;
-	                        s1 = peg$c6(s1, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$c0;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$c0;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$c0;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parseprimary();
-	            }
-	            return s0;
-	        }
-	        function peg$parseprimary() {
-	            var s0;
-	            s0 = peg$parsechildRef();
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parsedoubleStar();
-	                if (s0 === peg$FAILED) {
-	                    s0 = peg$parsestar();
-	                    if (s0 === peg$FAILED) {
-	                        s0 = peg$parsedoubleDollar();
-	                        if (s0 === peg$FAILED) {
-	                            s0 = peg$parsedollar();
-	                        }
-	                    }
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parsedollar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 36) {
-	                s1 = peg$c7;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c8);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c9();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsedoubleDollar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.substr(peg$currPos, 2) === peg$c10) {
-	                s1 = peg$c10;
-	                peg$currPos += 2;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c11);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c12();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsedoubleStar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.substr(peg$currPos, 2) === peg$c13) {
-	                s1 = peg$c13;
-	                peg$currPos += 2;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c14);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c15();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsestar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 42) {
-	                s1 = peg$c16;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c17);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c18();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsechildRef() {
-	            var s0, s1, s2;
-	            s0 = peg$currPos;
-	            s1 = [];
-	            if (peg$c20.test(input.charAt(peg$currPos))) {
-	                s2 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s2 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c21);
-	                }
-	            }
-	            if (s2 !== peg$FAILED) {
-	                while (s2 !== peg$FAILED) {
-	                    s1.push(s2);
-	                    if (peg$c20.test(input.charAt(peg$currPos))) {
-	                        s2 = input.charAt(peg$currPos);
-	                        peg$currPos++;
-	                    }
-	                    else {
-	                        s2 = peg$FAILED;
-	                        if (peg$silentFails === 0) {
-	                            peg$fail(peg$c21);
-	                        }
-	                    }
-	                }
-	            }
-	            else {
-	                s1 = peg$c0;
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c22(s1);
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        peg$result = peg$startRuleFunction();
-	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
-	            return peg$result;
-	        }
-	        else {
-	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
-	                peg$fail({ type: "end", description: "end of input" });
-	            }
-	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos);
-	        }
-	    }
-	    return {
-	        SyntaxError: SyntaxError,
-	        parse: parse
-	    };
-	})();
-	module.exports = mod;
-	//# sourceMappingURL=ramlselector.js.map
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*jshint node:true*/
-
-	if (false) {
-	    var define = require('amdefine')(module);
-	}
-
-	!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
-	    "use strict";
-
-	    var statusCodes = __webpack_require__(112),
-	        statusCodesToPhrases = {},
-	        statusPhrasesToCodes = {},
-	        methods = __webpack_require__(113),
-	        headers = __webpack_require__(114),
-	        relations = __webpack_require__(115);
-
-	    statusCodes.forEach(function(item) {
-	        var code = parseInt(item.code, 10),
-	            phrase;
-
-	        // Ignore codes for classes
-	        if (code.toString() !== item.code) {
-	            return;
-	        }
-
-	        phrase = item.phrase.toUpperCase().replace(/[^A-Z]/g, '_');
-
-	        statusCodesToPhrases[code] = item.phrase;
-	        statusPhrasesToCodes[phrase] = item.code;
-	    });
-
-	    return {
-	        statusCodes: statusCodes,
-	        statusCodesToPhrases: statusCodesToPhrases,
-	        statusPhrasesToCodes: statusPhrasesToCodes,
-	        methods: methods,
-	        headers: headers,
-	        relations: relations
-	    };
-	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
 /* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(58);
+	module.exports = new Type('tag:yaml.org,2002:str', {
+	    kind: 'scalar',
+	    construct: function (data) {
+	        return null !== data ? data : '';
+	    }
+	});
+	//# sourceMappingURL=str.js.map
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(58);
+	module.exports = new Type('tag:yaml.org,2002:seq', {
+	    kind: 'sequence',
+	    construct: function (data) {
+	        return null !== data ? data : [];
+	    }
+	});
+	//# sourceMappingURL=seq.js.map
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(58);
+	module.exports = new Type('tag:yaml.org,2002:map', {
+	    kind: 'mapping',
+	    construct: function (data) {
+	        return null !== data ? data : {};
+	    }
+	});
+	//# sourceMappingURL=map.js.map
+
+/***/ },
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../typings/tsd.d.ts" />
 	'use strict';
-	var common = __webpack_require__(69);
+	var common = __webpack_require__(65);
 	var Mark = (function () {
 	    function Mark(name, buffer, position, line, column) {
 	        this.name = name;
@@ -48487,57 +48532,12 @@
 	//# sourceMappingURL=mark.js.map
 
 /***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(62);
-	module.exports = new Type('tag:yaml.org,2002:str', {
-	    kind: 'scalar',
-	    construct: function (data) {
-	        return null !== data ? data : '';
-	    }
-	});
-	//# sourceMappingURL=str.js.map
-
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(62);
-	module.exports = new Type('tag:yaml.org,2002:seq', {
-	    kind: 'sequence',
-	    construct: function (data) {
-	        return null !== data ? data : [];
-	    }
-	});
-	//# sourceMappingURL=seq.js.map
-
-/***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(62);
-	module.exports = new Type('tag:yaml.org,2002:map', {
-	    kind: 'mapping',
-	    construct: function (data) {
-	        return null !== data ? data : {};
-	    }
-	});
-	//# sourceMappingURL=map.js.map
-
-/***/ },
 /* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	function resolveYamlNull(data) {
 	    if (null === data) {
 	        return true;
@@ -48580,7 +48580,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	function resolveYamlBoolean(data) {
 	    if (null === data) {
 	        return false;
@@ -48620,8 +48620,8 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var common = __webpack_require__(69);
-	var Type = __webpack_require__(62);
+	var common = __webpack_require__(65);
+	var Type = __webpack_require__(58);
 	function isHexCode(c) {
 	    return ((0x30 <= c) && (c <= 0x39)) || ((0x41 <= c) && (c <= 0x46)) || ((0x61 <= c) && (c <= 0x66));
 	}
@@ -48793,8 +48793,8 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var common = __webpack_require__(69);
-	var Type = __webpack_require__(62);
+	var common = __webpack_require__(65);
+	var Type = __webpack_require__(58);
 	var YAML_FLOAT_PATTERN = new RegExp('^(?:[-+]?(?:[0-9][0-9_]*)\\.[0-9_]*(?:[eE][-+][0-9]+)?' + '|\\.[0-9_]+(?:[eE][-+][0-9]+)?' + '|[-+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*' + '|[-+]?\\.(?:inf|Inf|INF)' + '|\\.(?:nan|NaN|NAN))$');
 	function resolveYamlFloat(data) {
 	    if (null === data) {
@@ -48889,7 +48889,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	var YAML_TIMESTAMP_REGEXP = new RegExp('^([0-9][0-9][0-9][0-9])' + '-([0-9][0-9]?)' + '-([0-9][0-9]?)' + '(?:(?:[Tt]|[ \\t]+)' + '([0-9][0-9]?)' + ':([0-9][0-9])' + ':([0-9][0-9])' + '(?:\\.([0-9]*))?' + '(?:[ \\t]*(Z|([-+])([0-9][0-9]?)' + '(?::([0-9][0-9]))?))?)?$'); // [11] tz_minute
 	function resolveYamlTimestamp(data) {
 	    if (null === data) {
@@ -48959,7 +48959,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	function resolveYamlMerge(data) {
 	    return '<<' === data || null === data;
 	}
@@ -48979,7 +48979,7 @@
 	// A trick for browserified version.
 	// Since we make browserifier to ignore `buffer` module, NodeBuffer will be undefined
 	var NodeBuffer = __webpack_require__(77).Buffer;
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	// [ 64, 65, 66 ] -> [ padding, CR, LF ]
 	var BASE64_MAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r';
 	function resolveYamlBinary(data) {
@@ -49083,7 +49083,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	var _toString = Object.prototype.toString;
 	function resolveYamlOmap(data) {
@@ -49135,7 +49135,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	var _toString = Object.prototype.toString;
 	function resolveYamlPairs(data) {
 	    if (null === data) {
@@ -49182,7 +49182,7 @@
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	function resolveYamlSet(data) {
 	    if (null === data) {
@@ -49214,7 +49214,7 @@
 
 	/// <reference path="../../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	function resolveJavascriptUndefined() {
 	    return true;
 	}
@@ -49243,7 +49243,7 @@
 
 	/// <reference path="../../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	function resolveJavascriptRegExp(data) {
 	    if (null === data) {
 	        return false;
@@ -49317,7 +49317,7 @@
 
 	/// <reference path="../../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var esprima = __webpack_require__(122);
+	var esprima = __webpack_require__(120);
 	// Browserified version does not have esprima
 	//
 	// 1. For node.js just require module as deps
@@ -49325,7 +49325,7 @@
 	//    If not found - try to fallback to window.esprima. If not
 	//    found too - then fail to parse.
 	//
-	var Type = __webpack_require__(62);
+	var Type = __webpack_require__(58);
 	function resolveJavascriptFunction(data) {
 	    if (null === data) {
 	        return false;
@@ -49628,6 +49628,34 @@
 /* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var parse = __webpack_require__(126).parse;
+	var stringify = __webpack_require__(126).stringify;
+
+	module.exports = handleQs;
+	function handleQs(url, query) {
+	  url = url.split('?');
+	  var start = url[0];
+	  var qs = (url[1] || '').split('#')[0];
+	  var end = url[1] && url[1].split('#').length > 1 ? '#' + url[1].split('#')[1] : '';
+
+	  var baseQs = parse(qs);
+	  for (var i in query) {
+	    baseQs[i] = query[i];
+	  }
+	  qs = stringify(baseQs);
+	  if (qs !== '') {
+	    qs = '?' + qs;
+	  }
+	  return start + qs + end;
+	}
+
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
 	function DOMParser(options){
 		this.options = options ||{locator:{}};
 		
@@ -49878,38 +49906,10 @@
 	}//appendChild and setAttributeNS are preformance key
 
 	if(true){
-		var XMLReader = __webpack_require__(120).XMLReader;
-		var DOMImplementation = exports.DOMImplementation = __webpack_require__(121).DOMImplementation;
-		exports.XMLSerializer = __webpack_require__(121).XMLSerializer ;
+		var XMLReader = __webpack_require__(121).XMLReader;
+		var DOMImplementation = exports.DOMImplementation = __webpack_require__(122).DOMImplementation;
+		exports.XMLSerializer = __webpack_require__(122).XMLSerializer ;
 		exports.DOMParser = DOMParser;
-	}
-
-
-/***/ },
-/* 106 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var parse = __webpack_require__(126).parse;
-	var stringify = __webpack_require__(126).stringify;
-
-	module.exports = handleQs;
-	function handleQs(url, query) {
-	  url = url.split('?');
-	  var start = url[0];
-	  var qs = (url[1] || '').split('#')[0];
-	  var end = url[1] && url[1].split('#').length > 1 ? '#' + url[1].split('#')[1] : '';
-
-	  var baseQs = parse(qs);
-	  for (var i in query) {
-	    baseQs[i] = query[i];
-	  }
-	  qs = stringify(baseQs);
-	  if (qs !== '') {
-	    qs = '?' + qs;
-	  }
-	  return start + qs + end;
 	}
 
 
@@ -50504,7 +50504,7 @@
 	  return Object.prototype.hasOwnProperty.call(obj, prop);
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(70)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(72)))
 
 /***/ },
 /* 108 */
@@ -51154,6 +51154,45 @@
 /* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	/**
+	 * isArray
+	 */
+
+	var isArray = Array.isArray;
+
+	/**
+	 * toString
+	 */
+
+	var str = Object.prototype.toString;
+
+	/**
+	 * Whether or not the given `val`
+	 * is an array.
+	 *
+	 * example:
+	 *
+	 *        isArray([]);
+	 *        // > true
+	 *        isArray(arguments);
+	 *        // > false
+	 *        isArray('');
+	 *        // > false
+	 *
+	 * @param {mixed} val
+	 * @return {bool}
+	 */
+
+	module.exports = isArray || function (val) {
+	  return !! val && '[object Array]' == str.call(val);
+	};
+
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
 	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
 	  var e, m,
 	      eLen = nBytes * 8 - mLen - 1,
@@ -51237,45 +51276,6 @@
 	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
 
 	  buffer[offset + i - d] |= s * 128;
-	};
-
-
-/***/ },
-/* 111 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * isArray
-	 */
-
-	var isArray = Array.isArray;
-
-	/**
-	 * toString
-	 */
-
-	var str = Object.prototype.toString;
-
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
 	};
 
 
@@ -53099,28 +53099,17 @@
 	    return __webpack_require__(137); // hack to fix a circular dependency issue when used with browserify
 	  } catch(_){}
 	}());
-	exports = module.exports = __webpack_require__(132);
+	exports = module.exports = __webpack_require__(128);
 	exports.Stream = Stream || exports;
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(133);
-	exports.Duplex = __webpack_require__(134);
-	exports.Transform = __webpack_require__(135);
-	exports.PassThrough = __webpack_require__(136);
+	exports.Writable = __webpack_require__(129);
+	exports.Duplex = __webpack_require__(130);
+	exports.Transform = __webpack_require__(131);
+	exports.PassThrough = __webpack_require__(132);
 
 
 /***/ },
 /* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = __webpack_require__(128)
-	__webpack_require__(129)
-	__webpack_require__(130)
-	__webpack_require__(131)
-
-/***/ },
-/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	if (typeof Object.create === 'function') {
@@ -53147,6 +53136,17 @@
 	  }
 	}
 
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(133)
+	__webpack_require__(134)
+	__webpack_require__(135)
+	__webpack_require__(136)
 
 /***/ },
 /* 119 */
@@ -53280,1740 +53280,6 @@
 
 /***/ },
 /* 120 */
-/***/ function(module, exports, __webpack_require__) {
-
-	//[4]   	NameStartChar	   ::=   	":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D] | [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] | [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
-	//[4a]   	NameChar	   ::=   	NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
-	//[5]   	Name	   ::=   	NameStartChar (NameChar)*
-	var nameStartChar = /[A-Z_a-z\xC0-\xD6\xD8-\xF6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]///\u10000-\uEFFFF
-	var nameChar = new RegExp("[\\-\\.0-9"+nameStartChar.source.slice(1,-1)+"\u00B7\u0300-\u036F\\ux203F-\u2040]");
-	var tagNamePattern = new RegExp('^'+nameStartChar.source+nameChar.source+'*(?:\:'+nameStartChar.source+nameChar.source+'*)?$');
-	//var tagNamePattern = /^[a-zA-Z_][\w\-\.]*(?:\:[a-zA-Z_][\w\-\.]*)?$/
-	//var handlers = 'resolveEntity,getExternalSubset,characters,endDocument,endElement,endPrefixMapping,ignorableWhitespace,processingInstruction,setDocumentLocator,skippedEntity,startDocument,startElement,startPrefixMapping,notationDecl,unparsedEntityDecl,error,fatalError,warning,attributeDecl,elementDecl,externalEntityDecl,internalEntityDecl,comment,endCDATA,endDTD,endEntity,startCDATA,startDTD,startEntity'.split(',')
-
-	//S_TAG,	S_ATTR,	S_EQ,	S_V
-	//S_ATTR_S,	S_E,	S_S,	S_C
-	var S_TAG = 0;//tag name offerring
-	var S_ATTR = 1;//attr name offerring 
-	var S_ATTR_S=2;//attr name end and space offer
-	var S_EQ = 3;//=space?
-	var S_V = 4;//attr value(no quot value only)
-	var S_E = 5;//attr value end and no space(quot end)
-	var S_S = 6;//(attr value end || tag end ) && (space offer)
-	var S_C = 7;//closed el<el />
-
-	function XMLReader(){
-		
-	}
-
-	XMLReader.prototype = {
-		parse:function(source,defaultNSMap,entityMap){
-			var domBuilder = this.domBuilder;
-			domBuilder.startDocument();
-			_copy(defaultNSMap ,defaultNSMap = {})
-			parse(source,defaultNSMap,entityMap,
-					domBuilder,this.errorHandler);
-			domBuilder.endDocument();
-		}
-	}
-	function parse(source,defaultNSMapCopy,entityMap,domBuilder,errorHandler){
-	  function fixedFromCharCode(code) {
-			// String.prototype.fromCharCode does not supports
-			// > 2 bytes unicode chars directly
-			if (code > 0xffff) {
-				code -= 0x10000;
-				var surrogate1 = 0xd800 + (code >> 10)
-					, surrogate2 = 0xdc00 + (code & 0x3ff);
-
-				return String.fromCharCode(surrogate1, surrogate2);
-			} else {
-				return String.fromCharCode(code);
-			}
-		}
-		function entityReplacer(a){
-			var k = a.slice(1,-1);
-			if(k in entityMap){
-				return entityMap[k]; 
-			}else if(k.charAt(0) === '#'){
-				return fixedFromCharCode(parseInt(k.substr(1).replace('x','0x')))
-			}else{
-				errorHandler.error('entity not found:'+a);
-				return a;
-			}
-		}
-		function appendText(end){//has some bugs
-			var xt = source.substring(start,end).replace(/&#?\w+;/g,entityReplacer);
-			locator&&position(start);
-			domBuilder.characters(xt,0,end-start);
-			start = end
-		}
-		function position(start,m){
-			while(start>=endPos && (m = linePattern.exec(source))){
-				startPos = m.index;
-				endPos = startPos + m[0].length;
-				locator.lineNumber++;
-				//console.log('line++:',locator,startPos,endPos)
-			}
-			locator.columnNumber = start-startPos+1;
-		}
-		var startPos = 0;
-		var endPos = 0;
-		var linePattern = /.+(?:\r\n?|\n)|.*$/g
-		var locator = domBuilder.locator;
-		
-		var parseStack = [{currentNSMap:defaultNSMapCopy}]
-		var closeMap = {};
-		var start = 0;
-		while(true){
-			var i = source.indexOf('<',start);
-			if(i<0){
-				if(!source.substr(start).match(/^\s*$/)){
-					var doc = domBuilder.document;
-	    			var text = doc.createTextNode(source.substr(start));
-	    			doc.appendChild(text);
-	    			domBuilder.currentElement = text;
-				}
-				return;
-			}
-			if(i>start){
-				appendText(i);
-			}
-			switch(source.charAt(i+1)){
-			case '/':
-				var end = source.indexOf('>',i+3);
-				var tagName = source.substring(i+2,end);
-				var config = parseStack.pop();
-				var localNSMap = config.localNSMap;
-				
-		        if(config.tagName != tagName){
-		            errorHandler.fatalError("end tag name: "+tagName+' is not match the current start tagName:'+config.tagName );
-		        }
-				domBuilder.endElement(config.uri,config.localName,tagName);
-				if(localNSMap){
-					for(var prefix in localNSMap){
-						domBuilder.endPrefixMapping(prefix) ;
-					}
-				}
-				end++;
-				break;
-				// end elment
-			case '?':// <?...?>
-				locator&&position(i);
-				end = parseInstruction(source,i,domBuilder);
-				break;
-			case '!':// <!doctype,<![CDATA,<!--
-				locator&&position(i);
-				end = parseDCC(source,i,domBuilder,errorHandler);
-				break;
-			default:
-				try{
-					locator&&position(i);
-					
-					var el = new ElementAttributes();
-					
-					//elStartEnd
-					var end = parseElementStartPart(source,i,el,entityReplacer,errorHandler);
-					var len = el.length;
-					//position fixed
-					if(len && locator){
-						var backup = copyLocator(locator,{});
-						for(var i = 0;i<len;i++){
-							var a = el[i];
-							position(a.offset);
-							a.offset = copyLocator(locator,{});
-						}
-						copyLocator(backup,locator);
-					}
-					if(!el.closed && fixSelfClosed(source,end,el.tagName,closeMap)){
-						el.closed = true;
-						if(!entityMap.nbsp){
-							errorHandler.warning('unclosed xml attribute');
-						}
-					}
-					appendElement(el,domBuilder,parseStack);
-					
-					
-					if(el.uri === 'http://www.w3.org/1999/xhtml' && !el.closed){
-						end = parseHtmlSpecialContent(source,end,el.tagName,entityReplacer,domBuilder)
-					}else{
-						end++;
-					}
-				}catch(e){
-					errorHandler.error('element parse error: '+e);
-					end = -1;
-				}
-
-			}
-			if(end<0){
-				//TODO: 这里有可能sax回退，有位置错误风险
-				appendText(i+1);
-			}else{
-				start = end;
-			}
-		}
-	}
-	function copyLocator(f,t){
-		t.lineNumber = f.lineNumber;
-		t.columnNumber = f.columnNumber;
-		return t;
-		
-	}
-
-	/**
-	 * @see #appendElement(source,elStartEnd,el,selfClosed,entityReplacer,domBuilder,parseStack);
-	 * @return end of the elementStartPart(end of elementEndPart for selfClosed el)
-	 */
-	function parseElementStartPart(source,start,el,entityReplacer,errorHandler){
-		var attrName;
-		var value;
-		var p = ++start;
-		var s = S_TAG;//status
-		while(true){
-			var c = source.charAt(p);
-			switch(c){
-			case '=':
-				if(s === S_ATTR){//attrName
-					attrName = source.slice(start,p);
-					s = S_EQ;
-				}else if(s === S_ATTR_S){
-					s = S_EQ;
-				}else{
-					//fatalError: equal must after attrName or space after attrName
-					throw new Error('attribute equal must after attrName');
-				}
-				break;
-			case '\'':
-			case '"':
-				if(s === S_EQ){//equal
-					start = p+1;
-					p = source.indexOf(c,start)
-					if(p>0){
-						value = source.slice(start,p).replace(/&#?\w+;/g,entityReplacer);
-						el.add(attrName,value,start-1);
-						s = S_E;
-					}else{
-						//fatalError: no end quot match
-						throw new Error('attribute value no end \''+c+'\' match');
-					}
-				}else if(s == S_V){
-					value = source.slice(start,p).replace(/&#?\w+;/g,entityReplacer);
-					//console.log(attrName,value,start,p)
-					el.add(attrName,value,start);
-					//console.dir(el)
-					errorHandler.warning('attribute "'+attrName+'" missed start quot('+c+')!!');
-					start = p+1;
-					s = S_E
-				}else{
-					//fatalError: no equal before
-					throw new Error('attribute value must after "="');
-				}
-				break;
-			case '/':
-				switch(s){
-				case S_TAG:
-					el.setTagName(source.slice(start,p));
-				case S_E:
-				case S_S:
-				case S_C:
-					s = S_C;
-					el.closed = true;
-				case S_V:
-				case S_ATTR:
-				case S_ATTR_S:
-					break;
-				//case S_EQ:
-				default:
-					throw new Error("attribute invalid close char('/')")
-				}
-				break;
-			case ''://end document
-				//throw new Error('unexpected end of input')
-				errorHandler.error('unexpected end of input');
-			case '>':
-				switch(s){
-				case S_TAG:
-					el.setTagName(source.slice(start,p));
-				case S_E:
-				case S_S:
-				case S_C:
-					break;//normal
-				case S_V://Compatible state
-				case S_ATTR:
-					value = source.slice(start,p);
-					if(value.slice(-1) === '/'){
-						el.closed  = true;
-						value = value.slice(0,-1)
-					}
-				case S_ATTR_S:
-					if(s === S_ATTR_S){
-						value = attrName;
-					}
-					if(s == S_V){
-						errorHandler.warning('attribute "'+value+'" missed quot(")!!');
-						el.add(attrName,value.replace(/&#?\w+;/g,entityReplacer),start)
-					}else{
-						errorHandler.warning('attribute "'+value+'" missed value!! "'+value+'" instead!!')
-						el.add(value,value,start)
-					}
-					break;
-				case S_EQ:
-					throw new Error('attribute value missed!!');
-				}
-	//			console.log(tagName,tagNamePattern,tagNamePattern.test(tagName))
-				return p;
-			/*xml space '\x20' | #x9 | #xD | #xA; */
-			case '\u0080':
-				c = ' ';
-			default:
-				if(c<= ' '){//space
-					switch(s){
-					case S_TAG:
-						el.setTagName(source.slice(start,p));//tagName
-						s = S_S;
-						break;
-					case S_ATTR:
-						attrName = source.slice(start,p)
-						s = S_ATTR_S;
-						break;
-					case S_V:
-						var value = source.slice(start,p).replace(/&#?\w+;/g,entityReplacer);
-						errorHandler.warning('attribute "'+value+'" missed quot(")!!');
-						el.add(attrName,value,start)
-					case S_E:
-						s = S_S;
-						break;
-					//case S_S:
-					//case S_EQ:
-					//case S_ATTR_S:
-					//	void();break;
-					//case S_C:
-						//ignore warning
-					}
-				}else{//not space
-	//S_TAG,	S_ATTR,	S_EQ,	S_V
-	//S_ATTR_S,	S_E,	S_S,	S_C
-					switch(s){
-					//case S_TAG:void();break;
-					//case S_ATTR:void();break;
-					//case S_V:void();break;
-					case S_ATTR_S:
-						errorHandler.warning('attribute "'+attrName+'" missed value!! "'+attrName+'" instead!!')
-						el.add(attrName,attrName,start);
-						start = p;
-						s = S_ATTR;
-						break;
-					case S_E:
-						errorHandler.warning('attribute space is required"'+attrName+'"!!')
-					case S_S:
-						s = S_ATTR;
-						start = p;
-						break;
-					case S_EQ:
-						s = S_V;
-						start = p;
-						break;
-					case S_C:
-						throw new Error("elements closed character '/' and '>' must be connected to");
-					}
-				}
-			}
-			p++;
-		}
-	}
-	/**
-	 * @return end of the elementStartPart(end of elementEndPart for selfClosed el)
-	 */
-	function appendElement(el,domBuilder,parseStack){
-		var tagName = el.tagName;
-		var localNSMap = null;
-		var currentNSMap = parseStack[parseStack.length-1].currentNSMap;
-		var i = el.length;
-		while(i--){
-			var a = el[i];
-			var qName = a.qName;
-			var value = a.value;
-			var nsp = qName.indexOf(':');
-			if(nsp>0){
-				var prefix = a.prefix = qName.slice(0,nsp);
-				var localName = qName.slice(nsp+1);
-				var nsPrefix = prefix === 'xmlns' && localName
-			}else{
-				localName = qName;
-				prefix = null
-				nsPrefix = qName === 'xmlns' && ''
-			}
-			//can not set prefix,because prefix !== ''
-			a.localName = localName ;
-			//prefix == null for no ns prefix attribute 
-			if(nsPrefix !== false){//hack!!
-				if(localNSMap == null){
-					localNSMap = {}
-					//console.log(currentNSMap,0)
-					_copy(currentNSMap,currentNSMap={})
-					//console.log(currentNSMap,1)
-				}
-				currentNSMap[nsPrefix] = localNSMap[nsPrefix] = value;
-				a.uri = 'http://www.w3.org/2000/xmlns/'
-				domBuilder.startPrefixMapping(nsPrefix, value) 
-			}
-		}
-		var i = el.length;
-		while(i--){
-			a = el[i];
-			var prefix = a.prefix;
-			if(prefix){//no prefix attribute has no namespace
-				if(prefix === 'xml'){
-					a.uri = 'http://www.w3.org/XML/1998/namespace';
-				}if(prefix !== 'xmlns'){
-					a.uri = currentNSMap[prefix]
-					
-					//{console.log('###'+a.qName,domBuilder.locator.systemId+'',currentNSMap,a.uri)}
-				}
-			}
-		}
-		var nsp = tagName.indexOf(':');
-		if(nsp>0){
-			prefix = el.prefix = tagName.slice(0,nsp);
-			localName = el.localName = tagName.slice(nsp+1);
-		}else{
-			prefix = null;//important!!
-			localName = el.localName = tagName;
-		}
-		//no prefix element has default namespace
-		var ns = el.uri = currentNSMap[prefix || ''];
-		domBuilder.startElement(ns,localName,tagName,el);
-		//endPrefixMapping and startPrefixMapping have not any help for dom builder
-		//localNSMap = null
-		if(el.closed){
-			domBuilder.endElement(ns,localName,tagName);
-			if(localNSMap){
-				for(prefix in localNSMap){
-					domBuilder.endPrefixMapping(prefix) 
-				}
-			}
-		}else{
-			el.currentNSMap = currentNSMap;
-			el.localNSMap = localNSMap;
-			parseStack.push(el);
-		}
-	}
-	function parseHtmlSpecialContent(source,elStartEnd,tagName,entityReplacer,domBuilder){
-		if(/^(?:script|textarea)$/i.test(tagName)){
-			var elEndStart =  source.indexOf('</'+tagName+'>',elStartEnd);
-			var text = source.substring(elStartEnd+1,elEndStart);
-			if(/[&<]/.test(text)){
-				if(/^script$/i.test(tagName)){
-					//if(!/\]\]>/.test(text)){
-						//lexHandler.startCDATA();
-						domBuilder.characters(text,0,text.length);
-						//lexHandler.endCDATA();
-						return elEndStart;
-					//}
-				}//}else{//text area
-					text = text.replace(/&#?\w+;/g,entityReplacer);
-					domBuilder.characters(text,0,text.length);
-					return elEndStart;
-				//}
-				
-			}
-		}
-		return elStartEnd+1;
-	}
-	function fixSelfClosed(source,elStartEnd,tagName,closeMap){
-		//if(tagName in closeMap){
-		var pos = closeMap[tagName];
-		if(pos == null){
-			//console.log(tagName)
-			pos = closeMap[tagName] = source.lastIndexOf('</'+tagName+'>')
-		}
-		return pos<elStartEnd;
-		//} 
-	}
-	function _copy(source,target){
-		for(var n in source){target[n] = source[n]}
-	}
-	function parseDCC(source,start,domBuilder,errorHandler){//sure start with '<!'
-		var next= source.charAt(start+2)
-		switch(next){
-		case '-':
-			if(source.charAt(start + 3) === '-'){
-				var end = source.indexOf('-->',start+4);
-				//append comment source.substring(4,end)//<!--
-				if(end>start){
-					domBuilder.comment(source,start+4,end-start-4);
-					return end+3;
-				}else{
-					errorHandler.error("Unclosed comment");
-					return -1;
-				}
-			}else{
-				//error
-				return -1;
-			}
-		default:
-			if(source.substr(start+3,6) == 'CDATA['){
-				var end = source.indexOf(']]>',start+9);
-				domBuilder.startCDATA();
-				domBuilder.characters(source,start+9,end-start-9);
-				domBuilder.endCDATA() 
-				return end+3;
-			}
-			//<!DOCTYPE
-			//startDTD(java.lang.String name, java.lang.String publicId, java.lang.String systemId) 
-			var matchs = split(source,start);
-			var len = matchs.length;
-			if(len>1 && /!doctype/i.test(matchs[0][0])){
-				var name = matchs[1][0];
-				var pubid = len>3 && /^public$/i.test(matchs[2][0]) && matchs[3][0]
-				var sysid = len>4 && matchs[4][0];
-				var lastMatch = matchs[len-1]
-				domBuilder.startDTD(name,pubid && pubid.replace(/^(['"])(.*?)\1$/,'$2'),
-						sysid && sysid.replace(/^(['"])(.*?)\1$/,'$2'));
-				domBuilder.endDTD();
-				
-				return lastMatch.index+lastMatch[0].length
-			}
-		}
-		return -1;
-	}
-
-
-
-	function parseInstruction(source,start,domBuilder){
-		var end = source.indexOf('?>',start);
-		if(end){
-			var match = source.substring(start,end).match(/^<\?(\S*)\s*([\s\S]*?)\s*$/);
-			if(match){
-				var len = match[0].length;
-				domBuilder.processingInstruction(match[1], match[2]) ;
-				return end+2;
-			}else{//error
-				return -1;
-			}
-		}
-		return -1;
-	}
-
-	/**
-	 * @param source
-	 */
-	function ElementAttributes(source){
-		
-	}
-	ElementAttributes.prototype = {
-		setTagName:function(tagName){
-			if(!tagNamePattern.test(tagName)){
-				throw new Error('invalid tagName:'+tagName)
-			}
-			this.tagName = tagName
-		},
-		add:function(qName,value,offset){
-			if(!tagNamePattern.test(qName)){
-				throw new Error('invalid attribute:'+qName)
-			}
-			this[this.length++] = {qName:qName,value:value,offset:offset}
-		},
-		length:0,
-		getLocalName:function(i){return this[i].localName},
-		getOffset:function(i){return this[i].offset},
-		getQName:function(i){return this[i].qName},
-		getURI:function(i){return this[i].uri},
-		getValue:function(i){return this[i].value}
-	//	,getIndex:function(uri, localName)){
-	//		if(localName){
-	//			
-	//		}else{
-	//			var qName = uri
-	//		}
-	//	},
-	//	getValue:function(){return this.getValue(this.getIndex.apply(this,arguments))},
-	//	getType:function(uri,localName){}
-	//	getType:function(i){},
-	}
-
-
-
-
-	function _set_proto_(thiz,parent){
-		thiz.__proto__ = parent;
-		return thiz;
-	}
-	if(!(_set_proto_({},_set_proto_.prototype) instanceof _set_proto_)){
-		_set_proto_ = function(thiz,parent){
-			function p(){};
-			p.prototype = parent;
-			p = new p();
-			for(parent in thiz){
-				p[parent] = thiz[parent];
-			}
-			return p;
-		}
-	}
-
-	function split(source,start){
-		var match;
-		var buf = [];
-		var reg = /'[^']+'|"[^"]+"|[^\s<>\/=]+=?|(\/?\s*>|<)/g;
-		reg.lastIndex = start;
-		reg.exec(source);//skip <
-		while(match = reg.exec(source)){
-			buf.push(match);
-			if(match[1])return buf;
-		}
-	}
-
-	if(true){
-		exports.XMLReader = XMLReader;
-	}
-
-
-
-/***/ },
-/* 121 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-	 * DOM Level 2
-	 * Object DOMException
-	 * @see http://www.w3.org/TR/REC-DOM-Level-1/ecma-script-language-binding.html
-	 * @see http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/ecma-script-binding.html
-	 */
-
-	function copy(src,dest){
-		for(var p in src){
-			dest[p] = src[p];
-		}
-	}
-	/**
-	^\w+\.prototype\.([_\w]+)\s*=\s*((?:.*\{\s*?[\r\n][\s\S]*?^})|\S.*?(?=[;\r\n]));?
-	^\w+\.prototype\.([_\w]+)\s*=\s*(\S.*?(?=[;\r\n]));?
-	 */
-	function _extends(Class,Super){
-		var pt = Class.prototype;
-		if(Object.create){
-			var ppt = Object.create(Super.prototype)
-			pt.__proto__ = ppt;
-		}
-		if(!(pt instanceof Super)){
-			function t(){};
-			t.prototype = Super.prototype;
-			t = new t();
-			copy(pt,t);
-			Class.prototype = pt = t;
-		}
-		if(pt.constructor != Class){
-			if(typeof Class != 'function'){
-				console.error("unknow Class:"+Class)
-			}
-			pt.constructor = Class
-		}
-	}
-	var htmlns = 'http://www.w3.org/1999/xhtml' ;
-	// Node Types
-	var NodeType = {}
-	var ELEMENT_NODE                = NodeType.ELEMENT_NODE                = 1;
-	var ATTRIBUTE_NODE              = NodeType.ATTRIBUTE_NODE              = 2;
-	var TEXT_NODE                   = NodeType.TEXT_NODE                   = 3;
-	var CDATA_SECTION_NODE          = NodeType.CDATA_SECTION_NODE          = 4;
-	var ENTITY_REFERENCE_NODE       = NodeType.ENTITY_REFERENCE_NODE       = 5;
-	var ENTITY_NODE                 = NodeType.ENTITY_NODE                 = 6;
-	var PROCESSING_INSTRUCTION_NODE = NodeType.PROCESSING_INSTRUCTION_NODE = 7;
-	var COMMENT_NODE                = NodeType.COMMENT_NODE                = 8;
-	var DOCUMENT_NODE               = NodeType.DOCUMENT_NODE               = 9;
-	var DOCUMENT_TYPE_NODE          = NodeType.DOCUMENT_TYPE_NODE          = 10;
-	var DOCUMENT_FRAGMENT_NODE      = NodeType.DOCUMENT_FRAGMENT_NODE      = 11;
-	var NOTATION_NODE               = NodeType.NOTATION_NODE               = 12;
-
-	// ExceptionCode
-	var ExceptionCode = {}
-	var ExceptionMessage = {};
-	var INDEX_SIZE_ERR              = ExceptionCode.INDEX_SIZE_ERR              = ((ExceptionMessage[1]="Index size error"),1);
-	var DOMSTRING_SIZE_ERR          = ExceptionCode.DOMSTRING_SIZE_ERR          = ((ExceptionMessage[2]="DOMString size error"),2);
-	var HIERARCHY_REQUEST_ERR       = ExceptionCode.HIERARCHY_REQUEST_ERR       = ((ExceptionMessage[3]="Hierarchy request error"),3);
-	var WRONG_DOCUMENT_ERR          = ExceptionCode.WRONG_DOCUMENT_ERR          = ((ExceptionMessage[4]="Wrong document"),4);
-	var INVALID_CHARACTER_ERR       = ExceptionCode.INVALID_CHARACTER_ERR       = ((ExceptionMessage[5]="Invalid character"),5);
-	var NO_DATA_ALLOWED_ERR         = ExceptionCode.NO_DATA_ALLOWED_ERR         = ((ExceptionMessage[6]="No data allowed"),6);
-	var NO_MODIFICATION_ALLOWED_ERR = ExceptionCode.NO_MODIFICATION_ALLOWED_ERR = ((ExceptionMessage[7]="No modification allowed"),7);
-	var NOT_FOUND_ERR               = ExceptionCode.NOT_FOUND_ERR               = ((ExceptionMessage[8]="Not found"),8);
-	var NOT_SUPPORTED_ERR           = ExceptionCode.NOT_SUPPORTED_ERR           = ((ExceptionMessage[9]="Not supported"),9);
-	var INUSE_ATTRIBUTE_ERR         = ExceptionCode.INUSE_ATTRIBUTE_ERR         = ((ExceptionMessage[10]="Attribute in use"),10);
-	//level2
-	var INVALID_STATE_ERR        	= ExceptionCode.INVALID_STATE_ERR        	= ((ExceptionMessage[11]="Invalid state"),11);
-	var SYNTAX_ERR               	= ExceptionCode.SYNTAX_ERR               	= ((ExceptionMessage[12]="Syntax error"),12);
-	var INVALID_MODIFICATION_ERR 	= ExceptionCode.INVALID_MODIFICATION_ERR 	= ((ExceptionMessage[13]="Invalid modification"),13);
-	var NAMESPACE_ERR            	= ExceptionCode.NAMESPACE_ERR           	= ((ExceptionMessage[14]="Invalid namespace"),14);
-	var INVALID_ACCESS_ERR       	= ExceptionCode.INVALID_ACCESS_ERR      	= ((ExceptionMessage[15]="Invalid access"),15);
-
-
-	function DOMException(code, message) {
-		if(message instanceof Error){
-			var error = message;
-		}else{
-			error = this;
-			Error.call(this, ExceptionMessage[code]);
-			this.message = ExceptionMessage[code];
-			if(Error.captureStackTrace) Error.captureStackTrace(this, DOMException);
-		}
-		error.code = code;
-		if(message) this.message = this.message + ": " + message;
-		return error;
-	};
-	DOMException.prototype = Error.prototype;
-	copy(ExceptionCode,DOMException)
-	/**
-	 * @see http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-536297177
-	 * The NodeList interface provides the abstraction of an ordered collection of nodes, without defining or constraining how this collection is implemented. NodeList objects in the DOM are live.
-	 * The items in the NodeList are accessible via an integral index, starting from 0.
-	 */
-	function NodeList() {
-	};
-	NodeList.prototype = {
-		/**
-		 * The number of nodes in the list. The range of valid child node indices is 0 to length-1 inclusive.
-		 * @standard level1
-		 */
-		length:0, 
-		/**
-		 * Returns the indexth item in the collection. If index is greater than or equal to the number of nodes in the list, this returns null.
-		 * @standard level1
-		 * @param index  unsigned long 
-		 *   Index into the collection.
-		 * @return Node
-		 * 	The node at the indexth position in the NodeList, or null if that is not a valid index. 
-		 */
-		item: function(index) {
-			return this[index] || null;
-		}
-	};
-	function LiveNodeList(node,refresh){
-		this._node = node;
-		this._refresh = refresh
-		_updateLiveList(this);
-	}
-	function _updateLiveList(list){
-		var inc = list._node._inc || list._node.ownerDocument._inc;
-		if(list._inc != inc){
-			var ls = list._refresh(list._node);
-			//console.log(ls.length)
-			__set__(list,'length',ls.length);
-			copy(ls,list);
-			list._inc = inc;
-		}
-	}
-	LiveNodeList.prototype.item = function(i){
-		_updateLiveList(this);
-		return this[i];
-	}
-
-	_extends(LiveNodeList,NodeList);
-	/**
-	 * 
-	 * Objects implementing the NamedNodeMap interface are used to represent collections of nodes that can be accessed by name. Note that NamedNodeMap does not inherit from NodeList; NamedNodeMaps are not maintained in any particular order. Objects contained in an object implementing NamedNodeMap may also be accessed by an ordinal index, but this is simply to allow convenient enumeration of the contents of a NamedNodeMap, and does not imply that the DOM specifies an order to these Nodes.
-	 * NamedNodeMap objects in the DOM are live.
-	 * used for attributes or DocumentType entities 
-	 */
-	function NamedNodeMap() {
-	};
-
-	function _findNodeIndex(list,node){
-		var i = list.length;
-		while(i--){
-			if(list[i] === node){return i}
-		}
-	}
-
-	function _addNamedNode(el,list,newAttr,oldAttr){
-		if(oldAttr){
-			list[_findNodeIndex(list,oldAttr)] = newAttr;
-		}else{
-			list[list.length++] = newAttr;
-		}
-		if(el){
-			newAttr.ownerElement = el;
-			var doc = el.ownerDocument;
-			if(doc){
-				oldAttr && _onRemoveAttribute(doc,el,oldAttr);
-				_onAddAttribute(doc,el,newAttr);
-			}
-		}
-	}
-	function _removeNamedNode(el,list,attr){
-		var i = _findNodeIndex(list,attr);
-		if(i>=0){
-			var lastIndex = list.length-1
-			while(i<lastIndex){
-				list[i] = list[++i]
-			}
-			list.length = lastIndex;
-			if(el){
-				var doc = el.ownerDocument;
-				if(doc){
-					_onRemoveAttribute(doc,el,attr);
-					attr.ownerElement = null;
-				}
-			}
-		}else{
-			throw DOMException(NOT_FOUND_ERR,new Error())
-		}
-	}
-	NamedNodeMap.prototype = {
-		length:0,
-		item:NodeList.prototype.item,
-		getNamedItem: function(key) {
-	//		if(key.indexOf(':')>0 || key == 'xmlns'){
-	//			return null;
-	//		}
-			var i = this.length;
-			while(i--){
-				var attr = this[i];
-				if(attr.nodeName == key){
-					return attr;
-				}
-			}
-		},
-		setNamedItem: function(attr) {
-			var el = attr.ownerElement;
-			if(el && el!=this._ownerElement){
-				throw new DOMException(INUSE_ATTRIBUTE_ERR);
-			}
-			var oldAttr = this.getNamedItem(attr.nodeName);
-			_addNamedNode(this._ownerElement,this,attr,oldAttr);
-			return oldAttr;
-		},
-		/* returns Node */
-		setNamedItemNS: function(attr) {// raises: WRONG_DOCUMENT_ERR,NO_MODIFICATION_ALLOWED_ERR,INUSE_ATTRIBUTE_ERR
-			var el = attr.ownerElement, oldAttr;
-			if(el && el!=this._ownerElement){
-				throw new DOMException(INUSE_ATTRIBUTE_ERR);
-			}
-			oldAttr = this.getNamedItemNS(attr.namespaceURI,attr.localName);
-			_addNamedNode(this._ownerElement,this,attr,oldAttr);
-			return oldAttr;
-		},
-
-		/* returns Node */
-		removeNamedItem: function(key) {
-			var attr = this.getNamedItem(key);
-			_removeNamedNode(this._ownerElement,this,attr);
-			return attr;
-			
-			
-		},// raises: NOT_FOUND_ERR,NO_MODIFICATION_ALLOWED_ERR
-		
-		//for level2
-		removeNamedItemNS:function(namespaceURI,localName){
-			var attr = this.getNamedItemNS(namespaceURI,localName);
-			_removeNamedNode(this._ownerElement,this,attr);
-			return attr;
-		},
-		getNamedItemNS: function(namespaceURI, localName) {
-			var i = this.length;
-			while(i--){
-				var node = this[i];
-				if(node.localName == localName && node.namespaceURI == namespaceURI){
-					return node;
-				}
-			}
-			return null;
-		}
-	};
-	/**
-	 * @see http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-102161490
-	 */
-	function DOMImplementation(/* Object */ features) {
-		this._features = {};
-		if (features) {
-			for (var feature in features) {
-				 this._features = features[feature];
-			}
-		}
-	};
-
-	DOMImplementation.prototype = {
-		hasFeature: function(/* string */ feature, /* string */ version) {
-			var versions = this._features[feature.toLowerCase()];
-			if (versions && (!version || version in versions)) {
-				return true;
-			} else {
-				return false;
-			}
-		},
-		// Introduced in DOM Level 2:
-		createDocument:function(namespaceURI,  qualifiedName, doctype){// raises:INVALID_CHARACTER_ERR,NAMESPACE_ERR,WRONG_DOCUMENT_ERR
-			var doc = new Document();
-			doc.doctype = doctype;
-			if(doctype){
-				doc.appendChild(doctype);
-			}
-			doc.implementation = this;
-			doc.childNodes = new NodeList();
-			if(qualifiedName){
-				var root = doc.createElementNS(namespaceURI,qualifiedName);
-				doc.appendChild(root);
-			}
-			return doc;
-		},
-		// Introduced in DOM Level 2:
-		createDocumentType:function(qualifiedName, publicId, systemId){// raises:INVALID_CHARACTER_ERR,NAMESPACE_ERR
-			var node = new DocumentType();
-			node.name = qualifiedName;
-			node.nodeName = qualifiedName;
-			node.publicId = publicId;
-			node.systemId = systemId;
-			// Introduced in DOM Level 2:
-			//readonly attribute DOMString        internalSubset;
-			
-			//TODO:..
-			//  readonly attribute NamedNodeMap     entities;
-			//  readonly attribute NamedNodeMap     notations;
-			return node;
-		}
-	};
-
-
-	/**
-	 * @see http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-1950641247
-	 */
-
-	function Node() {
-	};
-
-	Node.prototype = {
-		firstChild : null,
-		lastChild : null,
-		previousSibling : null,
-		nextSibling : null,
-		attributes : null,
-		parentNode : null,
-		childNodes : null,
-		ownerDocument : null,
-		nodeValue : null,
-		namespaceURI : null,
-		prefix : null,
-		localName : null,
-		// Modified in DOM Level 2:
-		insertBefore:function(newChild, refChild){//raises 
-			return _insertBefore(this,newChild,refChild);
-		},
-		replaceChild:function(newChild, oldChild){//raises 
-			this.insertBefore(newChild,oldChild);
-			if(oldChild){
-				this.removeChild(oldChild);
-			}
-		},
-		removeChild:function(oldChild){
-			return _removeChild(this,oldChild);
-		},
-		appendChild:function(newChild){
-			return this.insertBefore(newChild,null);
-		},
-		hasChildNodes:function(){
-			return this.firstChild != null;
-		},
-		cloneNode:function(deep){
-			return cloneNode(this.ownerDocument||this,this,deep);
-		},
-		// Modified in DOM Level 2:
-		normalize:function(){
-			var child = this.firstChild;
-			while(child){
-				var next = child.nextSibling;
-				if(next && next.nodeType == TEXT_NODE && child.nodeType == TEXT_NODE){
-					this.removeChild(next);
-					child.appendData(next.data);
-				}else{
-					child.normalize();
-					child = next;
-				}
-			}
-		},
-	  	// Introduced in DOM Level 2:
-		isSupported:function(feature, version){
-			return this.ownerDocument.implementation.hasFeature(feature,version);
-		},
-	    // Introduced in DOM Level 2:
-	    hasAttributes:function(){
-	    	return this.attributes.length>0;
-	    },
-	    lookupPrefix:function(namespaceURI){
-	    	var el = this;
-	    	while(el){
-	    		var map = el._nsMap;
-	    		//console.dir(map)
-	    		if(map){
-	    			for(var n in map){
-	    				if(map[n] == namespaceURI){
-	    					return n;
-	    				}
-	    			}
-	    		}
-	    		el = el.nodeType == 2?el.ownerDocument : el.parentNode;
-	    	}
-	    	return null;
-	    },
-	    // Introduced in DOM Level 3:
-	    lookupNamespaceURI:function(prefix){
-	    	var el = this;
-	    	while(el){
-	    		var map = el._nsMap;
-	    		//console.dir(map)
-	    		if(map){
-	    			if(prefix in map){
-	    				return map[prefix] ;
-	    			}
-	    		}
-	    		el = el.nodeType == 2?el.ownerDocument : el.parentNode;
-	    	}
-	    	return null;
-	    },
-	    // Introduced in DOM Level 3:
-	    isDefaultNamespace:function(namespaceURI){
-	    	var prefix = this.lookupPrefix(namespaceURI);
-	    	return prefix == null;
-	    }
-	};
-
-
-	function _xmlEncoder(c){
-		return c == '<' && '&lt;' ||
-	         c == '>' && '&gt;' ||
-	         c == '&' && '&amp;' ||
-	         c == '"' && '&quot;' ||
-	         '&#'+c.charCodeAt()+';'
-	}
-
-
-	copy(NodeType,Node);
-	copy(NodeType,Node.prototype);
-
-	/**
-	 * @param callback return true for continue,false for break
-	 * @return boolean true: break visit;
-	 */
-	function _visitNode(node,callback){
-		if(callback(node)){
-			return true;
-		}
-		if(node = node.firstChild){
-			do{
-				if(_visitNode(node,callback)){return true}
-	        }while(node=node.nextSibling)
-	    }
-	}
-
-
-
-	function Document(){
-	}
-	function _onAddAttribute(doc,el,newAttr){
-		doc && doc._inc++;
-		var ns = newAttr.namespaceURI ;
-		if(ns == 'http://www.w3.org/2000/xmlns/'){
-			//update namespace
-			el._nsMap[newAttr.prefix?newAttr.localName:''] = newAttr.value
-		}
-	}
-	function _onRemoveAttribute(doc,el,newAttr,remove){
-		doc && doc._inc++;
-		var ns = newAttr.namespaceURI ;
-		if(ns == 'http://www.w3.org/2000/xmlns/'){
-			//update namespace
-			delete el._nsMap[newAttr.prefix?newAttr.localName:'']
-		}
-	}
-	function _onUpdateChild(doc,el,newChild){
-		if(doc && doc._inc){
-			doc._inc++;
-			//update childNodes
-			var cs = el.childNodes;
-			if(newChild){
-				cs[cs.length++] = newChild;
-			}else{
-				//console.log(1)
-				var child = el.firstChild;
-				var i = 0;
-				while(child){
-					cs[i++] = child;
-					child =child.nextSibling;
-				}
-				cs.length = i;
-			}
-		}
-	}
-
-	/**
-	 * attributes;
-	 * children;
-	 * 
-	 * writeable properties:
-	 * nodeValue,Attr:value,CharacterData:data
-	 * prefix
-	 */
-	function _removeChild(parentNode,child){
-		var previous = child.previousSibling;
-		var next = child.nextSibling;
-		if(previous){
-			previous.nextSibling = next;
-		}else{
-			parentNode.firstChild = next
-		}
-		if(next){
-			next.previousSibling = previous;
-		}else{
-			parentNode.lastChild = previous;
-		}
-		_onUpdateChild(parentNode.ownerDocument,parentNode);
-		return child;
-	}
-	/**
-	 * preformance key(refChild == null)
-	 */
-	function _insertBefore(parentNode,newChild,nextChild){
-		var cp = newChild.parentNode;
-		if(cp){
-			cp.removeChild(newChild);//remove and update
-		}
-		if(newChild.nodeType === DOCUMENT_FRAGMENT_NODE){
-			var newFirst = newChild.firstChild;
-			if (newFirst == null) {
-				return newChild;
-			}
-			var newLast = newChild.lastChild;
-		}else{
-			newFirst = newLast = newChild;
-		}
-		var pre = nextChild ? nextChild.previousSibling : parentNode.lastChild;
-
-		newFirst.previousSibling = pre;
-		newLast.nextSibling = nextChild;
-		
-		
-		if(pre){
-			pre.nextSibling = newFirst;
-		}else{
-			parentNode.firstChild = newFirst;
-		}
-		if(nextChild == null){
-			parentNode.lastChild = newLast;
-		}else{
-			nextChild.previousSibling = newLast;
-		}
-		do{
-			newFirst.parentNode = parentNode;
-		}while(newFirst !== newLast && (newFirst= newFirst.nextSibling))
-		_onUpdateChild(parentNode.ownerDocument||parentNode,parentNode);
-		//console.log(parentNode.lastChild.nextSibling == null)
-		if (newChild.nodeType == DOCUMENT_FRAGMENT_NODE) {
-			newChild.firstChild = newChild.lastChild = null;
-		}
-		return newChild;
-	}
-	function _appendSingleChild(parentNode,newChild){
-		var cp = newChild.parentNode;
-		if(cp){
-			var pre = parentNode.lastChild;
-			cp.removeChild(newChild);//remove and update
-			var pre = parentNode.lastChild;
-		}
-		var pre = parentNode.lastChild;
-		newChild.parentNode = parentNode;
-		newChild.previousSibling = pre;
-		newChild.nextSibling = null;
-		if(pre){
-			pre.nextSibling = newChild;
-		}else{
-			parentNode.firstChild = newChild;
-		}
-		parentNode.lastChild = newChild;
-		_onUpdateChild(parentNode.ownerDocument,parentNode,newChild);
-		return newChild;
-		//console.log("__aa",parentNode.lastChild.nextSibling == null)
-	}
-	Document.prototype = {
-		//implementation : null,
-		nodeName :  '#document',
-		nodeType :  DOCUMENT_NODE,
-		doctype :  null,
-		documentElement :  null,
-		_inc : 1,
-		
-		insertBefore :  function(newChild, refChild){//raises 
-			if(newChild.nodeType == DOCUMENT_FRAGMENT_NODE){
-				var child = newChild.firstChild;
-				while(child){
-					var next = child.nextSibling;
-					this.insertBefore(child,refChild);
-					child = next;
-				}
-				return newChild;
-			}
-			if(this.documentElement == null && newChild.nodeType == 1){
-				this.documentElement = newChild;
-			}
-			
-			return _insertBefore(this,newChild,refChild),(newChild.ownerDocument = this),newChild;
-		},
-		removeChild :  function(oldChild){
-			if(this.documentElement == oldChild){
-				this.documentElement = null;
-			}
-			return _removeChild(this,oldChild);
-		},
-		// Introduced in DOM Level 2:
-		importNode : function(importedNode,deep){
-			return importNode(this,importedNode,deep);
-		},
-		// Introduced in DOM Level 2:
-		getElementById :	function(id){
-			var rtv = null;
-			_visitNode(this.documentElement,function(node){
-				if(node.nodeType == 1){
-					if(node.getAttribute('id') == id){
-						rtv = node;
-						return true;
-					}
-				}
-			})
-			return rtv;
-		},
-		
-		//document factory method:
-		createElement :	function(tagName){
-			var node = new Element();
-			node.ownerDocument = this;
-			node.nodeName = tagName;
-			node.tagName = tagName;
-			node.childNodes = new NodeList();
-			var attrs	= node.attributes = new NamedNodeMap();
-			attrs._ownerElement = node;
-			return node;
-		},
-		createDocumentFragment :	function(){
-			var node = new DocumentFragment();
-			node.ownerDocument = this;
-			node.childNodes = new NodeList();
-			return node;
-		},
-		createTextNode :	function(data){
-			var node = new Text();
-			node.ownerDocument = this;
-			node.appendData(data)
-			return node;
-		},
-		createComment :	function(data){
-			var node = new Comment();
-			node.ownerDocument = this;
-			node.appendData(data)
-			return node;
-		},
-		createCDATASection :	function(data){
-			var node = new CDATASection();
-			node.ownerDocument = this;
-			node.appendData(data)
-			return node;
-		},
-		createProcessingInstruction :	function(target,data){
-			var node = new ProcessingInstruction();
-			node.ownerDocument = this;
-			node.tagName = node.target = target;
-			node.nodeValue= node.data = data;
-			return node;
-		},
-		createAttribute :	function(name){
-			var node = new Attr();
-			node.ownerDocument	= this;
-			node.name = name;
-			node.nodeName	= name;
-			node.localName = name;
-			node.specified = true;
-			return node;
-		},
-		createEntityReference :	function(name){
-			var node = new EntityReference();
-			node.ownerDocument	= this;
-			node.nodeName	= name;
-			return node;
-		},
-		// Introduced in DOM Level 2:
-		createElementNS :	function(namespaceURI,qualifiedName){
-			var node = new Element();
-			var pl = qualifiedName.split(':');
-			var attrs	= node.attributes = new NamedNodeMap();
-			node.childNodes = new NodeList();
-			node.ownerDocument = this;
-			node.nodeName = qualifiedName;
-			node.tagName = qualifiedName;
-			node.namespaceURI = namespaceURI;
-			if(pl.length == 2){
-				node.prefix = pl[0];
-				node.localName = pl[1];
-			}else{
-				//el.prefix = null;
-				node.localName = qualifiedName;
-			}
-			attrs._ownerElement = node;
-			return node;
-		},
-		// Introduced in DOM Level 2:
-		createAttributeNS :	function(namespaceURI,qualifiedName){
-			var node = new Attr();
-			var pl = qualifiedName.split(':');
-			node.ownerDocument = this;
-			node.nodeName = qualifiedName;
-			node.name = qualifiedName;
-			node.namespaceURI = namespaceURI;
-			node.specified = true;
-			if(pl.length == 2){
-				node.prefix = pl[0];
-				node.localName = pl[1];
-			}else{
-				//el.prefix = null;
-				node.localName = qualifiedName;
-			}
-			return node;
-		}
-	};
-	_extends(Document,Node);
-
-
-	function Element() {
-		this._nsMap = {};
-	};
-	Element.prototype = {
-		nodeType : ELEMENT_NODE,
-		hasAttribute : function(name){
-			return this.getAttributeNode(name)!=null;
-		},
-		getAttribute : function(name){
-			var attr = this.getAttributeNode(name);
-			return attr && attr.value || '';
-		},
-		getAttributeNode : function(name){
-			return this.attributes.getNamedItem(name);
-		},
-		setAttribute : function(name, value){
-			var attr = this.ownerDocument.createAttribute(name);
-			attr.value = attr.nodeValue = "" + value;
-			this.setAttributeNode(attr)
-		},
-		removeAttribute : function(name){
-			var attr = this.getAttributeNode(name)
-			attr && this.removeAttributeNode(attr);
-		},
-		
-		//four real opeartion method
-		appendChild:function(newChild){
-			if(newChild.nodeType === DOCUMENT_FRAGMENT_NODE){
-				return this.insertBefore(newChild,null);
-			}else{
-				return _appendSingleChild(this,newChild);
-			}
-		},
-		setAttributeNode : function(newAttr){
-			return this.attributes.setNamedItem(newAttr);
-		},
-		setAttributeNodeNS : function(newAttr){
-			return this.attributes.setNamedItemNS(newAttr);
-		},
-		removeAttributeNode : function(oldAttr){
-			return this.attributes.removeNamedItem(oldAttr.nodeName);
-		},
-		//get real attribute name,and remove it by removeAttributeNode
-		removeAttributeNS : function(namespaceURI, localName){
-			var old = this.getAttributeNodeNS(namespaceURI, localName);
-			old && this.removeAttributeNode(old);
-		},
-		
-		hasAttributeNS : function(namespaceURI, localName){
-			return this.getAttributeNodeNS(namespaceURI, localName)!=null;
-		},
-		getAttributeNS : function(namespaceURI, localName){
-			var attr = this.getAttributeNodeNS(namespaceURI, localName);
-			return attr && attr.value || '';
-		},
-		setAttributeNS : function(namespaceURI, qualifiedName, value){
-			var attr = this.ownerDocument.createAttributeNS(namespaceURI, qualifiedName);
-			attr.value = attr.nodeValue = value;
-			this.setAttributeNode(attr)
-		},
-		getAttributeNodeNS : function(namespaceURI, localName){
-			return this.attributes.getNamedItemNS(namespaceURI, localName);
-		},
-		
-		getElementsByTagName : function(tagName){
-			return new LiveNodeList(this,function(base){
-				var ls = [];
-				_visitNode(base,function(node){
-					if(node !== base && node.nodeType == ELEMENT_NODE && (tagName === '*' || node.tagName == tagName)){
-						ls.push(node);
-					}
-				});
-				return ls;
-			});
-		},
-		getElementsByTagNameNS : function(namespaceURI, localName){
-			return new LiveNodeList(this,function(base){
-				var ls = [];
-				_visitNode(base,function(node){
-					if(node !== base && node.nodeType === ELEMENT_NODE && node.namespaceURI === namespaceURI && (localName === '*' || node.localName == localName)){
-						ls.push(node);
-					}
-				});
-				return ls;
-			});
-		}
-	};
-	Document.prototype.getElementsByTagName = Element.prototype.getElementsByTagName;
-	Document.prototype.getElementsByTagNameNS = Element.prototype.getElementsByTagNameNS;
-
-
-	_extends(Element,Node);
-	function Attr() {
-	};
-	Attr.prototype.nodeType = ATTRIBUTE_NODE;
-	_extends(Attr,Node);
-
-
-	function CharacterData() {
-	};
-	CharacterData.prototype = {
-		data : '',
-		substringData : function(offset, count) {
-			return this.data.substring(offset, offset+count);
-		},
-		appendData: function(text) {
-			text = this.data+text;
-			this.nodeValue = this.data = text;
-			this.length = text.length;
-		},
-		insertData: function(offset,text) {
-			this.replaceData(offset,0,text);
-		
-		},
-		appendChild:function(newChild){
-			//if(!(newChild instanceof CharacterData)){
-				throw new Error(ExceptionMessage[3])
-			//}
-			return Node.prototype.appendChild.apply(this,arguments)
-		},
-		deleteData: function(offset, count) {
-			this.replaceData(offset,count,"");
-		},
-		replaceData: function(offset, count, text) {
-			var start = this.data.substring(0,offset);
-			var end = this.data.substring(offset+count);
-			text = start + text + end;
-			this.nodeValue = this.data = text;
-			this.length = text.length;
-		}
-	}
-	_extends(CharacterData,Node);
-	function Text() {
-	};
-	Text.prototype = {
-		nodeName : "#text",
-		nodeType : TEXT_NODE,
-		splitText : function(offset) {
-			var text = this.data;
-			var newText = text.substring(offset);
-			text = text.substring(0, offset);
-			this.data = this.nodeValue = text;
-			this.length = text.length;
-			var newNode = this.ownerDocument.createTextNode(newText);
-			if(this.parentNode){
-				this.parentNode.insertBefore(newNode, this.nextSibling);
-			}
-			return newNode;
-		}
-	}
-	_extends(Text,CharacterData);
-	function Comment() {
-	};
-	Comment.prototype = {
-		nodeName : "#comment",
-		nodeType : COMMENT_NODE
-	}
-	_extends(Comment,CharacterData);
-
-	function CDATASection() {
-	};
-	CDATASection.prototype = {
-		nodeName : "#cdata-section",
-		nodeType : CDATA_SECTION_NODE
-	}
-	_extends(CDATASection,CharacterData);
-
-
-	function DocumentType() {
-	};
-	DocumentType.prototype.nodeType = DOCUMENT_TYPE_NODE;
-	_extends(DocumentType,Node);
-
-	function Notation() {
-	};
-	Notation.prototype.nodeType = NOTATION_NODE;
-	_extends(Notation,Node);
-
-	function Entity() {
-	};
-	Entity.prototype.nodeType = ENTITY_NODE;
-	_extends(Entity,Node);
-
-	function EntityReference() {
-	};
-	EntityReference.prototype.nodeType = ENTITY_REFERENCE_NODE;
-	_extends(EntityReference,Node);
-
-	function DocumentFragment() {
-	};
-	DocumentFragment.prototype.nodeName =	"#document-fragment";
-	DocumentFragment.prototype.nodeType =	DOCUMENT_FRAGMENT_NODE;
-	_extends(DocumentFragment,Node);
-
-
-	function ProcessingInstruction() {
-	}
-	ProcessingInstruction.prototype.nodeType = PROCESSING_INSTRUCTION_NODE;
-	_extends(ProcessingInstruction,Node);
-	function XMLSerializer(){}
-	XMLSerializer.prototype.serializeToString = function(node){
-		var buf = [];
-		serializeToString(node,buf);
-		return buf.join('');
-	}
-	Node.prototype.toString =function(){
-		return XMLSerializer.prototype.serializeToString(this);
-	}
-	function serializeToString(node,buf){
-		switch(node.nodeType){
-		case ELEMENT_NODE:
-			var attrs = node.attributes;
-			var len = attrs.length;
-			var child = node.firstChild;
-			var nodeName = node.tagName;
-			var isHTML = htmlns === node.namespaceURI
-			buf.push('<',nodeName);
-			for(var i=0;i<len;i++){
-				serializeToString(attrs.item(i),buf,isHTML);
-			}
-			if(child || isHTML && !/^(?:meta|link|img|br|hr|input)$/i.test(nodeName)){
-				buf.push('>');
-				//if is cdata child node
-				if(isHTML && /^script$/i.test(nodeName)){
-					if(child){
-						buf.push(child.data);
-					}
-				}else{
-					while(child){
-						serializeToString(child,buf);
-						child = child.nextSibling;
-					}
-				}
-				buf.push('</',nodeName,'>');
-			}else{
-				buf.push('/>');
-			}
-			return;
-		case DOCUMENT_NODE:
-		case DOCUMENT_FRAGMENT_NODE:
-			var child = node.firstChild;
-			while(child){
-				serializeToString(child,buf);
-				child = child.nextSibling;
-			}
-			return;
-		case ATTRIBUTE_NODE:
-			return buf.push(' ',node.name,'="',node.value.replace(/[<&"]/g,_xmlEncoder),'"');
-		case TEXT_NODE:
-			return buf.push(node.data.replace(/[<&]/g,_xmlEncoder));
-		case CDATA_SECTION_NODE:
-			return buf.push( '<![CDATA[',node.data,']]>');
-		case COMMENT_NODE:
-			return buf.push( "<!--",node.data,"-->");
-		case DOCUMENT_TYPE_NODE:
-			var pubid = node.publicId;
-			var sysid = node.systemId;
-			buf.push('<!DOCTYPE ',node.name);
-			if(pubid){
-				buf.push(' PUBLIC "',pubid);
-				if (sysid && sysid!='.') {
-					buf.push( '" "',sysid);
-				}
-				buf.push('">');
-			}else if(sysid && sysid!='.'){
-				buf.push(' SYSTEM "',sysid,'">');
-			}else{
-				var sub = node.internalSubset;
-				if(sub){
-					buf.push(" [",sub,"]");
-				}
-				buf.push(">");
-			}
-			return;
-		case PROCESSING_INSTRUCTION_NODE:
-			return buf.push( "<?",node.target," ",node.data,"?>");
-		case ENTITY_REFERENCE_NODE:
-			return buf.push( '&',node.nodeName,';');
-		//case ENTITY_NODE:
-		//case NOTATION_NODE:
-		default:
-			buf.push('??',node.nodeName);
-		}
-	}
-	function importNode(doc,node,deep){
-		var node2;
-		switch (node.nodeType) {
-		case ELEMENT_NODE:
-			node2 = node.cloneNode(false);
-			node2.ownerDocument = doc;
-			//var attrs = node2.attributes;
-			//var len = attrs.length;
-			//for(var i=0;i<len;i++){
-				//node2.setAttributeNodeNS(importNode(doc,attrs.item(i),deep));
-			//}
-		case DOCUMENT_FRAGMENT_NODE:
-			break;
-		case ATTRIBUTE_NODE:
-			deep = true;
-			break;
-		//case ENTITY_REFERENCE_NODE:
-		//case PROCESSING_INSTRUCTION_NODE:
-		////case TEXT_NODE:
-		//case CDATA_SECTION_NODE:
-		//case COMMENT_NODE:
-		//	deep = false;
-		//	break;
-		//case DOCUMENT_NODE:
-		//case DOCUMENT_TYPE_NODE:
-		//cannot be imported.
-		//case ENTITY_NODE:
-		//case NOTATION_NODE：
-		//can not hit in level3
-		//default:throw e;
-		}
-		if(!node2){
-			node2 = node.cloneNode(false);//false
-		}
-		node2.ownerDocument = doc;
-		node2.parentNode = null;
-		if(deep){
-			var child = node.firstChild;
-			while(child){
-				node2.appendChild(importNode(doc,child,deep));
-				child = child.nextSibling;
-			}
-		}
-		return node2;
-	}
-	//
-	//var _relationMap = {firstChild:1,lastChild:1,previousSibling:1,nextSibling:1,
-	//					attributes:1,childNodes:1,parentNode:1,documentElement:1,doctype,};
-	function cloneNode(doc,node,deep){
-		var node2 = new node.constructor();
-		for(var n in node){
-			var v = node[n];
-			if(typeof v != 'object' ){
-				if(v != node2[n]){
-					node2[n] = v;
-				}
-			}
-		}
-		if(node.childNodes){
-			node2.childNodes = new NodeList();
-		}
-		node2.ownerDocument = doc;
-		switch (node2.nodeType) {
-		case ELEMENT_NODE:
-			var attrs	= node.attributes;
-			var attrs2	= node2.attributes = new NamedNodeMap();
-			var len = attrs.length
-			attrs2._ownerElement = node2;
-			for(var i=0;i<len;i++){
-				node2.setAttributeNode(cloneNode(doc,attrs.item(i),true));
-			}
-			break;;
-		case ATTRIBUTE_NODE:
-			deep = true;
-		}
-		if(deep){
-			var child = node.firstChild;
-			while(child){
-				node2.appendChild(cloneNode(doc,child,deep));
-				child = child.nextSibling;
-			}
-		}
-		return node2;
-	}
-
-	function __set__(object,key,value){
-		object[key] = value
-	}
-	//do dynamic
-	try{
-		if(Object.defineProperty){
-			Object.defineProperty(LiveNodeList.prototype,'length',{
-				get:function(){
-					_updateLiveList(this);
-					return this.$$length;
-				}
-			});
-			Object.defineProperty(Node.prototype,'textContent',{
-				get:function(){
-					return getTextContent(this);
-				},
-				set:function(data){
-					switch(this.nodeType){
-					case 1:
-					case 11:
-						while(this.firstChild){
-							this.removeChild(this.firstChild);
-						}
-						if(data || String(data)){
-							this.appendChild(this.ownerDocument.createTextNode(data));
-						}
-						break;
-					default:
-						//TODO:
-						this.data = data;
-						this.value = value;
-						this.nodeValue = data;
-					}
-				}
-			})
-			
-			function getTextContent(node){
-				switch(node.nodeType){
-				case 1:
-				case 11:
-					var buf = [];
-					node = node.firstChild;
-					while(node){
-						if(node.nodeType!==7 && node.nodeType !==8){
-							buf.push(getTextContent(node));
-						}
-						node = node.nextSibling;
-					}
-					return buf.join('');
-				default:
-					return node.nodeValue;
-				}
-			}
-			__set__ = function(object,key,value){
-				//console.log(value)
-				object['$$'+key] = value
-			}
-		}
-	}catch(e){//ie8
-	}
-
-	if(true){
-		exports.DOMImplementation = DOMImplementation;
-		exports.XMLSerializer = XMLSerializer;
-	}
-
-
-/***/ },
-/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -60340,6 +58606,1740 @@
 
 
 /***/ },
+/* 121 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//[4]   	NameStartChar	   ::=   	":" | [A-Z] | "_" | [a-z] | [#xC0-#xD6] | [#xD8-#xF6] | [#xF8-#x2FF] | [#x370-#x37D] | [#x37F-#x1FFF] | [#x200C-#x200D] | [#x2070-#x218F] | [#x2C00-#x2FEF] | [#x3001-#xD7FF] | [#xF900-#xFDCF] | [#xFDF0-#xFFFD] | [#x10000-#xEFFFF]
+	//[4a]   	NameChar	   ::=   	NameStartChar | "-" | "." | [0-9] | #xB7 | [#x0300-#x036F] | [#x203F-#x2040]
+	//[5]   	Name	   ::=   	NameStartChar (NameChar)*
+	var nameStartChar = /[A-Z_a-z\xC0-\xD6\xD8-\xF6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]///\u10000-\uEFFFF
+	var nameChar = new RegExp("[\\-\\.0-9"+nameStartChar.source.slice(1,-1)+"\u00B7\u0300-\u036F\\ux203F-\u2040]");
+	var tagNamePattern = new RegExp('^'+nameStartChar.source+nameChar.source+'*(?:\:'+nameStartChar.source+nameChar.source+'*)?$');
+	//var tagNamePattern = /^[a-zA-Z_][\w\-\.]*(?:\:[a-zA-Z_][\w\-\.]*)?$/
+	//var handlers = 'resolveEntity,getExternalSubset,characters,endDocument,endElement,endPrefixMapping,ignorableWhitespace,processingInstruction,setDocumentLocator,skippedEntity,startDocument,startElement,startPrefixMapping,notationDecl,unparsedEntityDecl,error,fatalError,warning,attributeDecl,elementDecl,externalEntityDecl,internalEntityDecl,comment,endCDATA,endDTD,endEntity,startCDATA,startDTD,startEntity'.split(',')
+
+	//S_TAG,	S_ATTR,	S_EQ,	S_V
+	//S_ATTR_S,	S_E,	S_S,	S_C
+	var S_TAG = 0;//tag name offerring
+	var S_ATTR = 1;//attr name offerring 
+	var S_ATTR_S=2;//attr name end and space offer
+	var S_EQ = 3;//=space?
+	var S_V = 4;//attr value(no quot value only)
+	var S_E = 5;//attr value end and no space(quot end)
+	var S_S = 6;//(attr value end || tag end ) && (space offer)
+	var S_C = 7;//closed el<el />
+
+	function XMLReader(){
+		
+	}
+
+	XMLReader.prototype = {
+		parse:function(source,defaultNSMap,entityMap){
+			var domBuilder = this.domBuilder;
+			domBuilder.startDocument();
+			_copy(defaultNSMap ,defaultNSMap = {})
+			parse(source,defaultNSMap,entityMap,
+					domBuilder,this.errorHandler);
+			domBuilder.endDocument();
+		}
+	}
+	function parse(source,defaultNSMapCopy,entityMap,domBuilder,errorHandler){
+	  function fixedFromCharCode(code) {
+			// String.prototype.fromCharCode does not supports
+			// > 2 bytes unicode chars directly
+			if (code > 0xffff) {
+				code -= 0x10000;
+				var surrogate1 = 0xd800 + (code >> 10)
+					, surrogate2 = 0xdc00 + (code & 0x3ff);
+
+				return String.fromCharCode(surrogate1, surrogate2);
+			} else {
+				return String.fromCharCode(code);
+			}
+		}
+		function entityReplacer(a){
+			var k = a.slice(1,-1);
+			if(k in entityMap){
+				return entityMap[k]; 
+			}else if(k.charAt(0) === '#'){
+				return fixedFromCharCode(parseInt(k.substr(1).replace('x','0x')))
+			}else{
+				errorHandler.error('entity not found:'+a);
+				return a;
+			}
+		}
+		function appendText(end){//has some bugs
+			var xt = source.substring(start,end).replace(/&#?\w+;/g,entityReplacer);
+			locator&&position(start);
+			domBuilder.characters(xt,0,end-start);
+			start = end
+		}
+		function position(start,m){
+			while(start>=endPos && (m = linePattern.exec(source))){
+				startPos = m.index;
+				endPos = startPos + m[0].length;
+				locator.lineNumber++;
+				//console.log('line++:',locator,startPos,endPos)
+			}
+			locator.columnNumber = start-startPos+1;
+		}
+		var startPos = 0;
+		var endPos = 0;
+		var linePattern = /.+(?:\r\n?|\n)|.*$/g
+		var locator = domBuilder.locator;
+		
+		var parseStack = [{currentNSMap:defaultNSMapCopy}]
+		var closeMap = {};
+		var start = 0;
+		while(true){
+			var i = source.indexOf('<',start);
+			if(i<0){
+				if(!source.substr(start).match(/^\s*$/)){
+					var doc = domBuilder.document;
+	    			var text = doc.createTextNode(source.substr(start));
+	    			doc.appendChild(text);
+	    			domBuilder.currentElement = text;
+				}
+				return;
+			}
+			if(i>start){
+				appendText(i);
+			}
+			switch(source.charAt(i+1)){
+			case '/':
+				var end = source.indexOf('>',i+3);
+				var tagName = source.substring(i+2,end);
+				var config = parseStack.pop();
+				var localNSMap = config.localNSMap;
+				
+		        if(config.tagName != tagName){
+		            errorHandler.fatalError("end tag name: "+tagName+' is not match the current start tagName:'+config.tagName );
+		        }
+				domBuilder.endElement(config.uri,config.localName,tagName);
+				if(localNSMap){
+					for(var prefix in localNSMap){
+						domBuilder.endPrefixMapping(prefix) ;
+					}
+				}
+				end++;
+				break;
+				// end elment
+			case '?':// <?...?>
+				locator&&position(i);
+				end = parseInstruction(source,i,domBuilder);
+				break;
+			case '!':// <!doctype,<![CDATA,<!--
+				locator&&position(i);
+				end = parseDCC(source,i,domBuilder,errorHandler);
+				break;
+			default:
+				try{
+					locator&&position(i);
+					
+					var el = new ElementAttributes();
+					
+					//elStartEnd
+					var end = parseElementStartPart(source,i,el,entityReplacer,errorHandler);
+					var len = el.length;
+					//position fixed
+					if(len && locator){
+						var backup = copyLocator(locator,{});
+						for(var i = 0;i<len;i++){
+							var a = el[i];
+							position(a.offset);
+							a.offset = copyLocator(locator,{});
+						}
+						copyLocator(backup,locator);
+					}
+					if(!el.closed && fixSelfClosed(source,end,el.tagName,closeMap)){
+						el.closed = true;
+						if(!entityMap.nbsp){
+							errorHandler.warning('unclosed xml attribute');
+						}
+					}
+					appendElement(el,domBuilder,parseStack);
+					
+					
+					if(el.uri === 'http://www.w3.org/1999/xhtml' && !el.closed){
+						end = parseHtmlSpecialContent(source,end,el.tagName,entityReplacer,domBuilder)
+					}else{
+						end++;
+					}
+				}catch(e){
+					errorHandler.error('element parse error: '+e);
+					end = -1;
+				}
+
+			}
+			if(end<0){
+				//TODO: 这里有可能sax回退，有位置错误风险
+				appendText(i+1);
+			}else{
+				start = end;
+			}
+		}
+	}
+	function copyLocator(f,t){
+		t.lineNumber = f.lineNumber;
+		t.columnNumber = f.columnNumber;
+		return t;
+		
+	}
+
+	/**
+	 * @see #appendElement(source,elStartEnd,el,selfClosed,entityReplacer,domBuilder,parseStack);
+	 * @return end of the elementStartPart(end of elementEndPart for selfClosed el)
+	 */
+	function parseElementStartPart(source,start,el,entityReplacer,errorHandler){
+		var attrName;
+		var value;
+		var p = ++start;
+		var s = S_TAG;//status
+		while(true){
+			var c = source.charAt(p);
+			switch(c){
+			case '=':
+				if(s === S_ATTR){//attrName
+					attrName = source.slice(start,p);
+					s = S_EQ;
+				}else if(s === S_ATTR_S){
+					s = S_EQ;
+				}else{
+					//fatalError: equal must after attrName or space after attrName
+					throw new Error('attribute equal must after attrName');
+				}
+				break;
+			case '\'':
+			case '"':
+				if(s === S_EQ){//equal
+					start = p+1;
+					p = source.indexOf(c,start)
+					if(p>0){
+						value = source.slice(start,p).replace(/&#?\w+;/g,entityReplacer);
+						el.add(attrName,value,start-1);
+						s = S_E;
+					}else{
+						//fatalError: no end quot match
+						throw new Error('attribute value no end \''+c+'\' match');
+					}
+				}else if(s == S_V){
+					value = source.slice(start,p).replace(/&#?\w+;/g,entityReplacer);
+					//console.log(attrName,value,start,p)
+					el.add(attrName,value,start);
+					//console.dir(el)
+					errorHandler.warning('attribute "'+attrName+'" missed start quot('+c+')!!');
+					start = p+1;
+					s = S_E
+				}else{
+					//fatalError: no equal before
+					throw new Error('attribute value must after "="');
+				}
+				break;
+			case '/':
+				switch(s){
+				case S_TAG:
+					el.setTagName(source.slice(start,p));
+				case S_E:
+				case S_S:
+				case S_C:
+					s = S_C;
+					el.closed = true;
+				case S_V:
+				case S_ATTR:
+				case S_ATTR_S:
+					break;
+				//case S_EQ:
+				default:
+					throw new Error("attribute invalid close char('/')")
+				}
+				break;
+			case ''://end document
+				//throw new Error('unexpected end of input')
+				errorHandler.error('unexpected end of input');
+			case '>':
+				switch(s){
+				case S_TAG:
+					el.setTagName(source.slice(start,p));
+				case S_E:
+				case S_S:
+				case S_C:
+					break;//normal
+				case S_V://Compatible state
+				case S_ATTR:
+					value = source.slice(start,p);
+					if(value.slice(-1) === '/'){
+						el.closed  = true;
+						value = value.slice(0,-1)
+					}
+				case S_ATTR_S:
+					if(s === S_ATTR_S){
+						value = attrName;
+					}
+					if(s == S_V){
+						errorHandler.warning('attribute "'+value+'" missed quot(")!!');
+						el.add(attrName,value.replace(/&#?\w+;/g,entityReplacer),start)
+					}else{
+						errorHandler.warning('attribute "'+value+'" missed value!! "'+value+'" instead!!')
+						el.add(value,value,start)
+					}
+					break;
+				case S_EQ:
+					throw new Error('attribute value missed!!');
+				}
+	//			console.log(tagName,tagNamePattern,tagNamePattern.test(tagName))
+				return p;
+			/*xml space '\x20' | #x9 | #xD | #xA; */
+			case '\u0080':
+				c = ' ';
+			default:
+				if(c<= ' '){//space
+					switch(s){
+					case S_TAG:
+						el.setTagName(source.slice(start,p));//tagName
+						s = S_S;
+						break;
+					case S_ATTR:
+						attrName = source.slice(start,p)
+						s = S_ATTR_S;
+						break;
+					case S_V:
+						var value = source.slice(start,p).replace(/&#?\w+;/g,entityReplacer);
+						errorHandler.warning('attribute "'+value+'" missed quot(")!!');
+						el.add(attrName,value,start)
+					case S_E:
+						s = S_S;
+						break;
+					//case S_S:
+					//case S_EQ:
+					//case S_ATTR_S:
+					//	void();break;
+					//case S_C:
+						//ignore warning
+					}
+				}else{//not space
+	//S_TAG,	S_ATTR,	S_EQ,	S_V
+	//S_ATTR_S,	S_E,	S_S,	S_C
+					switch(s){
+					//case S_TAG:void();break;
+					//case S_ATTR:void();break;
+					//case S_V:void();break;
+					case S_ATTR_S:
+						errorHandler.warning('attribute "'+attrName+'" missed value!! "'+attrName+'" instead!!')
+						el.add(attrName,attrName,start);
+						start = p;
+						s = S_ATTR;
+						break;
+					case S_E:
+						errorHandler.warning('attribute space is required"'+attrName+'"!!')
+					case S_S:
+						s = S_ATTR;
+						start = p;
+						break;
+					case S_EQ:
+						s = S_V;
+						start = p;
+						break;
+					case S_C:
+						throw new Error("elements closed character '/' and '>' must be connected to");
+					}
+				}
+			}
+			p++;
+		}
+	}
+	/**
+	 * @return end of the elementStartPart(end of elementEndPart for selfClosed el)
+	 */
+	function appendElement(el,domBuilder,parseStack){
+		var tagName = el.tagName;
+		var localNSMap = null;
+		var currentNSMap = parseStack[parseStack.length-1].currentNSMap;
+		var i = el.length;
+		while(i--){
+			var a = el[i];
+			var qName = a.qName;
+			var value = a.value;
+			var nsp = qName.indexOf(':');
+			if(nsp>0){
+				var prefix = a.prefix = qName.slice(0,nsp);
+				var localName = qName.slice(nsp+1);
+				var nsPrefix = prefix === 'xmlns' && localName
+			}else{
+				localName = qName;
+				prefix = null
+				nsPrefix = qName === 'xmlns' && ''
+			}
+			//can not set prefix,because prefix !== ''
+			a.localName = localName ;
+			//prefix == null for no ns prefix attribute 
+			if(nsPrefix !== false){//hack!!
+				if(localNSMap == null){
+					localNSMap = {}
+					//console.log(currentNSMap,0)
+					_copy(currentNSMap,currentNSMap={})
+					//console.log(currentNSMap,1)
+				}
+				currentNSMap[nsPrefix] = localNSMap[nsPrefix] = value;
+				a.uri = 'http://www.w3.org/2000/xmlns/'
+				domBuilder.startPrefixMapping(nsPrefix, value) 
+			}
+		}
+		var i = el.length;
+		while(i--){
+			a = el[i];
+			var prefix = a.prefix;
+			if(prefix){//no prefix attribute has no namespace
+				if(prefix === 'xml'){
+					a.uri = 'http://www.w3.org/XML/1998/namespace';
+				}if(prefix !== 'xmlns'){
+					a.uri = currentNSMap[prefix]
+					
+					//{console.log('###'+a.qName,domBuilder.locator.systemId+'',currentNSMap,a.uri)}
+				}
+			}
+		}
+		var nsp = tagName.indexOf(':');
+		if(nsp>0){
+			prefix = el.prefix = tagName.slice(0,nsp);
+			localName = el.localName = tagName.slice(nsp+1);
+		}else{
+			prefix = null;//important!!
+			localName = el.localName = tagName;
+		}
+		//no prefix element has default namespace
+		var ns = el.uri = currentNSMap[prefix || ''];
+		domBuilder.startElement(ns,localName,tagName,el);
+		//endPrefixMapping and startPrefixMapping have not any help for dom builder
+		//localNSMap = null
+		if(el.closed){
+			domBuilder.endElement(ns,localName,tagName);
+			if(localNSMap){
+				for(prefix in localNSMap){
+					domBuilder.endPrefixMapping(prefix) 
+				}
+			}
+		}else{
+			el.currentNSMap = currentNSMap;
+			el.localNSMap = localNSMap;
+			parseStack.push(el);
+		}
+	}
+	function parseHtmlSpecialContent(source,elStartEnd,tagName,entityReplacer,domBuilder){
+		if(/^(?:script|textarea)$/i.test(tagName)){
+			var elEndStart =  source.indexOf('</'+tagName+'>',elStartEnd);
+			var text = source.substring(elStartEnd+1,elEndStart);
+			if(/[&<]/.test(text)){
+				if(/^script$/i.test(tagName)){
+					//if(!/\]\]>/.test(text)){
+						//lexHandler.startCDATA();
+						domBuilder.characters(text,0,text.length);
+						//lexHandler.endCDATA();
+						return elEndStart;
+					//}
+				}//}else{//text area
+					text = text.replace(/&#?\w+;/g,entityReplacer);
+					domBuilder.characters(text,0,text.length);
+					return elEndStart;
+				//}
+				
+			}
+		}
+		return elStartEnd+1;
+	}
+	function fixSelfClosed(source,elStartEnd,tagName,closeMap){
+		//if(tagName in closeMap){
+		var pos = closeMap[tagName];
+		if(pos == null){
+			//console.log(tagName)
+			pos = closeMap[tagName] = source.lastIndexOf('</'+tagName+'>')
+		}
+		return pos<elStartEnd;
+		//} 
+	}
+	function _copy(source,target){
+		for(var n in source){target[n] = source[n]}
+	}
+	function parseDCC(source,start,domBuilder,errorHandler){//sure start with '<!'
+		var next= source.charAt(start+2)
+		switch(next){
+		case '-':
+			if(source.charAt(start + 3) === '-'){
+				var end = source.indexOf('-->',start+4);
+				//append comment source.substring(4,end)//<!--
+				if(end>start){
+					domBuilder.comment(source,start+4,end-start-4);
+					return end+3;
+				}else{
+					errorHandler.error("Unclosed comment");
+					return -1;
+				}
+			}else{
+				//error
+				return -1;
+			}
+		default:
+			if(source.substr(start+3,6) == 'CDATA['){
+				var end = source.indexOf(']]>',start+9);
+				domBuilder.startCDATA();
+				domBuilder.characters(source,start+9,end-start-9);
+				domBuilder.endCDATA() 
+				return end+3;
+			}
+			//<!DOCTYPE
+			//startDTD(java.lang.String name, java.lang.String publicId, java.lang.String systemId) 
+			var matchs = split(source,start);
+			var len = matchs.length;
+			if(len>1 && /!doctype/i.test(matchs[0][0])){
+				var name = matchs[1][0];
+				var pubid = len>3 && /^public$/i.test(matchs[2][0]) && matchs[3][0]
+				var sysid = len>4 && matchs[4][0];
+				var lastMatch = matchs[len-1]
+				domBuilder.startDTD(name,pubid && pubid.replace(/^(['"])(.*?)\1$/,'$2'),
+						sysid && sysid.replace(/^(['"])(.*?)\1$/,'$2'));
+				domBuilder.endDTD();
+				
+				return lastMatch.index+lastMatch[0].length
+			}
+		}
+		return -1;
+	}
+
+
+
+	function parseInstruction(source,start,domBuilder){
+		var end = source.indexOf('?>',start);
+		if(end){
+			var match = source.substring(start,end).match(/^<\?(\S*)\s*([\s\S]*?)\s*$/);
+			if(match){
+				var len = match[0].length;
+				domBuilder.processingInstruction(match[1], match[2]) ;
+				return end+2;
+			}else{//error
+				return -1;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * @param source
+	 */
+	function ElementAttributes(source){
+		
+	}
+	ElementAttributes.prototype = {
+		setTagName:function(tagName){
+			if(!tagNamePattern.test(tagName)){
+				throw new Error('invalid tagName:'+tagName)
+			}
+			this.tagName = tagName
+		},
+		add:function(qName,value,offset){
+			if(!tagNamePattern.test(qName)){
+				throw new Error('invalid attribute:'+qName)
+			}
+			this[this.length++] = {qName:qName,value:value,offset:offset}
+		},
+		length:0,
+		getLocalName:function(i){return this[i].localName},
+		getOffset:function(i){return this[i].offset},
+		getQName:function(i){return this[i].qName},
+		getURI:function(i){return this[i].uri},
+		getValue:function(i){return this[i].value}
+	//	,getIndex:function(uri, localName)){
+	//		if(localName){
+	//			
+	//		}else{
+	//			var qName = uri
+	//		}
+	//	},
+	//	getValue:function(){return this.getValue(this.getIndex.apply(this,arguments))},
+	//	getType:function(uri,localName){}
+	//	getType:function(i){},
+	}
+
+
+
+
+	function _set_proto_(thiz,parent){
+		thiz.__proto__ = parent;
+		return thiz;
+	}
+	if(!(_set_proto_({},_set_proto_.prototype) instanceof _set_proto_)){
+		_set_proto_ = function(thiz,parent){
+			function p(){};
+			p.prototype = parent;
+			p = new p();
+			for(parent in thiz){
+				p[parent] = thiz[parent];
+			}
+			return p;
+		}
+	}
+
+	function split(source,start){
+		var match;
+		var buf = [];
+		var reg = /'[^']+'|"[^"]+"|[^\s<>\/=]+=?|(\/?\s*>|<)/g;
+		reg.lastIndex = start;
+		reg.exec(source);//skip <
+		while(match = reg.exec(source)){
+			buf.push(match);
+			if(match[1])return buf;
+		}
+	}
+
+	if(true){
+		exports.XMLReader = XMLReader;
+	}
+
+
+
+/***/ },
+/* 122 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+	 * DOM Level 2
+	 * Object DOMException
+	 * @see http://www.w3.org/TR/REC-DOM-Level-1/ecma-script-language-binding.html
+	 * @see http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/ecma-script-binding.html
+	 */
+
+	function copy(src,dest){
+		for(var p in src){
+			dest[p] = src[p];
+		}
+	}
+	/**
+	^\w+\.prototype\.([_\w]+)\s*=\s*((?:.*\{\s*?[\r\n][\s\S]*?^})|\S.*?(?=[;\r\n]));?
+	^\w+\.prototype\.([_\w]+)\s*=\s*(\S.*?(?=[;\r\n]));?
+	 */
+	function _extends(Class,Super){
+		var pt = Class.prototype;
+		if(Object.create){
+			var ppt = Object.create(Super.prototype)
+			pt.__proto__ = ppt;
+		}
+		if(!(pt instanceof Super)){
+			function t(){};
+			t.prototype = Super.prototype;
+			t = new t();
+			copy(pt,t);
+			Class.prototype = pt = t;
+		}
+		if(pt.constructor != Class){
+			if(typeof Class != 'function'){
+				console.error("unknow Class:"+Class)
+			}
+			pt.constructor = Class
+		}
+	}
+	var htmlns = 'http://www.w3.org/1999/xhtml' ;
+	// Node Types
+	var NodeType = {}
+	var ELEMENT_NODE                = NodeType.ELEMENT_NODE                = 1;
+	var ATTRIBUTE_NODE              = NodeType.ATTRIBUTE_NODE              = 2;
+	var TEXT_NODE                   = NodeType.TEXT_NODE                   = 3;
+	var CDATA_SECTION_NODE          = NodeType.CDATA_SECTION_NODE          = 4;
+	var ENTITY_REFERENCE_NODE       = NodeType.ENTITY_REFERENCE_NODE       = 5;
+	var ENTITY_NODE                 = NodeType.ENTITY_NODE                 = 6;
+	var PROCESSING_INSTRUCTION_NODE = NodeType.PROCESSING_INSTRUCTION_NODE = 7;
+	var COMMENT_NODE                = NodeType.COMMENT_NODE                = 8;
+	var DOCUMENT_NODE               = NodeType.DOCUMENT_NODE               = 9;
+	var DOCUMENT_TYPE_NODE          = NodeType.DOCUMENT_TYPE_NODE          = 10;
+	var DOCUMENT_FRAGMENT_NODE      = NodeType.DOCUMENT_FRAGMENT_NODE      = 11;
+	var NOTATION_NODE               = NodeType.NOTATION_NODE               = 12;
+
+	// ExceptionCode
+	var ExceptionCode = {}
+	var ExceptionMessage = {};
+	var INDEX_SIZE_ERR              = ExceptionCode.INDEX_SIZE_ERR              = ((ExceptionMessage[1]="Index size error"),1);
+	var DOMSTRING_SIZE_ERR          = ExceptionCode.DOMSTRING_SIZE_ERR          = ((ExceptionMessage[2]="DOMString size error"),2);
+	var HIERARCHY_REQUEST_ERR       = ExceptionCode.HIERARCHY_REQUEST_ERR       = ((ExceptionMessage[3]="Hierarchy request error"),3);
+	var WRONG_DOCUMENT_ERR          = ExceptionCode.WRONG_DOCUMENT_ERR          = ((ExceptionMessage[4]="Wrong document"),4);
+	var INVALID_CHARACTER_ERR       = ExceptionCode.INVALID_CHARACTER_ERR       = ((ExceptionMessage[5]="Invalid character"),5);
+	var NO_DATA_ALLOWED_ERR         = ExceptionCode.NO_DATA_ALLOWED_ERR         = ((ExceptionMessage[6]="No data allowed"),6);
+	var NO_MODIFICATION_ALLOWED_ERR = ExceptionCode.NO_MODIFICATION_ALLOWED_ERR = ((ExceptionMessage[7]="No modification allowed"),7);
+	var NOT_FOUND_ERR               = ExceptionCode.NOT_FOUND_ERR               = ((ExceptionMessage[8]="Not found"),8);
+	var NOT_SUPPORTED_ERR           = ExceptionCode.NOT_SUPPORTED_ERR           = ((ExceptionMessage[9]="Not supported"),9);
+	var INUSE_ATTRIBUTE_ERR         = ExceptionCode.INUSE_ATTRIBUTE_ERR         = ((ExceptionMessage[10]="Attribute in use"),10);
+	//level2
+	var INVALID_STATE_ERR        	= ExceptionCode.INVALID_STATE_ERR        	= ((ExceptionMessage[11]="Invalid state"),11);
+	var SYNTAX_ERR               	= ExceptionCode.SYNTAX_ERR               	= ((ExceptionMessage[12]="Syntax error"),12);
+	var INVALID_MODIFICATION_ERR 	= ExceptionCode.INVALID_MODIFICATION_ERR 	= ((ExceptionMessage[13]="Invalid modification"),13);
+	var NAMESPACE_ERR            	= ExceptionCode.NAMESPACE_ERR           	= ((ExceptionMessage[14]="Invalid namespace"),14);
+	var INVALID_ACCESS_ERR       	= ExceptionCode.INVALID_ACCESS_ERR      	= ((ExceptionMessage[15]="Invalid access"),15);
+
+
+	function DOMException(code, message) {
+		if(message instanceof Error){
+			var error = message;
+		}else{
+			error = this;
+			Error.call(this, ExceptionMessage[code]);
+			this.message = ExceptionMessage[code];
+			if(Error.captureStackTrace) Error.captureStackTrace(this, DOMException);
+		}
+		error.code = code;
+		if(message) this.message = this.message + ": " + message;
+		return error;
+	};
+	DOMException.prototype = Error.prototype;
+	copy(ExceptionCode,DOMException)
+	/**
+	 * @see http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-536297177
+	 * The NodeList interface provides the abstraction of an ordered collection of nodes, without defining or constraining how this collection is implemented. NodeList objects in the DOM are live.
+	 * The items in the NodeList are accessible via an integral index, starting from 0.
+	 */
+	function NodeList() {
+	};
+	NodeList.prototype = {
+		/**
+		 * The number of nodes in the list. The range of valid child node indices is 0 to length-1 inclusive.
+		 * @standard level1
+		 */
+		length:0, 
+		/**
+		 * Returns the indexth item in the collection. If index is greater than or equal to the number of nodes in the list, this returns null.
+		 * @standard level1
+		 * @param index  unsigned long 
+		 *   Index into the collection.
+		 * @return Node
+		 * 	The node at the indexth position in the NodeList, or null if that is not a valid index. 
+		 */
+		item: function(index) {
+			return this[index] || null;
+		}
+	};
+	function LiveNodeList(node,refresh){
+		this._node = node;
+		this._refresh = refresh
+		_updateLiveList(this);
+	}
+	function _updateLiveList(list){
+		var inc = list._node._inc || list._node.ownerDocument._inc;
+		if(list._inc != inc){
+			var ls = list._refresh(list._node);
+			//console.log(ls.length)
+			__set__(list,'length',ls.length);
+			copy(ls,list);
+			list._inc = inc;
+		}
+	}
+	LiveNodeList.prototype.item = function(i){
+		_updateLiveList(this);
+		return this[i];
+	}
+
+	_extends(LiveNodeList,NodeList);
+	/**
+	 * 
+	 * Objects implementing the NamedNodeMap interface are used to represent collections of nodes that can be accessed by name. Note that NamedNodeMap does not inherit from NodeList; NamedNodeMaps are not maintained in any particular order. Objects contained in an object implementing NamedNodeMap may also be accessed by an ordinal index, but this is simply to allow convenient enumeration of the contents of a NamedNodeMap, and does not imply that the DOM specifies an order to these Nodes.
+	 * NamedNodeMap objects in the DOM are live.
+	 * used for attributes or DocumentType entities 
+	 */
+	function NamedNodeMap() {
+	};
+
+	function _findNodeIndex(list,node){
+		var i = list.length;
+		while(i--){
+			if(list[i] === node){return i}
+		}
+	}
+
+	function _addNamedNode(el,list,newAttr,oldAttr){
+		if(oldAttr){
+			list[_findNodeIndex(list,oldAttr)] = newAttr;
+		}else{
+			list[list.length++] = newAttr;
+		}
+		if(el){
+			newAttr.ownerElement = el;
+			var doc = el.ownerDocument;
+			if(doc){
+				oldAttr && _onRemoveAttribute(doc,el,oldAttr);
+				_onAddAttribute(doc,el,newAttr);
+			}
+		}
+	}
+	function _removeNamedNode(el,list,attr){
+		var i = _findNodeIndex(list,attr);
+		if(i>=0){
+			var lastIndex = list.length-1
+			while(i<lastIndex){
+				list[i] = list[++i]
+			}
+			list.length = lastIndex;
+			if(el){
+				var doc = el.ownerDocument;
+				if(doc){
+					_onRemoveAttribute(doc,el,attr);
+					attr.ownerElement = null;
+				}
+			}
+		}else{
+			throw DOMException(NOT_FOUND_ERR,new Error())
+		}
+	}
+	NamedNodeMap.prototype = {
+		length:0,
+		item:NodeList.prototype.item,
+		getNamedItem: function(key) {
+	//		if(key.indexOf(':')>0 || key == 'xmlns'){
+	//			return null;
+	//		}
+			var i = this.length;
+			while(i--){
+				var attr = this[i];
+				if(attr.nodeName == key){
+					return attr;
+				}
+			}
+		},
+		setNamedItem: function(attr) {
+			var el = attr.ownerElement;
+			if(el && el!=this._ownerElement){
+				throw new DOMException(INUSE_ATTRIBUTE_ERR);
+			}
+			var oldAttr = this.getNamedItem(attr.nodeName);
+			_addNamedNode(this._ownerElement,this,attr,oldAttr);
+			return oldAttr;
+		},
+		/* returns Node */
+		setNamedItemNS: function(attr) {// raises: WRONG_DOCUMENT_ERR,NO_MODIFICATION_ALLOWED_ERR,INUSE_ATTRIBUTE_ERR
+			var el = attr.ownerElement, oldAttr;
+			if(el && el!=this._ownerElement){
+				throw new DOMException(INUSE_ATTRIBUTE_ERR);
+			}
+			oldAttr = this.getNamedItemNS(attr.namespaceURI,attr.localName);
+			_addNamedNode(this._ownerElement,this,attr,oldAttr);
+			return oldAttr;
+		},
+
+		/* returns Node */
+		removeNamedItem: function(key) {
+			var attr = this.getNamedItem(key);
+			_removeNamedNode(this._ownerElement,this,attr);
+			return attr;
+			
+			
+		},// raises: NOT_FOUND_ERR,NO_MODIFICATION_ALLOWED_ERR
+		
+		//for level2
+		removeNamedItemNS:function(namespaceURI,localName){
+			var attr = this.getNamedItemNS(namespaceURI,localName);
+			_removeNamedNode(this._ownerElement,this,attr);
+			return attr;
+		},
+		getNamedItemNS: function(namespaceURI, localName) {
+			var i = this.length;
+			while(i--){
+				var node = this[i];
+				if(node.localName == localName && node.namespaceURI == namespaceURI){
+					return node;
+				}
+			}
+			return null;
+		}
+	};
+	/**
+	 * @see http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html#ID-102161490
+	 */
+	function DOMImplementation(/* Object */ features) {
+		this._features = {};
+		if (features) {
+			for (var feature in features) {
+				 this._features = features[feature];
+			}
+		}
+	};
+
+	DOMImplementation.prototype = {
+		hasFeature: function(/* string */ feature, /* string */ version) {
+			var versions = this._features[feature.toLowerCase()];
+			if (versions && (!version || version in versions)) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		// Introduced in DOM Level 2:
+		createDocument:function(namespaceURI,  qualifiedName, doctype){// raises:INVALID_CHARACTER_ERR,NAMESPACE_ERR,WRONG_DOCUMENT_ERR
+			var doc = new Document();
+			doc.doctype = doctype;
+			if(doctype){
+				doc.appendChild(doctype);
+			}
+			doc.implementation = this;
+			doc.childNodes = new NodeList();
+			if(qualifiedName){
+				var root = doc.createElementNS(namespaceURI,qualifiedName);
+				doc.appendChild(root);
+			}
+			return doc;
+		},
+		// Introduced in DOM Level 2:
+		createDocumentType:function(qualifiedName, publicId, systemId){// raises:INVALID_CHARACTER_ERR,NAMESPACE_ERR
+			var node = new DocumentType();
+			node.name = qualifiedName;
+			node.nodeName = qualifiedName;
+			node.publicId = publicId;
+			node.systemId = systemId;
+			// Introduced in DOM Level 2:
+			//readonly attribute DOMString        internalSubset;
+			
+			//TODO:..
+			//  readonly attribute NamedNodeMap     entities;
+			//  readonly attribute NamedNodeMap     notations;
+			return node;
+		}
+	};
+
+
+	/**
+	 * @see http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-1950641247
+	 */
+
+	function Node() {
+	};
+
+	Node.prototype = {
+		firstChild : null,
+		lastChild : null,
+		previousSibling : null,
+		nextSibling : null,
+		attributes : null,
+		parentNode : null,
+		childNodes : null,
+		ownerDocument : null,
+		nodeValue : null,
+		namespaceURI : null,
+		prefix : null,
+		localName : null,
+		// Modified in DOM Level 2:
+		insertBefore:function(newChild, refChild){//raises 
+			return _insertBefore(this,newChild,refChild);
+		},
+		replaceChild:function(newChild, oldChild){//raises 
+			this.insertBefore(newChild,oldChild);
+			if(oldChild){
+				this.removeChild(oldChild);
+			}
+		},
+		removeChild:function(oldChild){
+			return _removeChild(this,oldChild);
+		},
+		appendChild:function(newChild){
+			return this.insertBefore(newChild,null);
+		},
+		hasChildNodes:function(){
+			return this.firstChild != null;
+		},
+		cloneNode:function(deep){
+			return cloneNode(this.ownerDocument||this,this,deep);
+		},
+		// Modified in DOM Level 2:
+		normalize:function(){
+			var child = this.firstChild;
+			while(child){
+				var next = child.nextSibling;
+				if(next && next.nodeType == TEXT_NODE && child.nodeType == TEXT_NODE){
+					this.removeChild(next);
+					child.appendData(next.data);
+				}else{
+					child.normalize();
+					child = next;
+				}
+			}
+		},
+	  	// Introduced in DOM Level 2:
+		isSupported:function(feature, version){
+			return this.ownerDocument.implementation.hasFeature(feature,version);
+		},
+	    // Introduced in DOM Level 2:
+	    hasAttributes:function(){
+	    	return this.attributes.length>0;
+	    },
+	    lookupPrefix:function(namespaceURI){
+	    	var el = this;
+	    	while(el){
+	    		var map = el._nsMap;
+	    		//console.dir(map)
+	    		if(map){
+	    			for(var n in map){
+	    				if(map[n] == namespaceURI){
+	    					return n;
+	    				}
+	    			}
+	    		}
+	    		el = el.nodeType == 2?el.ownerDocument : el.parentNode;
+	    	}
+	    	return null;
+	    },
+	    // Introduced in DOM Level 3:
+	    lookupNamespaceURI:function(prefix){
+	    	var el = this;
+	    	while(el){
+	    		var map = el._nsMap;
+	    		//console.dir(map)
+	    		if(map){
+	    			if(prefix in map){
+	    				return map[prefix] ;
+	    			}
+	    		}
+	    		el = el.nodeType == 2?el.ownerDocument : el.parentNode;
+	    	}
+	    	return null;
+	    },
+	    // Introduced in DOM Level 3:
+	    isDefaultNamespace:function(namespaceURI){
+	    	var prefix = this.lookupPrefix(namespaceURI);
+	    	return prefix == null;
+	    }
+	};
+
+
+	function _xmlEncoder(c){
+		return c == '<' && '&lt;' ||
+	         c == '>' && '&gt;' ||
+	         c == '&' && '&amp;' ||
+	         c == '"' && '&quot;' ||
+	         '&#'+c.charCodeAt()+';'
+	}
+
+
+	copy(NodeType,Node);
+	copy(NodeType,Node.prototype);
+
+	/**
+	 * @param callback return true for continue,false for break
+	 * @return boolean true: break visit;
+	 */
+	function _visitNode(node,callback){
+		if(callback(node)){
+			return true;
+		}
+		if(node = node.firstChild){
+			do{
+				if(_visitNode(node,callback)){return true}
+	        }while(node=node.nextSibling)
+	    }
+	}
+
+
+
+	function Document(){
+	}
+	function _onAddAttribute(doc,el,newAttr){
+		doc && doc._inc++;
+		var ns = newAttr.namespaceURI ;
+		if(ns == 'http://www.w3.org/2000/xmlns/'){
+			//update namespace
+			el._nsMap[newAttr.prefix?newAttr.localName:''] = newAttr.value
+		}
+	}
+	function _onRemoveAttribute(doc,el,newAttr,remove){
+		doc && doc._inc++;
+		var ns = newAttr.namespaceURI ;
+		if(ns == 'http://www.w3.org/2000/xmlns/'){
+			//update namespace
+			delete el._nsMap[newAttr.prefix?newAttr.localName:'']
+		}
+	}
+	function _onUpdateChild(doc,el,newChild){
+		if(doc && doc._inc){
+			doc._inc++;
+			//update childNodes
+			var cs = el.childNodes;
+			if(newChild){
+				cs[cs.length++] = newChild;
+			}else{
+				//console.log(1)
+				var child = el.firstChild;
+				var i = 0;
+				while(child){
+					cs[i++] = child;
+					child =child.nextSibling;
+				}
+				cs.length = i;
+			}
+		}
+	}
+
+	/**
+	 * attributes;
+	 * children;
+	 * 
+	 * writeable properties:
+	 * nodeValue,Attr:value,CharacterData:data
+	 * prefix
+	 */
+	function _removeChild(parentNode,child){
+		var previous = child.previousSibling;
+		var next = child.nextSibling;
+		if(previous){
+			previous.nextSibling = next;
+		}else{
+			parentNode.firstChild = next
+		}
+		if(next){
+			next.previousSibling = previous;
+		}else{
+			parentNode.lastChild = previous;
+		}
+		_onUpdateChild(parentNode.ownerDocument,parentNode);
+		return child;
+	}
+	/**
+	 * preformance key(refChild == null)
+	 */
+	function _insertBefore(parentNode,newChild,nextChild){
+		var cp = newChild.parentNode;
+		if(cp){
+			cp.removeChild(newChild);//remove and update
+		}
+		if(newChild.nodeType === DOCUMENT_FRAGMENT_NODE){
+			var newFirst = newChild.firstChild;
+			if (newFirst == null) {
+				return newChild;
+			}
+			var newLast = newChild.lastChild;
+		}else{
+			newFirst = newLast = newChild;
+		}
+		var pre = nextChild ? nextChild.previousSibling : parentNode.lastChild;
+
+		newFirst.previousSibling = pre;
+		newLast.nextSibling = nextChild;
+		
+		
+		if(pre){
+			pre.nextSibling = newFirst;
+		}else{
+			parentNode.firstChild = newFirst;
+		}
+		if(nextChild == null){
+			parentNode.lastChild = newLast;
+		}else{
+			nextChild.previousSibling = newLast;
+		}
+		do{
+			newFirst.parentNode = parentNode;
+		}while(newFirst !== newLast && (newFirst= newFirst.nextSibling))
+		_onUpdateChild(parentNode.ownerDocument||parentNode,parentNode);
+		//console.log(parentNode.lastChild.nextSibling == null)
+		if (newChild.nodeType == DOCUMENT_FRAGMENT_NODE) {
+			newChild.firstChild = newChild.lastChild = null;
+		}
+		return newChild;
+	}
+	function _appendSingleChild(parentNode,newChild){
+		var cp = newChild.parentNode;
+		if(cp){
+			var pre = parentNode.lastChild;
+			cp.removeChild(newChild);//remove and update
+			var pre = parentNode.lastChild;
+		}
+		var pre = parentNode.lastChild;
+		newChild.parentNode = parentNode;
+		newChild.previousSibling = pre;
+		newChild.nextSibling = null;
+		if(pre){
+			pre.nextSibling = newChild;
+		}else{
+			parentNode.firstChild = newChild;
+		}
+		parentNode.lastChild = newChild;
+		_onUpdateChild(parentNode.ownerDocument,parentNode,newChild);
+		return newChild;
+		//console.log("__aa",parentNode.lastChild.nextSibling == null)
+	}
+	Document.prototype = {
+		//implementation : null,
+		nodeName :  '#document',
+		nodeType :  DOCUMENT_NODE,
+		doctype :  null,
+		documentElement :  null,
+		_inc : 1,
+		
+		insertBefore :  function(newChild, refChild){//raises 
+			if(newChild.nodeType == DOCUMENT_FRAGMENT_NODE){
+				var child = newChild.firstChild;
+				while(child){
+					var next = child.nextSibling;
+					this.insertBefore(child,refChild);
+					child = next;
+				}
+				return newChild;
+			}
+			if(this.documentElement == null && newChild.nodeType == 1){
+				this.documentElement = newChild;
+			}
+			
+			return _insertBefore(this,newChild,refChild),(newChild.ownerDocument = this),newChild;
+		},
+		removeChild :  function(oldChild){
+			if(this.documentElement == oldChild){
+				this.documentElement = null;
+			}
+			return _removeChild(this,oldChild);
+		},
+		// Introduced in DOM Level 2:
+		importNode : function(importedNode,deep){
+			return importNode(this,importedNode,deep);
+		},
+		// Introduced in DOM Level 2:
+		getElementById :	function(id){
+			var rtv = null;
+			_visitNode(this.documentElement,function(node){
+				if(node.nodeType == 1){
+					if(node.getAttribute('id') == id){
+						rtv = node;
+						return true;
+					}
+				}
+			})
+			return rtv;
+		},
+		
+		//document factory method:
+		createElement :	function(tagName){
+			var node = new Element();
+			node.ownerDocument = this;
+			node.nodeName = tagName;
+			node.tagName = tagName;
+			node.childNodes = new NodeList();
+			var attrs	= node.attributes = new NamedNodeMap();
+			attrs._ownerElement = node;
+			return node;
+		},
+		createDocumentFragment :	function(){
+			var node = new DocumentFragment();
+			node.ownerDocument = this;
+			node.childNodes = new NodeList();
+			return node;
+		},
+		createTextNode :	function(data){
+			var node = new Text();
+			node.ownerDocument = this;
+			node.appendData(data)
+			return node;
+		},
+		createComment :	function(data){
+			var node = new Comment();
+			node.ownerDocument = this;
+			node.appendData(data)
+			return node;
+		},
+		createCDATASection :	function(data){
+			var node = new CDATASection();
+			node.ownerDocument = this;
+			node.appendData(data)
+			return node;
+		},
+		createProcessingInstruction :	function(target,data){
+			var node = new ProcessingInstruction();
+			node.ownerDocument = this;
+			node.tagName = node.target = target;
+			node.nodeValue= node.data = data;
+			return node;
+		},
+		createAttribute :	function(name){
+			var node = new Attr();
+			node.ownerDocument	= this;
+			node.name = name;
+			node.nodeName	= name;
+			node.localName = name;
+			node.specified = true;
+			return node;
+		},
+		createEntityReference :	function(name){
+			var node = new EntityReference();
+			node.ownerDocument	= this;
+			node.nodeName	= name;
+			return node;
+		},
+		// Introduced in DOM Level 2:
+		createElementNS :	function(namespaceURI,qualifiedName){
+			var node = new Element();
+			var pl = qualifiedName.split(':');
+			var attrs	= node.attributes = new NamedNodeMap();
+			node.childNodes = new NodeList();
+			node.ownerDocument = this;
+			node.nodeName = qualifiedName;
+			node.tagName = qualifiedName;
+			node.namespaceURI = namespaceURI;
+			if(pl.length == 2){
+				node.prefix = pl[0];
+				node.localName = pl[1];
+			}else{
+				//el.prefix = null;
+				node.localName = qualifiedName;
+			}
+			attrs._ownerElement = node;
+			return node;
+		},
+		// Introduced in DOM Level 2:
+		createAttributeNS :	function(namespaceURI,qualifiedName){
+			var node = new Attr();
+			var pl = qualifiedName.split(':');
+			node.ownerDocument = this;
+			node.nodeName = qualifiedName;
+			node.name = qualifiedName;
+			node.namespaceURI = namespaceURI;
+			node.specified = true;
+			if(pl.length == 2){
+				node.prefix = pl[0];
+				node.localName = pl[1];
+			}else{
+				//el.prefix = null;
+				node.localName = qualifiedName;
+			}
+			return node;
+		}
+	};
+	_extends(Document,Node);
+
+
+	function Element() {
+		this._nsMap = {};
+	};
+	Element.prototype = {
+		nodeType : ELEMENT_NODE,
+		hasAttribute : function(name){
+			return this.getAttributeNode(name)!=null;
+		},
+		getAttribute : function(name){
+			var attr = this.getAttributeNode(name);
+			return attr && attr.value || '';
+		},
+		getAttributeNode : function(name){
+			return this.attributes.getNamedItem(name);
+		},
+		setAttribute : function(name, value){
+			var attr = this.ownerDocument.createAttribute(name);
+			attr.value = attr.nodeValue = "" + value;
+			this.setAttributeNode(attr)
+		},
+		removeAttribute : function(name){
+			var attr = this.getAttributeNode(name)
+			attr && this.removeAttributeNode(attr);
+		},
+		
+		//four real opeartion method
+		appendChild:function(newChild){
+			if(newChild.nodeType === DOCUMENT_FRAGMENT_NODE){
+				return this.insertBefore(newChild,null);
+			}else{
+				return _appendSingleChild(this,newChild);
+			}
+		},
+		setAttributeNode : function(newAttr){
+			return this.attributes.setNamedItem(newAttr);
+		},
+		setAttributeNodeNS : function(newAttr){
+			return this.attributes.setNamedItemNS(newAttr);
+		},
+		removeAttributeNode : function(oldAttr){
+			return this.attributes.removeNamedItem(oldAttr.nodeName);
+		},
+		//get real attribute name,and remove it by removeAttributeNode
+		removeAttributeNS : function(namespaceURI, localName){
+			var old = this.getAttributeNodeNS(namespaceURI, localName);
+			old && this.removeAttributeNode(old);
+		},
+		
+		hasAttributeNS : function(namespaceURI, localName){
+			return this.getAttributeNodeNS(namespaceURI, localName)!=null;
+		},
+		getAttributeNS : function(namespaceURI, localName){
+			var attr = this.getAttributeNodeNS(namespaceURI, localName);
+			return attr && attr.value || '';
+		},
+		setAttributeNS : function(namespaceURI, qualifiedName, value){
+			var attr = this.ownerDocument.createAttributeNS(namespaceURI, qualifiedName);
+			attr.value = attr.nodeValue = value;
+			this.setAttributeNode(attr)
+		},
+		getAttributeNodeNS : function(namespaceURI, localName){
+			return this.attributes.getNamedItemNS(namespaceURI, localName);
+		},
+		
+		getElementsByTagName : function(tagName){
+			return new LiveNodeList(this,function(base){
+				var ls = [];
+				_visitNode(base,function(node){
+					if(node !== base && node.nodeType == ELEMENT_NODE && (tagName === '*' || node.tagName == tagName)){
+						ls.push(node);
+					}
+				});
+				return ls;
+			});
+		},
+		getElementsByTagNameNS : function(namespaceURI, localName){
+			return new LiveNodeList(this,function(base){
+				var ls = [];
+				_visitNode(base,function(node){
+					if(node !== base && node.nodeType === ELEMENT_NODE && node.namespaceURI === namespaceURI && (localName === '*' || node.localName == localName)){
+						ls.push(node);
+					}
+				});
+				return ls;
+			});
+		}
+	};
+	Document.prototype.getElementsByTagName = Element.prototype.getElementsByTagName;
+	Document.prototype.getElementsByTagNameNS = Element.prototype.getElementsByTagNameNS;
+
+
+	_extends(Element,Node);
+	function Attr() {
+	};
+	Attr.prototype.nodeType = ATTRIBUTE_NODE;
+	_extends(Attr,Node);
+
+
+	function CharacterData() {
+	};
+	CharacterData.prototype = {
+		data : '',
+		substringData : function(offset, count) {
+			return this.data.substring(offset, offset+count);
+		},
+		appendData: function(text) {
+			text = this.data+text;
+			this.nodeValue = this.data = text;
+			this.length = text.length;
+		},
+		insertData: function(offset,text) {
+			this.replaceData(offset,0,text);
+		
+		},
+		appendChild:function(newChild){
+			//if(!(newChild instanceof CharacterData)){
+				throw new Error(ExceptionMessage[3])
+			//}
+			return Node.prototype.appendChild.apply(this,arguments)
+		},
+		deleteData: function(offset, count) {
+			this.replaceData(offset,count,"");
+		},
+		replaceData: function(offset, count, text) {
+			var start = this.data.substring(0,offset);
+			var end = this.data.substring(offset+count);
+			text = start + text + end;
+			this.nodeValue = this.data = text;
+			this.length = text.length;
+		}
+	}
+	_extends(CharacterData,Node);
+	function Text() {
+	};
+	Text.prototype = {
+		nodeName : "#text",
+		nodeType : TEXT_NODE,
+		splitText : function(offset) {
+			var text = this.data;
+			var newText = text.substring(offset);
+			text = text.substring(0, offset);
+			this.data = this.nodeValue = text;
+			this.length = text.length;
+			var newNode = this.ownerDocument.createTextNode(newText);
+			if(this.parentNode){
+				this.parentNode.insertBefore(newNode, this.nextSibling);
+			}
+			return newNode;
+		}
+	}
+	_extends(Text,CharacterData);
+	function Comment() {
+	};
+	Comment.prototype = {
+		nodeName : "#comment",
+		nodeType : COMMENT_NODE
+	}
+	_extends(Comment,CharacterData);
+
+	function CDATASection() {
+	};
+	CDATASection.prototype = {
+		nodeName : "#cdata-section",
+		nodeType : CDATA_SECTION_NODE
+	}
+	_extends(CDATASection,CharacterData);
+
+
+	function DocumentType() {
+	};
+	DocumentType.prototype.nodeType = DOCUMENT_TYPE_NODE;
+	_extends(DocumentType,Node);
+
+	function Notation() {
+	};
+	Notation.prototype.nodeType = NOTATION_NODE;
+	_extends(Notation,Node);
+
+	function Entity() {
+	};
+	Entity.prototype.nodeType = ENTITY_NODE;
+	_extends(Entity,Node);
+
+	function EntityReference() {
+	};
+	EntityReference.prototype.nodeType = ENTITY_REFERENCE_NODE;
+	_extends(EntityReference,Node);
+
+	function DocumentFragment() {
+	};
+	DocumentFragment.prototype.nodeName =	"#document-fragment";
+	DocumentFragment.prototype.nodeType =	DOCUMENT_FRAGMENT_NODE;
+	_extends(DocumentFragment,Node);
+
+
+	function ProcessingInstruction() {
+	}
+	ProcessingInstruction.prototype.nodeType = PROCESSING_INSTRUCTION_NODE;
+	_extends(ProcessingInstruction,Node);
+	function XMLSerializer(){}
+	XMLSerializer.prototype.serializeToString = function(node){
+		var buf = [];
+		serializeToString(node,buf);
+		return buf.join('');
+	}
+	Node.prototype.toString =function(){
+		return XMLSerializer.prototype.serializeToString(this);
+	}
+	function serializeToString(node,buf){
+		switch(node.nodeType){
+		case ELEMENT_NODE:
+			var attrs = node.attributes;
+			var len = attrs.length;
+			var child = node.firstChild;
+			var nodeName = node.tagName;
+			var isHTML = htmlns === node.namespaceURI
+			buf.push('<',nodeName);
+			for(var i=0;i<len;i++){
+				serializeToString(attrs.item(i),buf,isHTML);
+			}
+			if(child || isHTML && !/^(?:meta|link|img|br|hr|input)$/i.test(nodeName)){
+				buf.push('>');
+				//if is cdata child node
+				if(isHTML && /^script$/i.test(nodeName)){
+					if(child){
+						buf.push(child.data);
+					}
+				}else{
+					while(child){
+						serializeToString(child,buf);
+						child = child.nextSibling;
+					}
+				}
+				buf.push('</',nodeName,'>');
+			}else{
+				buf.push('/>');
+			}
+			return;
+		case DOCUMENT_NODE:
+		case DOCUMENT_FRAGMENT_NODE:
+			var child = node.firstChild;
+			while(child){
+				serializeToString(child,buf);
+				child = child.nextSibling;
+			}
+			return;
+		case ATTRIBUTE_NODE:
+			return buf.push(' ',node.name,'="',node.value.replace(/[<&"]/g,_xmlEncoder),'"');
+		case TEXT_NODE:
+			return buf.push(node.data.replace(/[<&]/g,_xmlEncoder));
+		case CDATA_SECTION_NODE:
+			return buf.push( '<![CDATA[',node.data,']]>');
+		case COMMENT_NODE:
+			return buf.push( "<!--",node.data,"-->");
+		case DOCUMENT_TYPE_NODE:
+			var pubid = node.publicId;
+			var sysid = node.systemId;
+			buf.push('<!DOCTYPE ',node.name);
+			if(pubid){
+				buf.push(' PUBLIC "',pubid);
+				if (sysid && sysid!='.') {
+					buf.push( '" "',sysid);
+				}
+				buf.push('">');
+			}else if(sysid && sysid!='.'){
+				buf.push(' SYSTEM "',sysid,'">');
+			}else{
+				var sub = node.internalSubset;
+				if(sub){
+					buf.push(" [",sub,"]");
+				}
+				buf.push(">");
+			}
+			return;
+		case PROCESSING_INSTRUCTION_NODE:
+			return buf.push( "<?",node.target," ",node.data,"?>");
+		case ENTITY_REFERENCE_NODE:
+			return buf.push( '&',node.nodeName,';');
+		//case ENTITY_NODE:
+		//case NOTATION_NODE:
+		default:
+			buf.push('??',node.nodeName);
+		}
+	}
+	function importNode(doc,node,deep){
+		var node2;
+		switch (node.nodeType) {
+		case ELEMENT_NODE:
+			node2 = node.cloneNode(false);
+			node2.ownerDocument = doc;
+			//var attrs = node2.attributes;
+			//var len = attrs.length;
+			//for(var i=0;i<len;i++){
+				//node2.setAttributeNodeNS(importNode(doc,attrs.item(i),deep));
+			//}
+		case DOCUMENT_FRAGMENT_NODE:
+			break;
+		case ATTRIBUTE_NODE:
+			deep = true;
+			break;
+		//case ENTITY_REFERENCE_NODE:
+		//case PROCESSING_INSTRUCTION_NODE:
+		////case TEXT_NODE:
+		//case CDATA_SECTION_NODE:
+		//case COMMENT_NODE:
+		//	deep = false;
+		//	break;
+		//case DOCUMENT_NODE:
+		//case DOCUMENT_TYPE_NODE:
+		//cannot be imported.
+		//case ENTITY_NODE:
+		//case NOTATION_NODE：
+		//can not hit in level3
+		//default:throw e;
+		}
+		if(!node2){
+			node2 = node.cloneNode(false);//false
+		}
+		node2.ownerDocument = doc;
+		node2.parentNode = null;
+		if(deep){
+			var child = node.firstChild;
+			while(child){
+				node2.appendChild(importNode(doc,child,deep));
+				child = child.nextSibling;
+			}
+		}
+		return node2;
+	}
+	//
+	//var _relationMap = {firstChild:1,lastChild:1,previousSibling:1,nextSibling:1,
+	//					attributes:1,childNodes:1,parentNode:1,documentElement:1,doctype,};
+	function cloneNode(doc,node,deep){
+		var node2 = new node.constructor();
+		for(var n in node){
+			var v = node[n];
+			if(typeof v != 'object' ){
+				if(v != node2[n]){
+					node2[n] = v;
+				}
+			}
+		}
+		if(node.childNodes){
+			node2.childNodes = new NodeList();
+		}
+		node2.ownerDocument = doc;
+		switch (node2.nodeType) {
+		case ELEMENT_NODE:
+			var attrs	= node.attributes;
+			var attrs2	= node2.attributes = new NamedNodeMap();
+			var len = attrs.length
+			attrs2._ownerElement = node2;
+			for(var i=0;i<len;i++){
+				node2.setAttributeNode(cloneNode(doc,attrs.item(i),true));
+			}
+			break;;
+		case ATTRIBUTE_NODE:
+			deep = true;
+		}
+		if(deep){
+			var child = node.firstChild;
+			while(child){
+				node2.appendChild(cloneNode(doc,child,deep));
+				child = child.nextSibling;
+			}
+		}
+		return node2;
+	}
+
+	function __set__(object,key,value){
+		object[key] = value
+	}
+	//do dynamic
+	try{
+		if(Object.defineProperty){
+			Object.defineProperty(LiveNodeList.prototype,'length',{
+				get:function(){
+					_updateLiveList(this);
+					return this.$$length;
+				}
+			});
+			Object.defineProperty(Node.prototype,'textContent',{
+				get:function(){
+					return getTextContent(this);
+				},
+				set:function(data){
+					switch(this.nodeType){
+					case 1:
+					case 11:
+						while(this.firstChild){
+							this.removeChild(this.firstChild);
+						}
+						if(data || String(data)){
+							this.appendChild(this.ownerDocument.createTextNode(data));
+						}
+						break;
+					default:
+						//TODO:
+						this.data = data;
+						this.value = value;
+						this.nodeValue = data;
+					}
+				}
+			})
+			
+			function getTextContent(node){
+				switch(node.nodeType){
+				case 1:
+				case 11:
+					var buf = [];
+					node = node.firstChild;
+					while(node){
+						if(node.nodeType!==7 && node.nodeType !==8){
+							buf.push(getTextContent(node));
+						}
+						node = node.nextSibling;
+					}
+					return buf.join('');
+				default:
+					return node.nodeValue;
+				}
+			}
+			__set__ = function(object,key,value){
+				//console.log(value)
+				object['$$'+key] = value
+			}
+		}
+	}catch(e){//ie8
+	}
+
+	if(true){
+		exports.DOMImplementation = DOMImplementation;
+		exports.XMLSerializer = XMLSerializer;
+	}
+
+
+/***/ },
 /* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -60815,319 +60815,6 @@
 /* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var asap = __webpack_require__(147)
-
-	module.exports = Promise;
-	function Promise(fn) {
-	  if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
-	  if (typeof fn !== 'function') throw new TypeError('not a function')
-	  var state = null
-	  var value = null
-	  var deferreds = []
-	  var self = this
-
-	  this.then = function(onFulfilled, onRejected) {
-	    return new self.constructor(function(resolve, reject) {
-	      handle(new Handler(onFulfilled, onRejected, resolve, reject))
-	    })
-	  }
-
-	  function handle(deferred) {
-	    if (state === null) {
-	      deferreds.push(deferred)
-	      return
-	    }
-	    asap(function() {
-	      var cb = state ? deferred.onFulfilled : deferred.onRejected
-	      if (cb === null) {
-	        (state ? deferred.resolve : deferred.reject)(value)
-	        return
-	      }
-	      var ret
-	      try {
-	        ret = cb(value)
-	      }
-	      catch (e) {
-	        deferred.reject(e)
-	        return
-	      }
-	      deferred.resolve(ret)
-	    })
-	  }
-
-	  function resolve(newValue) {
-	    try { //Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
-	      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.')
-	      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-	        var then = newValue.then
-	        if (typeof then === 'function') {
-	          doResolve(then.bind(newValue), resolve, reject)
-	          return
-	        }
-	      }
-	      state = true
-	      value = newValue
-	      finale()
-	    } catch (e) { reject(e) }
-	  }
-
-	  function reject(newValue) {
-	    state = false
-	    value = newValue
-	    finale()
-	  }
-
-	  function finale() {
-	    for (var i = 0, len = deferreds.length; i < len; i++)
-	      handle(deferreds[i])
-	    deferreds = null
-	  }
-
-	  doResolve(fn, resolve, reject)
-	}
-
-
-	function Handler(onFulfilled, onRejected, resolve, reject){
-	  this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null
-	  this.onRejected = typeof onRejected === 'function' ? onRejected : null
-	  this.resolve = resolve
-	  this.reject = reject
-	}
-
-	/**
-	 * Take a potentially misbehaving resolver function and make sure
-	 * onFulfilled and onRejected are only called once.
-	 *
-	 * Makes no guarantees about asynchrony.
-	 */
-	function doResolve(fn, onFulfilled, onRejected) {
-	  var done = false;
-	  try {
-	    fn(function (value) {
-	      if (done) return
-	      done = true
-	      onFulfilled(value)
-	    }, function (reason) {
-	      if (done) return
-	      done = true
-	      onRejected(reason)
-	    })
-	  } catch (ex) {
-	    if (done) return
-	    done = true
-	    onRejected(ex)
-	  }
-	}
-
-
-/***/ },
-/* 129 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Promise = __webpack_require__(128)
-	var asap = __webpack_require__(147)
-
-	module.exports = Promise
-	Promise.prototype.done = function (onFulfilled, onRejected) {
-	  var self = arguments.length ? this.then.apply(this, arguments) : this
-	  self.then(null, function (err) {
-	    asap(function () {
-	      throw err
-	    })
-	  })
-	}
-
-/***/ },
-/* 130 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	//This file contains the ES6 extensions to the core Promises/A+ API
-
-	var Promise = __webpack_require__(128)
-	var asap = __webpack_require__(147)
-
-	module.exports = Promise
-
-	/* Static Functions */
-
-	function ValuePromise(value) {
-	  this.then = function (onFulfilled) {
-	    if (typeof onFulfilled !== 'function') return this
-	    return new Promise(function (resolve, reject) {
-	      asap(function () {
-	        try {
-	          resolve(onFulfilled(value))
-	        } catch (ex) {
-	          reject(ex);
-	        }
-	      })
-	    })
-	  }
-	}
-	ValuePromise.prototype = Promise.prototype
-
-	var TRUE = new ValuePromise(true)
-	var FALSE = new ValuePromise(false)
-	var NULL = new ValuePromise(null)
-	var UNDEFINED = new ValuePromise(undefined)
-	var ZERO = new ValuePromise(0)
-	var EMPTYSTRING = new ValuePromise('')
-
-	Promise.resolve = function (value) {
-	  if (value instanceof Promise) return value
-
-	  if (value === null) return NULL
-	  if (value === undefined) return UNDEFINED
-	  if (value === true) return TRUE
-	  if (value === false) return FALSE
-	  if (value === 0) return ZERO
-	  if (value === '') return EMPTYSTRING
-
-	  if (typeof value === 'object' || typeof value === 'function') {
-	    try {
-	      var then = value.then
-	      if (typeof then === 'function') {
-	        return new Promise(then.bind(value))
-	      }
-	    } catch (ex) {
-	      return new Promise(function (resolve, reject) {
-	        reject(ex)
-	      })
-	    }
-	  }
-
-	  return new ValuePromise(value)
-	}
-
-	Promise.all = function (arr) {
-	  var args = Array.prototype.slice.call(arr)
-
-	  return new Promise(function (resolve, reject) {
-	    if (args.length === 0) return resolve([])
-	    var remaining = args.length
-	    function res(i, val) {
-	      try {
-	        if (val && (typeof val === 'object' || typeof val === 'function')) {
-	          var then = val.then
-	          if (typeof then === 'function') {
-	            then.call(val, function (val) { res(i, val) }, reject)
-	            return
-	          }
-	        }
-	        args[i] = val
-	        if (--remaining === 0) {
-	          resolve(args);
-	        }
-	      } catch (ex) {
-	        reject(ex)
-	      }
-	    }
-	    for (var i = 0; i < args.length; i++) {
-	      res(i, args[i])
-	    }
-	  })
-	}
-
-	Promise.reject = function (value) {
-	  return new Promise(function (resolve, reject) { 
-	    reject(value);
-	  });
-	}
-
-	Promise.race = function (values) {
-	  return new Promise(function (resolve, reject) { 
-	    values.forEach(function(value){
-	      Promise.resolve(value).then(resolve, reject);
-	    })
-	  });
-	}
-
-	/* Prototype Methods */
-
-	Promise.prototype['catch'] = function (onRejected) {
-	  return this.then(null, onRejected);
-	}
-
-
-/***/ },
-/* 131 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	//This file contains then/promise specific extensions that are only useful for node.js interop
-
-	var Promise = __webpack_require__(128)
-	var asap = __webpack_require__(147)
-
-	module.exports = Promise
-
-	/* Static Functions */
-
-	Promise.denodeify = function (fn, argumentCount) {
-	  argumentCount = argumentCount || Infinity
-	  return function () {
-	    var self = this
-	    var args = Array.prototype.slice.call(arguments)
-	    return new Promise(function (resolve, reject) {
-	      while (args.length && args.length > argumentCount) {
-	        args.pop()
-	      }
-	      args.push(function (err, res) {
-	        if (err) reject(err)
-	        else resolve(res)
-	      })
-	      var res = fn.apply(self, args)
-	      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
-	        resolve(res)
-	      }
-	    })
-	  }
-	}
-	Promise.nodeify = function (fn) {
-	  return function () {
-	    var args = Array.prototype.slice.call(arguments)
-	    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-	    var ctx = this
-	    try {
-	      return fn.apply(this, arguments).nodeify(callback, ctx)
-	    } catch (ex) {
-	      if (callback === null || typeof callback == 'undefined') {
-	        return new Promise(function (resolve, reject) { reject(ex) })
-	      } else {
-	        asap(function () {
-	          callback.call(ctx, ex)
-	        })
-	      }
-	    }
-	  }
-	}
-
-	Promise.prototype.nodeify = function (callback, ctx) {
-	  if (typeof callback != 'function') return this
-
-	  this.then(function (value) {
-	    asap(function () {
-	      callback.call(ctx, null, value)
-	    })
-	  }, function (err) {
-	    asap(function () {
-	      callback.call(ctx, err)
-	    })
-	  })
-	}
-
-
-/***/ },
-/* 132 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	module.exports = Readable;
@@ -61138,7 +60825,7 @@
 
 
 	/*<replacement>*/
-	var isArray = __webpack_require__(143);
+	var isArray = __webpack_require__(142);
 	/*</replacement>*/
 
 
@@ -61148,7 +60835,7 @@
 
 	Readable.ReadableState = ReadableState;
 
-	var EE = __webpack_require__(142).EventEmitter;
+	var EE = __webpack_require__(143).EventEmitter;
 
 	/*<replacement>*/
 	if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
@@ -61164,7 +60851,7 @@
 	  Stream = __webpack_require__(137);
 	}catch(_){}finally{
 	  if (!Stream)
-	    Stream = __webpack_require__(142).EventEmitter;
+	    Stream = __webpack_require__(143).EventEmitter;
 	}}())
 	/*</replacement>*/
 
@@ -61172,7 +60859,7 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(118);
+	util.inherits = __webpack_require__(117);
 	/*</replacement>*/
 
 
@@ -61191,7 +60878,7 @@
 	util.inherits(Readable, Stream);
 
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(134);
+	  var Duplex = __webpack_require__(130);
 
 	  options = options || {};
 
@@ -61258,7 +60945,7 @@
 	}
 
 	function Readable(options) {
-	  var Duplex = __webpack_require__(134);
+	  var Duplex = __webpack_require__(130);
 
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -62088,10 +61775,10 @@
 	  return -1;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
-/* 133 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// A bit simpler than readable streams.
@@ -62116,7 +61803,7 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(118);
+	util.inherits = __webpack_require__(117);
 	/*</replacement>*/
 
 
@@ -62127,7 +61814,7 @@
 	  Stream = __webpack_require__(137);
 	}catch(_){}finally{
 	  if (!Stream)
-	    Stream = __webpack_require__(142).EventEmitter;
+	    Stream = __webpack_require__(143).EventEmitter;
 	}}())
 	/*</replacement>*/
 
@@ -62145,7 +61832,7 @@
 	}
 
 	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(134);
+	  var Duplex = __webpack_require__(130);
 
 	  options = options || {};
 
@@ -62254,7 +61941,7 @@
 
 
 	function Writable(options) {
-	  var Duplex = __webpack_require__(134);
+	  var Duplex = __webpack_require__(130);
 
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -62617,7 +62304,7 @@
 
 
 /***/ },
-/* 134 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a duplex stream is just a stream that is both readable and writable.
@@ -62646,11 +62333,11 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(118);
+	util.inherits = __webpack_require__(117);
 	/*</replacement>*/
 
-	var Readable = __webpack_require__(132);
-	var Writable = __webpack_require__(133);
+	var Readable = __webpack_require__(128);
+	var Writable = __webpack_require__(129);
 
 	util.inherits(Duplex, Readable);
 
@@ -62705,7 +62392,7 @@
 
 
 /***/ },
-/* 135 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a transform stream is a readable/writable stream where you do
@@ -62754,11 +62441,11 @@
 
 	module.exports = Transform;
 
-	var Duplex = __webpack_require__(134);
+	var Duplex = __webpack_require__(130);
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(118);
+	util.inherits = __webpack_require__(117);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -62908,7 +62595,7 @@
 
 
 /***/ },
-/* 136 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a passthrough stream.
@@ -62919,11 +62606,11 @@
 
 	module.exports = PassThrough;
 
-	var Transform = __webpack_require__(135);
+	var Transform = __webpack_require__(131);
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(118);
+	util.inherits = __webpack_require__(117);
 	/*</replacement>*/
 
 	util.inherits(PassThrough, Transform);
@@ -62938,6 +62625,319 @@
 	PassThrough.prototype._transform = function(chunk, encoding, cb) {
 	  cb(null, chunk);
 	};
+
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var asap = __webpack_require__(149)
+
+	module.exports = Promise;
+	function Promise(fn) {
+	  if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
+	  if (typeof fn !== 'function') throw new TypeError('not a function')
+	  var state = null
+	  var value = null
+	  var deferreds = []
+	  var self = this
+
+	  this.then = function(onFulfilled, onRejected) {
+	    return new self.constructor(function(resolve, reject) {
+	      handle(new Handler(onFulfilled, onRejected, resolve, reject))
+	    })
+	  }
+
+	  function handle(deferred) {
+	    if (state === null) {
+	      deferreds.push(deferred)
+	      return
+	    }
+	    asap(function() {
+	      var cb = state ? deferred.onFulfilled : deferred.onRejected
+	      if (cb === null) {
+	        (state ? deferred.resolve : deferred.reject)(value)
+	        return
+	      }
+	      var ret
+	      try {
+	        ret = cb(value)
+	      }
+	      catch (e) {
+	        deferred.reject(e)
+	        return
+	      }
+	      deferred.resolve(ret)
+	    })
+	  }
+
+	  function resolve(newValue) {
+	    try { //Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+	      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.')
+	      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+	        var then = newValue.then
+	        if (typeof then === 'function') {
+	          doResolve(then.bind(newValue), resolve, reject)
+	          return
+	        }
+	      }
+	      state = true
+	      value = newValue
+	      finale()
+	    } catch (e) { reject(e) }
+	  }
+
+	  function reject(newValue) {
+	    state = false
+	    value = newValue
+	    finale()
+	  }
+
+	  function finale() {
+	    for (var i = 0, len = deferreds.length; i < len; i++)
+	      handle(deferreds[i])
+	    deferreds = null
+	  }
+
+	  doResolve(fn, resolve, reject)
+	}
+
+
+	function Handler(onFulfilled, onRejected, resolve, reject){
+	  this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null
+	  this.onRejected = typeof onRejected === 'function' ? onRejected : null
+	  this.resolve = resolve
+	  this.reject = reject
+	}
+
+	/**
+	 * Take a potentially misbehaving resolver function and make sure
+	 * onFulfilled and onRejected are only called once.
+	 *
+	 * Makes no guarantees about asynchrony.
+	 */
+	function doResolve(fn, onFulfilled, onRejected) {
+	  var done = false;
+	  try {
+	    fn(function (value) {
+	      if (done) return
+	      done = true
+	      onFulfilled(value)
+	    }, function (reason) {
+	      if (done) return
+	      done = true
+	      onRejected(reason)
+	    })
+	  } catch (ex) {
+	    if (done) return
+	    done = true
+	    onRejected(ex)
+	  }
+	}
+
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Promise = __webpack_require__(133)
+	var asap = __webpack_require__(149)
+
+	module.exports = Promise
+	Promise.prototype.done = function (onFulfilled, onRejected) {
+	  var self = arguments.length ? this.then.apply(this, arguments) : this
+	  self.then(null, function (err) {
+	    asap(function () {
+	      throw err
+	    })
+	  })
+	}
+
+/***/ },
+/* 135 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	//This file contains the ES6 extensions to the core Promises/A+ API
+
+	var Promise = __webpack_require__(133)
+	var asap = __webpack_require__(149)
+
+	module.exports = Promise
+
+	/* Static Functions */
+
+	function ValuePromise(value) {
+	  this.then = function (onFulfilled) {
+	    if (typeof onFulfilled !== 'function') return this
+	    return new Promise(function (resolve, reject) {
+	      asap(function () {
+	        try {
+	          resolve(onFulfilled(value))
+	        } catch (ex) {
+	          reject(ex);
+	        }
+	      })
+	    })
+	  }
+	}
+	ValuePromise.prototype = Promise.prototype
+
+	var TRUE = new ValuePromise(true)
+	var FALSE = new ValuePromise(false)
+	var NULL = new ValuePromise(null)
+	var UNDEFINED = new ValuePromise(undefined)
+	var ZERO = new ValuePromise(0)
+	var EMPTYSTRING = new ValuePromise('')
+
+	Promise.resolve = function (value) {
+	  if (value instanceof Promise) return value
+
+	  if (value === null) return NULL
+	  if (value === undefined) return UNDEFINED
+	  if (value === true) return TRUE
+	  if (value === false) return FALSE
+	  if (value === 0) return ZERO
+	  if (value === '') return EMPTYSTRING
+
+	  if (typeof value === 'object' || typeof value === 'function') {
+	    try {
+	      var then = value.then
+	      if (typeof then === 'function') {
+	        return new Promise(then.bind(value))
+	      }
+	    } catch (ex) {
+	      return new Promise(function (resolve, reject) {
+	        reject(ex)
+	      })
+	    }
+	  }
+
+	  return new ValuePromise(value)
+	}
+
+	Promise.all = function (arr) {
+	  var args = Array.prototype.slice.call(arr)
+
+	  return new Promise(function (resolve, reject) {
+	    if (args.length === 0) return resolve([])
+	    var remaining = args.length
+	    function res(i, val) {
+	      try {
+	        if (val && (typeof val === 'object' || typeof val === 'function')) {
+	          var then = val.then
+	          if (typeof then === 'function') {
+	            then.call(val, function (val) { res(i, val) }, reject)
+	            return
+	          }
+	        }
+	        args[i] = val
+	        if (--remaining === 0) {
+	          resolve(args);
+	        }
+	      } catch (ex) {
+	        reject(ex)
+	      }
+	    }
+	    for (var i = 0; i < args.length; i++) {
+	      res(i, args[i])
+	    }
+	  })
+	}
+
+	Promise.reject = function (value) {
+	  return new Promise(function (resolve, reject) { 
+	    reject(value);
+	  });
+	}
+
+	Promise.race = function (values) {
+	  return new Promise(function (resolve, reject) { 
+	    values.forEach(function(value){
+	      Promise.resolve(value).then(resolve, reject);
+	    })
+	  });
+	}
+
+	/* Prototype Methods */
+
+	Promise.prototype['catch'] = function (onRejected) {
+	  return this.then(null, onRejected);
+	}
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	//This file contains then/promise specific extensions that are only useful for node.js interop
+
+	var Promise = __webpack_require__(133)
+	var asap = __webpack_require__(149)
+
+	module.exports = Promise
+
+	/* Static Functions */
+
+	Promise.denodeify = function (fn, argumentCount) {
+	  argumentCount = argumentCount || Infinity
+	  return function () {
+	    var self = this
+	    var args = Array.prototype.slice.call(arguments)
+	    return new Promise(function (resolve, reject) {
+	      while (args.length && args.length > argumentCount) {
+	        args.pop()
+	      }
+	      args.push(function (err, res) {
+	        if (err) reject(err)
+	        else resolve(res)
+	      })
+	      var res = fn.apply(self, args)
+	      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
+	        resolve(res)
+	      }
+	    })
+	  }
+	}
+	Promise.nodeify = function (fn) {
+	  return function () {
+	    var args = Array.prototype.slice.call(arguments)
+	    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+	    var ctx = this
+	    try {
+	      return fn.apply(this, arguments).nodeify(callback, ctx)
+	    } catch (ex) {
+	      if (callback === null || typeof callback == 'undefined') {
+	        return new Promise(function (resolve, reject) { reject(ex) })
+	      } else {
+	        asap(function () {
+	          callback.call(ctx, ex)
+	        })
+	      }
+	    }
+	  }
+	}
+
+	Promise.prototype.nodeify = function (callback, ctx) {
+	  if (typeof callback != 'function') return this
+
+	  this.then(function (value) {
+	    asap(function () {
+	      callback.call(ctx, null, value)
+	    })
+	  }, function (err) {
+	    asap(function () {
+	      callback.call(ctx, err)
+	    })
+	  })
+	}
 
 
 /***/ },
@@ -62967,7 +62967,7 @@
 
 	module.exports = Stream;
 
-	var EE = __webpack_require__(142).EventEmitter;
+	var EE = __webpack_require__(143).EventEmitter;
 	var inherits = __webpack_require__(155);
 
 	inherits(Stream, EE);
@@ -63114,8 +63114,8 @@
 
 	// Load modules
 
-	var Stringify = __webpack_require__(148);
-	var Parse = __webpack_require__(149);
+	var Stringify = __webpack_require__(147);
+	var Parse = __webpack_require__(148);
 
 
 	// Declare internals
@@ -63147,10 +63147,19 @@
 	  });
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
 /* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = Array.isArray || function (arr) {
+	  return Object.prototype.toString.call(arr) == '[object Array]';
+	};
+
+
+/***/ },
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -63454,15 +63463,6 @@
 	function isUndefined(arg) {
 	  return arg === void 0;
 	}
-
-
-/***/ },
-/* 143 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = Array.isArray || function (arr) {
-	  return Object.prototype.toString.call(arr) == '[object Array]';
-	};
 
 
 /***/ },
@@ -63878,126 +63878,6 @@
 /* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process, setImmediate) {
-	// Use the fastest possible means to execute a task in a future turn
-	// of the event loop.
-
-	// linked list of tasks (single, with head node)
-	var head = {task: void 0, next: null};
-	var tail = head;
-	var flushing = false;
-	var requestFlush = void 0;
-	var isNodeJS = false;
-
-	function flush() {
-	    /* jshint loopfunc: true */
-
-	    while (head.next) {
-	        head = head.next;
-	        var task = head.task;
-	        head.task = void 0;
-	        var domain = head.domain;
-
-	        if (domain) {
-	            head.domain = void 0;
-	            domain.enter();
-	        }
-
-	        try {
-	            task();
-
-	        } catch (e) {
-	            if (isNodeJS) {
-	                // In node, uncaught exceptions are considered fatal errors.
-	                // Re-throw them synchronously to interrupt flushing!
-
-	                // Ensure continuation if the uncaught exception is suppressed
-	                // listening "uncaughtException" events (as domains does).
-	                // Continue in next event to avoid tick recursion.
-	                if (domain) {
-	                    domain.exit();
-	                }
-	                setTimeout(flush, 0);
-	                if (domain) {
-	                    domain.enter();
-	                }
-
-	                throw e;
-
-	            } else {
-	                // In browsers, uncaught exceptions are not fatal.
-	                // Re-throw them asynchronously to avoid slow-downs.
-	                setTimeout(function() {
-	                   throw e;
-	                }, 0);
-	            }
-	        }
-
-	        if (domain) {
-	            domain.exit();
-	        }
-	    }
-
-	    flushing = false;
-	}
-
-	if (typeof process !== "undefined" && process.nextTick) {
-	    // Node.js before 0.9. Note that some fake-Node environments, like the
-	    // Mocha test runner, introduce a `process` global without a `nextTick`.
-	    isNodeJS = true;
-
-	    requestFlush = function () {
-	        process.nextTick(flush);
-	    };
-
-	} else if (typeof setImmediate === "function") {
-	    // In IE10, Node.js 0.9+, or https://github.com/NobleJS/setImmediate
-	    if (typeof window !== "undefined") {
-	        requestFlush = setImmediate.bind(window, flush);
-	    } else {
-	        requestFlush = function () {
-	            setImmediate(flush);
-	        };
-	    }
-
-	} else if (typeof MessageChannel !== "undefined") {
-	    // modern browsers
-	    // http://www.nonblocking.io/2011/06/windownexttick.html
-	    var channel = new MessageChannel();
-	    channel.port1.onmessage = flush;
-	    requestFlush = function () {
-	        channel.port2.postMessage(0);
-	    };
-
-	} else {
-	    // old browsers
-	    requestFlush = function () {
-	        setTimeout(flush, 0);
-	    };
-	}
-
-	function asap(task) {
-	    tail = tail.next = {
-	        task: task,
-	        domain: isNodeJS && process.domain,
-	        next: null
-	    };
-
-	    if (!flushing) {
-	        flushing = true;
-	        requestFlush();
-	    }
-	};
-
-	module.exports = asap;
-
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70), __webpack_require__(162).setImmediate))
-
-/***/ },
-/* 148 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// Load modules
 
 	var Utils = __webpack_require__(156);
@@ -64098,7 +63978,7 @@
 
 
 /***/ },
-/* 149 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Load modules
@@ -64261,44 +64141,164 @@
 
 
 /***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process, setImmediate) {
+	// Use the fastest possible means to execute a task in a future turn
+	// of the event loop.
+
+	// linked list of tasks (single, with head node)
+	var head = {task: void 0, next: null};
+	var tail = head;
+	var flushing = false;
+	var requestFlush = void 0;
+	var isNodeJS = false;
+
+	function flush() {
+	    /* jshint loopfunc: true */
+
+	    while (head.next) {
+	        head = head.next;
+	        var task = head.task;
+	        head.task = void 0;
+	        var domain = head.domain;
+
+	        if (domain) {
+	            head.domain = void 0;
+	            domain.enter();
+	        }
+
+	        try {
+	            task();
+
+	        } catch (e) {
+	            if (isNodeJS) {
+	                // In node, uncaught exceptions are considered fatal errors.
+	                // Re-throw them synchronously to interrupt flushing!
+
+	                // Ensure continuation if the uncaught exception is suppressed
+	                // listening "uncaughtException" events (as domains does).
+	                // Continue in next event to avoid tick recursion.
+	                if (domain) {
+	                    domain.exit();
+	                }
+	                setTimeout(flush, 0);
+	                if (domain) {
+	                    domain.enter();
+	                }
+
+	                throw e;
+
+	            } else {
+	                // In browsers, uncaught exceptions are not fatal.
+	                // Re-throw them asynchronously to avoid slow-downs.
+	                setTimeout(function() {
+	                   throw e;
+	                }, 0);
+	            }
+	        }
+
+	        if (domain) {
+	            domain.exit();
+	        }
+	    }
+
+	    flushing = false;
+	}
+
+	if (typeof process !== "undefined" && process.nextTick) {
+	    // Node.js before 0.9. Note that some fake-Node environments, like the
+	    // Mocha test runner, introduce a `process` global without a `nextTick`.
+	    isNodeJS = true;
+
+	    requestFlush = function () {
+	        process.nextTick(flush);
+	    };
+
+	} else if (typeof setImmediate === "function") {
+	    // In IE10, Node.js 0.9+, or https://github.com/NobleJS/setImmediate
+	    if (typeof window !== "undefined") {
+	        requestFlush = setImmediate.bind(window, flush);
+	    } else {
+	        requestFlush = function () {
+	            setImmediate(flush);
+	        };
+	    }
+
+	} else if (typeof MessageChannel !== "undefined") {
+	    // modern browsers
+	    // http://www.nonblocking.io/2011/06/windownexttick.html
+	    var channel = new MessageChannel();
+	    channel.port1.onmessage = flush;
+	    requestFlush = function () {
+	        channel.port2.postMessage(0);
+	    };
+
+	} else {
+	    // old browsers
+	    requestFlush = function () {
+	        setTimeout(flush, 0);
+	    };
+	}
+
+	function asap(task) {
+	    tail = tail.next = {
+	        task: task,
+	        domain: isNodeJS && process.domain,
+	        next: null
+	    };
+
+	    if (!flushing) {
+	        flushing = true;
+	        requestFlush();
+	    }
+	};
+
+	module.exports = asap;
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72), __webpack_require__(162).setImmediate))
+
+/***/ },
 /* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(160);
+	exports = module.exports = __webpack_require__(157);
 	exports.Stream = __webpack_require__(137);
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(157);
-	exports.Duplex = __webpack_require__(158);
-	exports.Transform = __webpack_require__(161);
-	exports.PassThrough = __webpack_require__(159);
+	exports.Writable = __webpack_require__(158);
+	exports.Duplex = __webpack_require__(159);
+	exports.Transform = __webpack_require__(160);
+	exports.PassThrough = __webpack_require__(161);
 
 
 /***/ },
 /* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(157)
+	module.exports = __webpack_require__(158)
 
 
 /***/ },
 /* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(158)
+	module.exports = __webpack_require__(159)
 
 
 /***/ },
 /* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(161)
+	module.exports = __webpack_require__(160)
 
 
 /***/ },
 /* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(159)
+	module.exports = __webpack_require__(161)
 
 
 /***/ },
@@ -64493,638 +64493,6 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-	// A bit simpler than readable streams.
-	// Implement an async ._write(chunk, cb), and it'll handle all
-	// the drain event emission and buffering.
-
-	module.exports = Writable;
-
-	/*<replacement>*/
-	var Buffer = __webpack_require__(77).Buffer;
-	/*</replacement>*/
-
-	Writable.WritableState = WritableState;
-
-
-	/*<replacement>*/
-	var util = __webpack_require__(167);
-	util.inherits = __webpack_require__(166);
-	/*</replacement>*/
-
-	var Stream = __webpack_require__(137);
-
-	util.inherits(Writable, Stream);
-
-	function WriteReq(chunk, encoding, cb) {
-	  this.chunk = chunk;
-	  this.encoding = encoding;
-	  this.callback = cb;
-	}
-
-	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(158);
-
-	  options = options || {};
-
-	  // the point at which write() starts returning false
-	  // Note: 0 is a valid value, means that we always return false if
-	  // the entire buffer is not flushed immediately on write()
-	  var hwm = options.highWaterMark;
-	  var defaultHwm = options.objectMode ? 16 : 16 * 1024;
-	  this.highWaterMark = (hwm || hwm === 0) ? hwm : defaultHwm;
-
-	  // object stream flag to indicate whether or not this stream
-	  // contains buffers or objects.
-	  this.objectMode = !!options.objectMode;
-
-	  if (stream instanceof Duplex)
-	    this.objectMode = this.objectMode || !!options.writableObjectMode;
-
-	  // cast to ints.
-	  this.highWaterMark = ~~this.highWaterMark;
-
-	  this.needDrain = false;
-	  // at the start of calling end()
-	  this.ending = false;
-	  // when end() has been called, and returned
-	  this.ended = false;
-	  // when 'finish' is emitted
-	  this.finished = false;
-
-	  // should we decode strings into buffers before passing to _write?
-	  // this is here so that some node-core streams can optimize string
-	  // handling at a lower level.
-	  var noDecode = options.decodeStrings === false;
-	  this.decodeStrings = !noDecode;
-
-	  // Crypto is kind of old and crusty.  Historically, its default string
-	  // encoding is 'binary' so we have to make this configurable.
-	  // Everything else in the universe uses 'utf8', though.
-	  this.defaultEncoding = options.defaultEncoding || 'utf8';
-
-	  // not an actual buffer we keep track of, but a measurement
-	  // of how much we're waiting to get pushed to some underlying
-	  // socket or file.
-	  this.length = 0;
-
-	  // a flag to see when we're in the middle of a write.
-	  this.writing = false;
-
-	  // when true all writes will be buffered until .uncork() call
-	  this.corked = 0;
-
-	  // a flag to be able to tell if the onwrite cb is called immediately,
-	  // or on a later tick.  We set this to true at first, because any
-	  // actions that shouldn't happen until "later" should generally also
-	  // not happen before the first write call.
-	  this.sync = true;
-
-	  // a flag to know if we're processing previously buffered items, which
-	  // may call the _write() callback in the same tick, so that we don't
-	  // end up in an overlapped onwrite situation.
-	  this.bufferProcessing = false;
-
-	  // the callback that's passed to _write(chunk,cb)
-	  this.onwrite = function(er) {
-	    onwrite(stream, er);
-	  };
-
-	  // the callback that the user supplies to write(chunk,encoding,cb)
-	  this.writecb = null;
-
-	  // the amount that is being written when _write is called.
-	  this.writelen = 0;
-
-	  this.buffer = [];
-
-	  // number of pending user-supplied write callbacks
-	  // this must be 0 before 'finish' can be emitted
-	  this.pendingcb = 0;
-
-	  // emit prefinish if the only thing we're waiting for is _write cbs
-	  // This is relevant for synchronous Transform streams
-	  this.prefinished = false;
-
-	  // True if the error was already emitted and should not be thrown again
-	  this.errorEmitted = false;
-	}
-
-	function Writable(options) {
-	  var Duplex = __webpack_require__(158);
-
-	  // Writable ctor is applied to Duplexes, though they're not
-	  // instanceof Writable, they're instanceof Readable.
-	  if (!(this instanceof Writable) && !(this instanceof Duplex))
-	    return new Writable(options);
-
-	  this._writableState = new WritableState(options, this);
-
-	  // legacy.
-	  this.writable = true;
-
-	  Stream.call(this);
-	}
-
-	// Otherwise people can pipe Writable streams, which is just wrong.
-	Writable.prototype.pipe = function() {
-	  this.emit('error', new Error('Cannot pipe. Not readable.'));
-	};
-
-
-	function writeAfterEnd(stream, state, cb) {
-	  var er = new Error('write after end');
-	  // TODO: defer error events consistently everywhere, not just the cb
-	  stream.emit('error', er);
-	  process.nextTick(function() {
-	    cb(er);
-	  });
-	}
-
-	// If we get something that is not a buffer, string, null, or undefined,
-	// and we're not in objectMode, then that's an error.
-	// Otherwise stream chunks are all considered to be of length=1, and the
-	// watermarks determine how many objects to keep in the buffer, rather than
-	// how many bytes or characters.
-	function validChunk(stream, state, chunk, cb) {
-	  var valid = true;
-	  if (!util.isBuffer(chunk) &&
-	      !util.isString(chunk) &&
-	      !util.isNullOrUndefined(chunk) &&
-	      !state.objectMode) {
-	    var er = new TypeError('Invalid non-string/buffer chunk');
-	    stream.emit('error', er);
-	    process.nextTick(function() {
-	      cb(er);
-	    });
-	    valid = false;
-	  }
-	  return valid;
-	}
-
-	Writable.prototype.write = function(chunk, encoding, cb) {
-	  var state = this._writableState;
-	  var ret = false;
-
-	  if (util.isFunction(encoding)) {
-	    cb = encoding;
-	    encoding = null;
-	  }
-
-	  if (util.isBuffer(chunk))
-	    encoding = 'buffer';
-	  else if (!encoding)
-	    encoding = state.defaultEncoding;
-
-	  if (!util.isFunction(cb))
-	    cb = function() {};
-
-	  if (state.ended)
-	    writeAfterEnd(this, state, cb);
-	  else if (validChunk(this, state, chunk, cb)) {
-	    state.pendingcb++;
-	    ret = writeOrBuffer(this, state, chunk, encoding, cb);
-	  }
-
-	  return ret;
-	};
-
-	Writable.prototype.cork = function() {
-	  var state = this._writableState;
-
-	  state.corked++;
-	};
-
-	Writable.prototype.uncork = function() {
-	  var state = this._writableState;
-
-	  if (state.corked) {
-	    state.corked--;
-
-	    if (!state.writing &&
-	        !state.corked &&
-	        !state.finished &&
-	        !state.bufferProcessing &&
-	        state.buffer.length)
-	      clearBuffer(this, state);
-	  }
-	};
-
-	function decodeChunk(state, chunk, encoding) {
-	  if (!state.objectMode &&
-	      state.decodeStrings !== false &&
-	      util.isString(chunk)) {
-	    chunk = new Buffer(chunk, encoding);
-	  }
-	  return chunk;
-	}
-
-	// if we're already writing something, then just put this
-	// in the queue, and wait our turn.  Otherwise, call _write
-	// If we return false, then we need a drain event, so set that flag.
-	function writeOrBuffer(stream, state, chunk, encoding, cb) {
-	  chunk = decodeChunk(state, chunk, encoding);
-	  if (util.isBuffer(chunk))
-	    encoding = 'buffer';
-	  var len = state.objectMode ? 1 : chunk.length;
-
-	  state.length += len;
-
-	  var ret = state.length < state.highWaterMark;
-	  // we must ensure that previous needDrain will not be reset to false.
-	  if (!ret)
-	    state.needDrain = true;
-
-	  if (state.writing || state.corked)
-	    state.buffer.push(new WriteReq(chunk, encoding, cb));
-	  else
-	    doWrite(stream, state, false, len, chunk, encoding, cb);
-
-	  return ret;
-	}
-
-	function doWrite(stream, state, writev, len, chunk, encoding, cb) {
-	  state.writelen = len;
-	  state.writecb = cb;
-	  state.writing = true;
-	  state.sync = true;
-	  if (writev)
-	    stream._writev(chunk, state.onwrite);
-	  else
-	    stream._write(chunk, encoding, state.onwrite);
-	  state.sync = false;
-	}
-
-	function onwriteError(stream, state, sync, er, cb) {
-	  if (sync)
-	    process.nextTick(function() {
-	      state.pendingcb--;
-	      cb(er);
-	    });
-	  else {
-	    state.pendingcb--;
-	    cb(er);
-	  }
-
-	  stream._writableState.errorEmitted = true;
-	  stream.emit('error', er);
-	}
-
-	function onwriteStateUpdate(state) {
-	  state.writing = false;
-	  state.writecb = null;
-	  state.length -= state.writelen;
-	  state.writelen = 0;
-	}
-
-	function onwrite(stream, er) {
-	  var state = stream._writableState;
-	  var sync = state.sync;
-	  var cb = state.writecb;
-
-	  onwriteStateUpdate(state);
-
-	  if (er)
-	    onwriteError(stream, state, sync, er, cb);
-	  else {
-	    // Check if we're actually ready to finish, but don't emit yet
-	    var finished = needFinish(stream, state);
-
-	    if (!finished &&
-	        !state.corked &&
-	        !state.bufferProcessing &&
-	        state.buffer.length) {
-	      clearBuffer(stream, state);
-	    }
-
-	    if (sync) {
-	      process.nextTick(function() {
-	        afterWrite(stream, state, finished, cb);
-	      });
-	    } else {
-	      afterWrite(stream, state, finished, cb);
-	    }
-	  }
-	}
-
-	function afterWrite(stream, state, finished, cb) {
-	  if (!finished)
-	    onwriteDrain(stream, state);
-	  state.pendingcb--;
-	  cb();
-	  finishMaybe(stream, state);
-	}
-
-	// Must force callback to be called on nextTick, so that we don't
-	// emit 'drain' before the write() consumer gets the 'false' return
-	// value, and has a chance to attach a 'drain' listener.
-	function onwriteDrain(stream, state) {
-	  if (state.length === 0 && state.needDrain) {
-	    state.needDrain = false;
-	    stream.emit('drain');
-	  }
-	}
-
-
-	// if there's something in the buffer waiting, then process it
-	function clearBuffer(stream, state) {
-	  state.bufferProcessing = true;
-
-	  if (stream._writev && state.buffer.length > 1) {
-	    // Fast case, write everything using _writev()
-	    var cbs = [];
-	    for (var c = 0; c < state.buffer.length; c++)
-	      cbs.push(state.buffer[c].callback);
-
-	    // count the one we are adding, as well.
-	    // TODO(isaacs) clean this up
-	    state.pendingcb++;
-	    doWrite(stream, state, true, state.length, state.buffer, '', function(err) {
-	      for (var i = 0; i < cbs.length; i++) {
-	        state.pendingcb--;
-	        cbs[i](err);
-	      }
-	    });
-
-	    // Clear buffer
-	    state.buffer = [];
-	  } else {
-	    // Slow case, write chunks one-by-one
-	    for (var c = 0; c < state.buffer.length; c++) {
-	      var entry = state.buffer[c];
-	      var chunk = entry.chunk;
-	      var encoding = entry.encoding;
-	      var cb = entry.callback;
-	      var len = state.objectMode ? 1 : chunk.length;
-
-	      doWrite(stream, state, false, len, chunk, encoding, cb);
-
-	      // if we didn't call the onwrite immediately, then
-	      // it means that we need to wait until it does.
-	      // also, that means that the chunk and cb are currently
-	      // being processed, so move the buffer counter past them.
-	      if (state.writing) {
-	        c++;
-	        break;
-	      }
-	    }
-
-	    if (c < state.buffer.length)
-	      state.buffer = state.buffer.slice(c);
-	    else
-	      state.buffer.length = 0;
-	  }
-
-	  state.bufferProcessing = false;
-	}
-
-	Writable.prototype._write = function(chunk, encoding, cb) {
-	  cb(new Error('not implemented'));
-
-	};
-
-	Writable.prototype._writev = null;
-
-	Writable.prototype.end = function(chunk, encoding, cb) {
-	  var state = this._writableState;
-
-	  if (util.isFunction(chunk)) {
-	    cb = chunk;
-	    chunk = null;
-	    encoding = null;
-	  } else if (util.isFunction(encoding)) {
-	    cb = encoding;
-	    encoding = null;
-	  }
-
-	  if (!util.isNullOrUndefined(chunk))
-	    this.write(chunk, encoding);
-
-	  // .end() fully uncorks
-	  if (state.corked) {
-	    state.corked = 1;
-	    this.uncork();
-	  }
-
-	  // ignore unnecessary end() calls.
-	  if (!state.ending && !state.finished)
-	    endWritable(this, state, cb);
-	};
-
-
-	function needFinish(stream, state) {
-	  return (state.ending &&
-	          state.length === 0 &&
-	          !state.finished &&
-	          !state.writing);
-	}
-
-	function prefinish(stream, state) {
-	  if (!state.prefinished) {
-	    state.prefinished = true;
-	    stream.emit('prefinish');
-	  }
-	}
-
-	function finishMaybe(stream, state) {
-	  var need = needFinish(stream, state);
-	  if (need) {
-	    if (state.pendingcb === 0) {
-	      prefinish(stream, state);
-	      state.finished = true;
-	      stream.emit('finish');
-	    } else
-	      prefinish(stream, state);
-	  }
-	  return need;
-	}
-
-	function endWritable(stream, state, cb) {
-	  state.ending = true;
-	  finishMaybe(stream, state);
-	  if (cb) {
-	    if (state.finished)
-	      process.nextTick(cb);
-	    else
-	      stream.once('finish', cb);
-	  }
-	  state.ended = true;
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
-
-/***/ },
-/* 158 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// a duplex stream is just a stream that is both readable and writable.
-	// Since JS doesn't have multiple prototypal inheritance, this class
-	// prototypally inherits from Readable, and then parasitically from
-	// Writable.
-
-	module.exports = Duplex;
-
-	/*<replacement>*/
-	var objectKeys = Object.keys || function (obj) {
-	  var keys = [];
-	  for (var key in obj) keys.push(key);
-	  return keys;
-	}
-	/*</replacement>*/
-
-
-	/*<replacement>*/
-	var util = __webpack_require__(167);
-	util.inherits = __webpack_require__(166);
-	/*</replacement>*/
-
-	var Readable = __webpack_require__(160);
-	var Writable = __webpack_require__(157);
-
-	util.inherits(Duplex, Readable);
-
-	forEach(objectKeys(Writable.prototype), function(method) {
-	  if (!Duplex.prototype[method])
-	    Duplex.prototype[method] = Writable.prototype[method];
-	});
-
-	function Duplex(options) {
-	  if (!(this instanceof Duplex))
-	    return new Duplex(options);
-
-	  Readable.call(this, options);
-	  Writable.call(this, options);
-
-	  if (options && options.readable === false)
-	    this.readable = false;
-
-	  if (options && options.writable === false)
-	    this.writable = false;
-
-	  this.allowHalfOpen = true;
-	  if (options && options.allowHalfOpen === false)
-	    this.allowHalfOpen = false;
-
-	  this.once('end', onend);
-	}
-
-	// the no-half-open enforcer
-	function onend() {
-	  // if we allow half-open state, or if the writable side ended,
-	  // then we're ok.
-	  if (this.allowHalfOpen || this._writableState.ended)
-	    return;
-
-	  // no more data can be written.
-	  // But allow more writes to happen in this tick.
-	  process.nextTick(this.end.bind(this));
-	}
-
-	function forEach (xs, f) {
-	  for (var i = 0, l = xs.length; i < l; i++) {
-	    f(xs[i], i);
-	  }
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
-
-/***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// a passthrough stream.
-	// basically just the most minimal sort of Transform stream.
-	// Every written chunk gets output as-is.
-
-	module.exports = PassThrough;
-
-	var Transform = __webpack_require__(161);
-
-	/*<replacement>*/
-	var util = __webpack_require__(167);
-	util.inherits = __webpack_require__(166);
-	/*</replacement>*/
-
-	util.inherits(PassThrough, Transform);
-
-	function PassThrough(options) {
-	  if (!(this instanceof PassThrough))
-	    return new PassThrough(options);
-
-	  Transform.call(this, options);
-	}
-
-	PassThrough.prototype._transform = function(chunk, encoding, cb) {
-	  cb(null, chunk);
-	};
-
-
-/***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 	module.exports = Readable;
 
 	/*<replacement>*/
@@ -65138,7 +64506,7 @@
 
 	Readable.ReadableState = ReadableState;
 
-	var EE = __webpack_require__(142).EventEmitter;
+	var EE = __webpack_require__(143).EventEmitter;
 
 	/*<replacement>*/
 	if (!EE.listenerCount) EE.listenerCount = function(emitter, type) {
@@ -65149,8 +64517,8 @@
 	var Stream = __webpack_require__(137);
 
 	/*<replacement>*/
-	var util = __webpack_require__(167);
-	util.inherits = __webpack_require__(166);
+	var util = __webpack_require__(166);
+	util.inherits = __webpack_require__(167);
 	/*</replacement>*/
 
 	var StringDecoder;
@@ -65169,7 +64537,7 @@
 	util.inherits(Readable, Stream);
 
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(158);
+	  var Duplex = __webpack_require__(159);
 
 	  options = options || {};
 
@@ -65237,7 +64605,7 @@
 	}
 
 	function Readable(options) {
-	  var Duplex = __webpack_require__(158);
+	  var Duplex = __webpack_require__(159);
 
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -66056,10 +65424,590 @@
 	  return -1;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
-/* 161 */
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// A bit simpler than readable streams.
+	// Implement an async ._write(chunk, cb), and it'll handle all
+	// the drain event emission and buffering.
+
+	module.exports = Writable;
+
+	/*<replacement>*/
+	var Buffer = __webpack_require__(77).Buffer;
+	/*</replacement>*/
+
+	Writable.WritableState = WritableState;
+
+
+	/*<replacement>*/
+	var util = __webpack_require__(166);
+	util.inherits = __webpack_require__(167);
+	/*</replacement>*/
+
+	var Stream = __webpack_require__(137);
+
+	util.inherits(Writable, Stream);
+
+	function WriteReq(chunk, encoding, cb) {
+	  this.chunk = chunk;
+	  this.encoding = encoding;
+	  this.callback = cb;
+	}
+
+	function WritableState(options, stream) {
+	  var Duplex = __webpack_require__(159);
+
+	  options = options || {};
+
+	  // the point at which write() starts returning false
+	  // Note: 0 is a valid value, means that we always return false if
+	  // the entire buffer is not flushed immediately on write()
+	  var hwm = options.highWaterMark;
+	  var defaultHwm = options.objectMode ? 16 : 16 * 1024;
+	  this.highWaterMark = (hwm || hwm === 0) ? hwm : defaultHwm;
+
+	  // object stream flag to indicate whether or not this stream
+	  // contains buffers or objects.
+	  this.objectMode = !!options.objectMode;
+
+	  if (stream instanceof Duplex)
+	    this.objectMode = this.objectMode || !!options.writableObjectMode;
+
+	  // cast to ints.
+	  this.highWaterMark = ~~this.highWaterMark;
+
+	  this.needDrain = false;
+	  // at the start of calling end()
+	  this.ending = false;
+	  // when end() has been called, and returned
+	  this.ended = false;
+	  // when 'finish' is emitted
+	  this.finished = false;
+
+	  // should we decode strings into buffers before passing to _write?
+	  // this is here so that some node-core streams can optimize string
+	  // handling at a lower level.
+	  var noDecode = options.decodeStrings === false;
+	  this.decodeStrings = !noDecode;
+
+	  // Crypto is kind of old and crusty.  Historically, its default string
+	  // encoding is 'binary' so we have to make this configurable.
+	  // Everything else in the universe uses 'utf8', though.
+	  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+	  // not an actual buffer we keep track of, but a measurement
+	  // of how much we're waiting to get pushed to some underlying
+	  // socket or file.
+	  this.length = 0;
+
+	  // a flag to see when we're in the middle of a write.
+	  this.writing = false;
+
+	  // when true all writes will be buffered until .uncork() call
+	  this.corked = 0;
+
+	  // a flag to be able to tell if the onwrite cb is called immediately,
+	  // or on a later tick.  We set this to true at first, because any
+	  // actions that shouldn't happen until "later" should generally also
+	  // not happen before the first write call.
+	  this.sync = true;
+
+	  // a flag to know if we're processing previously buffered items, which
+	  // may call the _write() callback in the same tick, so that we don't
+	  // end up in an overlapped onwrite situation.
+	  this.bufferProcessing = false;
+
+	  // the callback that's passed to _write(chunk,cb)
+	  this.onwrite = function(er) {
+	    onwrite(stream, er);
+	  };
+
+	  // the callback that the user supplies to write(chunk,encoding,cb)
+	  this.writecb = null;
+
+	  // the amount that is being written when _write is called.
+	  this.writelen = 0;
+
+	  this.buffer = [];
+
+	  // number of pending user-supplied write callbacks
+	  // this must be 0 before 'finish' can be emitted
+	  this.pendingcb = 0;
+
+	  // emit prefinish if the only thing we're waiting for is _write cbs
+	  // This is relevant for synchronous Transform streams
+	  this.prefinished = false;
+
+	  // True if the error was already emitted and should not be thrown again
+	  this.errorEmitted = false;
+	}
+
+	function Writable(options) {
+	  var Duplex = __webpack_require__(159);
+
+	  // Writable ctor is applied to Duplexes, though they're not
+	  // instanceof Writable, they're instanceof Readable.
+	  if (!(this instanceof Writable) && !(this instanceof Duplex))
+	    return new Writable(options);
+
+	  this._writableState = new WritableState(options, this);
+
+	  // legacy.
+	  this.writable = true;
+
+	  Stream.call(this);
+	}
+
+	// Otherwise people can pipe Writable streams, which is just wrong.
+	Writable.prototype.pipe = function() {
+	  this.emit('error', new Error('Cannot pipe. Not readable.'));
+	};
+
+
+	function writeAfterEnd(stream, state, cb) {
+	  var er = new Error('write after end');
+	  // TODO: defer error events consistently everywhere, not just the cb
+	  stream.emit('error', er);
+	  process.nextTick(function() {
+	    cb(er);
+	  });
+	}
+
+	// If we get something that is not a buffer, string, null, or undefined,
+	// and we're not in objectMode, then that's an error.
+	// Otherwise stream chunks are all considered to be of length=1, and the
+	// watermarks determine how many objects to keep in the buffer, rather than
+	// how many bytes or characters.
+	function validChunk(stream, state, chunk, cb) {
+	  var valid = true;
+	  if (!util.isBuffer(chunk) &&
+	      !util.isString(chunk) &&
+	      !util.isNullOrUndefined(chunk) &&
+	      !state.objectMode) {
+	    var er = new TypeError('Invalid non-string/buffer chunk');
+	    stream.emit('error', er);
+	    process.nextTick(function() {
+	      cb(er);
+	    });
+	    valid = false;
+	  }
+	  return valid;
+	}
+
+	Writable.prototype.write = function(chunk, encoding, cb) {
+	  var state = this._writableState;
+	  var ret = false;
+
+	  if (util.isFunction(encoding)) {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (util.isBuffer(chunk))
+	    encoding = 'buffer';
+	  else if (!encoding)
+	    encoding = state.defaultEncoding;
+
+	  if (!util.isFunction(cb))
+	    cb = function() {};
+
+	  if (state.ended)
+	    writeAfterEnd(this, state, cb);
+	  else if (validChunk(this, state, chunk, cb)) {
+	    state.pendingcb++;
+	    ret = writeOrBuffer(this, state, chunk, encoding, cb);
+	  }
+
+	  return ret;
+	};
+
+	Writable.prototype.cork = function() {
+	  var state = this._writableState;
+
+	  state.corked++;
+	};
+
+	Writable.prototype.uncork = function() {
+	  var state = this._writableState;
+
+	  if (state.corked) {
+	    state.corked--;
+
+	    if (!state.writing &&
+	        !state.corked &&
+	        !state.finished &&
+	        !state.bufferProcessing &&
+	        state.buffer.length)
+	      clearBuffer(this, state);
+	  }
+	};
+
+	function decodeChunk(state, chunk, encoding) {
+	  if (!state.objectMode &&
+	      state.decodeStrings !== false &&
+	      util.isString(chunk)) {
+	    chunk = new Buffer(chunk, encoding);
+	  }
+	  return chunk;
+	}
+
+	// if we're already writing something, then just put this
+	// in the queue, and wait our turn.  Otherwise, call _write
+	// If we return false, then we need a drain event, so set that flag.
+	function writeOrBuffer(stream, state, chunk, encoding, cb) {
+	  chunk = decodeChunk(state, chunk, encoding);
+	  if (util.isBuffer(chunk))
+	    encoding = 'buffer';
+	  var len = state.objectMode ? 1 : chunk.length;
+
+	  state.length += len;
+
+	  var ret = state.length < state.highWaterMark;
+	  // we must ensure that previous needDrain will not be reset to false.
+	  if (!ret)
+	    state.needDrain = true;
+
+	  if (state.writing || state.corked)
+	    state.buffer.push(new WriteReq(chunk, encoding, cb));
+	  else
+	    doWrite(stream, state, false, len, chunk, encoding, cb);
+
+	  return ret;
+	}
+
+	function doWrite(stream, state, writev, len, chunk, encoding, cb) {
+	  state.writelen = len;
+	  state.writecb = cb;
+	  state.writing = true;
+	  state.sync = true;
+	  if (writev)
+	    stream._writev(chunk, state.onwrite);
+	  else
+	    stream._write(chunk, encoding, state.onwrite);
+	  state.sync = false;
+	}
+
+	function onwriteError(stream, state, sync, er, cb) {
+	  if (sync)
+	    process.nextTick(function() {
+	      state.pendingcb--;
+	      cb(er);
+	    });
+	  else {
+	    state.pendingcb--;
+	    cb(er);
+	  }
+
+	  stream._writableState.errorEmitted = true;
+	  stream.emit('error', er);
+	}
+
+	function onwriteStateUpdate(state) {
+	  state.writing = false;
+	  state.writecb = null;
+	  state.length -= state.writelen;
+	  state.writelen = 0;
+	}
+
+	function onwrite(stream, er) {
+	  var state = stream._writableState;
+	  var sync = state.sync;
+	  var cb = state.writecb;
+
+	  onwriteStateUpdate(state);
+
+	  if (er)
+	    onwriteError(stream, state, sync, er, cb);
+	  else {
+	    // Check if we're actually ready to finish, but don't emit yet
+	    var finished = needFinish(stream, state);
+
+	    if (!finished &&
+	        !state.corked &&
+	        !state.bufferProcessing &&
+	        state.buffer.length) {
+	      clearBuffer(stream, state);
+	    }
+
+	    if (sync) {
+	      process.nextTick(function() {
+	        afterWrite(stream, state, finished, cb);
+	      });
+	    } else {
+	      afterWrite(stream, state, finished, cb);
+	    }
+	  }
+	}
+
+	function afterWrite(stream, state, finished, cb) {
+	  if (!finished)
+	    onwriteDrain(stream, state);
+	  state.pendingcb--;
+	  cb();
+	  finishMaybe(stream, state);
+	}
+
+	// Must force callback to be called on nextTick, so that we don't
+	// emit 'drain' before the write() consumer gets the 'false' return
+	// value, and has a chance to attach a 'drain' listener.
+	function onwriteDrain(stream, state) {
+	  if (state.length === 0 && state.needDrain) {
+	    state.needDrain = false;
+	    stream.emit('drain');
+	  }
+	}
+
+
+	// if there's something in the buffer waiting, then process it
+	function clearBuffer(stream, state) {
+	  state.bufferProcessing = true;
+
+	  if (stream._writev && state.buffer.length > 1) {
+	    // Fast case, write everything using _writev()
+	    var cbs = [];
+	    for (var c = 0; c < state.buffer.length; c++)
+	      cbs.push(state.buffer[c].callback);
+
+	    // count the one we are adding, as well.
+	    // TODO(isaacs) clean this up
+	    state.pendingcb++;
+	    doWrite(stream, state, true, state.length, state.buffer, '', function(err) {
+	      for (var i = 0; i < cbs.length; i++) {
+	        state.pendingcb--;
+	        cbs[i](err);
+	      }
+	    });
+
+	    // Clear buffer
+	    state.buffer = [];
+	  } else {
+	    // Slow case, write chunks one-by-one
+	    for (var c = 0; c < state.buffer.length; c++) {
+	      var entry = state.buffer[c];
+	      var chunk = entry.chunk;
+	      var encoding = entry.encoding;
+	      var cb = entry.callback;
+	      var len = state.objectMode ? 1 : chunk.length;
+
+	      doWrite(stream, state, false, len, chunk, encoding, cb);
+
+	      // if we didn't call the onwrite immediately, then
+	      // it means that we need to wait until it does.
+	      // also, that means that the chunk and cb are currently
+	      // being processed, so move the buffer counter past them.
+	      if (state.writing) {
+	        c++;
+	        break;
+	      }
+	    }
+
+	    if (c < state.buffer.length)
+	      state.buffer = state.buffer.slice(c);
+	    else
+	      state.buffer.length = 0;
+	  }
+
+	  state.bufferProcessing = false;
+	}
+
+	Writable.prototype._write = function(chunk, encoding, cb) {
+	  cb(new Error('not implemented'));
+
+	};
+
+	Writable.prototype._writev = null;
+
+	Writable.prototype.end = function(chunk, encoding, cb) {
+	  var state = this._writableState;
+
+	  if (util.isFunction(chunk)) {
+	    cb = chunk;
+	    chunk = null;
+	    encoding = null;
+	  } else if (util.isFunction(encoding)) {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (!util.isNullOrUndefined(chunk))
+	    this.write(chunk, encoding);
+
+	  // .end() fully uncorks
+	  if (state.corked) {
+	    state.corked = 1;
+	    this.uncork();
+	  }
+
+	  // ignore unnecessary end() calls.
+	  if (!state.ending && !state.finished)
+	    endWritable(this, state, cb);
+	};
+
+
+	function needFinish(stream, state) {
+	  return (state.ending &&
+	          state.length === 0 &&
+	          !state.finished &&
+	          !state.writing);
+	}
+
+	function prefinish(stream, state) {
+	  if (!state.prefinished) {
+	    state.prefinished = true;
+	    stream.emit('prefinish');
+	  }
+	}
+
+	function finishMaybe(stream, state) {
+	  var need = needFinish(stream, state);
+	  if (need) {
+	    if (state.pendingcb === 0) {
+	      prefinish(stream, state);
+	      state.finished = true;
+	      stream.emit('finish');
+	    } else
+	      prefinish(stream, state);
+	  }
+	  return need;
+	}
+
+	function endWritable(stream, state, cb) {
+	  state.ending = true;
+	  finishMaybe(stream, state);
+	  if (cb) {
+	    if (state.finished)
+	      process.nextTick(cb);
+	    else
+	      stream.once('finish', cb);
+	  }
+	  state.ended = true;
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// a duplex stream is just a stream that is both readable and writable.
+	// Since JS doesn't have multiple prototypal inheritance, this class
+	// prototypally inherits from Readable, and then parasitically from
+	// Writable.
+
+	module.exports = Duplex;
+
+	/*<replacement>*/
+	var objectKeys = Object.keys || function (obj) {
+	  var keys = [];
+	  for (var key in obj) keys.push(key);
+	  return keys;
+	}
+	/*</replacement>*/
+
+
+	/*<replacement>*/
+	var util = __webpack_require__(166);
+	util.inherits = __webpack_require__(167);
+	/*</replacement>*/
+
+	var Readable = __webpack_require__(157);
+	var Writable = __webpack_require__(158);
+
+	util.inherits(Duplex, Readable);
+
+	forEach(objectKeys(Writable.prototype), function(method) {
+	  if (!Duplex.prototype[method])
+	    Duplex.prototype[method] = Writable.prototype[method];
+	});
+
+	function Duplex(options) {
+	  if (!(this instanceof Duplex))
+	    return new Duplex(options);
+
+	  Readable.call(this, options);
+	  Writable.call(this, options);
+
+	  if (options && options.readable === false)
+	    this.readable = false;
+
+	  if (options && options.writable === false)
+	    this.writable = false;
+
+	  this.allowHalfOpen = true;
+	  if (options && options.allowHalfOpen === false)
+	    this.allowHalfOpen = false;
+
+	  this.once('end', onend);
+	}
+
+	// the no-half-open enforcer
+	function onend() {
+	  // if we allow half-open state, or if the writable side ended,
+	  // then we're ok.
+	  if (this.allowHalfOpen || this._writableState.ended)
+	    return;
+
+	  // no more data can be written.
+	  // But allow more writes to happen in this tick.
+	  process.nextTick(this.end.bind(this));
+	}
+
+	function forEach (xs, f) {
+	  for (var i = 0, l = xs.length; i < l; i++) {
+	    f(xs[i], i);
+	  }
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
+
+/***/ },
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -66128,11 +66076,11 @@
 
 	module.exports = Transform;
 
-	var Duplex = __webpack_require__(158);
+	var Duplex = __webpack_require__(159);
 
 	/*<replacement>*/
-	var util = __webpack_require__(167);
-	util.inherits = __webpack_require__(166);
+	var util = __webpack_require__(166);
+	util.inherits = __webpack_require__(167);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -66274,10 +66222,62 @@
 
 
 /***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// a passthrough stream.
+	// basically just the most minimal sort of Transform stream.
+	// Every written chunk gets output as-is.
+
+	module.exports = PassThrough;
+
+	var Transform = __webpack_require__(160);
+
+	/*<replacement>*/
+	var util = __webpack_require__(166);
+	util.inherits = __webpack_require__(167);
+	/*</replacement>*/
+
+	util.inherits(PassThrough, Transform);
+
+	function PassThrough(options) {
+	  if (!(this instanceof PassThrough))
+	    return new PassThrough(options);
+
+	  Transform.call(this, options);
+	}
+
+	PassThrough.prototype._transform = function(chunk, encoding, cb) {
+	  cb(null, chunk);
+	};
+
+
+/***/ },
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(70).nextTick;
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(72).nextTick;
 	var apply = Function.prototype.apply;
 	var slice = Array.prototype.slice;
 	var immediateIds = {};
@@ -66601,35 +66601,6 @@
 /* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
-	if (typeof Object.create === 'function') {
-	  // implementation from standard node.js 'util' module
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	      constructor: {
-	        value: ctor,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	  };
-	} else {
-	  // old school shim for old browsers
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    var TempCtor = function () {}
-	    TempCtor.prototype = superCtor.prototype
-	    ctor.prototype = new TempCtor()
-	    ctor.prototype.constructor = ctor
-	  }
-	}
-
-
-/***/ },
-/* 167 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
 	//
 	// Permission is hereby granted, free of charge, to any person obtaining a
@@ -66738,6 +66709,35 @@
 	  return Object.prototype.toString.call(o);
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(77).Buffer))
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	if (typeof Object.create === 'function') {
+	  // implementation from standard node.js 'util' module
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    ctor.prototype = Object.create(superCtor.prototype, {
+	      constructor: {
+	        value: ctor,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	  };
+	} else {
+	  // old school shim for old browsers
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    var TempCtor = function () {}
+	    TempCtor.prototype = superCtor.prototype
+	    ctor.prototype = new TempCtor()
+	    ctor.prototype.constructor = ctor
+	  }
+	}
+
 
 /***/ }
 /******/ ]);
