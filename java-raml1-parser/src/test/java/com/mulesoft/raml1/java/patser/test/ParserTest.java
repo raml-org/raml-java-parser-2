@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import com.mulesoft.raml1.java.parser.core.JavaNodeFactory;
 import com.mulesoft.raml1.java.parser.model.api.Api;
 import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
+import com.mulesoft.raml1.java.parser.model.datamodel.ObjectField;
 import com.mulesoft.raml1.java.parser.model.declarations.AnnotationType;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.Method;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.Resource;
@@ -65,11 +66,11 @@ public class ParserTest
         assertThat(get.method(), is("get"));
 
         // Body
-        assertThat(get.body().get(0).name(), is("application/x-www-form-urlencoded"));
-        // TODO: No access to  properties.
+        DataElement body = get.body().get(0);
+		assertThat(body.name(), is("application/x-www-form-urlencoded"));
+		assertThat(body instanceof ObjectField, is(true));		
+		assertThat(((ObjectField)body).properties().size(),is(2));
 
-        // annotations
-        // TODO: The following test fails. Resource method's annotations are not parsed.
         assertThat(get.annotations().size(), is(1));
     }
 }
