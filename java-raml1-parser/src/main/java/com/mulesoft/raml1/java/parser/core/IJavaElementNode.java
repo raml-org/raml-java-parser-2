@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IJavaElementNode extends IJavaNode {
 
-    List<ValidationIssue> getErrors();
+	List<ValidationIssue> getErrors();
 
 }

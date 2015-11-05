@@ -10,12 +10,12 @@ public class JavaAttributeNode implements IJavaAttributeNode {
 		this.jsNode = jsNode;
 		this.factory = factory;
 	}
-	
+
 	public JavaAttributeNode() {
 	}
 
 	private Object jsNode;
-	
+
 	private JavaNodeFactory factory;
 
 	protected String attributeValue() {
@@ -29,13 +29,12 @@ public class JavaAttributeNode implements IJavaAttributeNode {
 	public String toJSON() {
 		return this.toJSON(0);
 	}
-	
+
 	public String toJSON(int offset) {
-		if(this instanceof ValueType){
+		if (this instanceof ValueType) {
 			return "\"" + StringEscapeUtils.escapeEcmaScript(this.attributeValue()) + "\"";
 		}
 		return this.customClassValue().toJSON(offset);
 	}
-
 
 }
