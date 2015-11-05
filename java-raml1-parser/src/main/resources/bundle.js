@@ -9387,7 +9387,10 @@
 	        }
 	        var uc = new UserClass(className, qName);
 	        this.classCollection.addClass(uc);
-	        var imports = { 'import javax.xml.bind.annotation.XmlElement;': true };
+	        var imports = {
+				'import javax.xml.bind.annotation.XmlElement;': true,
+				'import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;': true
+			};
 	        imports[("import " + this.rootPackage + ".core." + customTypeSuperclass + ";")] = true;
 	        var fields = [];
 	        var hasArray = false;

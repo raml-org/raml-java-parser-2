@@ -46,7 +46,7 @@ public class ParserTest
         assertThat(typePaging.parameters().size(), is(2));
 
         final DataElement pageSize = typePaging.parameters().get(0);
-        assertThat(pageSize.name(), is("pageSize"));
+        assertThat(pageSize.name(), is("page-size"));
         assertThat(pageSize.type().size(), is(1));
         assertThat(pageSize.type().get(0), is("pointer"));
 
