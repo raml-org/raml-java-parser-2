@@ -14,3 +14,10 @@ hs_err_pid*
 # IntelliJ IDEA
 *.iml
 .idea
+
+# Eclipse
+.project
+.classpath
+.settings
+
+.DS_Store
