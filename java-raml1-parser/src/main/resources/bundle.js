@@ -9387,7 +9387,10 @@
 	        }
 	        var uc = new UserClass(className, qName);
 	        this.classCollection.addClass(uc);
-	        var imports = { 'import javax.xml.bind.annotation.XmlElement;': true };
+	        var imports = {
+	            'import javax.xml.bind.annotation.XmlElement;': true,
+	            'import org.eclipse.persistence.oxm.annotations.XmlDiscriminatorValue;': true
+	        };
 	        imports[("import " + this.rootPackage + ".core." + customTypeSuperclass + ";")] = true;
 	        var fields = [];
 	        var hasArray = false;
@@ -9434,7 +9437,7 @@
 	                fieldType = "List<" + fieldType + ">";
 	                arrDim--;
 	            }
-	            fields.push("    //@XmlElement(name=\"" + pName + "\")\n    public " + fieldType + " " + fieldName + ";");
+	            fields.push("    @XmlElement(name=\"" + pName + "\")\n    public " + fieldType + " " + fieldName + ";");
 	        });
 	        if (hasArray) {
 	            imports['import java.util.List;'] = true;
@@ -12378,7 +12381,7 @@
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ramlPathMatch = __webpack_require__(52);
+	var ramlPathMatch = __webpack_require__(53);
 	var hl = __webpack_require__(17);
 	var hlimpl = __webpack_require__(7);
 	var Opt = __webpack_require__(5);
@@ -12775,7 +12778,7 @@
 	var hl = __webpack_require__(17);
 	var hlImpl = __webpack_require__(7);
 	var typeExpr = __webpack_require__(31);
-	var ramlSignatureParser = __webpack_require__(53);
+	var ramlSignatureParser = __webpack_require__(52);
 	var wrapper = __webpack_require__(3);
 	function validate(s, node, cb) {
 	    var result = ramlSignatureParser.parse(s);
@@ -16865,20 +16868,20 @@
 
 	/// <reference path="../../../typings/tsd.d.ts" />
 	'use strict';
-	var loader = __webpack_require__(57);
+	var loader = __webpack_require__(60);
 	var dumper = __webpack_require__(27);
 	function deprecated(name) {
 	    return function () {
 	        throw new Error('Function ' + name + ' is deprecated and cannot be used.');
 	    };
 	}
-	exports.Type = __webpack_require__(58);
-	exports.Schema = __webpack_require__(59);
-	exports.FAILSAFE_SCHEMA = __webpack_require__(60);
-	exports.JSON_SCHEMA = __webpack_require__(61);
-	exports.CORE_SCHEMA = __webpack_require__(62);
-	exports.DEFAULT_SAFE_SCHEMA = __webpack_require__(63);
-	exports.DEFAULT_FULL_SCHEMA = __webpack_require__(64);
+	exports.Type = __webpack_require__(61);
+	exports.Schema = __webpack_require__(62);
+	exports.FAILSAFE_SCHEMA = __webpack_require__(63);
+	exports.JSON_SCHEMA = __webpack_require__(64);
+	exports.CORE_SCHEMA = __webpack_require__(65);
+	exports.DEFAULT_SAFE_SCHEMA = __webpack_require__(59);
+	exports.DEFAULT_FULL_SCHEMA = __webpack_require__(58);
 	exports.load = loader.load;
 	exports.loadAll = loader.loadAll;
 	exports.safeLoad = loader.safeLoad;
@@ -16887,9 +16890,9 @@
 	exports.safeDump = dumper.safeDump;
 	exports.YAMLException = __webpack_require__(28);
 	// Deprecared schema names from JS-YAML 2.0.x
-	exports.MINIMAL_SCHEMA = __webpack_require__(60);
-	exports.SAFE_SCHEMA = __webpack_require__(63);
-	exports.DEFAULT_SCHEMA = __webpack_require__(64);
+	exports.MINIMAL_SCHEMA = __webpack_require__(63);
+	exports.SAFE_SCHEMA = __webpack_require__(59);
+	exports.DEFAULT_SCHEMA = __webpack_require__(58);
 	// Deprecated functions from JS-YAML 1.x.x
 	exports.scan = deprecated('scan');
 	exports.parse = deprecated('parse');
@@ -16904,10 +16907,10 @@
 	/// <reference path="../../../../typings/tsd.d.ts" />
 	'use strict';
 	/*eslint-disable no-use-before-define*/
-	var common = __webpack_require__(65);
+	var common = __webpack_require__(57);
 	var YAMLException = __webpack_require__(28);
-	var DEFAULT_FULL_SCHEMA = __webpack_require__(64);
-	var DEFAULT_SAFE_SCHEMA = __webpack_require__(63);
+	var DEFAULT_FULL_SCHEMA = __webpack_require__(58);
+	var DEFAULT_SAFE_SCHEMA = __webpack_require__(59);
 	var _toString = Object.prototype.toString;
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	var CHAR_TAB = 0x09; /* Tab */
@@ -38953,128 +38956,6 @@
 /* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/// <reference path="../../typings/tsd.d.ts" />
-	var ramlSanitize = __webpack_require__(82);
-	var ramlValidate = __webpack_require__(83);
-	var REGEXP_MATCH = {
-	    number: '[-+]?\\d+(?:\\.\\d+)?',
-	    integer: '[-+]?\\d+',
-	    date: '(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \\d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \\d{4} (?:[0-1]\\d|2[0-3]):[0-5]\\d:[0-5]\\d GMT',
-	    boolean: '(?:true|false)'
-	};
-	var ESCAPE_CHARACTERS = /([.*+?=^!:${}()|[\]\/\\])/g;
-	var REGEXP_REPLACE = new RegExp([
-	    '([.\\/])?\\{([^}]+)\\}',
-	    ESCAPE_CHARACTERS.source
-	].join('|'), 'g');
-	function toRegExp(path, parameters, keys, options) {
-	    var end = options.end !== false;
-	    var strict = options.strict;
-	    var flags = '';
-	    if (!options.sensitive) {
-	        flags += 'i';
-	    }
-	    var route = path.replace(REGEXP_REPLACE, function (match, prefix, key, escape) {
-	        if (escape) {
-	            return '\\' + escape;
-	        }
-	        // Push the current key into the keys array.
-	        keys.push({
-	            name: key,
-	            prefix: prefix || '/'
-	        });
-	        prefix = prefix ? '\\' + prefix : '';
-	        // TODO: Support an array of parameters.
-	        var param = parameters[key];
-	        var capture = param && REGEXP_MATCH[param.type] || '[^' + (prefix || '\\/') + ']+';
-	        var optional = param && param.required === false;
-	        if (Array.isArray(param.enum) && param.enum.length) {
-	            capture = '(?:' + param.enum.map(function (value) {
-	                return String(value).replace(ESCAPE_CHARACTERS, '\\$1');
-	            }).join('|') + ')';
-	        }
-	        return prefix + '(' + capture + ')' + (optional ? '?' : '');
-	    });
-	    var endsWithSlash = path.charAt(path.length - 1) === '/';
-	    // In non-strict mode we allow a slash at the end of match. If the path to
-	    // match already ends with a slash, we remove it for consistency. The slash
-	    // is valid at the end of a path match, not in the middle. This is important
-	    // in non-ending mode, where "/test/" shouldn't match "/test//route".
-	    if (!strict) {
-	        route = (endsWithSlash ? route.slice(0, -2) : route) + '(?:\\/(?=$))?';
-	    }
-	    if (end) {
-	        route += '$';
-	    }
-	    else {
-	        // In non-ending mode, we need the capturing groups to match as much as
-	        // possible by using a positive lookahead to the end or next path segment.
-	        route += strict && endsWithSlash ? '' : '(?=\\/|$)';
-	    }
-	    return new RegExp('^' + route + (end ? '$' : ''), flags);
-	}
-	function decodeParam(param) {
-	    try {
-	        return decodeURIComponent(param);
-	    }
-	    catch (_) {
-	        var err = new Error('Failed to decode param "' + param + '"');
-	        err.status = 400;
-	        throw err;
-	    }
-	}
-	function ramlPathMatch(path, parameters, options) {
-	    options = options || {};
-	    if (path === '/' && options.end === false) {
-	        return truth;
-	    }
-	    parameters = parameters || {};
-	    var keys = [];
-	    var re = toRegExp(path, parameters, keys, options);
-	    var sanitize = ramlSanitize()(parameters);
-	    var validate = ramlValidate()(parameters);
-	    return function (pathname) {
-	        var m = re.exec(pathname);
-	        if (!m) {
-	            return false;
-	        }
-	        if (parameters['mediaTypeExtension']) {
-	            if (m.length > 1 && !m[m.length - 1]) {
-	                var beforeLast = m[m.length - 2];
-	                var ind = beforeLast.lastIndexOf('.');
-	                if (ind >= 0) {
-	                    m[m.length - 2] = beforeLast.substring(0, ind);
-	                    m[m.length - 1] = beforeLast.substring(ind);
-	                }
-	            }
-	        }
-	        var path = m[0];
-	        var params = {};
-	        for (var i = 1; i < m.length; i++) {
-	            var key = keys[i - 1];
-	            var param = m[i];
-	            params[key.name] = param == null ? param : decodeParam(param);
-	        }
-	        params = sanitize(params);
-	        if (!validate(params).valid) {
-	            return false;
-	        }
-	        return {
-	            path: path,
-	            params: params
-	        };
-	    };
-	}
-	function truth(path) {
-	    return { path: '', params: {} };
-	}
-	module.exports = ramlPathMatch;
-	//# sourceMappingURL=raml-path-match.js.map
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var parser = (function () {
 	    "use strict";
 	    /*
@@ -40184,6 +40065,128 @@
 	//# sourceMappingURL=ramlSignatureParser.js.map
 
 /***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../typings/tsd.d.ts" />
+	var ramlSanitize = __webpack_require__(82);
+	var ramlValidate = __webpack_require__(83);
+	var REGEXP_MATCH = {
+	    number: '[-+]?\\d+(?:\\.\\d+)?',
+	    integer: '[-+]?\\d+',
+	    date: '(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \\d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \\d{4} (?:[0-1]\\d|2[0-3]):[0-5]\\d:[0-5]\\d GMT',
+	    boolean: '(?:true|false)'
+	};
+	var ESCAPE_CHARACTERS = /([.*+?=^!:${}()|[\]\/\\])/g;
+	var REGEXP_REPLACE = new RegExp([
+	    '([.\\/])?\\{([^}]+)\\}',
+	    ESCAPE_CHARACTERS.source
+	].join('|'), 'g');
+	function toRegExp(path, parameters, keys, options) {
+	    var end = options.end !== false;
+	    var strict = options.strict;
+	    var flags = '';
+	    if (!options.sensitive) {
+	        flags += 'i';
+	    }
+	    var route = path.replace(REGEXP_REPLACE, function (match, prefix, key, escape) {
+	        if (escape) {
+	            return '\\' + escape;
+	        }
+	        // Push the current key into the keys array.
+	        keys.push({
+	            name: key,
+	            prefix: prefix || '/'
+	        });
+	        prefix = prefix ? '\\' + prefix : '';
+	        // TODO: Support an array of parameters.
+	        var param = parameters[key];
+	        var capture = param && REGEXP_MATCH[param.type] || '[^' + (prefix || '\\/') + ']+';
+	        var optional = param && param.required === false;
+	        if (Array.isArray(param.enum) && param.enum.length) {
+	            capture = '(?:' + param.enum.map(function (value) {
+	                return String(value).replace(ESCAPE_CHARACTERS, '\\$1');
+	            }).join('|') + ')';
+	        }
+	        return prefix + '(' + capture + ')' + (optional ? '?' : '');
+	    });
+	    var endsWithSlash = path.charAt(path.length - 1) === '/';
+	    // In non-strict mode we allow a slash at the end of match. If the path to
+	    // match already ends with a slash, we remove it for consistency. The slash
+	    // is valid at the end of a path match, not in the middle. This is important
+	    // in non-ending mode, where "/test/" shouldn't match "/test//route".
+	    if (!strict) {
+	        route = (endsWithSlash ? route.slice(0, -2) : route) + '(?:\\/(?=$))?';
+	    }
+	    if (end) {
+	        route += '$';
+	    }
+	    else {
+	        // In non-ending mode, we need the capturing groups to match as much as
+	        // possible by using a positive lookahead to the end or next path segment.
+	        route += strict && endsWithSlash ? '' : '(?=\\/|$)';
+	    }
+	    return new RegExp('^' + route + (end ? '$' : ''), flags);
+	}
+	function decodeParam(param) {
+	    try {
+	        return decodeURIComponent(param);
+	    }
+	    catch (_) {
+	        var err = new Error('Failed to decode param "' + param + '"');
+	        err.status = 400;
+	        throw err;
+	    }
+	}
+	function ramlPathMatch(path, parameters, options) {
+	    options = options || {};
+	    if (path === '/' && options.end === false) {
+	        return truth;
+	    }
+	    parameters = parameters || {};
+	    var keys = [];
+	    var re = toRegExp(path, parameters, keys, options);
+	    var sanitize = ramlSanitize()(parameters);
+	    var validate = ramlValidate()(parameters);
+	    return function (pathname) {
+	        var m = re.exec(pathname);
+	        if (!m) {
+	            return false;
+	        }
+	        if (parameters['mediaTypeExtension']) {
+	            if (m.length > 1 && !m[m.length - 1]) {
+	                var beforeLast = m[m.length - 2];
+	                var ind = beforeLast.lastIndexOf('.');
+	                if (ind >= 0) {
+	                    m[m.length - 2] = beforeLast.substring(0, ind);
+	                    m[m.length - 1] = beforeLast.substring(ind);
+	                }
+	            }
+	        }
+	        var path = m[0];
+	        var params = {};
+	        for (var i = 1; i < m.length; i++) {
+	            var key = keys[i - 1];
+	            var param = m[i];
+	            params[key.name] = param == null ? param : decodeParam(param);
+	        }
+	        params = sanitize(params);
+	        if (!validate(params).valid) {
+	            return false;
+	        }
+	        return {
+	            path: path,
+	            params: params
+	        };
+	    };
+	}
+	function truth(path) {
+	    return { path: '', params: {} };
+	}
+	module.exports = ramlPathMatch;
+	//# sourceMappingURL=raml-path-match.js.map
+
+/***/ },
 /* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -40342,7 +40345,7 @@
 	    d.prototype = new __();
 	};
 	var _ = __webpack_require__(47);
-	var sel = __webpack_require__(84);
+	var sel = __webpack_require__(85);
 	var Selector = (function () {
 	    function Selector() {
 	    }
@@ -40534,7 +40537,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../typings/tsd.d.ts" />
-	var ramlExpression = __webpack_require__(85);
+	var ramlExpression = __webpack_require__(84);
 	var search = __webpack_require__(35);
 	function validate(str, node) {
 	    var result = ramlExpression.parse(str);
@@ -40572,14 +40575,122 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../typings/tsd.d.ts" />
+	'use strict';
+	function isNothing(subject) {
+	    return (typeof subject === 'undefined') || (null === subject);
+	}
+	exports.isNothing = isNothing;
+	function isObject(subject) {
+	    return (typeof subject === 'object') && (null !== subject);
+	}
+	exports.isObject = isObject;
+	function toArray(sequence) {
+	    if (Array.isArray(sequence)) {
+	        return sequence;
+	    }
+	    else if (isNothing(sequence)) {
+	        return [];
+	    }
+	    return [sequence];
+	}
+	exports.toArray = toArray;
+	function extend(target, source) {
+	    var index, length, key, sourceKeys;
+	    if (source) {
+	        sourceKeys = Object.keys(source);
+	        for (index = 0, length = sourceKeys.length; index < length; index += 1) {
+	            key = sourceKeys[index];
+	            target[key] = source[key];
+	        }
+	    }
+	    return target;
+	}
+	exports.extend = extend;
+	function repeat(string, count) {
+	    var result = '', cycle;
+	    for (cycle = 0; cycle < count; cycle += 1) {
+	        result += string;
+	    }
+	    return result;
+	}
+	exports.repeat = repeat;
+	function isNegativeZero(number) {
+	    return (0 === number) && (Number.NEGATIVE_INFINITY === 1 / number);
+	}
+	exports.isNegativeZero = isNegativeZero;
+	//# sourceMappingURL=common.js.map
+
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	// JS-YAML's default schema for `load` function.
+	// It is not described in the YAML specification.
+	//
+	// This schema is based on JS-YAML's default safe schema and includes
+	// JavaScript-specific types: !!js/undefined, !!js/regexp and !!js/function.
+	//
+	// Also this schema is used as default base schema at `Schema.create` function.
+	'use strict';
+	var Schema = __webpack_require__(62);
+	var schema = new Schema({
+	    include: [
+	        __webpack_require__(59)
+	    ],
+	    explicit: [
+	        __webpack_require__(86),
+	        __webpack_require__(87),
+	        __webpack_require__(88)
+	    ]
+	});
+	Schema.DEFAULT = schema;
+	module.exports = schema;
+	//# sourceMappingURL=default_full.js.map
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	// JS-YAML's default schema for `safeLoad` function.
+	// It is not described in the YAML specification.
+	//
+	// This schema is based on standard YAML's Core schema and includes most of
+	// extra types described at YAML tag repository. (http://yaml.org/type/)
+	'use strict';
+	var Schema = __webpack_require__(62);
+	var schema = new Schema({
+	    include: [
+	        __webpack_require__(65)
+	    ],
+	    implicit: [
+	        __webpack_require__(89),
+	        __webpack_require__(90)
+	    ],
+	    explicit: [
+	        __webpack_require__(91),
+	        __webpack_require__(92),
+	        __webpack_require__(93),
+	        __webpack_require__(94)
+	    ]
+	});
+	module.exports = schema;
+	//# sourceMappingURL=default_safe.js.map
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../typings/tsd.d.ts" />
 	var ast = __webpack_require__(19);
 	'use strict';
 	/*eslint-disable max-len,no-use-before-define*/
-	var common = __webpack_require__(65);
+	var common = __webpack_require__(57);
 	var YAMLException = __webpack_require__(28);
-	var Mark = __webpack_require__(89);
-	var DEFAULT_SAFE_SCHEMA = __webpack_require__(63);
-	var DEFAULT_FULL_SCHEMA = __webpack_require__(64);
+	var Mark = __webpack_require__(102);
+	var DEFAULT_SAFE_SCHEMA = __webpack_require__(59);
+	var DEFAULT_FULL_SCHEMA = __webpack_require__(58);
 	var _hasOwnProperty = Object.prototype.hasOwnProperty;
 	var CONTEXT_FLOW_IN = 1;
 	var CONTEXT_FLOW_OUT = 2;
@@ -41888,7 +41999,7 @@
 	//# sourceMappingURL=loader.js.map
 
 /***/ },
-/* 58 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41948,15 +42059,15 @@
 	//# sourceMappingURL=type.js.map
 
 /***/ },
-/* 59 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../typings/tsd.d.ts" />
 	'use strict';
 	/*eslint-disable max-len*/
-	var common = __webpack_require__(65);
+	var common = __webpack_require__(57);
 	var YAMLException = __webpack_require__(28);
-	var Type = __webpack_require__(58);
+	var Type = __webpack_require__(61);
 	function compileList(schema, name, result) {
 	    var exclude = [];
 	    schema.include.forEach(function (includedSchema) {
@@ -42036,25 +42147,25 @@
 	//# sourceMappingURL=schema.js.map
 
 /***/ },
-/* 60 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	// Standard YAML's Failsafe schema.
 	// http://www.yaml.org/spec/1.2/spec.html#id2802346
 	'use strict';
-	var Schema = __webpack_require__(59);
+	var Schema = __webpack_require__(62);
 	module.exports = new Schema({
 	    explicit: [
-	        __webpack_require__(86),
-	        __webpack_require__(87),
-	        __webpack_require__(88)
+	        __webpack_require__(95),
+	        __webpack_require__(96),
+	        __webpack_require__(97)
 	    ]
 	});
 	//# sourceMappingURL=failsafe.js.map
 
 /***/ },
-/* 61 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -42065,22 +42176,22 @@
 	// So, this schema is not such strict as defined in the YAML specification.
 	// It allows numbers in binary notaion, use `Null` and `NULL` as `null`, etc.
 	'use strict';
-	var Schema = __webpack_require__(59);
+	var Schema = __webpack_require__(62);
 	module.exports = new Schema({
 	    include: [
-	        __webpack_require__(60)
+	        __webpack_require__(63)
 	    ],
 	    implicit: [
-	        __webpack_require__(90),
-	        __webpack_require__(91),
-	        __webpack_require__(92),
-	        __webpack_require__(93)
+	        __webpack_require__(98),
+	        __webpack_require__(99),
+	        __webpack_require__(100),
+	        __webpack_require__(101)
 	    ]
 	});
 	//# sourceMappingURL=json.js.map
 
 /***/ },
-/* 62 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
@@ -42090,121 +42201,13 @@
 	// NOTE: JS-YAML does not support schema-specific tag resolution restrictions.
 	// So, Core schema has no distinctions from JSON schema is JS-YAML.
 	'use strict';
-	var Schema = __webpack_require__(59);
+	var Schema = __webpack_require__(62);
 	module.exports = new Schema({
 	    include: [
-	        __webpack_require__(61)
+	        __webpack_require__(64)
 	    ]
 	});
 	//# sourceMappingURL=core.js.map
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	// JS-YAML's default schema for `safeLoad` function.
-	// It is not described in the YAML specification.
-	//
-	// This schema is based on standard YAML's Core schema and includes most of
-	// extra types described at YAML tag repository. (http://yaml.org/type/)
-	'use strict';
-	var Schema = __webpack_require__(59);
-	var schema = new Schema({
-	    include: [
-	        __webpack_require__(62)
-	    ],
-	    implicit: [
-	        __webpack_require__(94),
-	        __webpack_require__(95)
-	    ],
-	    explicit: [
-	        __webpack_require__(96),
-	        __webpack_require__(97),
-	        __webpack_require__(98),
-	        __webpack_require__(99)
-	    ]
-	});
-	module.exports = schema;
-	//# sourceMappingURL=default_safe.js.map
-
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	// JS-YAML's default schema for `load` function.
-	// It is not described in the YAML specification.
-	//
-	// This schema is based on JS-YAML's default safe schema and includes
-	// JavaScript-specific types: !!js/undefined, !!js/regexp and !!js/function.
-	//
-	// Also this schema is used as default base schema at `Schema.create` function.
-	'use strict';
-	var Schema = __webpack_require__(59);
-	var schema = new Schema({
-	    include: [
-	        __webpack_require__(63)
-	    ],
-	    explicit: [
-	        __webpack_require__(100),
-	        __webpack_require__(101),
-	        __webpack_require__(102)
-	    ]
-	});
-	Schema.DEFAULT = schema;
-	module.exports = schema;
-	//# sourceMappingURL=default_full.js.map
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../typings/tsd.d.ts" />
-	'use strict';
-	function isNothing(subject) {
-	    return (typeof subject === 'undefined') || (null === subject);
-	}
-	exports.isNothing = isNothing;
-	function isObject(subject) {
-	    return (typeof subject === 'object') && (null !== subject);
-	}
-	exports.isObject = isObject;
-	function toArray(sequence) {
-	    if (Array.isArray(sequence)) {
-	        return sequence;
-	    }
-	    else if (isNothing(sequence)) {
-	        return [];
-	    }
-	    return [sequence];
-	}
-	exports.toArray = toArray;
-	function extend(target, source) {
-	    var index, length, key, sourceKeys;
-	    if (source) {
-	        sourceKeys = Object.keys(source);
-	        for (index = 0, length = sourceKeys.length; index < length; index += 1) {
-	            key = sourceKeys[index];
-	            target[key] = source[key];
-	        }
-	    }
-	    return target;
-	}
-	exports.extend = extend;
-	function repeat(string, count) {
-	    var result = '', cycle;
-	    for (cycle = 0; cycle < count; cycle += 1) {
-	        result += string;
-	    }
-	    return result;
-	}
-	exports.repeat = repeat;
-	function isNegativeZero(number) {
-	    return (0 === number) && (Number.NEGATIVE_INFINITY === 1 / number);
-	}
-	exports.isNegativeZero = isNegativeZero;
-	//# sourceMappingURL=common.js.map
 
 /***/ },
 /* 66 */
@@ -44441,8 +44444,8 @@
 /* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {var Writable = __webpack_require__(116).Writable
-	var inherits = __webpack_require__(117)
+	/* WEBPACK VAR INJECTION */(function(Buffer) {var Writable = __webpack_require__(117).Writable
+	var inherits = __webpack_require__(118)
 
 	if (typeof Uint8Array === 'undefined') {
 	  var U8 = __webpack_require__(109).Uint8Array
@@ -44592,8 +44595,8 @@
 	 */
 
 	var base64 = __webpack_require__(119)
-	var ieee754 = __webpack_require__(111)
-	var isArray = __webpack_require__(110)
+	var ieee754 = __webpack_require__(115)
+	var isArray = __webpack_require__(114)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -46165,7 +46168,7 @@
 
 	'use strict';
 
-	var Promise = __webpack_require__(118);
+	var Promise = __webpack_require__(116);
 	var Response = __webpack_require__(75);
 	var handleQs = __webpack_require__(105);
 
@@ -46305,12 +46308,12 @@
 	!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
 	    "use strict";
 
-	    var statusCodes = __webpack_require__(112),
+	    var statusCodes = __webpack_require__(110),
 	        statusCodesToPhrases = {},
 	        statusPhrasesToCodes = {},
-	        methods = __webpack_require__(113),
-	        headers = __webpack_require__(114),
-	        relations = __webpack_require__(115);
+	        methods = __webpack_require__(111),
+	        headers = __webpack_require__(112),
+	        relations = __webpack_require__(113);
 
 	    statusCodes.forEach(function(item) {
 	        var code = parseInt(item.code, 10),
@@ -46665,410 +46668,6 @@
 
 /***/ },
 /* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var mod = (function () {
-	    /*
-	     * Generated by PEG.js 0.8.0.
-	     *
-	     * http://pegjs.majda.cz/
-	     */
-	    function peg$subclass(child, parent) {
-	        function ctor() {
-	            this.constructor = child;
-	        }
-	        ctor.prototype = parent.prototype;
-	        child.prototype = new ctor();
-	    }
-	    function SyntaxError(message, expected, found, offset, line, column) {
-	        this.message = message;
-	        this.expected = expected;
-	        this.found = found;
-	        this.offset = offset;
-	        this.line = line;
-	        this.column = column;
-	        this.name = "SyntaxError";
-	    }
-	    peg$subclass(SyntaxError, Error);
-	    function parse(input) {
-	        var options = arguments.length > 1 ? arguments[1] : {}, peg$FAILED = {}, peg$startRuleFunctions = { start: peg$parsestart }, peg$startRuleFunction = peg$parsestart, peg$c0 = peg$FAILED, peg$c1 = "|", peg$c2 = { type: "literal", value: "|", description: "\"|\"" }, peg$c3 = function (left, r) {
-	            return { 'type': 'or', 'left': left, 'right': r ? r : null };
-	        }, peg$c4 = ".", peg$c5 = { type: "literal", value: ".", description: "\".\"" }, peg$c6 = function (left, r) {
-	            return { 'type': 'dot', 'left': left, 'right': r };
-	        }, peg$c7 = "$", peg$c8 = { type: "literal", value: "$", description: "\"$\"" }, peg$c9 = function () {
-	            return { 'type': 'parent' };
-	        }, peg$c10 = "$$", peg$c11 = { type: "literal", value: "$$", description: "\"$$\"" }, peg$c12 = function () {
-	            return { 'type': 'ancestor' };
-	        }, peg$c13 = "**", peg$c14 = { type: "literal", value: "**", description: "\"**\"" }, peg$c15 = function () {
-	            return { 'type': 'descendant' };
-	        }, peg$c16 = "*", peg$c17 = { type: "literal", value: "*", description: "\"*\"" }, peg$c18 = function () {
-	            return { 'type': 'child' };
-	        }, peg$c19 = [], peg$c20 = /^[A-z]/, peg$c21 = { type: "class", value: "[A-z]", description: "[A-z]" }, peg$c22 = function (chars) {
-	            return { 'type': 'classLiteral', "name": chars.join("") };
-	        }, peg$currPos = 0, peg$reportedPos = 0, peg$cachedPos = 0, peg$cachedPosDetails = { line: 1, column: 1, seenCR: false }, peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
-	        if ("startRule" in options) {
-	            if (!(options.startRule in peg$startRuleFunctions)) {
-	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
-	            }
-	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
-	        }
-	        function text() {
-	            return input.substring(peg$reportedPos, peg$currPos);
-	        }
-	        function offset() {
-	            return peg$reportedPos;
-	        }
-	        function line() {
-	            return peg$computePosDetails(peg$reportedPos).line;
-	        }
-	        function column() {
-	            return peg$computePosDetails(peg$reportedPos).column;
-	        }
-	        function expected(description) {
-	            throw peg$buildException(null, [{ type: "other", description: description }], peg$reportedPos);
-	        }
-	        function error(message) {
-	            throw peg$buildException(message, null, peg$reportedPos);
-	        }
-	        function peg$computePosDetails(pos) {
-	            function advance(details, startPos, endPos) {
-	                var p, ch;
-	                for (p = startPos; p < endPos; p++) {
-	                    ch = input.charAt(p);
-	                    if (ch === "\n") {
-	                        if (!details.seenCR) {
-	                            details.line++;
-	                        }
-	                        details.column = 1;
-	                        details.seenCR = false;
-	                    }
-	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
-	                        details.line++;
-	                        details.column = 1;
-	                        details.seenCR = true;
-	                    }
-	                    else {
-	                        details.column++;
-	                        details.seenCR = false;
-	                    }
-	                }
-	            }
-	            if (peg$cachedPos !== pos) {
-	                if (peg$cachedPos > pos) {
-	                    peg$cachedPos = 0;
-	                    peg$cachedPosDetails = { line: 1, column: 1, seenCR: false };
-	                }
-	                advance(peg$cachedPosDetails, peg$cachedPos, pos);
-	                peg$cachedPos = pos;
-	            }
-	            return peg$cachedPosDetails;
-	        }
-	        function peg$fail(expected) {
-	            if (peg$currPos < peg$maxFailPos) {
-	                return;
-	            }
-	            if (peg$currPos > peg$maxFailPos) {
-	                peg$maxFailPos = peg$currPos;
-	                peg$maxFailExpected = [];
-	            }
-	            peg$maxFailExpected.push(expected);
-	        }
-	        function peg$buildException(message, expected, pos) {
-	            function cleanupExpected(expected) {
-	                var i = 1;
-	                expected.sort(function (a, b) {
-	                    if (a.description < b.description) {
-	                        return -1;
-	                    }
-	                    else if (a.description > b.description) {
-	                        return 1;
-	                    }
-	                    else {
-	                        return 0;
-	                    }
-	                });
-	                while (i < expected.length) {
-	                    if (expected[i - 1] === expected[i]) {
-	                        expected.splice(i, 1);
-	                    }
-	                    else {
-	                        i++;
-	                    }
-	                }
-	            }
-	            function buildMessage(expected, found) {
-	                function stringEscape(s) {
-	                    function hex(ch) {
-	                        return ch.charCodeAt(0).toString(16).toUpperCase();
-	                    }
-	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
-	                        return '\\x0' + hex(ch);
-	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
-	                        return '\\x' + hex(ch);
-	                    }).replace(/[\u0180-\u0FFF]/g, function (ch) {
-	                        return '\\u0' + hex(ch);
-	                    }).replace(/[\u1080-\uFFFF]/g, function (ch) {
-	                        return '\\u' + hex(ch);
-	                    });
-	                }
-	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
-	                for (i = 0; i < expected.length; i++) {
-	                    expectedDescs[i] = expected[i].description;
-	                }
-	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
-	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
-	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
-	            }
-	            var posDetails = peg$computePosDetails(pos), found = pos < input.length ? input.charAt(pos) : null;
-	            if (expected !== null) {
-	                cleanupExpected(expected);
-	            }
-	            return new SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, pos, posDetails.line, posDetails.column);
-	        }
-	        function peg$parsestart() {
-	            var s0;
-	            s0 = peg$parseor();
-	            return s0;
-	        }
-	        function peg$parseor() {
-	            var s0, s1, s2, s3;
-	            s0 = peg$currPos;
-	            s1 = peg$parsesequence();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 124) {
-	                    s2 = peg$c1;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c2);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parseor();
-	                    if (s3 !== peg$FAILED) {
-	                        peg$reportedPos = s0;
-	                        s1 = peg$c3(s1, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$c0;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$c0;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$c0;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parsesequence();
-	            }
-	            return s0;
-	        }
-	        function peg$parsesequence() {
-	            var s0, s1, s2, s3;
-	            s0 = peg$currPos;
-	            s1 = peg$parseprimary();
-	            if (s1 !== peg$FAILED) {
-	                if (input.charCodeAt(peg$currPos) === 46) {
-	                    s2 = peg$c4;
-	                    peg$currPos++;
-	                }
-	                else {
-	                    s2 = peg$FAILED;
-	                    if (peg$silentFails === 0) {
-	                        peg$fail(peg$c5);
-	                    }
-	                }
-	                if (s2 !== peg$FAILED) {
-	                    s3 = peg$parsesequence();
-	                    if (s3 !== peg$FAILED) {
-	                        peg$reportedPos = s0;
-	                        s1 = peg$c6(s1, s3);
-	                        s0 = s1;
-	                    }
-	                    else {
-	                        peg$currPos = s0;
-	                        s0 = peg$c0;
-	                    }
-	                }
-	                else {
-	                    peg$currPos = s0;
-	                    s0 = peg$c0;
-	                }
-	            }
-	            else {
-	                peg$currPos = s0;
-	                s0 = peg$c0;
-	            }
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parseprimary();
-	            }
-	            return s0;
-	        }
-	        function peg$parseprimary() {
-	            var s0;
-	            s0 = peg$parsechildRef();
-	            if (s0 === peg$FAILED) {
-	                s0 = peg$parsedoubleStar();
-	                if (s0 === peg$FAILED) {
-	                    s0 = peg$parsestar();
-	                    if (s0 === peg$FAILED) {
-	                        s0 = peg$parsedoubleDollar();
-	                        if (s0 === peg$FAILED) {
-	                            s0 = peg$parsedollar();
-	                        }
-	                    }
-	                }
-	            }
-	            return s0;
-	        }
-	        function peg$parsedollar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 36) {
-	                s1 = peg$c7;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c8);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c9();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsedoubleDollar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.substr(peg$currPos, 2) === peg$c10) {
-	                s1 = peg$c10;
-	                peg$currPos += 2;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c11);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c12();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsedoubleStar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.substr(peg$currPos, 2) === peg$c13) {
-	                s1 = peg$c13;
-	                peg$currPos += 2;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c14);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c15();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsestar() {
-	            var s0, s1;
-	            s0 = peg$currPos;
-	            if (input.charCodeAt(peg$currPos) === 42) {
-	                s1 = peg$c16;
-	                peg$currPos++;
-	            }
-	            else {
-	                s1 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c17);
-	                }
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c18();
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        function peg$parsechildRef() {
-	            var s0, s1, s2;
-	            s0 = peg$currPos;
-	            s1 = [];
-	            if (peg$c20.test(input.charAt(peg$currPos))) {
-	                s2 = input.charAt(peg$currPos);
-	                peg$currPos++;
-	            }
-	            else {
-	                s2 = peg$FAILED;
-	                if (peg$silentFails === 0) {
-	                    peg$fail(peg$c21);
-	                }
-	            }
-	            if (s2 !== peg$FAILED) {
-	                while (s2 !== peg$FAILED) {
-	                    s1.push(s2);
-	                    if (peg$c20.test(input.charAt(peg$currPos))) {
-	                        s2 = input.charAt(peg$currPos);
-	                        peg$currPos++;
-	                    }
-	                    else {
-	                        s2 = peg$FAILED;
-	                        if (peg$silentFails === 0) {
-	                            peg$fail(peg$c21);
-	                        }
-	                    }
-	                }
-	            }
-	            else {
-	                s1 = peg$c0;
-	            }
-	            if (s1 !== peg$FAILED) {
-	                peg$reportedPos = s0;
-	                s1 = peg$c22(s1);
-	            }
-	            s0 = s1;
-	            return s0;
-	        }
-	        peg$result = peg$startRuleFunction();
-	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
-	            return peg$result;
-	        }
-	        else {
-	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
-	                peg$fail({ type: "end", description: "end of input" });
-	            }
-	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos);
-	        }
-	    }
-	    return {
-	        SyntaxError: SyntaxError,
-	        parse: parse
-	    };
-	})();
-	module.exports = mod;
-	//# sourceMappingURL=ramlselector.js.map
-
-/***/ },
-/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var parser = (function () {
@@ -48420,12 +48019,904 @@
 	//# sourceMappingURL=ramlExpressionParser.js.map
 
 /***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var mod = (function () {
+	    /*
+	     * Generated by PEG.js 0.8.0.
+	     *
+	     * http://pegjs.majda.cz/
+	     */
+	    function peg$subclass(child, parent) {
+	        function ctor() {
+	            this.constructor = child;
+	        }
+	        ctor.prototype = parent.prototype;
+	        child.prototype = new ctor();
+	    }
+	    function SyntaxError(message, expected, found, offset, line, column) {
+	        this.message = message;
+	        this.expected = expected;
+	        this.found = found;
+	        this.offset = offset;
+	        this.line = line;
+	        this.column = column;
+	        this.name = "SyntaxError";
+	    }
+	    peg$subclass(SyntaxError, Error);
+	    function parse(input) {
+	        var options = arguments.length > 1 ? arguments[1] : {}, peg$FAILED = {}, peg$startRuleFunctions = { start: peg$parsestart }, peg$startRuleFunction = peg$parsestart, peg$c0 = peg$FAILED, peg$c1 = "|", peg$c2 = { type: "literal", value: "|", description: "\"|\"" }, peg$c3 = function (left, r) {
+	            return { 'type': 'or', 'left': left, 'right': r ? r : null };
+	        }, peg$c4 = ".", peg$c5 = { type: "literal", value: ".", description: "\".\"" }, peg$c6 = function (left, r) {
+	            return { 'type': 'dot', 'left': left, 'right': r };
+	        }, peg$c7 = "$", peg$c8 = { type: "literal", value: "$", description: "\"$\"" }, peg$c9 = function () {
+	            return { 'type': 'parent' };
+	        }, peg$c10 = "$$", peg$c11 = { type: "literal", value: "$$", description: "\"$$\"" }, peg$c12 = function () {
+	            return { 'type': 'ancestor' };
+	        }, peg$c13 = "**", peg$c14 = { type: "literal", value: "**", description: "\"**\"" }, peg$c15 = function () {
+	            return { 'type': 'descendant' };
+	        }, peg$c16 = "*", peg$c17 = { type: "literal", value: "*", description: "\"*\"" }, peg$c18 = function () {
+	            return { 'type': 'child' };
+	        }, peg$c19 = [], peg$c20 = /^[A-z]/, peg$c21 = { type: "class", value: "[A-z]", description: "[A-z]" }, peg$c22 = function (chars) {
+	            return { 'type': 'classLiteral', "name": chars.join("") };
+	        }, peg$currPos = 0, peg$reportedPos = 0, peg$cachedPos = 0, peg$cachedPosDetails = { line: 1, column: 1, seenCR: false }, peg$maxFailPos = 0, peg$maxFailExpected = [], peg$silentFails = 0, peg$result;
+	        if ("startRule" in options) {
+	            if (!(options.startRule in peg$startRuleFunctions)) {
+	                throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
+	            }
+	            peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
+	        }
+	        function text() {
+	            return input.substring(peg$reportedPos, peg$currPos);
+	        }
+	        function offset() {
+	            return peg$reportedPos;
+	        }
+	        function line() {
+	            return peg$computePosDetails(peg$reportedPos).line;
+	        }
+	        function column() {
+	            return peg$computePosDetails(peg$reportedPos).column;
+	        }
+	        function expected(description) {
+	            throw peg$buildException(null, [{ type: "other", description: description }], peg$reportedPos);
+	        }
+	        function error(message) {
+	            throw peg$buildException(message, null, peg$reportedPos);
+	        }
+	        function peg$computePosDetails(pos) {
+	            function advance(details, startPos, endPos) {
+	                var p, ch;
+	                for (p = startPos; p < endPos; p++) {
+	                    ch = input.charAt(p);
+	                    if (ch === "\n") {
+	                        if (!details.seenCR) {
+	                            details.line++;
+	                        }
+	                        details.column = 1;
+	                        details.seenCR = false;
+	                    }
+	                    else if (ch === "\r" || ch === "\u2028" || ch === "\u2029") {
+	                        details.line++;
+	                        details.column = 1;
+	                        details.seenCR = true;
+	                    }
+	                    else {
+	                        details.column++;
+	                        details.seenCR = false;
+	                    }
+	                }
+	            }
+	            if (peg$cachedPos !== pos) {
+	                if (peg$cachedPos > pos) {
+	                    peg$cachedPos = 0;
+	                    peg$cachedPosDetails = { line: 1, column: 1, seenCR: false };
+	                }
+	                advance(peg$cachedPosDetails, peg$cachedPos, pos);
+	                peg$cachedPos = pos;
+	            }
+	            return peg$cachedPosDetails;
+	        }
+	        function peg$fail(expected) {
+	            if (peg$currPos < peg$maxFailPos) {
+	                return;
+	            }
+	            if (peg$currPos > peg$maxFailPos) {
+	                peg$maxFailPos = peg$currPos;
+	                peg$maxFailExpected = [];
+	            }
+	            peg$maxFailExpected.push(expected);
+	        }
+	        function peg$buildException(message, expected, pos) {
+	            function cleanupExpected(expected) {
+	                var i = 1;
+	                expected.sort(function (a, b) {
+	                    if (a.description < b.description) {
+	                        return -1;
+	                    }
+	                    else if (a.description > b.description) {
+	                        return 1;
+	                    }
+	                    else {
+	                        return 0;
+	                    }
+	                });
+	                while (i < expected.length) {
+	                    if (expected[i - 1] === expected[i]) {
+	                        expected.splice(i, 1);
+	                    }
+	                    else {
+	                        i++;
+	                    }
+	                }
+	            }
+	            function buildMessage(expected, found) {
+	                function stringEscape(s) {
+	                    function hex(ch) {
+	                        return ch.charCodeAt(0).toString(16).toUpperCase();
+	                    }
+	                    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\f/g, '\\f').replace(/\r/g, '\\r').replace(/[\x00-\x07\x0B\x0E\x0F]/g, function (ch) {
+	                        return '\\x0' + hex(ch);
+	                    }).replace(/[\x10-\x1F\x80-\xFF]/g, function (ch) {
+	                        return '\\x' + hex(ch);
+	                    }).replace(/[\u0180-\u0FFF]/g, function (ch) {
+	                        return '\\u0' + hex(ch);
+	                    }).replace(/[\u1080-\uFFFF]/g, function (ch) {
+	                        return '\\u' + hex(ch);
+	                    });
+	                }
+	                var expectedDescs = new Array(expected.length), expectedDesc, foundDesc, i;
+	                for (i = 0; i < expected.length; i++) {
+	                    expectedDescs[i] = expected[i].description;
+	                }
+	                expectedDesc = expected.length > 1 ? expectedDescs.slice(0, -1).join(", ") + " or " + expectedDescs[expected.length - 1] : expectedDescs[0];
+	                foundDesc = found ? "\"" + stringEscape(found) + "\"" : "end of input";
+	                return "Expected " + expectedDesc + " but " + foundDesc + " found.";
+	            }
+	            var posDetails = peg$computePosDetails(pos), found = pos < input.length ? input.charAt(pos) : null;
+	            if (expected !== null) {
+	                cleanupExpected(expected);
+	            }
+	            return new SyntaxError(message !== null ? message : buildMessage(expected, found), expected, found, pos, posDetails.line, posDetails.column);
+	        }
+	        function peg$parsestart() {
+	            var s0;
+	            s0 = peg$parseor();
+	            return s0;
+	        }
+	        function peg$parseor() {
+	            var s0, s1, s2, s3;
+	            s0 = peg$currPos;
+	            s1 = peg$parsesequence();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 124) {
+	                    s2 = peg$c1;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c2);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parseor();
+	                    if (s3 !== peg$FAILED) {
+	                        peg$reportedPos = s0;
+	                        s1 = peg$c3(s1, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$c0;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$c0;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$c0;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parsesequence();
+	            }
+	            return s0;
+	        }
+	        function peg$parsesequence() {
+	            var s0, s1, s2, s3;
+	            s0 = peg$currPos;
+	            s1 = peg$parseprimary();
+	            if (s1 !== peg$FAILED) {
+	                if (input.charCodeAt(peg$currPos) === 46) {
+	                    s2 = peg$c4;
+	                    peg$currPos++;
+	                }
+	                else {
+	                    s2 = peg$FAILED;
+	                    if (peg$silentFails === 0) {
+	                        peg$fail(peg$c5);
+	                    }
+	                }
+	                if (s2 !== peg$FAILED) {
+	                    s3 = peg$parsesequence();
+	                    if (s3 !== peg$FAILED) {
+	                        peg$reportedPos = s0;
+	                        s1 = peg$c6(s1, s3);
+	                        s0 = s1;
+	                    }
+	                    else {
+	                        peg$currPos = s0;
+	                        s0 = peg$c0;
+	                    }
+	                }
+	                else {
+	                    peg$currPos = s0;
+	                    s0 = peg$c0;
+	                }
+	            }
+	            else {
+	                peg$currPos = s0;
+	                s0 = peg$c0;
+	            }
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parseprimary();
+	            }
+	            return s0;
+	        }
+	        function peg$parseprimary() {
+	            var s0;
+	            s0 = peg$parsechildRef();
+	            if (s0 === peg$FAILED) {
+	                s0 = peg$parsedoubleStar();
+	                if (s0 === peg$FAILED) {
+	                    s0 = peg$parsestar();
+	                    if (s0 === peg$FAILED) {
+	                        s0 = peg$parsedoubleDollar();
+	                        if (s0 === peg$FAILED) {
+	                            s0 = peg$parsedollar();
+	                        }
+	                    }
+	                }
+	            }
+	            return s0;
+	        }
+	        function peg$parsedollar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 36) {
+	                s1 = peg$c7;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c8);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c9();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsedoubleDollar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.substr(peg$currPos, 2) === peg$c10) {
+	                s1 = peg$c10;
+	                peg$currPos += 2;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c11);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c12();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsedoubleStar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.substr(peg$currPos, 2) === peg$c13) {
+	                s1 = peg$c13;
+	                peg$currPos += 2;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c14);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c15();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsestar() {
+	            var s0, s1;
+	            s0 = peg$currPos;
+	            if (input.charCodeAt(peg$currPos) === 42) {
+	                s1 = peg$c16;
+	                peg$currPos++;
+	            }
+	            else {
+	                s1 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c17);
+	                }
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c18();
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        function peg$parsechildRef() {
+	            var s0, s1, s2;
+	            s0 = peg$currPos;
+	            s1 = [];
+	            if (peg$c20.test(input.charAt(peg$currPos))) {
+	                s2 = input.charAt(peg$currPos);
+	                peg$currPos++;
+	            }
+	            else {
+	                s2 = peg$FAILED;
+	                if (peg$silentFails === 0) {
+	                    peg$fail(peg$c21);
+	                }
+	            }
+	            if (s2 !== peg$FAILED) {
+	                while (s2 !== peg$FAILED) {
+	                    s1.push(s2);
+	                    if (peg$c20.test(input.charAt(peg$currPos))) {
+	                        s2 = input.charAt(peg$currPos);
+	                        peg$currPos++;
+	                    }
+	                    else {
+	                        s2 = peg$FAILED;
+	                        if (peg$silentFails === 0) {
+	                            peg$fail(peg$c21);
+	                        }
+	                    }
+	                }
+	            }
+	            else {
+	                s1 = peg$c0;
+	            }
+	            if (s1 !== peg$FAILED) {
+	                peg$reportedPos = s0;
+	                s1 = peg$c22(s1);
+	            }
+	            s0 = s1;
+	            return s0;
+	        }
+	        peg$result = peg$startRuleFunction();
+	        if (peg$result !== peg$FAILED && peg$currPos === input.length) {
+	            return peg$result;
+	        }
+	        else {
+	            if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+	                peg$fail({ type: "end", description: "end of input" });
+	            }
+	            throw peg$buildException(null, peg$maxFailExpected, peg$maxFailPos);
+	        }
+	    }
+	    return {
+	        SyntaxError: SyntaxError,
+	        parse: parse
+	    };
+	})();
+	module.exports = mod;
+	//# sourceMappingURL=ramlselector.js.map
+
+/***/ },
 /* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(61);
+	function resolveJavascriptUndefined() {
+	    return true;
+	}
+	function constructJavascriptUndefined() {
+	    /*eslint-disable no-undefined*/
+	    return undefined;
+	}
+	function representJavascriptUndefined() {
+	    return '';
+	}
+	function isUndefined(object) {
+	    return 'undefined' === typeof object;
+	}
+	module.exports = new Type('tag:yaml.org,2002:js/undefined', {
+	    kind: 'scalar',
+	    resolve: resolveJavascriptUndefined,
+	    construct: constructJavascriptUndefined,
+	    predicate: isUndefined,
+	    represent: representJavascriptUndefined
+	});
+	//# sourceMappingURL=undefined.js.map
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(61);
+	function resolveJavascriptRegExp(data) {
+	    if (null === data) {
+	        return false;
+	    }
+	    if (0 === data.length) {
+	        return false;
+	    }
+	    var regexp = data, tail = /\/([gim]*)$/.exec(data), modifiers = '';
+	    // if regexp starts with '/' it can have modifiers and must be properly closed
+	    // `/foo/gim` - modifiers tail can be maximum 3 chars
+	    if ('/' === regexp[0]) {
+	        if (tail) {
+	            modifiers = tail[1];
+	        }
+	        if (modifiers.length > 3) {
+	            return false;
+	        }
+	        // if expression starts with /, is should be properly terminated
+	        if (regexp[regexp.length - modifiers.length - 1] !== '/') {
+	            return false;
+	        }
+	        regexp = regexp.slice(1, regexp.length - modifiers.length - 1);
+	    }
+	    try {
+	        var dummy = new RegExp(regexp, modifiers);
+	        return true;
+	    }
+	    catch (error) {
+	        return false;
+	    }
+	}
+	function constructJavascriptRegExp(data) {
+	    var regexp = data, tail = /\/([gim]*)$/.exec(data), modifiers = '';
+	    // `/foo/gim` - tail can be maximum 4 chars
+	    if ('/' === regexp[0]) {
+	        if (tail) {
+	            modifiers = tail[1];
+	        }
+	        regexp = regexp.slice(1, regexp.length - modifiers.length - 1);
+	    }
+	    return new RegExp(regexp, modifiers);
+	}
+	function representJavascriptRegExp(object /*, style*/) {
+	    var result = '/' + object.source + '/';
+	    if (object.global) {
+	        result += 'g';
+	    }
+	    if (object.multiline) {
+	        result += 'm';
+	    }
+	    if (object.ignoreCase) {
+	        result += 'i';
+	    }
+	    return result;
+	}
+	function isRegExp(object) {
+	    return '[object RegExp]' === Object.prototype.toString.call(object);
+	}
+	module.exports = new Type('tag:yaml.org,2002:js/regexp', {
+	    kind: 'scalar',
+	    resolve: resolveJavascriptRegExp,
+	    construct: constructJavascriptRegExp,
+	    predicate: isRegExp,
+	    represent: representJavascriptRegExp
+	});
+	//# sourceMappingURL=regexp.js.map
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var esprima = __webpack_require__(120);
+	// Browserified version does not have esprima
+	//
+	// 1. For node.js just require module as deps
+	// 2. For browser try to require mudule via external AMD system.
+	//    If not found - try to fallback to window.esprima. If not
+	//    found too - then fail to parse.
+	//
+	var Type = __webpack_require__(61);
+	function resolveJavascriptFunction(data) {
+	    if (null === data) {
+	        return false;
+	    }
+	    try {
+	        var source = '(' + data + ')', ast = esprima.parse(source, { range: true }), params = [], body;
+	        if ('Program' !== ast.type || 1 !== ast.body.length || 'ExpressionStatement' !== ast.body[0].type || 'FunctionExpression' !== ast.body[0]['expression'].type) {
+	            return false;
+	        }
+	        return true;
+	    }
+	    catch (err) {
+	        return false;
+	    }
+	}
+	function constructJavascriptFunction(data) {
+	    /*jslint evil:true*/
+	    var source = '(' + data + ')', ast = esprima.parse(source, { range: true }), params = [], body;
+	    if ('Program' !== ast.type || 1 !== ast.body.length || 'ExpressionStatement' !== ast.body[0].type || 'FunctionExpression' !== ast.body[0]['expression'].type) {
+	        throw new Error('Failed to resolve function');
+	    }
+	    ast.body[0]['expression'].params.forEach(function (param) {
+	        params.push(param.name);
+	    });
+	    body = ast.body[0]['expression'].body.range;
+	    // Esprima's ranges include the first '{' and the last '}' characters on
+	    // function expressions. So cut them out.
+	    /*eslint-disable no-new-func*/
+	    return new Function(params, source.slice(body[0] + 1, body[1] - 1));
+	}
+	function representJavascriptFunction(object /*, style*/) {
+	    return object.toString();
+	}
+	function isFunction(object) {
+	    return '[object Function]' === Object.prototype.toString.call(object);
+	}
+	module.exports = new Type('tag:yaml.org,2002:js/function', {
+	    kind: 'scalar',
+	    resolve: resolveJavascriptFunction,
+	    construct: constructJavascriptFunction,
+	    predicate: isFunction,
+	    represent: representJavascriptFunction
+	});
+	//# sourceMappingURL=function.js.map
+
+/***/ },
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(58);
+	var Type = __webpack_require__(61);
+	var YAML_TIMESTAMP_REGEXP = new RegExp('^([0-9][0-9][0-9][0-9])' + '-([0-9][0-9]?)' + '-([0-9][0-9]?)' + '(?:(?:[Tt]|[ \\t]+)' + '([0-9][0-9]?)' + ':([0-9][0-9])' + ':([0-9][0-9])' + '(?:\\.([0-9]*))?' + '(?:[ \\t]*(Z|([-+])([0-9][0-9]?)' + '(?::([0-9][0-9]))?))?)?$'); // [11] tz_minute
+	function resolveYamlTimestamp(data) {
+	    if (null === data) {
+	        return false;
+	    }
+	    var match, year, month, day, hour, minute, second, fraction = 0, delta = null, tz_hour, tz_minute, date;
+	    match = YAML_TIMESTAMP_REGEXP.exec(data);
+	    if (null === match) {
+	        return false;
+	    }
+	    return true;
+	}
+	function constructYamlTimestamp(data) {
+	    var match, year, month, day, hour, minute, second, fraction = 0, delta = null, tz_hour, tz_minute, date;
+	    match = YAML_TIMESTAMP_REGEXP.exec(data);
+	    if (null === match) {
+	        throw new Error('Date resolve error');
+	    }
+	    // match: [1] year [2] month [3] day
+	    year = +(match[1]);
+	    month = +(match[2]) - 1; // JS month starts with 0
+	    day = +(match[3]);
+	    if (!match[4]) {
+	        return new Date(Date.UTC(year, month, day));
+	    }
+	    // match: [4] hour [5] minute [6] second [7] fraction
+	    hour = +(match[4]);
+	    minute = +(match[5]);
+	    second = +(match[6]);
+	    if (match[7]) {
+	        fraction = match[7].slice(0, 3);
+	        while (fraction.length < 3) {
+	            fraction = fraction + '0';
+	        }
+	        fraction = +fraction;
+	    }
+	    // match: [8] tz [9] tz_sign [10] tz_hour [11] tz_minute
+	    if (match[9]) {
+	        tz_hour = +(match[10]);
+	        tz_minute = +(match[11] || 0);
+	        delta = (tz_hour * 60 + tz_minute) * 60000; // delta in mili-seconds
+	        if ('-' === match[9]) {
+	            delta = -delta;
+	        }
+	    }
+	    date = new Date(Date.UTC(year, month, day, hour, minute, second, fraction));
+	    if (delta) {
+	        date.setTime(date.getTime() - delta);
+	    }
+	    return date;
+	}
+	function representYamlTimestamp(object /*, style*/) {
+	    return object.toISOString();
+	}
+	module.exports = new Type('tag:yaml.org,2002:timestamp', {
+	    kind: 'scalar',
+	    resolve: resolveYamlTimestamp,
+	    construct: constructYamlTimestamp,
+	    instanceOf: Date,
+	    represent: representYamlTimestamp
+	});
+	//# sourceMappingURL=timestamp.js.map
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(61);
+	function resolveYamlMerge(data) {
+	    return '<<' === data || null === data;
+	}
+	module.exports = new Type('tag:yaml.org,2002:merge', {
+	    kind: 'scalar',
+	    resolve: resolveYamlMerge
+	});
+	//# sourceMappingURL=merge.js.map
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	/*eslint-disable no-bitwise*/
+	// A trick for browserified version.
+	// Since we make browserifier to ignore `buffer` module, NodeBuffer will be undefined
+	var NodeBuffer = __webpack_require__(77).Buffer;
+	var Type = __webpack_require__(61);
+	// [ 64, 65, 66 ] -> [ padding, CR, LF ]
+	var BASE64_MAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r';
+	function resolveYamlBinary(data) {
+	    if (null === data) {
+	        return false;
+	    }
+	    var code, idx, bitlen = 0, len = 0, max = data.length, map = BASE64_MAP;
+	    for (idx = 0; idx < max; idx++) {
+	        code = map.indexOf(data.charAt(idx));
+	        // Skip CR/LF
+	        if (code > 64) {
+	            continue;
+	        }
+	        // Fail on illegal characters
+	        if (code < 0) {
+	            return false;
+	        }
+	        bitlen += 6;
+	    }
+	    // If there are any bits left, source was corrupted
+	    return (bitlen % 8) === 0;
+	}
+	function constructYamlBinary(data) {
+	    var code, idx, tailbits, input = data.replace(/[\r\n=]/g, ''), max = input.length, map = BASE64_MAP, bits = 0, result = [];
+	    for (idx = 0; idx < max; idx++) {
+	        if ((idx % 4 === 0) && idx) {
+	            result.push((bits >> 16) & 0xFF);
+	            result.push((bits >> 8) & 0xFF);
+	            result.push(bits & 0xFF);
+	        }
+	        bits = (bits << 6) | map.indexOf(input.charAt(idx));
+	    }
+	    // Dump tail
+	    tailbits = (max % 4) * 6;
+	    if (tailbits === 0) {
+	        result.push((bits >> 16) & 0xFF);
+	        result.push((bits >> 8) & 0xFF);
+	        result.push(bits & 0xFF);
+	    }
+	    else if (tailbits === 18) {
+	        result.push((bits >> 10) & 0xFF);
+	        result.push((bits >> 2) & 0xFF);
+	    }
+	    else if (tailbits === 12) {
+	        result.push((bits >> 4) & 0xFF);
+	    }
+	    // Wrap into Buffer for NodeJS and leave Array for browser
+	    if (NodeBuffer) {
+	        return new NodeBuffer(result);
+	    }
+	    return result;
+	}
+	function representYamlBinary(object /*, style*/) {
+	    var result = '', bits = 0, idx, tail, max = object.length, map = BASE64_MAP;
+	    for (idx = 0; idx < max; idx++) {
+	        if ((idx % 3 === 0) && idx) {
+	            result += map[(bits >> 18) & 0x3F];
+	            result += map[(bits >> 12) & 0x3F];
+	            result += map[(bits >> 6) & 0x3F];
+	            result += map[bits & 0x3F];
+	        }
+	        bits = (bits << 8) + object[idx];
+	    }
+	    // Dump tail
+	    tail = max % 3;
+	    if (tail === 0) {
+	        result += map[(bits >> 18) & 0x3F];
+	        result += map[(bits >> 12) & 0x3F];
+	        result += map[(bits >> 6) & 0x3F];
+	        result += map[bits & 0x3F];
+	    }
+	    else if (tail === 2) {
+	        result += map[(bits >> 10) & 0x3F];
+	        result += map[(bits >> 4) & 0x3F];
+	        result += map[(bits << 2) & 0x3F];
+	        result += map[64];
+	    }
+	    else if (tail === 1) {
+	        result += map[(bits >> 2) & 0x3F];
+	        result += map[(bits << 4) & 0x3F];
+	        result += map[64];
+	        result += map[64];
+	    }
+	    return result;
+	}
+	function isBinary(object) {
+	    return NodeBuffer && NodeBuffer.isBuffer(object);
+	}
+	module.exports = new Type('tag:yaml.org,2002:binary', {
+	    kind: 'scalar',
+	    resolve: resolveYamlBinary,
+	    construct: constructYamlBinary,
+	    predicate: isBinary,
+	    represent: representYamlBinary
+	});
+	//# sourceMappingURL=binary.js.map
+
+/***/ },
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(61);
+	var _hasOwnProperty = Object.prototype.hasOwnProperty;
+	var _toString = Object.prototype.toString;
+	function resolveYamlOmap(data) {
+	    if (null === data) {
+	        return true;
+	    }
+	    var objectKeys = [], index, length, pair, pairKey, pairHasKey, object = data;
+	    for (index = 0, length = object.length; index < length; index += 1) {
+	        pair = object[index];
+	        pairHasKey = false;
+	        if ('[object Object]' !== _toString.call(pair)) {
+	            return false;
+	        }
+	        for (pairKey in pair) {
+	            if (_hasOwnProperty.call(pair, pairKey)) {
+	                if (!pairHasKey) {
+	                    pairHasKey = true;
+	                }
+	                else {
+	                    return false;
+	                }
+	            }
+	        }
+	        if (!pairHasKey) {
+	            return false;
+	        }
+	        if (-1 === objectKeys.indexOf(pairKey)) {
+	            objectKeys.push(pairKey);
+	        }
+	        else {
+	            return false;
+	        }
+	    }
+	    return true;
+	}
+	function constructYamlOmap(data) {
+	    return null !== data ? data : [];
+	}
+	module.exports = new Type('tag:yaml.org,2002:omap', {
+	    kind: 'sequence',
+	    resolve: resolveYamlOmap,
+	    construct: constructYamlOmap
+	});
+	//# sourceMappingURL=omap.js.map
+
+/***/ },
+/* 93 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(61);
+	var _toString = Object.prototype.toString;
+	function resolveYamlPairs(data) {
+	    if (null === data) {
+	        return true;
+	    }
+	    var index, length, pair, keys, result, object = data;
+	    result = new Array(object.length);
+	    for (index = 0, length = object.length; index < length; index += 1) {
+	        pair = object[index];
+	        if ('[object Object]' !== _toString.call(pair)) {
+	            return false;
+	        }
+	        keys = Object.keys(pair);
+	        if (1 !== keys.length) {
+	            return false;
+	        }
+	        result[index] = [keys[0], pair[keys[0]]];
+	    }
+	    return true;
+	}
+	function constructYamlPairs(data) {
+	    if (null === data) {
+	        return [];
+	    }
+	    var index, length, pair, keys, result, object = data;
+	    result = new Array(object.length);
+	    for (index = 0, length = object.length; index < length; index += 1) {
+	        pair = object[index];
+	        keys = Object.keys(pair);
+	        result[index] = [keys[0], pair[keys[0]]];
+	    }
+	    return result;
+	}
+	module.exports = new Type('tag:yaml.org,2002:pairs', {
+	    kind: 'sequence',
+	    resolve: resolveYamlPairs,
+	    construct: constructYamlPairs
+	});
+	//# sourceMappingURL=pairs.js.map
+
+/***/ },
+/* 94 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(61);
+	var _hasOwnProperty = Object.prototype.hasOwnProperty;
+	function resolveYamlSet(data) {
+	    if (null === data) {
+	        return true;
+	    }
+	    var key, object = data;
+	    for (key in object) {
+	        if (_hasOwnProperty.call(object, key)) {
+	            if (null !== object[key]) {
+	                return false;
+	            }
+	        }
+	    }
+	    return true;
+	}
+	function constructYamlSet(data) {
+	    return null !== data ? data : {};
+	}
+	module.exports = new Type('tag:yaml.org,2002:set', {
+	    kind: 'mapping',
+	    resolve: resolveYamlSet,
+	    construct: constructYamlSet
+	});
+	//# sourceMappingURL=set.js.map
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/// <reference path="../../../../../typings/tsd.d.ts" />
+	'use strict';
+	var Type = __webpack_require__(61);
 	module.exports = new Type('tag:yaml.org,2002:str', {
 	    kind: 'scalar',
 	    construct: function (data) {
@@ -48435,12 +48926,12 @@
 	//# sourceMappingURL=str.js.map
 
 /***/ },
-/* 87 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(58);
+	var Type = __webpack_require__(61);
 	module.exports = new Type('tag:yaml.org,2002:seq', {
 	    kind: 'sequence',
 	    construct: function (data) {
@@ -48450,12 +48941,12 @@
 	//# sourceMappingURL=seq.js.map
 
 /***/ },
-/* 88 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(58);
+	var Type = __webpack_require__(61);
 	module.exports = new Type('tag:yaml.org,2002:map', {
 	    kind: 'mapping',
 	    construct: function (data) {
@@ -48465,79 +48956,12 @@
 	//# sourceMappingURL=map.js.map
 
 /***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../typings/tsd.d.ts" />
-	'use strict';
-	var common = __webpack_require__(65);
-	var Mark = (function () {
-	    function Mark(name, buffer, position, line, column) {
-	        this.name = name;
-	        this.buffer = buffer;
-	        this.position = position;
-	        this.line = line;
-	        this.column = column;
-	    }
-	    Mark.prototype.getSnippet = function (indent, maxLength) {
-	        if (indent === void 0) { indent = 0; }
-	        if (maxLength === void 0) { maxLength = 75; }
-	        var head, start, tail, end, snippet;
-	        if (!this.buffer) {
-	            return null;
-	        }
-	        indent = indent || 4;
-	        maxLength = maxLength || 75;
-	        head = '';
-	        start = this.position;
-	        while (start > 0 && -1 === '\x00\r\n\x85\u2028\u2029'.indexOf(this.buffer.charAt(start - 1))) {
-	            start -= 1;
-	            if (this.position - start > (maxLength / 2 - 1)) {
-	                head = ' ... ';
-	                start += 5;
-	                break;
-	            }
-	        }
-	        tail = '';
-	        end = this.position;
-	        while (end < this.buffer.length && -1 === '\x00\r\n\x85\u2028\u2029'.indexOf(this.buffer.charAt(end))) {
-	            end += 1;
-	            if (end - this.position > (maxLength / 2 - 1)) {
-	                tail = ' ... ';
-	                end -= 5;
-	                break;
-	            }
-	        }
-	        snippet = this.buffer.slice(start, end);
-	        return common.repeat(' ', indent) + head + snippet + tail + '\n' + common.repeat(' ', indent + this.position - start + head.length) + '^';
-	    };
-	    Mark.prototype.toString = function (compact) {
-	        if (compact === void 0) { compact = true; }
-	        var snippet, where = '';
-	        if (this.name) {
-	            where += 'in "' + this.name + '" ';
-	        }
-	        where += 'at line ' + (this.line + 1) + ', column ' + (this.column + 1);
-	        if (!compact) {
-	            snippet = this.getSnippet();
-	            if (snippet) {
-	                where += ':\n' + snippet;
-	            }
-	        }
-	        return where;
-	    };
-	    return Mark;
-	})();
-	module.exports = Mark;
-	//# sourceMappingURL=mark.js.map
-
-/***/ },
-/* 90 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(58);
+	var Type = __webpack_require__(61);
 	function resolveYamlNull(data) {
 	    if (null === data) {
 	        return true;
@@ -48575,12 +48999,12 @@
 	//# sourceMappingURL=null.js.map
 
 /***/ },
-/* 91 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var Type = __webpack_require__(58);
+	var Type = __webpack_require__(61);
 	function resolveYamlBoolean(data) {
 	    if (null === data) {
 	        return false;
@@ -48615,13 +49039,13 @@
 	//# sourceMappingURL=bool.js.map
 
 /***/ },
-/* 92 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var common = __webpack_require__(65);
-	var Type = __webpack_require__(58);
+	var common = __webpack_require__(57);
+	var Type = __webpack_require__(61);
 	function isHexCode(c) {
 	    return ((0x30 <= c) && (c <= 0x39)) || ((0x41 <= c) && (c <= 0x46)) || ((0x61 <= c) && (c <= 0x66));
 	}
@@ -48788,13 +49212,13 @@
 	//# sourceMappingURL=int.js.map
 
 /***/ },
-/* 93 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="../../../../../typings/tsd.d.ts" />
 	'use strict';
-	var common = __webpack_require__(65);
-	var Type = __webpack_require__(58);
+	var common = __webpack_require__(57);
+	var Type = __webpack_require__(61);
 	var YAML_FLOAT_PATTERN = new RegExp('^(?:[-+]?(?:[0-9][0-9_]*)\\.[0-9_]*(?:[eE][-+][0-9]+)?' + '|\\.[0-9_]+(?:[eE][-+][0-9]+)?' + '|[-+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*' + '|[-+]?\\.(?:inf|Inf|INF)' + '|\\.(?:nan|NaN|NAN))$');
 	function resolveYamlFloat(data) {
 	    if (null === data) {
@@ -48884,492 +49308,71 @@
 	//# sourceMappingURL=float.js.map
 
 /***/ },
-/* 94 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(58);
-	var YAML_TIMESTAMP_REGEXP = new RegExp('^([0-9][0-9][0-9][0-9])' + '-([0-9][0-9]?)' + '-([0-9][0-9]?)' + '(?:(?:[Tt]|[ \\t]+)' + '([0-9][0-9]?)' + ':([0-9][0-9])' + ':([0-9][0-9])' + '(?:\\.([0-9]*))?' + '(?:[ \\t]*(Z|([-+])([0-9][0-9]?)' + '(?::([0-9][0-9]))?))?)?$'); // [11] tz_minute
-	function resolveYamlTimestamp(data) {
-	    if (null === data) {
-	        return false;
-	    }
-	    var match, year, month, day, hour, minute, second, fraction = 0, delta = null, tz_hour, tz_minute, date;
-	    match = YAML_TIMESTAMP_REGEXP.exec(data);
-	    if (null === match) {
-	        return false;
-	    }
-	    return true;
-	}
-	function constructYamlTimestamp(data) {
-	    var match, year, month, day, hour, minute, second, fraction = 0, delta = null, tz_hour, tz_minute, date;
-	    match = YAML_TIMESTAMP_REGEXP.exec(data);
-	    if (null === match) {
-	        throw new Error('Date resolve error');
-	    }
-	    // match: [1] year [2] month [3] day
-	    year = +(match[1]);
-	    month = +(match[2]) - 1; // JS month starts with 0
-	    day = +(match[3]);
-	    if (!match[4]) {
-	        return new Date(Date.UTC(year, month, day));
-	    }
-	    // match: [4] hour [5] minute [6] second [7] fraction
-	    hour = +(match[4]);
-	    minute = +(match[5]);
-	    second = +(match[6]);
-	    if (match[7]) {
-	        fraction = match[7].slice(0, 3);
-	        while (fraction.length < 3) {
-	            fraction = fraction + '0';
-	        }
-	        fraction = +fraction;
-	    }
-	    // match: [8] tz [9] tz_sign [10] tz_hour [11] tz_minute
-	    if (match[9]) {
-	        tz_hour = +(match[10]);
-	        tz_minute = +(match[11] || 0);
-	        delta = (tz_hour * 60 + tz_minute) * 60000; // delta in mili-seconds
-	        if ('-' === match[9]) {
-	            delta = -delta;
-	        }
-	    }
-	    date = new Date(Date.UTC(year, month, day, hour, minute, second, fraction));
-	    if (delta) {
-	        date.setTime(date.getTime() - delta);
-	    }
-	    return date;
-	}
-	function representYamlTimestamp(object /*, style*/) {
-	    return object.toISOString();
-	}
-	module.exports = new Type('tag:yaml.org,2002:timestamp', {
-	    kind: 'scalar',
-	    resolve: resolveYamlTimestamp,
-	    construct: constructYamlTimestamp,
-	    instanceOf: Date,
-	    represent: representYamlTimestamp
-	});
-	//# sourceMappingURL=timestamp.js.map
-
-/***/ },
-/* 95 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(58);
-	function resolveYamlMerge(data) {
-	    return '<<' === data || null === data;
-	}
-	module.exports = new Type('tag:yaml.org,2002:merge', {
-	    kind: 'scalar',
-	    resolve: resolveYamlMerge
-	});
-	//# sourceMappingURL=merge.js.map
-
-/***/ },
-/* 96 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	/*eslint-disable no-bitwise*/
-	// A trick for browserified version.
-	// Since we make browserifier to ignore `buffer` module, NodeBuffer will be undefined
-	var NodeBuffer = __webpack_require__(77).Buffer;
-	var Type = __webpack_require__(58);
-	// [ 64, 65, 66 ] -> [ padding, CR, LF ]
-	var BASE64_MAP = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\n\r';
-	function resolveYamlBinary(data) {
-	    if (null === data) {
-	        return false;
-	    }
-	    var code, idx, bitlen = 0, len = 0, max = data.length, map = BASE64_MAP;
-	    for (idx = 0; idx < max; idx++) {
-	        code = map.indexOf(data.charAt(idx));
-	        // Skip CR/LF
-	        if (code > 64) {
-	            continue;
-	        }
-	        // Fail on illegal characters
-	        if (code < 0) {
-	            return false;
-	        }
-	        bitlen += 6;
-	    }
-	    // If there are any bits left, source was corrupted
-	    return (bitlen % 8) === 0;
-	}
-	function constructYamlBinary(data) {
-	    var code, idx, tailbits, input = data.replace(/[\r\n=]/g, ''), max = input.length, map = BASE64_MAP, bits = 0, result = [];
-	    for (idx = 0; idx < max; idx++) {
-	        if ((idx % 4 === 0) && idx) {
-	            result.push((bits >> 16) & 0xFF);
-	            result.push((bits >> 8) & 0xFF);
-	            result.push(bits & 0xFF);
-	        }
-	        bits = (bits << 6) | map.indexOf(input.charAt(idx));
-	    }
-	    // Dump tail
-	    tailbits = (max % 4) * 6;
-	    if (tailbits === 0) {
-	        result.push((bits >> 16) & 0xFF);
-	        result.push((bits >> 8) & 0xFF);
-	        result.push(bits & 0xFF);
-	    }
-	    else if (tailbits === 18) {
-	        result.push((bits >> 10) & 0xFF);
-	        result.push((bits >> 2) & 0xFF);
-	    }
-	    else if (tailbits === 12) {
-	        result.push((bits >> 4) & 0xFF);
-	    }
-	    // Wrap into Buffer for NodeJS and leave Array for browser
-	    if (NodeBuffer) {
-	        return new NodeBuffer(result);
-	    }
-	    return result;
-	}
-	function representYamlBinary(object /*, style*/) {
-	    var result = '', bits = 0, idx, tail, max = object.length, map = BASE64_MAP;
-	    for (idx = 0; idx < max; idx++) {
-	        if ((idx % 3 === 0) && idx) {
-	            result += map[(bits >> 18) & 0x3F];
-	            result += map[(bits >> 12) & 0x3F];
-	            result += map[(bits >> 6) & 0x3F];
-	            result += map[bits & 0x3F];
-	        }
-	        bits = (bits << 8) + object[idx];
-	    }
-	    // Dump tail
-	    tail = max % 3;
-	    if (tail === 0) {
-	        result += map[(bits >> 18) & 0x3F];
-	        result += map[(bits >> 12) & 0x3F];
-	        result += map[(bits >> 6) & 0x3F];
-	        result += map[bits & 0x3F];
-	    }
-	    else if (tail === 2) {
-	        result += map[(bits >> 10) & 0x3F];
-	        result += map[(bits >> 4) & 0x3F];
-	        result += map[(bits << 2) & 0x3F];
-	        result += map[64];
-	    }
-	    else if (tail === 1) {
-	        result += map[(bits >> 2) & 0x3F];
-	        result += map[(bits << 4) & 0x3F];
-	        result += map[64];
-	        result += map[64];
-	    }
-	    return result;
-	}
-	function isBinary(object) {
-	    return NodeBuffer && NodeBuffer.isBuffer(object);
-	}
-	module.exports = new Type('tag:yaml.org,2002:binary', {
-	    kind: 'scalar',
-	    resolve: resolveYamlBinary,
-	    construct: constructYamlBinary,
-	    predicate: isBinary,
-	    represent: representYamlBinary
-	});
-	//# sourceMappingURL=binary.js.map
-
-/***/ },
-/* 97 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(58);
-	var _hasOwnProperty = Object.prototype.hasOwnProperty;
-	var _toString = Object.prototype.toString;
-	function resolveYamlOmap(data) {
-	    if (null === data) {
-	        return true;
-	    }
-	    var objectKeys = [], index, length, pair, pairKey, pairHasKey, object = data;
-	    for (index = 0, length = object.length; index < length; index += 1) {
-	        pair = object[index];
-	        pairHasKey = false;
-	        if ('[object Object]' !== _toString.call(pair)) {
-	            return false;
-	        }
-	        for (pairKey in pair) {
-	            if (_hasOwnProperty.call(pair, pairKey)) {
-	                if (!pairHasKey) {
-	                    pairHasKey = true;
-	                }
-	                else {
-	                    return false;
-	                }
-	            }
-	        }
-	        if (!pairHasKey) {
-	            return false;
-	        }
-	        if (-1 === objectKeys.indexOf(pairKey)) {
-	            objectKeys.push(pairKey);
-	        }
-	        else {
-	            return false;
-	        }
-	    }
-	    return true;
-	}
-	function constructYamlOmap(data) {
-	    return null !== data ? data : [];
-	}
-	module.exports = new Type('tag:yaml.org,2002:omap', {
-	    kind: 'sequence',
-	    resolve: resolveYamlOmap,
-	    construct: constructYamlOmap
-	});
-	//# sourceMappingURL=omap.js.map
-
-/***/ },
-/* 98 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(58);
-	var _toString = Object.prototype.toString;
-	function resolveYamlPairs(data) {
-	    if (null === data) {
-	        return true;
-	    }
-	    var index, length, pair, keys, result, object = data;
-	    result = new Array(object.length);
-	    for (index = 0, length = object.length; index < length; index += 1) {
-	        pair = object[index];
-	        if ('[object Object]' !== _toString.call(pair)) {
-	            return false;
-	        }
-	        keys = Object.keys(pair);
-	        if (1 !== keys.length) {
-	            return false;
-	        }
-	        result[index] = [keys[0], pair[keys[0]]];
-	    }
-	    return true;
-	}
-	function constructYamlPairs(data) {
-	    if (null === data) {
-	        return [];
-	    }
-	    var index, length, pair, keys, result, object = data;
-	    result = new Array(object.length);
-	    for (index = 0, length = object.length; index < length; index += 1) {
-	        pair = object[index];
-	        keys = Object.keys(pair);
-	        result[index] = [keys[0], pair[keys[0]]];
-	    }
-	    return result;
-	}
-	module.exports = new Type('tag:yaml.org,2002:pairs', {
-	    kind: 'sequence',
-	    resolve: resolveYamlPairs,
-	    construct: constructYamlPairs
-	});
-	//# sourceMappingURL=pairs.js.map
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(58);
-	var _hasOwnProperty = Object.prototype.hasOwnProperty;
-	function resolveYamlSet(data) {
-	    if (null === data) {
-	        return true;
-	    }
-	    var key, object = data;
-	    for (key in object) {
-	        if (_hasOwnProperty.call(object, key)) {
-	            if (null !== object[key]) {
-	                return false;
-	            }
-	        }
-	    }
-	    return true;
-	}
-	function constructYamlSet(data) {
-	    return null !== data ? data : {};
-	}
-	module.exports = new Type('tag:yaml.org,2002:set', {
-	    kind: 'mapping',
-	    resolve: resolveYamlSet,
-	    construct: constructYamlSet
-	});
-	//# sourceMappingURL=set.js.map
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(58);
-	function resolveJavascriptUndefined() {
-	    return true;
-	}
-	function constructJavascriptUndefined() {
-	    /*eslint-disable no-undefined*/
-	    return undefined;
-	}
-	function representJavascriptUndefined() {
-	    return '';
-	}
-	function isUndefined(object) {
-	    return 'undefined' === typeof object;
-	}
-	module.exports = new Type('tag:yaml.org,2002:js/undefined', {
-	    kind: 'scalar',
-	    resolve: resolveJavascriptUndefined,
-	    construct: constructJavascriptUndefined,
-	    predicate: isUndefined,
-	    represent: representJavascriptUndefined
-	});
-	//# sourceMappingURL=undefined.js.map
-
-/***/ },
-/* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/// <reference path="../../../../../../typings/tsd.d.ts" />
-	'use strict';
-	var Type = __webpack_require__(58);
-	function resolveJavascriptRegExp(data) {
-	    if (null === data) {
-	        return false;
-	    }
-	    if (0 === data.length) {
-	        return false;
-	    }
-	    var regexp = data, tail = /\/([gim]*)$/.exec(data), modifiers = '';
-	    // if regexp starts with '/' it can have modifiers and must be properly closed
-	    // `/foo/gim` - modifiers tail can be maximum 3 chars
-	    if ('/' === regexp[0]) {
-	        if (tail) {
-	            modifiers = tail[1];
-	        }
-	        if (modifiers.length > 3) {
-	            return false;
-	        }
-	        // if expression starts with /, is should be properly terminated
-	        if (regexp[regexp.length - modifiers.length - 1] !== '/') {
-	            return false;
-	        }
-	        regexp = regexp.slice(1, regexp.length - modifiers.length - 1);
-	    }
-	    try {
-	        var dummy = new RegExp(regexp, modifiers);
-	        return true;
-	    }
-	    catch (error) {
-	        return false;
-	    }
-	}
-	function constructJavascriptRegExp(data) {
-	    var regexp = data, tail = /\/([gim]*)$/.exec(data), modifiers = '';
-	    // `/foo/gim` - tail can be maximum 4 chars
-	    if ('/' === regexp[0]) {
-	        if (tail) {
-	            modifiers = tail[1];
-	        }
-	        regexp = regexp.slice(1, regexp.length - modifiers.length - 1);
-	    }
-	    return new RegExp(regexp, modifiers);
-	}
-	function representJavascriptRegExp(object /*, style*/) {
-	    var result = '/' + object.source + '/';
-	    if (object.global) {
-	        result += 'g';
-	    }
-	    if (object.multiline) {
-	        result += 'm';
-	    }
-	    if (object.ignoreCase) {
-	        result += 'i';
-	    }
-	    return result;
-	}
-	function isRegExp(object) {
-	    return '[object RegExp]' === Object.prototype.toString.call(object);
-	}
-	module.exports = new Type('tag:yaml.org,2002:js/regexp', {
-	    kind: 'scalar',
-	    resolve: resolveJavascriptRegExp,
-	    construct: constructJavascriptRegExp,
-	    predicate: isRegExp,
-	    represent: representJavascriptRegExp
-	});
-	//# sourceMappingURL=regexp.js.map
-
-/***/ },
 /* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/// <reference path="../../../../../../typings/tsd.d.ts" />
+	/// <reference path="../../../../typings/tsd.d.ts" />
 	'use strict';
-	var esprima = __webpack_require__(120);
-	// Browserified version does not have esprima
-	//
-	// 1. For node.js just require module as deps
-	// 2. For browser try to require mudule via external AMD system.
-	//    If not found - try to fallback to window.esprima. If not
-	//    found too - then fail to parse.
-	//
-	var Type = __webpack_require__(58);
-	function resolveJavascriptFunction(data) {
-	    if (null === data) {
-	        return false;
+	var common = __webpack_require__(57);
+	var Mark = (function () {
+	    function Mark(name, buffer, position, line, column) {
+	        this.name = name;
+	        this.buffer = buffer;
+	        this.position = position;
+	        this.line = line;
+	        this.column = column;
 	    }
-	    try {
-	        var source = '(' + data + ')', ast = esprima.parse(source, { range: true }), params = [], body;
-	        if ('Program' !== ast.type || 1 !== ast.body.length || 'ExpressionStatement' !== ast.body[0].type || 'FunctionExpression' !== ast.body[0]['expression'].type) {
-	            return false;
+	    Mark.prototype.getSnippet = function (indent, maxLength) {
+	        if (indent === void 0) { indent = 0; }
+	        if (maxLength === void 0) { maxLength = 75; }
+	        var head, start, tail, end, snippet;
+	        if (!this.buffer) {
+	            return null;
 	        }
-	        return true;
-	    }
-	    catch (err) {
-	        return false;
-	    }
-	}
-	function constructJavascriptFunction(data) {
-	    /*jslint evil:true*/
-	    var source = '(' + data + ')', ast = esprima.parse(source, { range: true }), params = [], body;
-	    if ('Program' !== ast.type || 1 !== ast.body.length || 'ExpressionStatement' !== ast.body[0].type || 'FunctionExpression' !== ast.body[0]['expression'].type) {
-	        throw new Error('Failed to resolve function');
-	    }
-	    ast.body[0]['expression'].params.forEach(function (param) {
-	        params.push(param.name);
-	    });
-	    body = ast.body[0]['expression'].body.range;
-	    // Esprima's ranges include the first '{' and the last '}' characters on
-	    // function expressions. So cut them out.
-	    /*eslint-disable no-new-func*/
-	    return new Function(params, source.slice(body[0] + 1, body[1] - 1));
-	}
-	function representJavascriptFunction(object /*, style*/) {
-	    return object.toString();
-	}
-	function isFunction(object) {
-	    return '[object Function]' === Object.prototype.toString.call(object);
-	}
-	module.exports = new Type('tag:yaml.org,2002:js/function', {
-	    kind: 'scalar',
-	    resolve: resolveJavascriptFunction,
-	    construct: constructJavascriptFunction,
-	    predicate: isFunction,
-	    represent: representJavascriptFunction
-	});
-	//# sourceMappingURL=function.js.map
+	        indent = indent || 4;
+	        maxLength = maxLength || 75;
+	        head = '';
+	        start = this.position;
+	        while (start > 0 && -1 === '\x00\r\n\x85\u2028\u2029'.indexOf(this.buffer.charAt(start - 1))) {
+	            start -= 1;
+	            if (this.position - start > (maxLength / 2 - 1)) {
+	                head = ' ... ';
+	                start += 5;
+	                break;
+	            }
+	        }
+	        tail = '';
+	        end = this.position;
+	        while (end < this.buffer.length && -1 === '\x00\r\n\x85\u2028\u2029'.indexOf(this.buffer.charAt(end))) {
+	            end += 1;
+	            if (end - this.position > (maxLength / 2 - 1)) {
+	                tail = ' ... ';
+	                end -= 5;
+	                break;
+	            }
+	        }
+	        snippet = this.buffer.slice(start, end);
+	        return common.repeat(' ', indent) + head + snippet + tail + '\n' + common.repeat(' ', indent + this.position - start + head.length) + '^';
+	    };
+	    Mark.prototype.toString = function (compact) {
+	        if (compact === void 0) { compact = true; }
+	        var snippet, where = '';
+	        if (this.name) {
+	            where += 'in "' + this.name + '" ';
+	        }
+	        where += 'at line ' + (this.line + 1) + ', column ' + (this.column + 1);
+	        if (!compact) {
+	            snippet = this.getSnippet();
+	            if (snippet) {
+	                where += ':\n' + snippet;
+	            }
+	        }
+	        return where;
+	    };
+	    return Mark;
+	})();
+	module.exports = Mark;
+	//# sourceMappingURL=mark.js.map
 
 /***/ },
 /* 103 */
@@ -50486,7 +50489,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(138);
+	exports.inherits = __webpack_require__(137);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -51154,135 +51157,6 @@
 /* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
-	/**
-	 * isArray
-	 */
-
-	var isArray = Array.isArray;
-
-	/**
-	 * toString
-	 */
-
-	var str = Object.prototype.toString;
-
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
-	};
-
-
-/***/ },
-/* 111 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
-	  var e, m,
-	      eLen = nBytes * 8 - mLen - 1,
-	      eMax = (1 << eLen) - 1,
-	      eBias = eMax >> 1,
-	      nBits = -7,
-	      i = isLE ? (nBytes - 1) : 0,
-	      d = isLE ? -1 : 1,
-	      s = buffer[offset + i];
-
-	  i += d;
-
-	  e = s & ((1 << (-nBits)) - 1);
-	  s >>= (-nBits);
-	  nBits += eLen;
-	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8);
-
-	  m = e & ((1 << (-nBits)) - 1);
-	  e >>= (-nBits);
-	  nBits += mLen;
-	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8);
-
-	  if (e === 0) {
-	    e = 1 - eBias;
-	  } else if (e === eMax) {
-	    return m ? NaN : ((s ? -1 : 1) * Infinity);
-	  } else {
-	    m = m + Math.pow(2, mLen);
-	    e = e - eBias;
-	  }
-	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
-	};
-
-	exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
-	  var e, m, c,
-	      eLen = nBytes * 8 - mLen - 1,
-	      eMax = (1 << eLen) - 1,
-	      eBias = eMax >> 1,
-	      rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0),
-	      i = isLE ? 0 : (nBytes - 1),
-	      d = isLE ? 1 : -1,
-	      s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0;
-
-	  value = Math.abs(value);
-
-	  if (isNaN(value) || value === Infinity) {
-	    m = isNaN(value) ? 1 : 0;
-	    e = eMax;
-	  } else {
-	    e = Math.floor(Math.log(value) / Math.LN2);
-	    if (value * (c = Math.pow(2, -e)) < 1) {
-	      e--;
-	      c *= 2;
-	    }
-	    if (e + eBias >= 1) {
-	      value += rt / c;
-	    } else {
-	      value += rt * Math.pow(2, 1 - eBias);
-	    }
-	    if (value * c >= 2) {
-	      e++;
-	      c /= 2;
-	    }
-
-	    if (e + eBias >= eMax) {
-	      m = 0;
-	      e = eMax;
-	    } else if (e + eBias >= 1) {
-	      m = (value * c - 1) * Math.pow(2, mLen);
-	      e = e + eBias;
-	    } else {
-	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
-	      e = 0;
-	    }
-	  }
-
-	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8);
-
-	  e = (e << mLen) | m;
-	  eLen += mLen;
-	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
-
-	  buffer[offset + i - d] |= s * 128;
-	};
-
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
 	module.exports = [
 		{
 			"code": "1xx",
@@ -51714,7 +51588,7 @@
 	]
 
 /***/ },
-/* 113 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = [
@@ -52063,7 +51937,7 @@
 	]
 
 /***/ },
-/* 114 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = [
@@ -52688,7 +52562,7 @@
 	]
 
 /***/ },
-/* 115 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = [
@@ -53091,25 +52965,165 @@
 	]
 
 /***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * isArray
+	 */
+
+	var isArray = Array.isArray;
+
+	/**
+	 * toString
+	 */
+
+	var str = Object.prototype.toString;
+
+	/**
+	 * Whether or not the given `val`
+	 * is an array.
+	 *
+	 * example:
+	 *
+	 *        isArray([]);
+	 *        // > true
+	 *        isArray(arguments);
+	 *        // > false
+	 *        isArray('');
+	 *        // > false
+	 *
+	 * @param {mixed} val
+	 * @return {bool}
+	 */
+
+	module.exports = isArray || function (val) {
+	  return !! val && '[object Array]' == str.call(val);
+	};
+
+
+/***/ },
+/* 115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
+	  var e, m,
+	      eLen = nBytes * 8 - mLen - 1,
+	      eMax = (1 << eLen) - 1,
+	      eBias = eMax >> 1,
+	      nBits = -7,
+	      i = isLE ? (nBytes - 1) : 0,
+	      d = isLE ? -1 : 1,
+	      s = buffer[offset + i];
+
+	  i += d;
+
+	  e = s & ((1 << (-nBits)) - 1);
+	  s >>= (-nBits);
+	  nBits += eLen;
+	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8);
+
+	  m = e & ((1 << (-nBits)) - 1);
+	  e >>= (-nBits);
+	  nBits += mLen;
+	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8);
+
+	  if (e === 0) {
+	    e = 1 - eBias;
+	  } else if (e === eMax) {
+	    return m ? NaN : ((s ? -1 : 1) * Infinity);
+	  } else {
+	    m = m + Math.pow(2, mLen);
+	    e = e - eBias;
+	  }
+	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
+	};
+
+	exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
+	  var e, m, c,
+	      eLen = nBytes * 8 - mLen - 1,
+	      eMax = (1 << eLen) - 1,
+	      eBias = eMax >> 1,
+	      rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0),
+	      i = isLE ? 0 : (nBytes - 1),
+	      d = isLE ? 1 : -1,
+	      s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0;
+
+	  value = Math.abs(value);
+
+	  if (isNaN(value) || value === Infinity) {
+	    m = isNaN(value) ? 1 : 0;
+	    e = eMax;
+	  } else {
+	    e = Math.floor(Math.log(value) / Math.LN2);
+	    if (value * (c = Math.pow(2, -e)) < 1) {
+	      e--;
+	      c *= 2;
+	    }
+	    if (e + eBias >= 1) {
+	      value += rt / c;
+	    } else {
+	      value += rt * Math.pow(2, 1 - eBias);
+	    }
+	    if (value * c >= 2) {
+	      e++;
+	      c /= 2;
+	    }
+
+	    if (e + eBias >= eMax) {
+	      m = 0;
+	      e = eMax;
+	    } else if (e + eBias >= 1) {
+	      m = (value * c - 1) * Math.pow(2, mLen);
+	      e = e + eBias;
+	    } else {
+	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
+	      e = 0;
+	    }
+	  }
+
+	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8);
+
+	  e = (e << mLen) | m;
+	  eLen += mLen;
+	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
+
+	  buffer[offset + i - d] |= s * 128;
+	};
+
+
+/***/ },
 /* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(128)
+	__webpack_require__(129)
+	__webpack_require__(130)
+	__webpack_require__(131)
+
+/***/ },
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stream = (function (){
 	  try {
-	    return __webpack_require__(137); // hack to fix a circular dependency issue when used with browserify
+	    return __webpack_require__(138); // hack to fix a circular dependency issue when used with browserify
 	  } catch(_){}
 	}());
-	exports = module.exports = __webpack_require__(128);
+	exports = module.exports = __webpack_require__(132);
 	exports.Stream = Stream || exports;
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(129);
-	exports.Duplex = __webpack_require__(130);
-	exports.Transform = __webpack_require__(131);
-	exports.PassThrough = __webpack_require__(132);
+	exports.Writable = __webpack_require__(133);
+	exports.Duplex = __webpack_require__(134);
+	exports.Transform = __webpack_require__(135);
+	exports.PassThrough = __webpack_require__(136);
 
 
 /***/ },
-/* 117 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	if (typeof Object.create === 'function') {
@@ -53136,17 +53150,6 @@
 	  }
 	}
 
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = __webpack_require__(133)
-	__webpack_require__(134)
-	__webpack_require__(135)
-	__webpack_require__(136)
 
 /***/ },
 /* 119 */
@@ -60815,6 +60818,319 @@
 /* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var asap = __webpack_require__(147)
+
+	module.exports = Promise;
+	function Promise(fn) {
+	  if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
+	  if (typeof fn !== 'function') throw new TypeError('not a function')
+	  var state = null
+	  var value = null
+	  var deferreds = []
+	  var self = this
+
+	  this.then = function(onFulfilled, onRejected) {
+	    return new self.constructor(function(resolve, reject) {
+	      handle(new Handler(onFulfilled, onRejected, resolve, reject))
+	    })
+	  }
+
+	  function handle(deferred) {
+	    if (state === null) {
+	      deferreds.push(deferred)
+	      return
+	    }
+	    asap(function() {
+	      var cb = state ? deferred.onFulfilled : deferred.onRejected
+	      if (cb === null) {
+	        (state ? deferred.resolve : deferred.reject)(value)
+	        return
+	      }
+	      var ret
+	      try {
+	        ret = cb(value)
+	      }
+	      catch (e) {
+	        deferred.reject(e)
+	        return
+	      }
+	      deferred.resolve(ret)
+	    })
+	  }
+
+	  function resolve(newValue) {
+	    try { //Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+	      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.')
+	      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+	        var then = newValue.then
+	        if (typeof then === 'function') {
+	          doResolve(then.bind(newValue), resolve, reject)
+	          return
+	        }
+	      }
+	      state = true
+	      value = newValue
+	      finale()
+	    } catch (e) { reject(e) }
+	  }
+
+	  function reject(newValue) {
+	    state = false
+	    value = newValue
+	    finale()
+	  }
+
+	  function finale() {
+	    for (var i = 0, len = deferreds.length; i < len; i++)
+	      handle(deferreds[i])
+	    deferreds = null
+	  }
+
+	  doResolve(fn, resolve, reject)
+	}
+
+
+	function Handler(onFulfilled, onRejected, resolve, reject){
+	  this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null
+	  this.onRejected = typeof onRejected === 'function' ? onRejected : null
+	  this.resolve = resolve
+	  this.reject = reject
+	}
+
+	/**
+	 * Take a potentially misbehaving resolver function and make sure
+	 * onFulfilled and onRejected are only called once.
+	 *
+	 * Makes no guarantees about asynchrony.
+	 */
+	function doResolve(fn, onFulfilled, onRejected) {
+	  var done = false;
+	  try {
+	    fn(function (value) {
+	      if (done) return
+	      done = true
+	      onFulfilled(value)
+	    }, function (reason) {
+	      if (done) return
+	      done = true
+	      onRejected(reason)
+	    })
+	  } catch (ex) {
+	    if (done) return
+	    done = true
+	    onRejected(ex)
+	  }
+	}
+
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Promise = __webpack_require__(128)
+	var asap = __webpack_require__(147)
+
+	module.exports = Promise
+	Promise.prototype.done = function (onFulfilled, onRejected) {
+	  var self = arguments.length ? this.then.apply(this, arguments) : this
+	  self.then(null, function (err) {
+	    asap(function () {
+	      throw err
+	    })
+	  })
+	}
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	//This file contains the ES6 extensions to the core Promises/A+ API
+
+	var Promise = __webpack_require__(128)
+	var asap = __webpack_require__(147)
+
+	module.exports = Promise
+
+	/* Static Functions */
+
+	function ValuePromise(value) {
+	  this.then = function (onFulfilled) {
+	    if (typeof onFulfilled !== 'function') return this
+	    return new Promise(function (resolve, reject) {
+	      asap(function () {
+	        try {
+	          resolve(onFulfilled(value))
+	        } catch (ex) {
+	          reject(ex);
+	        }
+	      })
+	    })
+	  }
+	}
+	ValuePromise.prototype = Promise.prototype
+
+	var TRUE = new ValuePromise(true)
+	var FALSE = new ValuePromise(false)
+	var NULL = new ValuePromise(null)
+	var UNDEFINED = new ValuePromise(undefined)
+	var ZERO = new ValuePromise(0)
+	var EMPTYSTRING = new ValuePromise('')
+
+	Promise.resolve = function (value) {
+	  if (value instanceof Promise) return value
+
+	  if (value === null) return NULL
+	  if (value === undefined) return UNDEFINED
+	  if (value === true) return TRUE
+	  if (value === false) return FALSE
+	  if (value === 0) return ZERO
+	  if (value === '') return EMPTYSTRING
+
+	  if (typeof value === 'object' || typeof value === 'function') {
+	    try {
+	      var then = value.then
+	      if (typeof then === 'function') {
+	        return new Promise(then.bind(value))
+	      }
+	    } catch (ex) {
+	      return new Promise(function (resolve, reject) {
+	        reject(ex)
+	      })
+	    }
+	  }
+
+	  return new ValuePromise(value)
+	}
+
+	Promise.all = function (arr) {
+	  var args = Array.prototype.slice.call(arr)
+
+	  return new Promise(function (resolve, reject) {
+	    if (args.length === 0) return resolve([])
+	    var remaining = args.length
+	    function res(i, val) {
+	      try {
+	        if (val && (typeof val === 'object' || typeof val === 'function')) {
+	          var then = val.then
+	          if (typeof then === 'function') {
+	            then.call(val, function (val) { res(i, val) }, reject)
+	            return
+	          }
+	        }
+	        args[i] = val
+	        if (--remaining === 0) {
+	          resolve(args);
+	        }
+	      } catch (ex) {
+	        reject(ex)
+	      }
+	    }
+	    for (var i = 0; i < args.length; i++) {
+	      res(i, args[i])
+	    }
+	  })
+	}
+
+	Promise.reject = function (value) {
+	  return new Promise(function (resolve, reject) { 
+	    reject(value);
+	  });
+	}
+
+	Promise.race = function (values) {
+	  return new Promise(function (resolve, reject) { 
+	    values.forEach(function(value){
+	      Promise.resolve(value).then(resolve, reject);
+	    })
+	  });
+	}
+
+	/* Prototype Methods */
+
+	Promise.prototype['catch'] = function (onRejected) {
+	  return this.then(null, onRejected);
+	}
+
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	//This file contains then/promise specific extensions that are only useful for node.js interop
+
+	var Promise = __webpack_require__(128)
+	var asap = __webpack_require__(147)
+
+	module.exports = Promise
+
+	/* Static Functions */
+
+	Promise.denodeify = function (fn, argumentCount) {
+	  argumentCount = argumentCount || Infinity
+	  return function () {
+	    var self = this
+	    var args = Array.prototype.slice.call(arguments)
+	    return new Promise(function (resolve, reject) {
+	      while (args.length && args.length > argumentCount) {
+	        args.pop()
+	      }
+	      args.push(function (err, res) {
+	        if (err) reject(err)
+	        else resolve(res)
+	      })
+	      var res = fn.apply(self, args)
+	      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
+	        resolve(res)
+	      }
+	    })
+	  }
+	}
+	Promise.nodeify = function (fn) {
+	  return function () {
+	    var args = Array.prototype.slice.call(arguments)
+	    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
+	    var ctx = this
+	    try {
+	      return fn.apply(this, arguments).nodeify(callback, ctx)
+	    } catch (ex) {
+	      if (callback === null || typeof callback == 'undefined') {
+	        return new Promise(function (resolve, reject) { reject(ex) })
+	      } else {
+	        asap(function () {
+	          callback.call(ctx, ex)
+	        })
+	      }
+	    }
+	  }
+	}
+
+	Promise.prototype.nodeify = function (callback, ctx) {
+	  if (typeof callback != 'function') return this
+
+	  this.then(function (value) {
+	    asap(function () {
+	      callback.call(ctx, null, value)
+	    })
+	  }, function (err) {
+	    asap(function () {
+	      callback.call(ctx, err)
+	    })
+	  })
+	}
+
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	module.exports = Readable;
@@ -60848,7 +61164,7 @@
 	/*<replacement>*/
 	var Stream;
 	(function (){try{
-	  Stream = __webpack_require__(137);
+	  Stream = __webpack_require__(138);
 	}catch(_){}finally{
 	  if (!Stream)
 	    Stream = __webpack_require__(143).EventEmitter;
@@ -60859,7 +61175,7 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
 
@@ -60878,7 +61194,7 @@
 	util.inherits(Readable, Stream);
 
 	function ReadableState(options, stream) {
-	  var Duplex = __webpack_require__(130);
+	  var Duplex = __webpack_require__(134);
 
 	  options = options || {};
 
@@ -60945,7 +61261,7 @@
 	}
 
 	function Readable(options) {
-	  var Duplex = __webpack_require__(130);
+	  var Duplex = __webpack_require__(134);
 
 	  if (!(this instanceof Readable))
 	    return new Readable(options);
@@ -61778,7 +62094,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
-/* 129 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// A bit simpler than readable streams.
@@ -61803,7 +62119,7 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
 
@@ -61811,7 +62127,7 @@
 	/*<replacement>*/
 	var Stream;
 	(function (){try{
-	  Stream = __webpack_require__(137);
+	  Stream = __webpack_require__(138);
 	}catch(_){}finally{
 	  if (!Stream)
 	    Stream = __webpack_require__(143).EventEmitter;
@@ -61832,7 +62148,7 @@
 	}
 
 	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(130);
+	  var Duplex = __webpack_require__(134);
 
 	  options = options || {};
 
@@ -61941,7 +62257,7 @@
 
 
 	function Writable(options) {
-	  var Duplex = __webpack_require__(130);
+	  var Duplex = __webpack_require__(134);
 
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -62304,7 +62620,7 @@
 
 
 /***/ },
-/* 130 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a duplex stream is just a stream that is both readable and writable.
@@ -62333,11 +62649,11 @@
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
-	var Readable = __webpack_require__(128);
-	var Writable = __webpack_require__(129);
+	var Readable = __webpack_require__(132);
+	var Writable = __webpack_require__(133);
 
 	util.inherits(Duplex, Readable);
 
@@ -62392,7 +62708,7 @@
 
 
 /***/ },
-/* 131 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a transform stream is a readable/writable stream where you do
@@ -62441,11 +62757,11 @@
 
 	module.exports = Transform;
 
-	var Duplex = __webpack_require__(130);
+	var Duplex = __webpack_require__(134);
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
 	util.inherits(Transform, Duplex);
@@ -62595,7 +62911,7 @@
 
 
 /***/ },
-/* 132 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a passthrough stream.
@@ -62606,11 +62922,11 @@
 
 	module.exports = PassThrough;
 
-	var Transform = __webpack_require__(131);
+	var Transform = __webpack_require__(135);
 
 	/*<replacement>*/
 	var util = __webpack_require__(145);
-	util.inherits = __webpack_require__(117);
+	util.inherits = __webpack_require__(118);
 	/*</replacement>*/
 
 	util.inherits(PassThrough, Transform);
@@ -62628,320 +62944,36 @@
 
 
 /***/ },
-/* 133 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var asap = __webpack_require__(149)
-
-	module.exports = Promise;
-	function Promise(fn) {
-	  if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new')
-	  if (typeof fn !== 'function') throw new TypeError('not a function')
-	  var state = null
-	  var value = null
-	  var deferreds = []
-	  var self = this
-
-	  this.then = function(onFulfilled, onRejected) {
-	    return new self.constructor(function(resolve, reject) {
-	      handle(new Handler(onFulfilled, onRejected, resolve, reject))
-	    })
-	  }
-
-	  function handle(deferred) {
-	    if (state === null) {
-	      deferreds.push(deferred)
-	      return
-	    }
-	    asap(function() {
-	      var cb = state ? deferred.onFulfilled : deferred.onRejected
-	      if (cb === null) {
-	        (state ? deferred.resolve : deferred.reject)(value)
-	        return
-	      }
-	      var ret
-	      try {
-	        ret = cb(value)
-	      }
-	      catch (e) {
-	        deferred.reject(e)
-	        return
-	      }
-	      deferred.resolve(ret)
-	    })
-	  }
-
-	  function resolve(newValue) {
-	    try { //Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
-	      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.')
-	      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-	        var then = newValue.then
-	        if (typeof then === 'function') {
-	          doResolve(then.bind(newValue), resolve, reject)
-	          return
-	        }
-	      }
-	      state = true
-	      value = newValue
-	      finale()
-	    } catch (e) { reject(e) }
-	  }
-
-	  function reject(newValue) {
-	    state = false
-	    value = newValue
-	    finale()
-	  }
-
-	  function finale() {
-	    for (var i = 0, len = deferreds.length; i < len; i++)
-	      handle(deferreds[i])
-	    deferreds = null
-	  }
-
-	  doResolve(fn, resolve, reject)
-	}
-
-
-	function Handler(onFulfilled, onRejected, resolve, reject){
-	  this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null
-	  this.onRejected = typeof onRejected === 'function' ? onRejected : null
-	  this.resolve = resolve
-	  this.reject = reject
-	}
-
-	/**
-	 * Take a potentially misbehaving resolver function and make sure
-	 * onFulfilled and onRejected are only called once.
-	 *
-	 * Makes no guarantees about asynchrony.
-	 */
-	function doResolve(fn, onFulfilled, onRejected) {
-	  var done = false;
-	  try {
-	    fn(function (value) {
-	      if (done) return
-	      done = true
-	      onFulfilled(value)
-	    }, function (reason) {
-	      if (done) return
-	      done = true
-	      onRejected(reason)
-	    })
-	  } catch (ex) {
-	    if (done) return
-	    done = true
-	    onRejected(ex)
-	  }
-	}
-
-
-/***/ },
-/* 134 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var Promise = __webpack_require__(133)
-	var asap = __webpack_require__(149)
-
-	module.exports = Promise
-	Promise.prototype.done = function (onFulfilled, onRejected) {
-	  var self = arguments.length ? this.then.apply(this, arguments) : this
-	  self.then(null, function (err) {
-	    asap(function () {
-	      throw err
-	    })
-	  })
-	}
-
-/***/ },
-/* 135 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	//This file contains the ES6 extensions to the core Promises/A+ API
-
-	var Promise = __webpack_require__(133)
-	var asap = __webpack_require__(149)
-
-	module.exports = Promise
-
-	/* Static Functions */
-
-	function ValuePromise(value) {
-	  this.then = function (onFulfilled) {
-	    if (typeof onFulfilled !== 'function') return this
-	    return new Promise(function (resolve, reject) {
-	      asap(function () {
-	        try {
-	          resolve(onFulfilled(value))
-	        } catch (ex) {
-	          reject(ex);
-	        }
-	      })
-	    })
-	  }
-	}
-	ValuePromise.prototype = Promise.prototype
-
-	var TRUE = new ValuePromise(true)
-	var FALSE = new ValuePromise(false)
-	var NULL = new ValuePromise(null)
-	var UNDEFINED = new ValuePromise(undefined)
-	var ZERO = new ValuePromise(0)
-	var EMPTYSTRING = new ValuePromise('')
-
-	Promise.resolve = function (value) {
-	  if (value instanceof Promise) return value
-
-	  if (value === null) return NULL
-	  if (value === undefined) return UNDEFINED
-	  if (value === true) return TRUE
-	  if (value === false) return FALSE
-	  if (value === 0) return ZERO
-	  if (value === '') return EMPTYSTRING
-
-	  if (typeof value === 'object' || typeof value === 'function') {
-	    try {
-	      var then = value.then
-	      if (typeof then === 'function') {
-	        return new Promise(then.bind(value))
-	      }
-	    } catch (ex) {
-	      return new Promise(function (resolve, reject) {
-	        reject(ex)
-	      })
-	    }
-	  }
-
-	  return new ValuePromise(value)
-	}
-
-	Promise.all = function (arr) {
-	  var args = Array.prototype.slice.call(arr)
-
-	  return new Promise(function (resolve, reject) {
-	    if (args.length === 0) return resolve([])
-	    var remaining = args.length
-	    function res(i, val) {
-	      try {
-	        if (val && (typeof val === 'object' || typeof val === 'function')) {
-	          var then = val.then
-	          if (typeof then === 'function') {
-	            then.call(val, function (val) { res(i, val) }, reject)
-	            return
-	          }
-	        }
-	        args[i] = val
-	        if (--remaining === 0) {
-	          resolve(args);
-	        }
-	      } catch (ex) {
-	        reject(ex)
-	      }
-	    }
-	    for (var i = 0; i < args.length; i++) {
-	      res(i, args[i])
-	    }
-	  })
-	}
-
-	Promise.reject = function (value) {
-	  return new Promise(function (resolve, reject) { 
-	    reject(value);
-	  });
-	}
-
-	Promise.race = function (values) {
-	  return new Promise(function (resolve, reject) { 
-	    values.forEach(function(value){
-	      Promise.resolve(value).then(resolve, reject);
-	    })
-	  });
-	}
-
-	/* Prototype Methods */
-
-	Promise.prototype['catch'] = function (onRejected) {
-	  return this.then(null, onRejected);
-	}
-
-
-/***/ },
-/* 136 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	//This file contains then/promise specific extensions that are only useful for node.js interop
-
-	var Promise = __webpack_require__(133)
-	var asap = __webpack_require__(149)
-
-	module.exports = Promise
-
-	/* Static Functions */
-
-	Promise.denodeify = function (fn, argumentCount) {
-	  argumentCount = argumentCount || Infinity
-	  return function () {
-	    var self = this
-	    var args = Array.prototype.slice.call(arguments)
-	    return new Promise(function (resolve, reject) {
-	      while (args.length && args.length > argumentCount) {
-	        args.pop()
-	      }
-	      args.push(function (err, res) {
-	        if (err) reject(err)
-	        else resolve(res)
-	      })
-	      var res = fn.apply(self, args)
-	      if (res && (typeof res === 'object' || typeof res === 'function') && typeof res.then === 'function') {
-	        resolve(res)
-	      }
-	    })
-	  }
-	}
-	Promise.nodeify = function (fn) {
-	  return function () {
-	    var args = Array.prototype.slice.call(arguments)
-	    var callback = typeof args[args.length - 1] === 'function' ? args.pop() : null
-	    var ctx = this
-	    try {
-	      return fn.apply(this, arguments).nodeify(callback, ctx)
-	    } catch (ex) {
-	      if (callback === null || typeof callback == 'undefined') {
-	        return new Promise(function (resolve, reject) { reject(ex) })
-	      } else {
-	        asap(function () {
-	          callback.call(ctx, ex)
-	        })
-	      }
-	    }
-	  }
-	}
-
-	Promise.prototype.nodeify = function (callback, ctx) {
-	  if (typeof callback != 'function') return this
-
-	  this.then(function (value) {
-	    asap(function () {
-	      callback.call(ctx, null, value)
-	    })
-	  }, function (err) {
-	    asap(function () {
-	      callback.call(ctx, err)
-	    })
-	  })
-	}
-
-
-/***/ },
 /* 137 */
+/***/ function(module, exports, __webpack_require__) {
+
+	if (typeof Object.create === 'function') {
+	  // implementation from standard node.js 'util' module
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    ctor.prototype = Object.create(superCtor.prototype, {
+	      constructor: {
+	        value: ctor,
+	        enumerable: false,
+	        writable: true,
+	        configurable: true
+	      }
+	    });
+	  };
+	} else {
+	  // old school shim for old browsers
+	  module.exports = function inherits(ctor, superCtor) {
+	    ctor.super_ = superCtor
+	    var TempCtor = function () {}
+	    TempCtor.prototype = superCtor.prototype
+	    ctor.prototype = new TempCtor()
+	    ctor.prototype.constructor = ctor
+	  }
+	}
+
+
+/***/ },
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -63074,35 +63106,6 @@
 
 
 /***/ },
-/* 138 */
-/***/ function(module, exports, __webpack_require__) {
-
-	if (typeof Object.create === 'function') {
-	  // implementation from standard node.js 'util' module
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	      constructor: {
-	        value: ctor,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
-	  };
-	} else {
-	  // old school shim for old browsers
-	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    var TempCtor = function () {}
-	    TempCtor.prototype = superCtor.prototype
-	    ctor.prototype = new TempCtor()
-	    ctor.prototype.constructor = ctor
-	  }
-	}
-
-
-/***/ },
 /* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -63114,8 +63117,8 @@
 
 	// Load modules
 
-	var Stringify = __webpack_require__(147);
-	var Parse = __webpack_require__(148);
+	var Stringify = __webpack_require__(148);
+	var Parse = __webpack_require__(149);
 
 
 	// Declare internals
@@ -63878,6 +63881,126 @@
 /* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process, setImmediate) {
+	// Use the fastest possible means to execute a task in a future turn
+	// of the event loop.
+
+	// linked list of tasks (single, with head node)
+	var head = {task: void 0, next: null};
+	var tail = head;
+	var flushing = false;
+	var requestFlush = void 0;
+	var isNodeJS = false;
+
+	function flush() {
+	    /* jshint loopfunc: true */
+
+	    while (head.next) {
+	        head = head.next;
+	        var task = head.task;
+	        head.task = void 0;
+	        var domain = head.domain;
+
+	        if (domain) {
+	            head.domain = void 0;
+	            domain.enter();
+	        }
+
+	        try {
+	            task();
+
+	        } catch (e) {
+	            if (isNodeJS) {
+	                // In node, uncaught exceptions are considered fatal errors.
+	                // Re-throw them synchronously to interrupt flushing!
+
+	                // Ensure continuation if the uncaught exception is suppressed
+	                // listening "uncaughtException" events (as domains does).
+	                // Continue in next event to avoid tick recursion.
+	                if (domain) {
+	                    domain.exit();
+	                }
+	                setTimeout(flush, 0);
+	                if (domain) {
+	                    domain.enter();
+	                }
+
+	                throw e;
+
+	            } else {
+	                // In browsers, uncaught exceptions are not fatal.
+	                // Re-throw them asynchronously to avoid slow-downs.
+	                setTimeout(function() {
+	                   throw e;
+	                }, 0);
+	            }
+	        }
+
+	        if (domain) {
+	            domain.exit();
+	        }
+	    }
+
+	    flushing = false;
+	}
+
+	if (typeof process !== "undefined" && process.nextTick) {
+	    // Node.js before 0.9. Note that some fake-Node environments, like the
+	    // Mocha test runner, introduce a `process` global without a `nextTick`.
+	    isNodeJS = true;
+
+	    requestFlush = function () {
+	        process.nextTick(flush);
+	    };
+
+	} else if (typeof setImmediate === "function") {
+	    // In IE10, Node.js 0.9+, or https://github.com/NobleJS/setImmediate
+	    if (typeof window !== "undefined") {
+	        requestFlush = setImmediate.bind(window, flush);
+	    } else {
+	        requestFlush = function () {
+	            setImmediate(flush);
+	        };
+	    }
+
+	} else if (typeof MessageChannel !== "undefined") {
+	    // modern browsers
+	    // http://www.nonblocking.io/2011/06/windownexttick.html
+	    var channel = new MessageChannel();
+	    channel.port1.onmessage = flush;
+	    requestFlush = function () {
+	        channel.port2.postMessage(0);
+	    };
+
+	} else {
+	    // old browsers
+	    requestFlush = function () {
+	        setTimeout(flush, 0);
+	    };
+	}
+
+	function asap(task) {
+	    tail = tail.next = {
+	        task: task,
+	        domain: isNodeJS && process.domain,
+	        next: null
+	    };
+
+	    if (!flushing) {
+	        flushing = true;
+	        requestFlush();
+	    }
+	};
+
+	module.exports = asap;
+
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72), __webpack_require__(162).setImmediate))
+
+/***/ },
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// Load modules
 
 	var Utils = __webpack_require__(156);
@@ -63978,7 +64101,7 @@
 
 
 /***/ },
-/* 148 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Load modules
@@ -64141,133 +64264,13 @@
 
 
 /***/ },
-/* 149 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process, setImmediate) {
-	// Use the fastest possible means to execute a task in a future turn
-	// of the event loop.
-
-	// linked list of tasks (single, with head node)
-	var head = {task: void 0, next: null};
-	var tail = head;
-	var flushing = false;
-	var requestFlush = void 0;
-	var isNodeJS = false;
-
-	function flush() {
-	    /* jshint loopfunc: true */
-
-	    while (head.next) {
-	        head = head.next;
-	        var task = head.task;
-	        head.task = void 0;
-	        var domain = head.domain;
-
-	        if (domain) {
-	            head.domain = void 0;
-	            domain.enter();
-	        }
-
-	        try {
-	            task();
-
-	        } catch (e) {
-	            if (isNodeJS) {
-	                // In node, uncaught exceptions are considered fatal errors.
-	                // Re-throw them synchronously to interrupt flushing!
-
-	                // Ensure continuation if the uncaught exception is suppressed
-	                // listening "uncaughtException" events (as domains does).
-	                // Continue in next event to avoid tick recursion.
-	                if (domain) {
-	                    domain.exit();
-	                }
-	                setTimeout(flush, 0);
-	                if (domain) {
-	                    domain.enter();
-	                }
-
-	                throw e;
-
-	            } else {
-	                // In browsers, uncaught exceptions are not fatal.
-	                // Re-throw them asynchronously to avoid slow-downs.
-	                setTimeout(function() {
-	                   throw e;
-	                }, 0);
-	            }
-	        }
-
-	        if (domain) {
-	            domain.exit();
-	        }
-	    }
-
-	    flushing = false;
-	}
-
-	if (typeof process !== "undefined" && process.nextTick) {
-	    // Node.js before 0.9. Note that some fake-Node environments, like the
-	    // Mocha test runner, introduce a `process` global without a `nextTick`.
-	    isNodeJS = true;
-
-	    requestFlush = function () {
-	        process.nextTick(flush);
-	    };
-
-	} else if (typeof setImmediate === "function") {
-	    // In IE10, Node.js 0.9+, or https://github.com/NobleJS/setImmediate
-	    if (typeof window !== "undefined") {
-	        requestFlush = setImmediate.bind(window, flush);
-	    } else {
-	        requestFlush = function () {
-	            setImmediate(flush);
-	        };
-	    }
-
-	} else if (typeof MessageChannel !== "undefined") {
-	    // modern browsers
-	    // http://www.nonblocking.io/2011/06/windownexttick.html
-	    var channel = new MessageChannel();
-	    channel.port1.onmessage = flush;
-	    requestFlush = function () {
-	        channel.port2.postMessage(0);
-	    };
-
-	} else {
-	    // old browsers
-	    requestFlush = function () {
-	        setTimeout(flush, 0);
-	    };
-	}
-
-	function asap(task) {
-	    tail = tail.next = {
-	        task: task,
-	        domain: isNodeJS && process.domain,
-	        next: null
-	    };
-
-	    if (!flushing) {
-	        flushing = true;
-	        requestFlush();
-	    }
-	};
-
-	module.exports = asap;
-
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72), __webpack_require__(162).setImmediate))
-
-/***/ },
 /* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(157);
-	exports.Stream = __webpack_require__(137);
+	exports = module.exports = __webpack_require__(158);
+	exports.Stream = __webpack_require__(138);
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(158);
+	exports.Writable = __webpack_require__(157);
 	exports.Duplex = __webpack_require__(159);
 	exports.Transform = __webpack_require__(160);
 	exports.PassThrough = __webpack_require__(161);
@@ -64277,7 +64280,7 @@
 /* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(158)
+	module.exports = __webpack_require__(157)
 
 
 /***/ },
@@ -64493,6 +64496,490 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+	// A bit simpler than readable streams.
+	// Implement an async ._write(chunk, cb), and it'll handle all
+	// the drain event emission and buffering.
+
+	module.exports = Writable;
+
+	/*<replacement>*/
+	var Buffer = __webpack_require__(77).Buffer;
+	/*</replacement>*/
+
+	Writable.WritableState = WritableState;
+
+
+	/*<replacement>*/
+	var util = __webpack_require__(166);
+	util.inherits = __webpack_require__(167);
+	/*</replacement>*/
+
+	var Stream = __webpack_require__(138);
+
+	util.inherits(Writable, Stream);
+
+	function WriteReq(chunk, encoding, cb) {
+	  this.chunk = chunk;
+	  this.encoding = encoding;
+	  this.callback = cb;
+	}
+
+	function WritableState(options, stream) {
+	  var Duplex = __webpack_require__(159);
+
+	  options = options || {};
+
+	  // the point at which write() starts returning false
+	  // Note: 0 is a valid value, means that we always return false if
+	  // the entire buffer is not flushed immediately on write()
+	  var hwm = options.highWaterMark;
+	  var defaultHwm = options.objectMode ? 16 : 16 * 1024;
+	  this.highWaterMark = (hwm || hwm === 0) ? hwm : defaultHwm;
+
+	  // object stream flag to indicate whether or not this stream
+	  // contains buffers or objects.
+	  this.objectMode = !!options.objectMode;
+
+	  if (stream instanceof Duplex)
+	    this.objectMode = this.objectMode || !!options.writableObjectMode;
+
+	  // cast to ints.
+	  this.highWaterMark = ~~this.highWaterMark;
+
+	  this.needDrain = false;
+	  // at the start of calling end()
+	  this.ending = false;
+	  // when end() has been called, and returned
+	  this.ended = false;
+	  // when 'finish' is emitted
+	  this.finished = false;
+
+	  // should we decode strings into buffers before passing to _write?
+	  // this is here so that some node-core streams can optimize string
+	  // handling at a lower level.
+	  var noDecode = options.decodeStrings === false;
+	  this.decodeStrings = !noDecode;
+
+	  // Crypto is kind of old and crusty.  Historically, its default string
+	  // encoding is 'binary' so we have to make this configurable.
+	  // Everything else in the universe uses 'utf8', though.
+	  this.defaultEncoding = options.defaultEncoding || 'utf8';
+
+	  // not an actual buffer we keep track of, but a measurement
+	  // of how much we're waiting to get pushed to some underlying
+	  // socket or file.
+	  this.length = 0;
+
+	  // a flag to see when we're in the middle of a write.
+	  this.writing = false;
+
+	  // when true all writes will be buffered until .uncork() call
+	  this.corked = 0;
+
+	  // a flag to be able to tell if the onwrite cb is called immediately,
+	  // or on a later tick.  We set this to true at first, because any
+	  // actions that shouldn't happen until "later" should generally also
+	  // not happen before the first write call.
+	  this.sync = true;
+
+	  // a flag to know if we're processing previously buffered items, which
+	  // may call the _write() callback in the same tick, so that we don't
+	  // end up in an overlapped onwrite situation.
+	  this.bufferProcessing = false;
+
+	  // the callback that's passed to _write(chunk,cb)
+	  this.onwrite = function(er) {
+	    onwrite(stream, er);
+	  };
+
+	  // the callback that the user supplies to write(chunk,encoding,cb)
+	  this.writecb = null;
+
+	  // the amount that is being written when _write is called.
+	  this.writelen = 0;
+
+	  this.buffer = [];
+
+	  // number of pending user-supplied write callbacks
+	  // this must be 0 before 'finish' can be emitted
+	  this.pendingcb = 0;
+
+	  // emit prefinish if the only thing we're waiting for is _write cbs
+	  // This is relevant for synchronous Transform streams
+	  this.prefinished = false;
+
+	  // True if the error was already emitted and should not be thrown again
+	  this.errorEmitted = false;
+	}
+
+	function Writable(options) {
+	  var Duplex = __webpack_require__(159);
+
+	  // Writable ctor is applied to Duplexes, though they're not
+	  // instanceof Writable, they're instanceof Readable.
+	  if (!(this instanceof Writable) && !(this instanceof Duplex))
+	    return new Writable(options);
+
+	  this._writableState = new WritableState(options, this);
+
+	  // legacy.
+	  this.writable = true;
+
+	  Stream.call(this);
+	}
+
+	// Otherwise people can pipe Writable streams, which is just wrong.
+	Writable.prototype.pipe = function() {
+	  this.emit('error', new Error('Cannot pipe. Not readable.'));
+	};
+
+
+	function writeAfterEnd(stream, state, cb) {
+	  var er = new Error('write after end');
+	  // TODO: defer error events consistently everywhere, not just the cb
+	  stream.emit('error', er);
+	  process.nextTick(function() {
+	    cb(er);
+	  });
+	}
+
+	// If we get something that is not a buffer, string, null, or undefined,
+	// and we're not in objectMode, then that's an error.
+	// Otherwise stream chunks are all considered to be of length=1, and the
+	// watermarks determine how many objects to keep in the buffer, rather than
+	// how many bytes or characters.
+	function validChunk(stream, state, chunk, cb) {
+	  var valid = true;
+	  if (!util.isBuffer(chunk) &&
+	      !util.isString(chunk) &&
+	      !util.isNullOrUndefined(chunk) &&
+	      !state.objectMode) {
+	    var er = new TypeError('Invalid non-string/buffer chunk');
+	    stream.emit('error', er);
+	    process.nextTick(function() {
+	      cb(er);
+	    });
+	    valid = false;
+	  }
+	  return valid;
+	}
+
+	Writable.prototype.write = function(chunk, encoding, cb) {
+	  var state = this._writableState;
+	  var ret = false;
+
+	  if (util.isFunction(encoding)) {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (util.isBuffer(chunk))
+	    encoding = 'buffer';
+	  else if (!encoding)
+	    encoding = state.defaultEncoding;
+
+	  if (!util.isFunction(cb))
+	    cb = function() {};
+
+	  if (state.ended)
+	    writeAfterEnd(this, state, cb);
+	  else if (validChunk(this, state, chunk, cb)) {
+	    state.pendingcb++;
+	    ret = writeOrBuffer(this, state, chunk, encoding, cb);
+	  }
+
+	  return ret;
+	};
+
+	Writable.prototype.cork = function() {
+	  var state = this._writableState;
+
+	  state.corked++;
+	};
+
+	Writable.prototype.uncork = function() {
+	  var state = this._writableState;
+
+	  if (state.corked) {
+	    state.corked--;
+
+	    if (!state.writing &&
+	        !state.corked &&
+	        !state.finished &&
+	        !state.bufferProcessing &&
+	        state.buffer.length)
+	      clearBuffer(this, state);
+	  }
+	};
+
+	function decodeChunk(state, chunk, encoding) {
+	  if (!state.objectMode &&
+	      state.decodeStrings !== false &&
+	      util.isString(chunk)) {
+	    chunk = new Buffer(chunk, encoding);
+	  }
+	  return chunk;
+	}
+
+	// if we're already writing something, then just put this
+	// in the queue, and wait our turn.  Otherwise, call _write
+	// If we return false, then we need a drain event, so set that flag.
+	function writeOrBuffer(stream, state, chunk, encoding, cb) {
+	  chunk = decodeChunk(state, chunk, encoding);
+	  if (util.isBuffer(chunk))
+	    encoding = 'buffer';
+	  var len = state.objectMode ? 1 : chunk.length;
+
+	  state.length += len;
+
+	  var ret = state.length < state.highWaterMark;
+	  // we must ensure that previous needDrain will not be reset to false.
+	  if (!ret)
+	    state.needDrain = true;
+
+	  if (state.writing || state.corked)
+	    state.buffer.push(new WriteReq(chunk, encoding, cb));
+	  else
+	    doWrite(stream, state, false, len, chunk, encoding, cb);
+
+	  return ret;
+	}
+
+	function doWrite(stream, state, writev, len, chunk, encoding, cb) {
+	  state.writelen = len;
+	  state.writecb = cb;
+	  state.writing = true;
+	  state.sync = true;
+	  if (writev)
+	    stream._writev(chunk, state.onwrite);
+	  else
+	    stream._write(chunk, encoding, state.onwrite);
+	  state.sync = false;
+	}
+
+	function onwriteError(stream, state, sync, er, cb) {
+	  if (sync)
+	    process.nextTick(function() {
+	      state.pendingcb--;
+	      cb(er);
+	    });
+	  else {
+	    state.pendingcb--;
+	    cb(er);
+	  }
+
+	  stream._writableState.errorEmitted = true;
+	  stream.emit('error', er);
+	}
+
+	function onwriteStateUpdate(state) {
+	  state.writing = false;
+	  state.writecb = null;
+	  state.length -= state.writelen;
+	  state.writelen = 0;
+	}
+
+	function onwrite(stream, er) {
+	  var state = stream._writableState;
+	  var sync = state.sync;
+	  var cb = state.writecb;
+
+	  onwriteStateUpdate(state);
+
+	  if (er)
+	    onwriteError(stream, state, sync, er, cb);
+	  else {
+	    // Check if we're actually ready to finish, but don't emit yet
+	    var finished = needFinish(stream, state);
+
+	    if (!finished &&
+	        !state.corked &&
+	        !state.bufferProcessing &&
+	        state.buffer.length) {
+	      clearBuffer(stream, state);
+	    }
+
+	    if (sync) {
+	      process.nextTick(function() {
+	        afterWrite(stream, state, finished, cb);
+	      });
+	    } else {
+	      afterWrite(stream, state, finished, cb);
+	    }
+	  }
+	}
+
+	function afterWrite(stream, state, finished, cb) {
+	  if (!finished)
+	    onwriteDrain(stream, state);
+	  state.pendingcb--;
+	  cb();
+	  finishMaybe(stream, state);
+	}
+
+	// Must force callback to be called on nextTick, so that we don't
+	// emit 'drain' before the write() consumer gets the 'false' return
+	// value, and has a chance to attach a 'drain' listener.
+	function onwriteDrain(stream, state) {
+	  if (state.length === 0 && state.needDrain) {
+	    state.needDrain = false;
+	    stream.emit('drain');
+	  }
+	}
+
+
+	// if there's something in the buffer waiting, then process it
+	function clearBuffer(stream, state) {
+	  state.bufferProcessing = true;
+
+	  if (stream._writev && state.buffer.length > 1) {
+	    // Fast case, write everything using _writev()
+	    var cbs = [];
+	    for (var c = 0; c < state.buffer.length; c++)
+	      cbs.push(state.buffer[c].callback);
+
+	    // count the one we are adding, as well.
+	    // TODO(isaacs) clean this up
+	    state.pendingcb++;
+	    doWrite(stream, state, true, state.length, state.buffer, '', function(err) {
+	      for (var i = 0; i < cbs.length; i++) {
+	        state.pendingcb--;
+	        cbs[i](err);
+	      }
+	    });
+
+	    // Clear buffer
+	    state.buffer = [];
+	  } else {
+	    // Slow case, write chunks one-by-one
+	    for (var c = 0; c < state.buffer.length; c++) {
+	      var entry = state.buffer[c];
+	      var chunk = entry.chunk;
+	      var encoding = entry.encoding;
+	      var cb = entry.callback;
+	      var len = state.objectMode ? 1 : chunk.length;
+
+	      doWrite(stream, state, false, len, chunk, encoding, cb);
+
+	      // if we didn't call the onwrite immediately, then
+	      // it means that we need to wait until it does.
+	      // also, that means that the chunk and cb are currently
+	      // being processed, so move the buffer counter past them.
+	      if (state.writing) {
+	        c++;
+	        break;
+	      }
+	    }
+
+	    if (c < state.buffer.length)
+	      state.buffer = state.buffer.slice(c);
+	    else
+	      state.buffer.length = 0;
+	  }
+
+	  state.bufferProcessing = false;
+	}
+
+	Writable.prototype._write = function(chunk, encoding, cb) {
+	  cb(new Error('not implemented'));
+
+	};
+
+	Writable.prototype._writev = null;
+
+	Writable.prototype.end = function(chunk, encoding, cb) {
+	  var state = this._writableState;
+
+	  if (util.isFunction(chunk)) {
+	    cb = chunk;
+	    chunk = null;
+	    encoding = null;
+	  } else if (util.isFunction(encoding)) {
+	    cb = encoding;
+	    encoding = null;
+	  }
+
+	  if (!util.isNullOrUndefined(chunk))
+	    this.write(chunk, encoding);
+
+	  // .end() fully uncorks
+	  if (state.corked) {
+	    state.corked = 1;
+	    this.uncork();
+	  }
+
+	  // ignore unnecessary end() calls.
+	  if (!state.ending && !state.finished)
+	    endWritable(this, state, cb);
+	};
+
+
+	function needFinish(stream, state) {
+	  return (state.ending &&
+	          state.length === 0 &&
+	          !state.finished &&
+	          !state.writing);
+	}
+
+	function prefinish(stream, state) {
+	  if (!state.prefinished) {
+	    state.prefinished = true;
+	    stream.emit('prefinish');
+	  }
+	}
+
+	function finishMaybe(stream, state) {
+	  var need = needFinish(stream, state);
+	  if (need) {
+	    if (state.pendingcb === 0) {
+	      prefinish(stream, state);
+	      state.finished = true;
+	      stream.emit('finish');
+	    } else
+	      prefinish(stream, state);
+	  }
+	  return need;
+	}
+
+	function endWritable(stream, state, cb) {
+	  state.ending = true;
+	  finishMaybe(stream, state);
+	  if (cb) {
+	    if (state.finished)
+	      process.nextTick(cb);
+	    else
+	      stream.once('finish', cb);
+	  }
+	  state.ended = true;
+	}
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 	module.exports = Readable;
 
 	/*<replacement>*/
@@ -64514,7 +65001,7 @@
 	};
 	/*</replacement>*/
 
-	var Stream = __webpack_require__(137);
+	var Stream = __webpack_require__(138);
 
 	/*<replacement>*/
 	var util = __webpack_require__(166);
@@ -65427,490 +65914,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
 
 /***/ },
-/* 158 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// A bit simpler than readable streams.
-	// Implement an async ._write(chunk, cb), and it'll handle all
-	// the drain event emission and buffering.
-
-	module.exports = Writable;
-
-	/*<replacement>*/
-	var Buffer = __webpack_require__(77).Buffer;
-	/*</replacement>*/
-
-	Writable.WritableState = WritableState;
-
-
-	/*<replacement>*/
-	var util = __webpack_require__(166);
-	util.inherits = __webpack_require__(167);
-	/*</replacement>*/
-
-	var Stream = __webpack_require__(137);
-
-	util.inherits(Writable, Stream);
-
-	function WriteReq(chunk, encoding, cb) {
-	  this.chunk = chunk;
-	  this.encoding = encoding;
-	  this.callback = cb;
-	}
-
-	function WritableState(options, stream) {
-	  var Duplex = __webpack_require__(159);
-
-	  options = options || {};
-
-	  // the point at which write() starts returning false
-	  // Note: 0 is a valid value, means that we always return false if
-	  // the entire buffer is not flushed immediately on write()
-	  var hwm = options.highWaterMark;
-	  var defaultHwm = options.objectMode ? 16 : 16 * 1024;
-	  this.highWaterMark = (hwm || hwm === 0) ? hwm : defaultHwm;
-
-	  // object stream flag to indicate whether or not this stream
-	  // contains buffers or objects.
-	  this.objectMode = !!options.objectMode;
-
-	  if (stream instanceof Duplex)
-	    this.objectMode = this.objectMode || !!options.writableObjectMode;
-
-	  // cast to ints.
-	  this.highWaterMark = ~~this.highWaterMark;
-
-	  this.needDrain = false;
-	  // at the start of calling end()
-	  this.ending = false;
-	  // when end() has been called, and returned
-	  this.ended = false;
-	  // when 'finish' is emitted
-	  this.finished = false;
-
-	  // should we decode strings into buffers before passing to _write?
-	  // this is here so that some node-core streams can optimize string
-	  // handling at a lower level.
-	  var noDecode = options.decodeStrings === false;
-	  this.decodeStrings = !noDecode;
-
-	  // Crypto is kind of old and crusty.  Historically, its default string
-	  // encoding is 'binary' so we have to make this configurable.
-	  // Everything else in the universe uses 'utf8', though.
-	  this.defaultEncoding = options.defaultEncoding || 'utf8';
-
-	  // not an actual buffer we keep track of, but a measurement
-	  // of how much we're waiting to get pushed to some underlying
-	  // socket or file.
-	  this.length = 0;
-
-	  // a flag to see when we're in the middle of a write.
-	  this.writing = false;
-
-	  // when true all writes will be buffered until .uncork() call
-	  this.corked = 0;
-
-	  // a flag to be able to tell if the onwrite cb is called immediately,
-	  // or on a later tick.  We set this to true at first, because any
-	  // actions that shouldn't happen until "later" should generally also
-	  // not happen before the first write call.
-	  this.sync = true;
-
-	  // a flag to know if we're processing previously buffered items, which
-	  // may call the _write() callback in the same tick, so that we don't
-	  // end up in an overlapped onwrite situation.
-	  this.bufferProcessing = false;
-
-	  // the callback that's passed to _write(chunk,cb)
-	  this.onwrite = function(er) {
-	    onwrite(stream, er);
-	  };
-
-	  // the callback that the user supplies to write(chunk,encoding,cb)
-	  this.writecb = null;
-
-	  // the amount that is being written when _write is called.
-	  this.writelen = 0;
-
-	  this.buffer = [];
-
-	  // number of pending user-supplied write callbacks
-	  // this must be 0 before 'finish' can be emitted
-	  this.pendingcb = 0;
-
-	  // emit prefinish if the only thing we're waiting for is _write cbs
-	  // This is relevant for synchronous Transform streams
-	  this.prefinished = false;
-
-	  // True if the error was already emitted and should not be thrown again
-	  this.errorEmitted = false;
-	}
-
-	function Writable(options) {
-	  var Duplex = __webpack_require__(159);
-
-	  // Writable ctor is applied to Duplexes, though they're not
-	  // instanceof Writable, they're instanceof Readable.
-	  if (!(this instanceof Writable) && !(this instanceof Duplex))
-	    return new Writable(options);
-
-	  this._writableState = new WritableState(options, this);
-
-	  // legacy.
-	  this.writable = true;
-
-	  Stream.call(this);
-	}
-
-	// Otherwise people can pipe Writable streams, which is just wrong.
-	Writable.prototype.pipe = function() {
-	  this.emit('error', new Error('Cannot pipe. Not readable.'));
-	};
-
-
-	function writeAfterEnd(stream, state, cb) {
-	  var er = new Error('write after end');
-	  // TODO: defer error events consistently everywhere, not just the cb
-	  stream.emit('error', er);
-	  process.nextTick(function() {
-	    cb(er);
-	  });
-	}
-
-	// If we get something that is not a buffer, string, null, or undefined,
-	// and we're not in objectMode, then that's an error.
-	// Otherwise stream chunks are all considered to be of length=1, and the
-	// watermarks determine how many objects to keep in the buffer, rather than
-	// how many bytes or characters.
-	function validChunk(stream, state, chunk, cb) {
-	  var valid = true;
-	  if (!util.isBuffer(chunk) &&
-	      !util.isString(chunk) &&
-	      !util.isNullOrUndefined(chunk) &&
-	      !state.objectMode) {
-	    var er = new TypeError('Invalid non-string/buffer chunk');
-	    stream.emit('error', er);
-	    process.nextTick(function() {
-	      cb(er);
-	    });
-	    valid = false;
-	  }
-	  return valid;
-	}
-
-	Writable.prototype.write = function(chunk, encoding, cb) {
-	  var state = this._writableState;
-	  var ret = false;
-
-	  if (util.isFunction(encoding)) {
-	    cb = encoding;
-	    encoding = null;
-	  }
-
-	  if (util.isBuffer(chunk))
-	    encoding = 'buffer';
-	  else if (!encoding)
-	    encoding = state.defaultEncoding;
-
-	  if (!util.isFunction(cb))
-	    cb = function() {};
-
-	  if (state.ended)
-	    writeAfterEnd(this, state, cb);
-	  else if (validChunk(this, state, chunk, cb)) {
-	    state.pendingcb++;
-	    ret = writeOrBuffer(this, state, chunk, encoding, cb);
-	  }
-
-	  return ret;
-	};
-
-	Writable.prototype.cork = function() {
-	  var state = this._writableState;
-
-	  state.corked++;
-	};
-
-	Writable.prototype.uncork = function() {
-	  var state = this._writableState;
-
-	  if (state.corked) {
-	    state.corked--;
-
-	    if (!state.writing &&
-	        !state.corked &&
-	        !state.finished &&
-	        !state.bufferProcessing &&
-	        state.buffer.length)
-	      clearBuffer(this, state);
-	  }
-	};
-
-	function decodeChunk(state, chunk, encoding) {
-	  if (!state.objectMode &&
-	      state.decodeStrings !== false &&
-	      util.isString(chunk)) {
-	    chunk = new Buffer(chunk, encoding);
-	  }
-	  return chunk;
-	}
-
-	// if we're already writing something, then just put this
-	// in the queue, and wait our turn.  Otherwise, call _write
-	// If we return false, then we need a drain event, so set that flag.
-	function writeOrBuffer(stream, state, chunk, encoding, cb) {
-	  chunk = decodeChunk(state, chunk, encoding);
-	  if (util.isBuffer(chunk))
-	    encoding = 'buffer';
-	  var len = state.objectMode ? 1 : chunk.length;
-
-	  state.length += len;
-
-	  var ret = state.length < state.highWaterMark;
-	  // we must ensure that previous needDrain will not be reset to false.
-	  if (!ret)
-	    state.needDrain = true;
-
-	  if (state.writing || state.corked)
-	    state.buffer.push(new WriteReq(chunk, encoding, cb));
-	  else
-	    doWrite(stream, state, false, len, chunk, encoding, cb);
-
-	  return ret;
-	}
-
-	function doWrite(stream, state, writev, len, chunk, encoding, cb) {
-	  state.writelen = len;
-	  state.writecb = cb;
-	  state.writing = true;
-	  state.sync = true;
-	  if (writev)
-	    stream._writev(chunk, state.onwrite);
-	  else
-	    stream._write(chunk, encoding, state.onwrite);
-	  state.sync = false;
-	}
-
-	function onwriteError(stream, state, sync, er, cb) {
-	  if (sync)
-	    process.nextTick(function() {
-	      state.pendingcb--;
-	      cb(er);
-	    });
-	  else {
-	    state.pendingcb--;
-	    cb(er);
-	  }
-
-	  stream._writableState.errorEmitted = true;
-	  stream.emit('error', er);
-	}
-
-	function onwriteStateUpdate(state) {
-	  state.writing = false;
-	  state.writecb = null;
-	  state.length -= state.writelen;
-	  state.writelen = 0;
-	}
-
-	function onwrite(stream, er) {
-	  var state = stream._writableState;
-	  var sync = state.sync;
-	  var cb = state.writecb;
-
-	  onwriteStateUpdate(state);
-
-	  if (er)
-	    onwriteError(stream, state, sync, er, cb);
-	  else {
-	    // Check if we're actually ready to finish, but don't emit yet
-	    var finished = needFinish(stream, state);
-
-	    if (!finished &&
-	        !state.corked &&
-	        !state.bufferProcessing &&
-	        state.buffer.length) {
-	      clearBuffer(stream, state);
-	    }
-
-	    if (sync) {
-	      process.nextTick(function() {
-	        afterWrite(stream, state, finished, cb);
-	      });
-	    } else {
-	      afterWrite(stream, state, finished, cb);
-	    }
-	  }
-	}
-
-	function afterWrite(stream, state, finished, cb) {
-	  if (!finished)
-	    onwriteDrain(stream, state);
-	  state.pendingcb--;
-	  cb();
-	  finishMaybe(stream, state);
-	}
-
-	// Must force callback to be called on nextTick, so that we don't
-	// emit 'drain' before the write() consumer gets the 'false' return
-	// value, and has a chance to attach a 'drain' listener.
-	function onwriteDrain(stream, state) {
-	  if (state.length === 0 && state.needDrain) {
-	    state.needDrain = false;
-	    stream.emit('drain');
-	  }
-	}
-
-
-	// if there's something in the buffer waiting, then process it
-	function clearBuffer(stream, state) {
-	  state.bufferProcessing = true;
-
-	  if (stream._writev && state.buffer.length > 1) {
-	    // Fast case, write everything using _writev()
-	    var cbs = [];
-	    for (var c = 0; c < state.buffer.length; c++)
-	      cbs.push(state.buffer[c].callback);
-
-	    // count the one we are adding, as well.
-	    // TODO(isaacs) clean this up
-	    state.pendingcb++;
-	    doWrite(stream, state, true, state.length, state.buffer, '', function(err) {
-	      for (var i = 0; i < cbs.length; i++) {
-	        state.pendingcb--;
-	        cbs[i](err);
-	      }
-	    });
-
-	    // Clear buffer
-	    state.buffer = [];
-	  } else {
-	    // Slow case, write chunks one-by-one
-	    for (var c = 0; c < state.buffer.length; c++) {
-	      var entry = state.buffer[c];
-	      var chunk = entry.chunk;
-	      var encoding = entry.encoding;
-	      var cb = entry.callback;
-	      var len = state.objectMode ? 1 : chunk.length;
-
-	      doWrite(stream, state, false, len, chunk, encoding, cb);
-
-	      // if we didn't call the onwrite immediately, then
-	      // it means that we need to wait until it does.
-	      // also, that means that the chunk and cb are currently
-	      // being processed, so move the buffer counter past them.
-	      if (state.writing) {
-	        c++;
-	        break;
-	      }
-	    }
-
-	    if (c < state.buffer.length)
-	      state.buffer = state.buffer.slice(c);
-	    else
-	      state.buffer.length = 0;
-	  }
-
-	  state.bufferProcessing = false;
-	}
-
-	Writable.prototype._write = function(chunk, encoding, cb) {
-	  cb(new Error('not implemented'));
-
-	};
-
-	Writable.prototype._writev = null;
-
-	Writable.prototype.end = function(chunk, encoding, cb) {
-	  var state = this._writableState;
-
-	  if (util.isFunction(chunk)) {
-	    cb = chunk;
-	    chunk = null;
-	    encoding = null;
-	  } else if (util.isFunction(encoding)) {
-	    cb = encoding;
-	    encoding = null;
-	  }
-
-	  if (!util.isNullOrUndefined(chunk))
-	    this.write(chunk, encoding);
-
-	  // .end() fully uncorks
-	  if (state.corked) {
-	    state.corked = 1;
-	    this.uncork();
-	  }
-
-	  // ignore unnecessary end() calls.
-	  if (!state.ending && !state.finished)
-	    endWritable(this, state, cb);
-	};
-
-
-	function needFinish(stream, state) {
-	  return (state.ending &&
-	          state.length === 0 &&
-	          !state.finished &&
-	          !state.writing);
-	}
-
-	function prefinish(stream, state) {
-	  if (!state.prefinished) {
-	    state.prefinished = true;
-	    stream.emit('prefinish');
-	  }
-	}
-
-	function finishMaybe(stream, state) {
-	  var need = needFinish(stream, state);
-	  if (need) {
-	    if (state.pendingcb === 0) {
-	      prefinish(stream, state);
-	      state.finished = true;
-	      stream.emit('finish');
-	    } else
-	      prefinish(stream, state);
-	  }
-	  return need;
-	}
-
-	function endWritable(stream, state, cb) {
-	  state.ending = true;
-	  finishMaybe(stream, state);
-	  if (cb) {
-	    if (state.finished)
-	      process.nextTick(cb);
-	    else
-	      stream.once('finish', cb);
-	  }
-	  state.ended = true;
-	}
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(72)))
-
-/***/ },
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -65956,8 +65959,8 @@
 	util.inherits = __webpack_require__(167);
 	/*</replacement>*/
 
-	var Readable = __webpack_require__(157);
-	var Writable = __webpack_require__(158);
+	var Readable = __webpack_require__(158);
+	var Writable = __webpack_require__(157);
 
 	util.inherits(Duplex, Readable);
 

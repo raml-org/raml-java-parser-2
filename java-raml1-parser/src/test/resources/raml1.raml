@@ -6,7 +6,7 @@ annotationTypes:
   - paging:
       allowedTargets: method
       parameters:
-        pageSize:
+        page-size:
           type: pointer
           target: *.DataElement
         offset:
@@ -15,7 +15,7 @@ annotationTypes:
 /exmaple-collection:
   get:
     (paging):
-      pageSize: application/x-www-form-urlencoded.limit
+      page-size: application/x-www-form-urlencoded.limit
       offset: application/x-www-form-urlencoded.skip
     body:
       application/x-www-form-urlencoded:
