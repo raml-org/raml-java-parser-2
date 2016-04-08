@@ -1,10 +1,11 @@
 package com.mulesoft.raml1.java.parser.model.declarations;
 
-import java.util.List;
-import javax.xml.bind.annotation.XmlElement;
 import com.mulesoft.raml1.java.parser.model.common.RAMLLanguageElement;
 import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
 import com.mulesoft.raml1.java.parser.model.systemTypes.MarkdownString;
+
+import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 
 
@@ -18,8 +19,8 @@ public interface AnnotationType extends RAMLLanguageElement {
     String usage();
 
 
-    @XmlElement(name="parameters")
-    List<DataElement> parameters();
+    @XmlElement(name="properties")
+    List<DataElement> properties();
 
 
     @XmlElement(name="allowMultiple")

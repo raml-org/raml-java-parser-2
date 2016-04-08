@@ -2991,9 +2991,9 @@
 	    /**
 	     *
 	     **/
-	    //parameters
-	    AnnotationTypeImpl.prototype.parameters = function () {
-	        return _super.prototype.elements.call(this, 'parameters');
+	    //properties
+	    AnnotationTypeImpl.prototype.properties = function () {
+	        return _super.prototype.elements.call(this, 'properties');
 	    };
 	    /**
 	     *
@@ -20163,7 +20163,7 @@
 	                    if (x.key() == "annotations") {
 	                        return;
 	                    }
-	                    if (x.key() == "parameters") {
+	                    if (x.key() == "properties") {
 	                        return;
 	                    }
 	                    if (!pn.property(x.key())) {
@@ -30964,7 +30964,7 @@
 							"optional": false
 						},
 						{
-							"name": "parameters",
+							"name": "properties",
 							"type": {
 								"base": {
 									"typeName": "datamodel.DataElement",
