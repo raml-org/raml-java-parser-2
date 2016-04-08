@@ -1,8 +1,5 @@
 package com.mulesoft.raml1.java.patser.test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
 import com.mulesoft.raml1.java.parser.core.JavaNodeFactory;
 import com.mulesoft.raml1.java.parser.model.api.Api;
 import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
@@ -11,6 +8,8 @@ import com.mulesoft.raml1.java.parser.model.datamodel.RAMLPointerElement;
 import com.mulesoft.raml1.java.parser.model.declarations.AnnotationType;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.Method;
 import com.mulesoft.raml1.java.parser.model.methodsAndResources.Resource;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +18,8 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class Raml1Test
 {
@@ -84,12 +83,12 @@ public class Raml1Test
         final AnnotationType typePaging = api.annotationTypes().get(0);
         assertThat(typePaging.allowedTargets().size(), is(1));
         assertThat(typePaging.allowedTargets().get(0).value(), is("method"));
-        assertThat(typePaging.parameters().size(), is(2));
+        assertThat(typePaging.properties().size(), is(2));
 
-        annotationType((RAMLPointerElement) typePaging.parameters().get(0), "page-size",
+        annotationType((RAMLPointerElement) typePaging.properties().get(0), "page-size",
                        Collections.singletonList("pointer"),
                        "*.DataElement");
-        annotationType((RAMLPointerElement) typePaging.parameters().get(1), "offset",
+        annotationType((RAMLPointerElement) typePaging.properties().get(1), "offset",
                        Collections.singletonList("pointer"),
                        "*.DataElement");
     }

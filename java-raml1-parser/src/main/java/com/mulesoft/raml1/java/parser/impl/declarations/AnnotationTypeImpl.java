@@ -1,16 +1,16 @@
 package com.mulesoft.raml1.java.parser.impl.declarations;
 
-import java.util.List;
-import javax.xml.bind.annotation.XmlElement;
 import com.mulesoft.raml1.java.parser.core.JavaNodeFactory;
 import com.mulesoft.raml1.java.parser.impl.common.RAMLLanguageElementImpl;
-import com.mulesoft.raml1.java.parser.model.declarations.AnnotationType;
-import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
 import com.mulesoft.raml1.java.parser.impl.datamodel.DataElementImpl;
-import com.mulesoft.raml1.java.parser.model.declarations.AnnotationTarget;
-import com.mulesoft.raml1.java.parser.impl.declarations.AnnotationTargetImpl;
-import com.mulesoft.raml1.java.parser.model.systemTypes.MarkdownString;
 import com.mulesoft.raml1.java.parser.impl.systemTypes.MarkdownStringImpl;
+import com.mulesoft.raml1.java.parser.model.datamodel.DataElement;
+import com.mulesoft.raml1.java.parser.model.declarations.AnnotationTarget;
+import com.mulesoft.raml1.java.parser.model.declarations.AnnotationType;
+import com.mulesoft.raml1.java.parser.model.systemTypes.MarkdownString;
+
+import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 
 
@@ -37,9 +37,9 @@ public class AnnotationTypeImpl extends RAMLLanguageElementImpl implements Annot
     }
 
 
-    @XmlElement(name="parameters")
-    public List<DataElement> parameters(){
-        return super.getElements("parameters", DataElementImpl.class);
+    @XmlElement(name="properties")
+    public List<DataElement> properties(){
+        return super.getElements("properties", DataElementImpl.class);
     }
 
 

@@ -58,7 +58,7 @@ baseUri: https://www.example.com/{version}
 annotationTypes:
   - paging:
       allowedTargets: method
-      parameters:
+      properties:
         pageSize:
           type: pointer
           target: *.DataElement
